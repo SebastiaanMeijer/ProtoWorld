@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<smartobject
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="../definition.xsd"
+ name="Escalator"
+ view_color="(0.9,0.9,0.9)"
+ view_mesh="escModel_idle.obj"
+ default_state="Stopped"
+ digTheatre="true"
+ fitTheatre="true"
+>
+
+  <!-- =============================== STATES ============================ -->
+
+  <state name="Up">
+    <handlers>
+      <receive message="EVACUATION_ORDER">
+        <change_state to="Stopped"/>
+      </receive>
+    </handlers>
+    <events>
+      <physic volume="slope" force="(-2,0,0)"/>
+    </events>
+    <behaviors>
+      <navigation mode="reverse"/>
+    </behaviors>
+    <enter>
+      <mesh file="escModel_up.obj"/>
+    </enter>
+  </state>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <state name="Down">
+    <handlers>
+      <receive message="EVACUATION_ORDER">
+        <change_state to="Stopped"/>
+      </receive>
+    </handlers>
+    <events>
+      <physic volume="slope" force="(2,0,0)"/>
+    </events>
+    <behaviors>
+      <navigation mode="front"/>
+    </behaviors>
+    <enter>
+      <mesh file="escModel_down.obj"/>
+    </enter>
+  </state>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <state name="Stopped">
+    <behaviors>
+      <navigation mode="free"/>
+    </behaviors>
+    <enter>
+      <mesh file="escModel_idle.obj"/>
+    </enter>
+  </state>
+
+</smartobject>

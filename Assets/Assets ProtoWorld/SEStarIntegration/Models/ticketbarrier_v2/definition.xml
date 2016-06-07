@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<smartobject
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="../definition.xsd"
+ name="Ticket Barrier v2"
+ view_color="(0.75,0.75,0.75)"
+ view_mesh="tbModel_closed.obj"
+ rally_point="(-1.0,0,0)"
+ navigation_volume="trigger"
+ navigation_mesh="tbModel.obj"
+ default_state="Closed"
+>
+
+  <!-- =============================== STATES ============================ -->
+
+  <state name="Closed">
+    <behaviors>
+      <navigation mode="front"/>
+    </behaviors>
+
+    <enter>
+      <mesh file="tbModel_closed.obj"/>
+    </enter>
+
+    <targets>
+      <nop id="entry_point"/>
+      <queueup id="queue" destination="(-1.50,0,0)"/>
+      <move id="approach" destination="(-0.50,0,0)" radius="0.10"/>
+      <interact id="open" name="open (with ticket)" duration="300" service_location_closed_state="Closed">
+        <remove certificate="TICKET_VALID"/>
+        <give certificate="TICKET_VALIDATED"/>
+        <changestate to="Open"/>
+      </interact>
+      <move id="climb" destination="(0,0,0)" radius="0.10"/>
+      <interact id="jump over" name="jump over" duration="500" trigger="front"/>
+      <move id="move through" destination="(0.75,0,0)" radius="0.25"/>
+    </targets>
+
+    <transitions>
+      <transition from="entry_point" to="queue"/>
+      <transition from="queue" to="approach"/>
+      <transition from="approach" to="open">
+        <require certificate="TICKET_VALID"/>
+      </transition>
+      <transition from="approach" to="climb"/>
+      <transition from="climb" to="jump over">
+        <require qualifier="CHEAT"/>
+      </transition>
+      <transition from="jump over" to="move through"/>
+    </transitions>
+  </state>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <state name="Open">
+    <behaviors>
+      <navigation mode="front"/>
+    </behaviors>
+
+    <enter>
+      <mesh file="tbModel.obj"/>
+    </enter>
+
+    <targets>
+      <nop id="entry_point"/>
+      <move id="approach" destination="(-0.50,0,0)" radius="0.10"/>
+      <move id="move through" destination="(0.75,0,0)" radius="0.25"/>
+      <interact id="close" name="pass" duration="0" trigger="front">
+        <changestate to="Closed" known="false"/>
+      </interact>
+    </targets>
+
+    <transitions>
+      <transition from="entry_point" to="approach"/>
+      <transition from="approach" to="move through"/>
+      <transition from="move through" to="close"/>
+    </transitions>
+  </state>
+
+</smartobject>

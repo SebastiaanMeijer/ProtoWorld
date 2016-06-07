@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <stations>
+    <station stationId="9" x="-628.7427" y="-0.01" z="755.2124" name="DK" />
+    <station stationId="8" x="-392.938965" y="-0.01" z="552.7905" name="valhalla" />
+    <station stationId="7" x="-226.976074" y="0" z="980.305664" name="KTH" />
+    <station stationId="6" x="-462.696777" y="0" z="1077.2832" name="borggarden" />
+  </stations>
+  <transportlines>
+    <line transportId="0" category="Metro" name="KTH express" stationIds="8,7,6,9" travelingTimes="4,5,1" />
+  </transportlines>
+</root>

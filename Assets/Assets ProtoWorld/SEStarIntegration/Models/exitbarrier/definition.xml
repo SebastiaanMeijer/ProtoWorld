@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<smartobject
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="../definition.xsd"
+ name="Exit Barrier"
+ view_color="(0.4,0.15,0.15)"
+ view_mesh="ebModel.obj"
+ navigation_volume="trigger"
+>
+
+  <!-- ============================== VARIABLES ========================== -->
+
+  <variables>
+    <var name="stats_uses" value="0"/>
+  </variables>
+
+  <!-- =============================== STATES ============================ -->
+
+  <state name="Normal">
+    <handlers>
+      <receive message="SEALING_ORDER">
+        <change_state to="Blocked"/>
+      </receive>
+    </handlers>
+    <behaviors>
+      <navigation mode="front"/>
+    </behaviors>
+    <targets>
+      <nop id="entry_point"/>
+      <queueup id="0" destination="(-1.1,0,0)"/>
+      <move id="1" destination="(-0.25,0,0)"/>
+      <interact id="2" name="pass through" duration="1000" trigger="front">
+        <update var="stats_uses" value="stats_uses + 1"/>
+      </interact>
+      <move id="3" destination="(1.1,0,0)"/>
+    </targets>
+
+    <transitions>
+      <transition from="entry_point" to="0"/>
+      <transition from="0" to="1"/>
+      <transition from="1" to="2"/>
+      <transition from="2" to="3"/>
+    </transitions>
+  </state>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <state name="Blocked"/>
+
+</smartobject>

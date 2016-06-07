@@ -1,0 +1,34 @@
+Created by Andreas Astertun 2009 www.it-bubblan.se
+
+--------------------------------------------------
+
+Low poly 3D model of a trashcan
+
+Perfect for games
+
+77 Vertices, 85 faces
+512x512 Texture
+Seamed and mapped
+
+Low poly model included for far away view and collision detection.
+12 Vertices, 10 faces
+
+Blender file included.
+
+Keywords: Trashcan, street, city, garbage, trash
+
+--------------------------------------------------
+
+License terms for my free products:
+-----------------------------
+* Visible credits in final product
+* This file incuded in any redistributions
+* No other restrictions
+* Any good improvements shared with me
+
+License terms if you paid for the product:
+------------------------------------------
+* Use is restricted to one company or one person, product may be used in multiple productions.
+* No other restrictions
+
+If you need any custom models made please email me at the above website.

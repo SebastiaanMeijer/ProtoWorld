@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <stations>
+    <station stationId="0" x="80" y="0" z="-50" name="San Giovanni" />
+    <station stationId="1" x="70" y="0" z="-30" name="Termini" />
+    <station stationId="2" x="60" y="0" z="-20" name="Spagna"  />
+    <station stationId="3" x="35" y="0" z="-10" name="Ottaviano"  />
+    <station stationId="4" x="90" y="0" z="-10" name="Roma Tiburtina"  />
+    <station stationId="5" x="60" y="0" z="-40" name="Colosseo"  />
+    <station stationId="6" x="60" y="0" z="-50" name="Piramide"  />
+    <station stationId="7" x="90" y="0" z="-20" name="Tiburtina"  />
+    <station stationId="8" x="60" y="0" z="-60" name="Ostiense"  />
+    <station stationId="9" x="30" y="0" z="-50" name="Trastevere"  />
+    <station stationId="10" x="25" y="0" z="-30" name="San Pietro"  />
+    <station stationId="11" x="45" y="0" z="-50" name="Porta San Paolo"  />
+    <station stationId="12" x="40" y="0" z="-80" name="Basilica San Paolo"  />
+    <station stationId="13" x="50" y="0" z="-10" name="Lepanto"  />
+    <station stationId="14" x="20" y="0" z="-10" name="Cipro"  />
+    <station stationId="15" x="32" y="0" z="-25" name="Largo Di Porta Cavalleggeri- Fornac"  />
+    <station stationId="16" x="40" y="0" z="-25" name="Lungotevere In Sassia- Santo Spirito"  />
+    <station stationId="17" x="40" y="0" z="-5" name="Milizie- Distretto Militare"  />
+    <station stationId="18" x="55" y="0" z="-5" name="Flaminio"  />
+    <station stationId="19" x="75" y="0" z="-10" name="Croce Rossa"  />
+    <station stationId="20" x="42" y="0" z="-25" name="Lungotevere fiorentini-paoli"  />
+    <station stationId="21" x="30" y="0" z="-78" name="Marconi- Edison"  />
+  </stations>
+  <transportlines>
+    <line transportId="0" category="Metro" name="A" stationIds="0,1,2,18,13,3,14" travelingTimes="4,3,2,2,2,2"/>
+    <line transportId="1" category="Metro" name="B" stationIds="4,1,5,6,12" travelingTimes="6,2,4,4"/>
+    
+    <line transportId="2" category="Train" name="1" stationIds="7,1" travelingTimes="10"/>
+    <line transportId="3" category="Train" name="2" stationIds="7,8,9,10" travelingTimes="16,4,5"/>
+    <line transportId="4" category="Train" name="3" stationIds="11,12" travelingTimes="3"/>
+
+    <line transportId="5" category="Walk" name="1" stationIds="4,7" travelingTimes="1"/>
+    <line transportId="6" category="Walk" name="2" stationIds="6,8" travelingTimes="5"/>
+    <line transportId="7" category="Walk" name="3" stationIds="6,11" travelingTimes="4"/>
+    <line transportId="8" category="Walk" name="4" stationIds="8,11" travelingTimes="4"/>
+
+    <line transportId="9" category="Bus" name="64" stationIds="2,15" travelingTimes="4"/>
+    <line transportId="10" category="Bus" name="40" stationIds="2,16" travelingTimes="4"/>
+    <line transportId="11" category="Bus" name="490" stationIds="17,18" travelingTimes="4"/>
+    <line transportId="12" category="Bus" name="495" stationIds="18,19" travelingTimes="4"/>
+    <line transportId="13" category="Bus" name="280" stationIds="6,20" travelingTimes="4"/>
+    <line transportId="14" category="Bus" name="23" stationIds="12,8" travelingTimes="4"/>
+    <line transportId="15" category="Bus" name="170" stationIds="9,21" travelingTimes="4"/>
+
+    <!--<line transportId="16" category="Walk" name="5" stationIds="3,17" travelingTimes="5"/>
+    <line transportId="17" category="Walk" name="6" stationIds="15,16" travelingTimes="4"/>
+    <line transportId="18" category="Walk" name="7" stationIds="16,20" travelingTimes="4"/>-->
+  
+  </transportlines>
+</root>

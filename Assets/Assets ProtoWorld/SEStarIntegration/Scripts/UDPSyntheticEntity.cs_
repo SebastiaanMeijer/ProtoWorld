@@ -1,0 +1,11 @@
+﻿using UnityEngine;
+using System.Collections;
+
+[System.Serializable]
+public class UDPSyntheticEntity 
+{
+    [SerializeField]
+    public string SyntheticEntityName="";
+    [SerializeField]
+    public int udpPort = 10116;
+}

@@ -1,0 +1,66 @@
+﻿using UnityEngine;
+using UnityEditor;
+using System.Collections;
+using System.Collections.Generic;
+
+[CustomEditor(typeof(SEStar_MultipleUDP))]
+public class SEStarMultipleUDPEditor : Editor
+{
+
+    public override void OnInspectorGUI()
+    {
+        var sestar = target as SEStar_MultipleUDP;
+        if (GUILayout.Button("Calculate coordinate difference"))
+            CalculateCoordinateDifference(sestar);
+        if (sestar.UDPSyntheticEntities == null)
+            sestar.UDPSyntheticEntities = new List<UDPSyntheticEntity>();
+        var bgcolor = GUI.backgroundColor;
+        int selection = -1;
+        
+        EditorGUILayout.BeginVertical(GUI.skin.box);
+        EditorGUILayout.LabelField("Synthetic Entities");
+        int indent = EditorGUI.indentLevel;
+        
+        if (GUILayout.Button("Add"))
+        {
+            sestar.UDPSyntheticEntities.Add(new UDPSyntheticEntity());
+            EditorUtility.SetDirty(target);
+        }
+        EditorGUI.indentLevel++;
+        for (int i = 0; i < sestar.UDPSyntheticEntities.Count; i++)
+        {
+            GUI.backgroundColor = Color.green;
+            EditorGUILayout.BeginVertical(GUI.skin.box);
+            GUI.backgroundColor = bgcolor;
+
+            sestar.UDPSyntheticEntities[i].SyntheticEntityName = EditorGUILayout.TextField("Entity Name", sestar.UDPSyntheticEntities[i].SyntheticEntityName);
+            sestar.UDPSyntheticEntities[i].udpPort = EditorGUILayout.IntField("UDP Port", sestar.UDPSyntheticEntities[i].udpPort);
+            if (GUILayout.Button("Remove"))
+                selection = i;
+            EditorGUILayout.EndVertical();
+        }
+        if (selection != -1)
+        {
+            sestar.UDPSyntheticEntities.RemoveAt(selection);
+            selection = -1;
+            EditorUtility.SetDirty(target);
+        }
+        EditorGUI.indentLevel = indent;
+        EditorGUILayout.EndVertical();
+
+        DrawDefaultInspector();
+    }
+    private void CalculateCoordinateDifference(SEStar_MultipleUDP sestar)
+    {
+        ServiceGapslabsClient client = ServicePropertiesClass.GetGapslabsService(ServicePropertiesClass.ServiceUri);
+        var go = GameObject.Find("AramGISBoundaries");
+        var mapboundaries = go.GetComponent<MapBoundaries>();
+        CoordinateConvertor.Initialize(client, mapboundaries);
+        sestar.CalculatedUnityReference = CoordinateConvertor.LatLonToVector3(sestar.ReferenceLatitudeLongitude.x, sestar.ReferenceLatitudeLongitude.y);
+        if (sestar.OverrideReferenceOffsetByAnObject)
+            sestar.CalculatedDifference = sestar.ReferenceOffsetObject.position;
+        else
+            sestar.CalculatedDifference = sestar.CalculatedUnityReference - sestar.ReferenceSEStarCartesian.ThalesCartesianToUnity();
+        EditorUtility.SetDirty(target);
+    }
+}

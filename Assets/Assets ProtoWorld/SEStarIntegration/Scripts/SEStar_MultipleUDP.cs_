@@ -1,0 +1,1030 @@
+
+using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Net;
+using System.Net.Sockets;
+using System.Runtime.InteropServices;
+using System.IO;
+using System.Text;
+using Connector.Messages.SEStar;
+
+public class SEStar_MultipleUDP : MonoBehaviour
+{
+
+    private bool connected_;
+
+    private Socket socketSEStarTCP_;
+    private NetworkStream streamTCP_;
+
+    private int[] numSyntheticEntities_ = new int[1];
+    private int[] idExternalCamera_ = new int[1];
+    private List<Thread> udpThread_;
+    [HideInInspector]
+    public List<UDPSyntheticEntity> UDPSyntheticEntities;
+    // TODO: Make this a list of size: UDPSyntheticEntities.Count
+    public List<MessageUnity[]> syntheticEntities_ = new List<MessageUnity[]>();//new MessageUnity[10000];
+    private Thread tcpThread_;
+
+    private Thread externalCameraThread_;
+    private uint idReceiver_ = 0;
+    private uint idSender_ = 256;
+    private ManualResetEvent endMessageReceivedTCP = new ManualResetEvent(false);
+    private ManualResetEvent endMessageReceivedUDP = new ManualResetEvent(false);
+    private ManualResetEvent endMessageExternalCamera = new ManualResetEvent(false);
+    private System.Object tcpLock_ = new System.Object();
+    private System.Object udpLock_ = new System.Object();
+    private List<MessageSEStar> msgsIn_ = new List<MessageSEStar>();
+    private bool first_ = true;
+    private Dictionary<uint, GameObject> actors_ = new Dictionary<uint, GameObject>();
+    private Dictionary<uint, uint> actorsGender_ = new Dictionary<uint, uint>();
+    private Dictionary<uint, GameObject> smartObjects_ = new Dictionary<uint, GameObject>();
+    private List<string> actorsTemplate_ = new List<string>();
+
+
+
+    private struct MessageUnity
+    {
+        public uint id_;
+        public float posX;
+        public float posY;
+        public float posZ;
+        public float oriX;
+        public float oriY;
+        public float oriZ;
+        public int lifeStatus_;
+        public float instantVelocity_;
+    };
+
+    private struct shared_memory_log
+    {
+        MessageUnity[] sharedSyntheticEntities_;
+        int numSharedSyntheticEntities_;
+        bool message_in_;
+        bool connected_;
+    };
+
+    void CreateActor(uint id, System.Random rand)
+    {
+        byte[] values = new byte[1];
+        rand.NextBytes(values);
+        int rr = values[0] % actorsTemplate_.Count;
+        Debug.Log("Actor: " + actorsTemplate_[rr]);
+        actors_[id] = (UnityEngine.GameObject)UnityEngine.GameObject.Instantiate(Resources.Load(actorsTemplate_[rr]));
+        if (actorsTemplate_[rr].Contains("_f"))
+            actorsGender_[id] = 0;
+        else if (actorsTemplate_[rr].Contains("_m"))
+            actorsGender_[id] = 1;
+        else
+            actorsGender_[id] = 2;
+    }
+
+    void DeleteActor(uint id)
+    {
+        if (actors_.ContainsKey(id))
+        {
+            actors_[id].SetActive(false);
+            UnityEngine.GameObject.Destroy(actors_[id]);
+            actors_.Remove(id);
+        }
+        if (actorsGender_.ContainsKey(id))
+        {
+            actorsGender_.Remove(id);
+        }
+    }
+    // Modified by Aram Azhzari
+    void UpdateAnimation(uint id, float instantVelocity, bool alive, System.Random rand)
+    {
+        if (alive == true)
+        {
+            if (actorsGender_[id] == 0)
+            {
+                if (instantVelocity > 2.0f)
+                {
+                    actors_[id].GetComponent<ThalesAIController>().Speed = 2;
+
+                }
+                else if (instantVelocity < 0.1f)
+                {
+                    actors_[id].GetComponent<ThalesAIController>().Speed = 0;
+
+                }
+                else
+                {
+                    actors_[id].GetComponent<ThalesAIController>().Speed = 0.5f;
+
+                }
+            }
+            else if (actorsGender_[id] == 1)
+            {
+                if (instantVelocity > 2.0f)
+                {
+                    actors_[id].GetComponent<ThalesAIController>().Speed = 2;
+
+                }
+                else if (instantVelocity < 0.1f)
+                {
+                    actors_[id].GetComponent<ThalesAIController>().Speed = 0;
+
+                }
+                else
+                {
+                    actors_[id].GetComponent<ThalesAIController>().Speed = 0.5f;
+
+                }
+            }
+            else
+            {
+                if (instantVelocity > 2.0f)
+                {
+                    actors_[id].GetComponent<ThalesAIController>().Speed = 2;
+
+                }
+                else if (instantVelocity < 0.1f)
+                {
+                    actors_[id].GetComponent<ThalesAIController>().Speed = 0;
+
+                }
+                else
+                {
+                    actors_[id].GetComponent<ThalesAIController>().Speed = 0.5f;
+
+                }
+            }
+        }
+        else
+        {
+            // TODO: Implement die animation.
+
+
+        }
+    }
+
+
+    void CreateSmartObject(MessageSEStar msgIn, string actorName)
+    {
+        // TODO: TESTING
+        //if (actorName == "Metal_Barrier")
+        //    return;
+        //
+        Debug.Log("ACTOR NAME:   " + actorName);
+        UnityEngine.GameObject newActor = (UnityEngine.GameObject)UnityEngine.GameObject.Instantiate(Resources.Load(actorName));
+        smartObjects_[msgIn.parameters[1].unsigned_] = newActor;
+
+        // Added by Aram Azhari
+        // CONCLUSION: The scale values are not sent.
+        // Checking whether SEStar is sending scale values.
+        //if (actorName == "Metal_Barrier")
+        //{
+        //    Vector3 scale = new Vector3(-msgIn.parameters[9].float_, msgIn.parameters[10].float_, -msgIn.parameters[11].float_);
+        //    if (scale != Vector3.zero)
+        //    {
+        //        Debug.LogWarning("SCALE VALUES RECEIVED FOR " + actorName);
+        //        //smartObjects_[msgIn.parameters[1].unsigned_].transform.localScale = scale;
+        //    }
+        //}
+        //
+    }
+
+    void UpdateSmartObject(MessageSEStar msgIn)
+    {
+        if (!smartObjects_.ContainsKey(msgIn.parameters[1].unsigned_))
+            return;
+        Vector3 pos = new Vector3(-msgIn.parameters[3].float_, msgIn.parameters[5].float_, -msgIn.parameters[4].float_);
+        // Added by Aram Azhari
+        // pos += CalculatedDifference;
+        //
+        smartObjects_[msgIn.parameters[1].unsigned_].transform.position = pos;
+        Vector3 dir = new Vector3(msgIn.parameters[6].float_, msgIn.parameters[7].float_, msgIn.parameters[8].float_);
+        Vector3 pos1 = new Vector3(msgIn.parameters[3].float_, msgIn.parameters[4].float_, msgIn.parameters[5].float_) + (dir * 100.0f);
+        Vector3 pos2 = new Vector3(-pos1.x, pos1.z, -pos1.y);
+        Vector3 modifier = new Vector3(-90.0f, 90.0f, 0.0f);
+        smartObjects_[msgIn.parameters[1].unsigned_].transform.LookAt(pos2);
+        smartObjects_[msgIn.parameters[1].unsigned_].transform.Rotate(modifier);
+
+        // Added by Aram Azhari
+        // CONCLUDED: This is II.5.3, therefore the parameters[9] is Camera FoV.
+        // Checking whether SEStar is sending scale values.
+        // According to II.5.2 Smartobject by "Client" embed scale value in parameters[9] to parameters[11] (x,y,z ?).
+        // But if this is the smartobject update by "SE-Star" the it will have camera field of view.
+
+        //Vector3 scale = new Vector3(msgIn.parameters[9].float_, msgIn.parameters[10].float_, msgIn.parameters[11].float_);
+        //if (scale != Vector3.zero)
+        //{
+        //    Debug.LogWarning("SCALE VALUES RECEIVED FOR " + smartObjects_[msgIn.parameters[1].unsigned_].name);
+        //    smartObjects_[msgIn.parameters[1].unsigned_].transform.localScale = scale;
+        //}
+    }
+
+    // Use this for initialization
+    int typeSharingMemory_ = 0; // 0 -> UDP, 1 -> SharingMemory
+    //string udpAddress_ = "127.0.0.1";
+    //int udpPort_ = 10114;
+    //string tcpAddress_ = "127.0.0.1";
+    //int tcpPort_ = 6112;
+    //string udpExternalcameraAddress_ = "127.0.0.1";
+    //int udpExternalcameraPort_ = 12114;
+    public string udpAddress_ = "127.0.0.1";
+    public int udpPort_ = 10116;
+    public string tcpAddress_ = "127.0.0.1";
+    public int tcpPort_ = 6112;
+    public string udpExternalcameraAddress_ = "127.0.0.1";
+    public int udpExternalcameraPort_ = 10112;
+    public Vector2 ReferenceLatitudeLongitude = new Vector2(48.8390602f, 2.2519118f);
+    public Vector3 ReferenceSEStarCartesian = new Vector3(-175f, -282.7f, 0.09992f);
+    public Vector3 CalculatedUnityReference;
+    public Vector3 CalculatedDifference;
+    public bool OverrideReferenceOffsetByAnObject = true;
+    public Transform ReferenceOffsetObject;
+    void Start()
+    {
+
+        for (int i = 0; i < UDPSyntheticEntities.Count; i++)
+        {
+            syntheticEntities_.Add(new MessageUnity[10000]);
+        }
+        Debug.Log("SEStar Start");
+        Console.Write("SEStar Start");
+        string path = "ConfUnity.cfg";
+        if (File.Exists(path) == true)
+        {
+            FileStream fs = File.OpenRead(path);
+            StreamReader sr = new StreamReader(fs);
+            string[] split;
+            string line;
+
+            line = sr.ReadLine();
+            split = line.Split(new Char[] { ' ' });
+            if (split[1] == "UDP")
+            {
+                typeSharingMemory_ = 0;
+                udpAddress_ = split[2];
+                udpPort_ = int.Parse(split[3]);
+            }
+            else if (split[1] == "SharingMemory")
+            {
+                typeSharingMemory_ = 1;
+            }
+            line = sr.ReadLine();
+            split = line.Split(new Char[] { ' ' });
+            tcpAddress_ = split[1];
+            tcpPort_ = int.Parse(split[2]);
+            line = sr.ReadLine();
+            split = line.Split(new Char[] { ' ' });
+            udpExternalcameraAddress_ = split[1];
+            udpExternalcameraPort_ = int.Parse(split[2]);
+            sr.Close();
+        }
+        Application.runInBackground = true;
+        UnityEngine.Object[] tmpPersos = Resources.LoadAll("");
+        foreach (UnityEngine.Object tmpPerso in tmpPersos)
+        {
+            if (tmpPerso.name.Contains("_f") || tmpPerso.name.Contains("_m") || tmpPerso.name.Contains("_g"))
+            {
+                actorsTemplate_.Add(tmpPerso.name);
+            }
+        }
+        connected_ = true;
+        tcpThread_ = new Thread(tcpThread);
+        Debug.Log("Starting " + "tcp thread");
+        tcpThread_.Start();
+
+        udpThread_ = new List<Thread>();
+        if (typeSharingMemory_ == 0)
+        {
+            for (int i = 0; i < UDPSyntheticEntities.Count; i++)
+            {
+
+                Thread t = new Thread(new ParameterizedThreadStart(udpThread));
+                t.Name = UDPSyntheticEntities[i].SyntheticEntityName;
+                Debug.Log("Starting " + "udp thread: " + t.Name);
+                udpThread_.Add(t);
+                t.Start(UDPSyntheticEntities[i].udpPort);
+            }
+        }
+        //else if (typeSharingMemory_ == 1)
+        //{
+        //    udpThread_ = new Thread(sharedmemoryThread);
+        //    Debug.Log("Starting " + "udp shared memory thread");
+        //    udpThread_.Start();
+        //}
+        externalCameraThread_ = new Thread(externalCameraThread);
+        Debug.Log("Starting " + "camera thread");
+        externalCameraThread_.Start();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (connected_ == true)
+        {
+            System.Random rand = new System.Random();
+            lock (udpLock_)
+            {
+                bool find = false;
+                foreach (KeyValuePair<uint, GameObject> actor in actors_)
+                {
+                    for (uint i = 0; i < numSyntheticEntities_[0]; i++)
+                    {
+                        if (syntheticEntities_[i].id_ == actor.Key)
+                        {
+                            find = true;
+                            break;
+                        }
+                    }
+                    if (find == false)
+                    {
+                        //if (!(actor.Value.GetComponent<Animation>().IsPlaying("breakdown1_f")) &&
+                        //        !(actor.Value.GetComponent<Animation>().IsPlaying("breakdown2_f")) &&
+                        //        !(actor.Value.GetComponent<Animation>().IsPlaying("breakdown1_m")) &&
+                        //        !(actor.Value.GetComponent<Animation>().IsPlaying("breakdown2_m")) &&
+                        //        !(actor.Value.GetComponent<Animation>().IsPlaying("breakdown1_g")) &&
+                        //        !(actor.Value.GetComponent<Animation>().IsPlaying("breakdown2_g")))
+                        //{
+                        //    actor.Value.GetComponent<Animation>().Play("empty");
+                        //    actor.Value.SetActive(false);
+                        //}
+                        actor.Value.SetActive(false);
+                    }
+                    find = false;
+                }
+                for (uint i = 0; i < numSyntheticEntities_[0]; i++)
+                {
+                    if (!actors_.ContainsKey(syntheticEntities_[i].id_))
+                    {
+                        CreateActor(syntheticEntities_[i].id_, rand);
+                    }
+                    Vector3 pos = new Vector3(-syntheticEntities_[i].posX, syntheticEntities_[i].posZ - 0.10f, -syntheticEntities_[i].posY);
+                    actors_[syntheticEntities_[i].id_].transform.position = pos;
+                    bool alive = false;
+                    float speed = 0.0f;
+                    if (syntheticEntities_[i].lifeStatus_ == 0)
+                    {
+                        Vector3 dir = new Vector3(syntheticEntities_[i].oriX, syntheticEntities_[i].oriY, syntheticEntities_[i].oriZ);
+                        Vector3 pos1 = new Vector3(syntheticEntities_[i].posX, syntheticEntities_[i].posY, syntheticEntities_[i].posZ) + (dir * 100.0f);
+                        Vector3 pos2 = new Vector3(-pos1.x, pos1.z, -pos1.y);
+                        actors_[syntheticEntities_[i].id_].transform.LookAt(pos2);
+                        alive = true;
+                        speed = syntheticEntities_[i].instantVelocity_;
+                    }
+                    // Added by Aram Azhari
+                    actors_[syntheticEntities_[i].id_].transform.RotateAround(Vector3.zero, Vector3.up, 90f);
+                    actors_[syntheticEntities_[i].id_].transform.position = actors_[syntheticEntities_[i].id_].transform.position + CalculatedDifference;
+                    //
+                    UpdateAnimation(syntheticEntities_[i].id_, speed, alive, rand);
+                    actors_[syntheticEntities_[i].id_].SetActive(true);
+                }
+            }
+            lock (tcpLock_)
+            {
+                foreach (MessageSEStar msg in msgsIn_)
+                {
+                    switch (msg.type)
+                    {
+                        case MessageTypes.TMSG_REGISTER_APPLICATION:
+                            {
+                                idReceiver_ = msg.idReceiver;
+                                break;
+                            }
+                        case MessageTypes.TMSG_APPLICATION_COMMAND:
+                            {
+
+                                switch ((CommandeTypes)msg.parameters[2].unsigned_)
+                                {
+                                    case CommandeTypes.CT_REGISTER:
+                                        {
+                                            Debug.LogWarning("TMSG_APPLICATION_COMMAND: " + msg.parameters[0].unsigned_);
+                                            switch ((ObjectTypes)msg.parameters[0].unsigned_)
+                                            {
+                                                case ObjectTypes.OT_TRASH:
+                                                    {
+                                                        CreateSmartObject(msg, "Poubelle");
+                                                        break;
+                                                    }
+                                                case ObjectTypes.OT_BARRIER:
+                                                    {
+                                                        CreateSmartObject(msg, "Metal_Barrier");
+                                                        break;
+                                                    }
+                                                case ObjectTypes.OT_ESCALATOR: // Added by Aram Azhari
+                                                    {
+                                                        CreateSmartObject(msg, "Escelator");
+                                                        break;
+                                                    }
+                                                case ObjectTypes.OT_GATE: // Added by Aram Azhari
+                                                    {
+                                                        CreateSmartObject(msg, "Gate");
+                                                        break;
+                                                    }
+                                                case ObjectTypes.OT_TICKETBARRIER: // Added by Aram Azhari
+                                                    {
+                                                        CreateSmartObject(msg, "TicketBarrier");
+                                                        break;
+                                                    }
+                                                case ObjectTypes.OT_EXITBARRIER: // Added by Aram Azhari
+                                                    {
+                                                        CreateSmartObject(msg, "ExitBarrier");
+                                                        break;
+                                                    }
+                                                case ObjectTypes.OT_CAMERA: // Added by Aram Azhari
+                                                    {
+                                                        CreateSmartObject(msg, "SecurityCamera");
+                                                        break;
+                                                    }
+                                                default:
+                                                    {
+                                                        Debug.LogWarning("Aram TODO: Create " + (ObjectTypes)msg.parameters[0].unsigned_);
+                                                        break;
+                                                    }
+                                            }
+                                            break;
+                                        }
+                                    case CommandeTypes.CT_REGISTER_SMARTOBJECT_POSITION:
+                                        {
+                                            UpdateSmartObject(msg);
+                                            break;
+                                        }
+                                    case CommandeTypes.CT_SMARTOBJECT_UPDATE_POS_ORI:
+                                        {
+                                            if ((ObjectTypes)msg.parameters[0].unsigned_ == ObjectTypes.OT_CAMERA)
+                                            {
+                                                if (idExternalCamera_[0] != -1)
+                                                {
+                                                    if (msg.parameters[1].unsigned_ == (uint)idExternalCamera_[0])
+                                                    {
+                                                        Vector3 pos = new Vector3(-msg.parameters[3].float_, msg.parameters[5].float_, -msg.parameters[4].float_);
+                                                        // Modified by Aram Azhari
+                                                        //Camera.main.transform.position = pos+CalculatedDifference;
+                                                        //
+                                                        Camera.main.transform.position = pos;
+                                                        Vector3 dir = new Vector3(msg.parameters[6].float_, msg.parameters[7].float_, msg.parameters[8].float_);
+                                                        Vector3 pos1 = new Vector3(msg.parameters[3].float_, msg.parameters[4].float_, msg.parameters[5].float_) + (dir * 100.0f);
+                                                        Vector3 pos2 = new Vector3(-pos1.x, pos1.z, -pos1.y);
+                                                        Camera.main.transform.LookAt(pos2);
+                                                        Camera.main.fieldOfView = msg.parameters[9].float_ * 3.0f / 4.0f;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    Vector3 pos = new Vector3(-msg.parameters[3].float_, msg.parameters[5].float_, -msg.parameters[4].float_);
+                                                    // Modified by Aram Azhari
+                                                    //Camera.main.transform.position = pos + CalculatedDifference;
+                                                    //
+                                                    Camera.main.transform.position = pos;
+                                                    Vector3 dir = new Vector3(msg.parameters[6].float_, msg.parameters[7].float_, msg.parameters[8].float_);
+                                                    Vector3 pos1 = new Vector3(msg.parameters[3].float_, msg.parameters[4].float_, msg.parameters[5].float_) + (dir * 100.0f);
+                                                    Vector3 pos2 = new Vector3(-pos1.x, pos1.z, -pos1.y);
+                                                    Camera.main.transform.LookAt(pos2);
+                                                    Camera.main.fieldOfView = msg.parameters[9].float_ * 3.0f / 4.0f;
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    case CommandeTypes.CT_DELETE_SYNTHETICENTITY:
+                                        {
+                                            DeleteActor(msg.parameters[1].unsigned_);
+                                            break;
+                                        }
+                                    case CommandeTypes.CT_CHANGE_STATE:
+                                        {
+                                            // Added by Aram Azhari
+                                            byte[] chars = new byte[52];
+                                            int rank = 0;
+                                            for (uint j = 3; j < 16; ++j)
+                                            {
+                                                chars[rank++] = msg.parameters[j].char1_;
+                                                chars[rank++] = msg.parameters[j].char2_;
+                                                chars[rank++] = msg.parameters[j].char3_;
+                                                chars[rank++] = msg.parameters[j].char4_;
+                                            }
+                                            string type = System.Text.UTF8Encoding.ASCII.GetString(chars);
+                                            ////
+                                            switch ((ObjectTypes)msg.parameters[0].unsigned_)
+                                            {
+                                                case ObjectTypes.OT_TRASH:
+                                                    {
+                                                        if (!smartObjects_.ContainsKey(msg.parameters[1].unsigned_))
+                                                            break;
+                                                        // Commented out by Aram Azhari
+                                                        //byte[] chars = new byte[52];
+                                                        //int rank = 0;
+                                                        //for (uint j = 3; j < 16; ++j)
+                                                        //{
+                                                        //    chars[rank++] = msg.parameters[j].char1_;
+                                                        //    chars[rank++] = msg.parameters[j].char2_;
+                                                        //    chars[rank++] = msg.parameters[j].char3_;
+                                                        //    chars[rank++] = msg.parameters[j].char4_;
+                                                        //}
+                                                        //string type = System.Text.UTF8Encoding.ASCII.GetString(chars);
+                                                        //
+                                                        if (type.Contains("Normal") == true)
+                                                        {
+                                                            if (smartObjects_[msg.parameters[1].unsigned_].transform.childCount > 0)
+                                                            {
+                                                                UnityEngine.Transform prevActor = smartObjects_[msg.parameters[1].unsigned_].transform.GetChild(0);
+                                                                smartObjects_[msg.parameters[1].unsigned_].transform.DetachChildren();
+                                                                DestroyObject(prevActor.gameObject);
+                                                            }
+                                                            smartObjects_[msg.parameters[1].unsigned_].SetActive(true);
+                                                        }
+                                                        else if (type.Contains("In Fire") == true)
+                                                        {
+                                                            if (smartObjects_[msg.parameters[1].unsigned_].transform.childCount > 0)
+                                                            {
+                                                                UnityEngine.Transform prevActor = smartObjects_[msg.parameters[1].unsigned_].transform.GetChild(0);
+                                                                smartObjects_[msg.parameters[1].unsigned_].transform.DetachChildren();
+                                                                DestroyObject(prevActor.gameObject);
+                                                            }
+                                                            UnityEngine.GameObject newActor = (UnityEngine.GameObject)UnityEngine.GameObject.Instantiate(Resources.Load("MyFlame"));
+                                                            newActor.transform.parent = smartObjects_[msg.parameters[1].unsigned_].transform;
+                                                            Vector3 pos = new Vector3(0.0f, 0.0f, 0.8f);
+                                                            newActor.transform.localPosition = pos;
+                                                            Vector3 ori = new Vector3(90.0f, 0.0f, 0.0f);
+                                                            Quaternion quat = new Quaternion();
+                                                            quat.eulerAngles = ori;
+                                                            newActor.transform.localRotation = quat;
+                                                            smartObjects_[msg.parameters[1].unsigned_].SetActive(true);
+                                                        }
+                                                        else if (type.Contains("Exploding") == true || type.Contains("Exploded") == true)
+                                                        {
+                                                            if (smartObjects_[msg.parameters[1].unsigned_].transform.childCount > 0)
+                                                            {
+                                                                UnityEngine.Transform prevActor = smartObjects_[msg.parameters[1].unsigned_].transform.GetChild(0);
+                                                                smartObjects_[msg.parameters[1].unsigned_].transform.DetachChildren();
+                                                                DestroyObject(prevActor.gameObject);
+                                                            }
+                                                            UnityEngine.GameObject newActor = (UnityEngine.GameObject)UnityEngine.GameObject.Instantiate(Resources.Load("MyExplosion"));
+                                                            newActor.transform.position = smartObjects_[msg.parameters[1].unsigned_].transform.position;
+                                                            smartObjects_[msg.parameters[1].unsigned_].SetActive(false);
+                                                        }
+                                                        else if (type.Contains("Burnt") == true)
+                                                        {
+                                                            if (smartObjects_[msg.parameters[1].unsigned_].transform.childCount > 0)
+                                                            {
+                                                                UnityEngine.Transform prevActor = smartObjects_[msg.parameters[1].unsigned_].transform.GetChild(0);
+                                                                smartObjects_[msg.parameters[1].unsigned_].transform.DetachChildren();
+                                                                DestroyObject(prevActor.gameObject);
+                                                            }
+                                                            smartObjects_[msg.parameters[1].unsigned_].SetActive(true);
+                                                        }
+                                                        break;
+                                                    }
+                                                case ObjectTypes.OT_TICKETBARRIER:
+                                                    {
+                                                        // Added by Aram Azhari
+
+                                                        if (type.Contains("Open"))
+                                                        {
+                                                            //Debug.LogWarning("Aram: OT_TICKETBARRIER type: ()" + type + "()");
+                                                            //smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>().ChangeBarrier(true);
+                                                            if (smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>() == null)
+                                                                smartObjects_[msg.parameters[1].unsigned_].AddComponent<TicketBarrierLogicScript>();
+                                                            smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>().ChangeBarrier(true);
+                                                        }
+                                                        else if (type.Contains("Closed"))
+                                                        {
+                                                            //Debug.LogWarning("Aram: OT_TICKETBARRIER type: ()" + type + "()");
+                                                            //smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>().ChangeBarrier(false);
+                                                            if (smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>() == null)
+                                                                smartObjects_[msg.parameters[1].unsigned_].AddComponent<TicketBarrierLogicScript>();
+                                                            smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>().ChangeBarrier(false);
+                                                        }
+                                                        break;
+                                                        ////
+                                                    }
+                                                case ObjectTypes.OT_EXITBARRIER:
+                                                    {
+                                                        // Added by Aram Azhari
+
+                                                        if (type.Contains("Open"))
+                                                        {
+                                                            //Debug.LogWarning("Aram: OT_EXITBARRIER type: ()" + type + "()");
+                                                            //smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>().ChangeBarrier(true);
+                                                            if (smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>() == null)
+                                                                smartObjects_[msg.parameters[1].unsigned_].AddComponent<TicketBarrierLogicScript>();
+                                                            smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>().ChangeBarrier(true);
+                                                        }
+                                                        else if (type.Contains("Closed"))
+                                                        {
+                                                            //Debug.LogWarning("Aram: OT_EXITBARRIER type: ()" + type + "()");
+                                                            //smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>().ChangeBarrier(false);
+                                                            if (smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>() == null)
+                                                                smartObjects_[msg.parameters[1].unsigned_].AddComponent<TicketBarrierLogicScript>();
+                                                            smartObjects_[msg.parameters[1].unsigned_].GetComponent<TicketBarrierLogicScript>().ChangeBarrier(false);
+                                                        }
+                                                        break;
+                                                        ////
+                                                    }
+                                                default:
+                                                    {
+                                                        // Added by Aram Azhari
+                                                        //byte[] chars = new byte[52];
+                                                        //int rank = 0;
+                                                        //for (uint j = 3; j < 16; ++j)
+                                                        //{
+                                                        //    chars[rank++] = msg.parameters[j].char1_;
+                                                        //    chars[rank++] = msg.parameters[j].char2_;
+                                                        //    chars[rank++] = msg.parameters[j].char3_;
+                                                        //    chars[rank++] = msg.parameters[j].char4_;
+                                                        //}
+                                                        //string type = System.Text.UTF8Encoding.ASCII.GetString(chars);
+                                                        Debug.LogWarning("Aram TODO: Update the status for  " + (ObjectTypes)msg.parameters[0].unsigned_ + " TO " + type);
+                                                        //
+                                                        break;
+                                                    }
+                                            }
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            break;
+                                        }
+                                }
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
+                }
+                msgsIn_.Clear();
+
+            }
+            if (Input.GetKeyDown(KeyCode.S)) // TESTING TCP MESSAGE SENT TO SE-*
+            {
+
+                MessageParameter[] ps = new MessageParameter[24];
+                ps[0].int_ = (int)ExternalApplicationTypes.TEA_BUSINESSSTUDIO;
+                ps[1].unsigned_ = 5678;
+                ps[2].unsigned_ = (uint)CommandeTypes.CT_SPAWN_EXTERNAL_ENTITY;
+                ps[3].float_ = 0;
+                ps[4].float_ = 0;
+                ps[5].char1_ = 0;
+                ps[5].char2_ = 64;
+                ps[5].char3_ = 64;
+                ps[5].char4_ = 64;
+                var name = System.Text.UTF8Encoding.ASCII.GetBytes("Basic_Passenger");
+                int rank = 0;
+                for (uint j = 6; j < 16; ++j)
+                {
+                    if (rank > name.Length)
+                        break;
+                    ps[j].char1_ = name[rank++];
+                    if (rank > name.Length)
+                        break;
+                    ps[j].char2_ = name[rank++];
+                    if (rank > name.Length)
+                        break;
+                    ps[j].char3_ = name[rank++];
+                    if (rank == name.Length)
+                        break;
+                    ps[j].char4_ = name[rank++];
+                }
+                //// Added by Aram Azhari
+                //byte[] chars = new byte[52];
+                //int rank = 0;
+                //for (uint j = 3; j < 16; ++j)
+                //{
+                //    chars[rank++] = msg.parameters[j].char1_;
+                //    chars[rank++] = msg.parameters[j].char2_;
+                //    chars[rank++] = msg.parameters[j].char3_;
+                //    chars[rank++] = msg.parameters[j].char4_;
+                //}
+                //string type = System.Text.UTF8Encoding.ASCII.GetString(chars);
+                //    ////
+                //
+                MessageSEStar msgOut = new MessageSEStar(MessageTypes.TMSG_COMMAND, (MessageTypes)ExternalApplicationModes.MEA_BOTH, idSender_, idReceiver_, ps);
+                lock (tcpLock_)
+                {
+                    sendMsg(msgOut);
+                }
+            }
+        }
+    }
+
+    void OnDestroy()
+    {
+        try
+        {
+            connected_ = false;
+            //tcpThread_.Abort();
+            //udpThread_.Abort();
+            //externalCameraThread_.Abort();
+
+            tcpThread_.Interrupt();
+            if (!tcpThread_.Join(2000))
+            {
+                tcpThread_.Abort();
+            }
+            Thread.Sleep(1000);
+            for (int i = 0; i < udpThread_.Count; i++)
+            {
+                udpThread_[i].Interrupt();
+                if (!udpThread_[i].Join(2000))
+                {
+                    udpThread_[i].Abort();
+                }
+            }
+            Thread.Sleep(1000);
+            externalCameraThread_.Interrupt();
+            if (!externalCameraThread_.Join(2000))
+            {
+                externalCameraThread_.Abort();
+            }
+        }
+        catch (System.Exception ex)
+        { Debug.LogException(ex); }
+        Thread.Sleep(1000);
+        Debug.Log("SEStar Stop");
+        Console.Write("SEStar Stop");
+    }
+
+    private struct receivingData
+    {
+        public byte[] buffer;
+        public NetworkStream ns;
+    }
+
+    private void tcpThreadCallBack(IAsyncResult ar)
+    {
+        receivingData myData = (receivingData)ar.AsyncState;
+        int numMessage = myData.ns.EndRead(ar) / 116;
+        lock (tcpLock_)
+        {
+            for (int i = 0; i < numMessage; i++)
+            {
+                byte[] dataBytes = new byte[116];
+                Buffer.BlockCopy(myData.buffer, i * 116, dataBytes, 0, 116);
+                GCHandle hdl = GCHandle.Alloc(dataBytes, GCHandleType.Pinned);
+                MessageSEStar message;
+                IntPtr bufferLocal = hdl.AddrOfPinnedObject();
+                message = (MessageSEStar)Marshal.PtrToStructure(bufferLocal, typeof(MessageSEStar));
+                msgsIn_.Add(message);
+            }
+            if (first_ == true)
+            {
+                MessageParameter[] ps = new MessageParameter[24];
+                ps[0].int_ = (int)ExternalApplicationTypes.TEA_BUSINESSSTUDIO;
+                MessageSEStar msgOut = new MessageSEStar(MessageTypes.TMSG_REGISTER_APPLICATION, (MessageTypes)ExternalApplicationModes.MEA_BOTH, idSender_, idReceiver_, ps);
+                sendMsg(msgOut);
+                first_ = false;
+            }
+        }
+        endMessageReceivedTCP.Set();
+    }
+
+    private void tcpThread()
+    {
+        Debug.Log("tcpThread : Begin");
+        Console.Write("tcpThread : Begin");
+        try
+        {
+            socketSEStarTCP_ = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        }
+        catch (SocketException se)
+        {
+            Debug.Log("Error when trying to bind: " + se.Message + se.StackTrace);
+            Console.Write("Error when trying to bind: " + se.Message + se.StackTrace);
+            Thread.Sleep(3000);
+        }
+        while (!socketSEStarTCP_.Connected)
+        {
+            try
+            {
+                socketSEStarTCP_.Connect(tcpAddress_, tcpPort_);
+            }
+            catch (SocketException se)
+            {
+                Debug.Log("Error when trying to connect: " + se.Message + se.StackTrace);
+                Console.Write("Error when trying to connect: " + se.Message + se.StackTrace);
+                Thread.Sleep(3000);
+            }
+        }
+        streamTCP_ = new NetworkStream(socketSEStarTCP_, true);
+        while (connected_ && socketSEStarTCP_.Connected)
+        {
+            try
+            {
+                endMessageReceivedTCP.Reset();
+                receivingData rd = new receivingData();
+                rd.ns = streamTCP_;
+                rd.buffer = new byte[65536];
+                streamTCP_.BeginRead(rd.buffer, 0, rd.buffer.Length, new AsyncCallback(tcpThreadCallBack), rd);
+                endMessageReceivedTCP.WaitOne();
+            }
+            catch (ThreadInterruptedException tie)
+            {
+                Debug.LogException(tie);
+
+                Console.Write("Crash in tcpThread: " + tie.Message + tie.StackTrace);
+                if (streamTCP_ != null)
+                {
+                    streamTCP_.Close();
+                    streamTCP_.Dispose();
+                    streamTCP_ = null;
+                }
+                socketSEStarTCP_.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex);
+                //Debug.Log("Crash in tcpThread: " + ex.Message + ex.StackTrace);
+                Console.Write("Crash in tcpThread: " + ex.Message + ex.StackTrace);
+                if (streamTCP_ != null)
+                {
+                    streamTCP_.Close();
+                    streamTCP_.Dispose();
+                    streamTCP_ = null;
+                }
+                socketSEStarTCP_.Close();
+            }
+        }
+        if (streamTCP_ != null)
+        {
+            streamTCP_.Close();
+            streamTCP_.Dispose();
+            streamTCP_ = null;
+        }
+        socketSEStarTCP_.Close();
+        Debug.Log("tcpThread : End");
+        Console.Write("tcpThread : End");
+    }
+    public struct UdpState
+    {
+        public UdpClient udpClient_;
+        public IPEndPoint remoteIpEndPoint_;
+    }
+
+    public void udpThreadCallBack(IAsyncResult ar)
+    {
+        UdpClient udpClient = (UdpClient)((UdpState)(ar.AsyncState)).udpClient_;
+        IPEndPoint remoteIpEndPoint = (IPEndPoint)((UdpState)(ar.AsyncState)).remoteIpEndPoint_;
+        Byte[] receiveBytes = null;
+        try
+        {
+            receiveBytes = udpClient.EndReceive(ar, ref remoteIpEndPoint);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Crash in udpThread: " + ex.Message + ex.StackTrace);
+        }
+        lock (udpLock_)
+        {
+            numSyntheticEntities_[0] = 0;
+            Buffer.BlockCopy(receiveBytes, 0, numSyntheticEntities_, 0, sizeof(int));
+            byte[] dataBytes = new byte[36];
+            if (numSyntheticEntities_[0] > 0)
+            {
+                for (int i = 0; i < numSyntheticEntities_[0]; i++)
+                {
+                    Buffer.BlockCopy(receiveBytes, sizeof(int) + (i * 36), dataBytes, 0, 36);
+                    GCHandle hdl = GCHandle.Alloc(dataBytes, GCHandleType.Pinned);
+                    IntPtr bufferLocal = hdl.AddrOfPinnedObject();
+                    syntheticEntities_[i] = (MessageUnity)Marshal.PtrToStructure(bufferLocal, typeof(MessageUnity));
+                }
+            }
+        }
+        endMessageReceivedUDP.Set();
+    }
+
+    public void udpThread(object udpPort)
+    {
+        int udpPort_ = (int)udpPort;
+        Debug.Log("udpThread " + Thread.CurrentThread.Name + ": Begin");
+        IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, udpPort_);
+        UdpClient udpClient = new UdpClient(remoteIpEndPoint);
+
+        Byte[] receiveBytes = null;
+        while (connected_ == true)
+        {
+            receiveBytes = udpClient.Receive(ref remoteIpEndPoint);
+            lock (udpLock_)
+            {
+                numSyntheticEntities_[0] = 0;
+                Buffer.BlockCopy(receiveBytes, 0, numSyntheticEntities_, 0, sizeof(int));
+                byte[] dataBytes = new byte[36];
+                if (numSyntheticEntities_[0] > 0)
+                {
+                    for (int i = 0; i < numSyntheticEntities_[0]; i++)
+                    {
+                        Buffer.BlockCopy(receiveBytes, sizeof(int) + (i * 36), dataBytes, 0, 36);
+                        GCHandle hdl = GCHandle.Alloc(dataBytes, GCHandleType.Pinned);
+                        IntPtr bufferLocal = hdl.AddrOfPinnedObject();
+                        syntheticEntities_[i] = (MessageUnity)Marshal.PtrToStructure(bufferLocal, typeof(MessageUnity));
+                    }
+                }
+            }
+        }
+        Debug.Log("udpThread " + Thread.CurrentThread.Name + ": End");
+    }
+    public void sharedmemoryThread()
+    {
+        Debug.Log("sharedmemoryThread : Begin");
+
+        //shared_memory_log* data_;
+
+        /*		shmSharedSyntheticEntities_ = boost::interprocess::shared_memory_object(boost::interprocess::open_only, "shmSharedSyntheticEntities", boost::interprocess::read_write);
+                regionSharedSyntheticEntities_ = boost::interprocess::mapped_region(shmSharedSyntheticEntities_, boost::interprocess::read_write);
+                data_ = static_cast<shared_memory_log*>(regionSharedSyntheticEntities_.get_address());
+                data_->connected_ = true;
+        */
+        while (connected_ == true)
+        {
+            /*			boost::interprocess::scoped_lock<boost::interprocess::interprocess_mutex> lock(vkSEStarConnector::data_->mutex_);
+                        if (!vkSEStarConnector::data_->message_in_) {
+                            vkSEStarConnector::data_->cond_empty_.wait(lock);
+                        }
+	
+                        readingSharedMemoryMutex_.lock();
+                        vkSEStarConnector::numSharedSyntheticEntitiesLocal_ = vkSEStarConnector::data_->numSharedSyntheticEntities_;
+                        memcpy(vkSEStarConnector::sharedSyntheticEntitiesLocal_, vkSEStarConnector::data_->sharedSyntheticEntities_, 10000 * sizeof(MessageUnity));
+                        readingSharedMemoryMutex_.unlock();
+	
+                        vkSEStarConnector::data_->message_in_ = false;
+                        vkSEStarConnector::data_->cond_full_.notify_one();*/
+        }
+        Debug.Log("sharedmemoryThread : End");
+    }
+
+    public void externalCameraThreadCallBack(IAsyncResult ar)
+    {
+        UdpClient udpClient = (UdpClient)((UdpState)(ar.AsyncState)).udpClient_;
+        IPEndPoint remoteIpEndPoint = (IPEndPoint)((UdpState)(ar.AsyncState)).remoteIpEndPoint_;
+        Byte[] receiveBytes = null;
+        try
+        {
+            receiveBytes = udpClient.EndReceive(ar, ref remoteIpEndPoint);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Crash in udpThread: " + ex.Message + ex.StackTrace);
+        }
+        lock (tcpLock_)
+        {
+            idExternalCamera_[0] = -1;
+            Buffer.BlockCopy(receiveBytes, 0, idExternalCamera_, 0, sizeof(int));
+        }
+        endMessageExternalCamera.Set();
+    }
+
+    private void externalCameraThread()
+    {
+        Debug.Log("externalCameraThread : Begin");
+        idExternalCamera_[0] = -1;
+        IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, udpExternalcameraPort_);
+        UdpClient udpClient = new UdpClient(remoteIpEndPoint);
+        /*		UdpState s = new UdpState();
+                s.udpClient_ = udpClient;
+                s.remoteIpEndPoint_ = remoteIpEndPoint;*/
+        Byte[] receiveBytes = null;
+        while (connected_ == true)
+        {
+            /*			try {
+                            endMessageExternalCamera.Reset();
+                            udpClient.BeginReceive(new AsyncCallback(externalCameraThreadCallBack), s);
+                            endMessageExternalCamera.WaitOne();
+                        }
+                        catch (Exception ex){
+                            Debug.Log("Crash in externalCameraThread: " + ex.Message + ex.StackTrace);
+                        }*/
+            receiveBytes = udpClient.Receive(ref remoteIpEndPoint);
+            lock (tcpLock_)
+            {
+                idExternalCamera_[0] = -1;
+                Buffer.BlockCopy(receiveBytes, 0, idExternalCamera_, 0, sizeof(int));
+            }
+        }
+        Debug.Log("externalCameraThread : End");
+    }
+
+    private void sendMsg(MessageSEStar msg)
+    {
+        Debug.Log("sendMsg : Begin");
+        int size = Marshal.SizeOf(msg);
+        byte[] arr = new byte[size];
+        IntPtr ptr = Marshal.AllocHGlobal(size);
+
+        Marshal.StructureToPtr(msg, ptr, true);
+        Marshal.Copy(ptr, arr, 0, size);
+        Marshal.FreeHGlobal(ptr);
+
+        try
+        {
+            streamTCP_.Write(arr, 0, arr.Length);
+        }
+        catch (Exception ex)
+        {
+            if (ex is ObjectDisposedException || ex is System.IO.IOException)
+            {
+                // Do nothing - we've closed the stream
+                Debug.Log("Crash in sendMsg");
+                return;  // will also execute finally{} below to release calling thread
+            }
+        }
+        Debug.Log("sendMsg : End");
+    }
+
+    
+}
