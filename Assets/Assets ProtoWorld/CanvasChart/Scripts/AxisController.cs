@@ -1,8 +1,13 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿/*
+ * 
+ * CANVAS CHART MODULE
+ * AxisController.cs
+ * Johnson Ho
+ * 
+ */
+
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using System;
 
 /// <summary>
 /// Attach to the axis object to visualize axis in the chart.

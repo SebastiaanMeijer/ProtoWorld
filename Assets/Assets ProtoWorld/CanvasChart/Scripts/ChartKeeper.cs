@@ -1,5 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿/*
+ * 
+ * CANVAS CHART MODULE
+ * ChartKeeper.cs
+ * Johnson Ho
+ * 
+ */
+
+using UnityEngine;
 using System.Collections.Generic;
 using System;
 using System.Linq;
@@ -12,6 +19,9 @@ using UnityEngine.UI;
 /// </summary>
 public enum UIChartTypes { ToBeDecided = 0, Bar = 1, Pie = 2, Line = 3, StackedArea = 4 }
 
+/// <summary>
+/// Old(?) Implementation of controlling the chart in UI canvas.
+/// </summary>
 public class ChartKeeper : MonoBehaviour
 {
 
