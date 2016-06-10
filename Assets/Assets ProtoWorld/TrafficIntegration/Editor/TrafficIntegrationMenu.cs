@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿/*
+ * 
+ * TRAFFIC INTEGRATION
+ * TrafficIntegrationMenu.cs
+ * Johnson Ho
+ * 
+ */
+
+using UnityEngine;
 using UnityEditor;
 using System.IO;
 
@@ -183,46 +191,4 @@ public class TrafficIntegrationMenu : MonoBehaviour
     }
 }
 
-public class MatSimBuilder : EditorWindow
-{
-    public MatSimParameters parameters;
-
-    public float total;
-
-    public int progress;
-
-    public void BuildNetwork()
-    {
-        //string path = @"C:\Users\admgaming\Desktop\Jay\input";
-
-        //var container = new MatSimContainer();
-        //container.Load(path);
-
-        //parameters = FindObjectOfType<MatSimParameters>();
-        //total = container.carLinks.Count;
-
-        //foreach (var link in container.carLinks.Values)
-        //{
-        //    var go = container.CreateLinkObject(link.from, link.to, parameters.scale, parameters.roadWidthInMeter);
-        //}
-    }
-
-
-
-
-
-
-
-    void onGUI()
-    {
-        if (progress < total)
-            EditorUtility.ClearProgressBar();
-        else
-            EditorUtility.DisplayProgressBar("Build progress", "Completed links", progress / total);
-
-        if (GUILayout.Button("Close"))
-            this.Close();
-    }
-
-}
 

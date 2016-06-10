@@ -1,9 +1,14 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿/*
+ * 
+ * TRAFFIC INTEGRATION MODULE
+ * VissimIO.cs
+ * Johnson Ho
+ * 
+ */
+
+using UnityEngine;
 using System.IO;
 using System;
-using System.Threading;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 public class VissimIO : SimulationIOBase
