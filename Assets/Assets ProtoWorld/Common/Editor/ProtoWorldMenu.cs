@@ -30,11 +30,7 @@ public class ProtoWorldMenu : MonoBehaviour
     [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Add or Edit/Add Essentials", false, 0)]
     static void AddEssentialsModuleToScene()
     {
-        DestroyImmediate(GameObject.Find("Main Camera"));
-        DestroyImmediate(GameObject.Find("Directional Light"));
-
-        DestroyImmediate(GameObject.Find(navModuleName));
-        DestroyImmediate(GameObject.Find(scenModuleName));
+        ClearEssentialsModule();
 
         AddModuleIfNotExist(navModuleName);
         AddModuleIfNotExist(scenModuleName);
@@ -491,9 +487,11 @@ public class ProtoWorldMenu : MonoBehaviour
         foreach (var guid in guids)
         {
             var path = AssetDatabase.GUIDToAssetPath(guid);
+            Debug.Log(path);
             if (path.Contains(".prefab"))
             {
                 string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
+                Debug.Log(fileName);
                 if (fileName.Equals(prefabName))
                 {
                     var prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;

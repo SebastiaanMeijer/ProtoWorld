@@ -1,7 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿/*
+ *  
+ * SIMULATION READER
+ * SimulationIOWindow.cs
+ * Johnson Ho
+ * 
+ */
+
 using UnityEditor;
 using UnityEngine;
 

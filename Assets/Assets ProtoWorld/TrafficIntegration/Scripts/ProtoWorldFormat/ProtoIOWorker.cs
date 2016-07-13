@@ -1,10 +1,21 @@
-﻿using UnityEngine;
+﻿/*
+ * 
+ * TRAFFIC INTEGRATION MODULE
+ * ProtoIOWorker.cs
+ * Johnson Ho
+ * 
+ */
+
+using UnityEngine;
 using System.Collections;
 using System.ComponentModel;
 using System.Threading;
 using System.IO;
 using System;
 
+/// <summary>
+/// Worker class that import {simulation file} to [TrafficIntegrationData]
+/// </summary>
 public class ProtoIOWorker
 {
     protected TrafficIntegrationData trafficDB;

@@ -1,5 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿/*
+ * 
+ * TRAFFIC INTEGRATION MODULE
+ * SumoIO.cs
+ * Johnson Ho
+ * 
+ */
+
+using UnityEngine;
 using System.Xml;
 using System.Threading;
 using System.Net.Sockets;
