@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2013
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtoWorld.CSharp.Plugins", "ProtoWorld.CSharp.Plugins.csproj", "{F7CF5A49-C9B8-D11E-2831-3325AAA1D499}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtoWorld.CSharp", "ProtoWorld.CSharp.csproj", "{C49473D7-76E5-8626-288E-482E8679FF32}"
