@@ -2,8 +2,7 @@
  * 
  * GAPSLABS EXTENDED EDITOR
  * Aram Azhari
- * 
- * Reviewed by Miguel Ramos Carretero
+ * Miguel Ramos Carretero
  * 
  */
 
@@ -60,6 +59,19 @@ public class OSMReaderSQL : Editor
         var globalO = GameObject.Find("AramGISBoundaries");
         var mapproperties = globalO.GetComponent<MapBoundaries>();
         ImportOSMDataSQL_ServerSide(true, true, false);
+        Vector3 scale = new Vector3(mapproperties.Scale.x, 1, mapproperties.Scale.y);
+        GroupObjectsWithTags("Lines", new string[] { "Line" }, scale, false, true);
+        //GroupRoads();
+        AssignStaticLayers();
+    }
+
+    [MenuItem("Gapslabs Extended Editor/Load OSM Data/Generate Roads (Optimization test)", false, 1)]
+    static void Create2_4()
+    {
+        PrepareForCombining.TurnRoadCollidersOff();
+        var globalO = GameObject.Find("AramGISBoundaries");
+        var mapproperties = globalO.GetComponent<MapBoundaries>();
+        ImportOSMDataSQL_SimpleLines(true);
         Vector3 scale = new Vector3(mapproperties.Scale.x, 1, mapproperties.Scale.y);
         GroupObjectsWithTags("Lines", new string[] { "Line" }, scale, false, true);
         //GroupRoads();
@@ -246,7 +258,7 @@ public class OSMReaderSQL : Editor
         var gos4 = GameObject.FindGameObjectsWithTag("Water");
         var gos5 = GameObject.FindGameObjectsWithTag("BusStop");
         var gos6 = GameObject.FindGameObjectsWithTag("TrafficLight");
-        if (EditorUtility.DisplayDialog("Deleting roads", "There are a total of " + (gos.Length+gos2.Length+gos3.Length+gos4.Length+gos5.Length+gos6.Length) + " elements.\nAre you sure you want to delete them?", "Yes", "No"))
+        if (EditorUtility.DisplayDialog("Deleting roads", "There are a total of " + (gos.Length + gos2.Length + gos3.Length + gos4.Length + gos5.Length + gos6.Length) + " elements.\nAre you sure you want to delete them?", "Yes", "No"))
         {
             foreach (var g in gos)
                 GameObject.DestroyImmediate(g);
@@ -261,12 +273,12 @@ public class OSMReaderSQL : Editor
             foreach (var g in gos6)
                 GameObject.DestroyImmediate(g);
 
-           GameObject.DestroyImmediate(GameObject.Find("Lines"));
-           GameObject.DestroyImmediate(GameObject.Find("Buildings"));
-           GameObject.DestroyImmediate(GameObject.Find("Areas"));
-           GameObject.DestroyImmediate(GameObject.Find("Bus stops"));
-           GameObject.DestroyImmediate(GameObject.Find("Traffic Lights"));
-           GameObject.DestroyImmediate(GameObject.Find("Water Areas"));
+            GameObject.DestroyImmediate(GameObject.Find("Lines"));
+            GameObject.DestroyImmediate(GameObject.Find("Buildings"));
+            GameObject.DestroyImmediate(GameObject.Find("Areas"));
+            GameObject.DestroyImmediate(GameObject.Find("Bus stops"));
+            GameObject.DestroyImmediate(GameObject.Find("Traffic Lights"));
+            GameObject.DestroyImmediate(GameObject.Find("Water Areas"));
 
         }
     }
@@ -1217,7 +1229,7 @@ public class OSMReaderSQL : Editor
         }
         EditorUtility.ClearProgressBar();
     }
-    
+
     //static string conn = "Server=localhost\\SQLEXPRESS;Database=GIStest;User Id=gapslabuser;Password=test;";
 
     //static string connOleDb = "Driver=SQLOLEDB;Server=localhost\\SQLEXPRESS;Database=GIStest;User Id=gapslabuser;Password=test;";
@@ -2224,7 +2236,6 @@ public class OSMReaderSQL : Editor
         ChooseConnection();
         ServiceGapslabsClient client = ServicePropertiesClass.GetGapslabsService(ServicePropertiesClass.ServiceUri);
 
-
         // int StressTest=0;
 
         Color buildingColor = new Color(0, 0, 255, 255);
@@ -2357,9 +2368,9 @@ public class OSMReaderSQL : Editor
 
         }
         catch (System.Exception e) { Debug.LogException(e); }
-        finally 
+        finally
         {
-            EditorUtility.ClearProgressBar(); 
+            EditorUtility.ClearProgressBar();
         }
 
 
@@ -2490,6 +2501,183 @@ public class OSMReaderSQL : Editor
 
     }
 
+    // Added by Miguel R. C. -- Optimization of road generation for large areas (TODO)
+    static void ImportOSMDataSQL_SimpleLines(bool GenerateRoads, bool CorrectAspectRatio = false)
+    {
+        ChooseConnection();
+        ServiceGapslabsClient client = ServicePropertiesClass.GetGapslabsService(ServicePropertiesClass.ServiceUri);
+
+        var go = GameObject.Find("AramGISBoundaries");
+        var connection = go.GetComponent<MapBoundaries>();
+        var Con = connection.OverrideDatabaseConnection ? connection.GetOverridenConnectionString() : wcfCon;
+
+        // Aram.OSMParser.Bounds  bounds=new Aram.OSMParser.Bounds();
+        // Note: These are the min max of values in the database. 
+        Debug.Log("Check if there are errors");
+        BoundsWCF boundsTemp = null;
+
+        try
+        {
+            EditorUtility.DisplayProgressBar("Getting database bounds...", "client.GetBounds", 0.5f);
+            boundsTemp = client.GetBounds(Con);
+        }
+        catch (System.Exception e) { Debug.LogException(e); }
+        finally { EditorUtility.ClearProgressBar(); }
+
+        // Temporary - it appears the data for sweden includes some data that go to the north pole and it ruins all interpolations.
+        //boundsTemp.maxlon=32;
+        Debug.Log("Is there an error?");
+        if (boundsTemp == null)
+        {
+            Debug.LogWarning("Could not communicate to receive the database bounds.");
+            return;
+        }
+        Debug.Log("Setting interpolation Boundary");
+
+        // However, the real ranges for lat and lon are:
+        // Latitude measurements range from 0° to (+/–)90°.
+        // Longitude measurements range from 0° to (+/–)180°.
+
+        float[] minmaxX; //=new double[] {0,20000f};
+        float[] minmaxY; //=new double[] {0f,40000f};
+
+        BoundsWCF SelectedArea = new BoundsWCF();
+
+        float LineWidth = 0.4f;
+
+        MapBoundaries mapboundaries;
+
+        float height; //5f;
+
+        if (go != null)
+        {
+            mapboundaries = go.GetComponent<MapBoundaries>();
+            SelectedArea.minlat = mapboundaries.minLat;
+            SelectedArea.maxlat = mapboundaries.maxLat;
+            SelectedArea.minlon = mapboundaries.minLon;
+            SelectedArea.maxlon = mapboundaries.maxLon;
+            minmaxX = mapboundaries.minMaxX;
+            minmaxY = mapboundaries.minMaxY;
+            Debug.Log(minmaxX + "\t" + minmaxY);
+
+            LineWidth = mapboundaries.RoadLineThickness;
+            height = mapboundaries.BuildingHeight;
+            if (height < 4)
+                height = 4;
+        }
+        else
+        {
+            throw new MissingComponentException("The AramGISBoundaries object is not found.");
+        }
+
+        Debug.Log("Getting ways...");
+
+        string[] ways = null;
+
+        try
+        {
+            EditorUtility.DisplayProgressBar("Getting database bounds...", "client.GetBounds", 0.5f);
+
+            if (GenerateRoads)
+            {
+                string[][] roadtag = new string[1][];
+                roadtag[0] = new string[] { "highway", "" }; // NOTE: highway tag in OSM is in lower case.
+                ways = client.GetWayIdsWithTags(Con, SelectedArea, roadtag);
+            }
+        }
+        catch (System.Exception e) { Debug.LogException(e); }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
+        }
+
+        Debug.Log("Ways were received.");
+        float[] MinPointOnArea = SimpleInterpolation((float)SelectedArea.minlat, (float)SelectedArea.minlon, boundsTemp, minmaxX, minmaxY);
+
+        // Testing the correct direction
+        int direction = -1;
+        GaPSLabs.Geometry.Vector3 MinPointOnMap = new GaPSLabs.Geometry.Vector3();
+        MinPointOnMap.x = direction * MinPointOnArea[0];
+        MinPointOnMap.y = 0;
+        MinPointOnMap.z = MinPointOnArea[1];
+        // Vector3 MinPointOnMap = new Vector3(MinPointOnArea[0],0,MinPointOnArea[1]);
+        go.GetComponent<MapBoundaries>().MinPointOnMap = new Vector3(direction * MinPointOnArea[0], 0, MinPointOnArea[1]);
+        EditorUtility.SetDirty(go);
+
+        Debug.Log("Number of Ways:" + ways.Length);
+
+        LineDraw draw = LineDraw.CreateInstance<LineDraw>();
+
+        int totalWays = ways.Length;
+        int progress = 0;
+
+        var mapProperty = go.GetComponent<MapBoundaries>();
+
+        CoordinateConvertor.Initialize(client, mapboundaries);
+
+        client.GetOSMmeshFromOsmId(null, MinPointOnMap, boundsTemp, mapboundaries.ToGapslabsMapProperties(mapboundaries.BuildingMinimumHeight, mapboundaries.BuildingMaximumHeight), Con, "Way"
+            , mapboundaries.RemoveRedundantPointsOnTheSameLine, mapboundaries.RedundantPointErrorThreshold, mapboundaries.SegmentLines);
+        try
+        {
+            foreach (var FirstWay in ways)
+            {
+                try
+                {
+                    if (!EditorUtility.DisplayCancelableProgressBar("Importing data", "Generating roads with simple lines\t" + progress + "/" + totalWays, progress++ / (float)totalWays))
+                    {
+                        var nodes = client.GetWayNodes(FirstWay, Con);
+
+                        if (nodes.Length > 1)
+                        {
+                            // Convert the nodes into a list of Vector3 points
+                            Vector3[] points = new Vector3[nodes.Length];
+
+                            for (int i = 0; i < nodes.Length; i++)
+                            {
+                                points[i] = CoordinateConvertor.LatLonToVector3(nodes[i].lat, nodes[i].lon);
+                            }
+
+                            // Draw the line
+                            draw.Draw(points, Color.blue, Color.blue, mapboundaries.RoadWidth, mapboundaries.RoadWidth, LineDraw.OSMType.Line, FirstWay, null, "Line");
+                        }
+
+                        //var serverObject = client.GetOSMmeshFromOsmId(FirstWay, MinPointOnMap, boundsTemp, null, Con, "Way"
+                        //    , mapboundaries.RemoveRedundantPointsOnTheSameLine, mapboundaries.RedundantPointErrorThreshold, mapboundaries.SegmentLines);
+
+                        //if (serverObject != null)
+                        //{
+                        //    var tag = serverObject.Name.Split(new string[] { "|" }, System.StringSplitOptions.RemoveEmptyEntries)[1];
+                        //    var osmtype = serverObject.Name.Split(new string[] { "|" }, System.StringSplitOptions.RemoveEmptyEntries)[3].ToLower();
+                        //    if (tag == "1")
+                        //        tag = "Line";
+                        //    else if (tag == "2" && !osmtype.EndsWith("area"))
+                        //        tag = "Building";
+                        //    else if (tag == "2" && osmtype.EndsWith("area"))
+                        //        tag = "Area";
+                        //    serverObject.GenerateShapeFromServerObject(tag, true);
+                        //}
+                    }
+                    else
+                    {
+                        EditorUtility.ClearProgressBar();
+                        break;
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    EditorUtility.ClearProgressBar();
+                    throw e;
+                }
+
+            }
+        }
+        finally
+        {
+            client.Close();
+        }
+        EditorUtility.ClearProgressBar();
+    }
+
     static void ImportOSMDataSQL(bool GenerateBuildingShapes, bool GenerateRoads, bool GenerateBuildings, bool CorrectAspectRatio = false)
     {
         ChooseConnection();
@@ -2518,11 +2706,13 @@ public class OSMReaderSQL : Editor
             boundsTemp = client.GetBounds(Con);
             Debug.Log("These are the bounds: " + boundsTemp.minlat + ", " + boundsTemp.minlon + ", " + boundsTemp.maxlat + ", " + boundsTemp.maxlon + ", ");
         }
-        catch (System.Exception e) { 
-            Debug.LogException(e); 
+        catch (System.Exception e)
+        {
+            Debug.LogException(e);
         }
-        finally { 
-            EditorUtility.ClearProgressBar(); 
+        finally
+        {
+            EditorUtility.ClearProgressBar();
         }
 
         // Temporary - it appears the data for sweden includes some data that go to the north pole and it ruins all interpolations.
@@ -2629,13 +2819,13 @@ public class OSMReaderSQL : Editor
 
 
         }
-        catch (System.Exception e) 
-        { 
-            Debug.LogException(e); 
+        catch (System.Exception e)
+        {
+            Debug.LogException(e);
         }
-        finally 
-        {                          
-            EditorUtility.ClearProgressBar(); 
+        finally
+        {
+            EditorUtility.ClearProgressBar();
         }
 
         Debug.Log("Ways were received.");

@@ -9,6 +9,7 @@ using System.Linq;
 public class LineDraw : ScriptableObject
 {
     public enum OSMType { Node, Line, Polygon, Relation };
+
     public void Draw(Vector3[] Points, Color StartingColor, Color EndingColor, float WidthStart, float WidthEnd, OSMType type, string Id, string other, string tag)
     {
         GameObject gameObject = new GameObject(type + "|" + ((int)type) + "|" + Id + (!string.IsNullOrEmpty(other) ? "|" + other : ""));
@@ -989,7 +990,5 @@ public class LineDraw : ScriptableObject
             }
         }
         return tPoints.ToArray();
-
     }
-
 }
