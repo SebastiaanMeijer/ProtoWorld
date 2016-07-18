@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 9978b22e140e75c478e9e44125e893cb
+timeCreated: 1454200538
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - stationPrefab: {fileID: 195700, guid: 5d6bd95d96a8d674bba5552a037a7f18, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

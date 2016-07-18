@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 472b8335a8e1df54dbf9ccfdb57778db
+timeCreated: 1454924860
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - line: {instanceID: 0}
+  - currentStation: {instanceID: 0}
+  - nextStation: {instanceID: 0}
+  - vehiclePrefab: {fileID: 170438, guid: 3ddae54600abf3f4db1c7a41c098dd61, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

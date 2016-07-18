@@ -1,0 +1,212 @@
+fileFormatVersion: 2
+guid: ea416fc4cf3363c4d805b27c8ffda0b5
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Anti brouillard
+    100002: Caisse
+    100004: Calandre
+    100006: Calandre01
+    100008: //RootNode
+    100010: Echappement
+    100012: Grille
+    100014: Grilles
+    100016: Jante Av
+    100018: Jante Av002
+    100020: Jante Av003
+    100022: Jante Av01
+    100024: Jupe Ar
+    100026: Lunette Ar01
+    100028: Objet01
+    100030: ouies
+    100032: 'Ouies '
+    100034: Pare brise
+    100036: Phares
+    100038: Pneu Ar
+    100040: Pneu Ar001
+    100042: Pneu Av
+    100044: Pneu Av001
+    100046: Reflecteur Optique
+    100048: Sph__re01
+    100050: Tube01
+    100052: Vitre de custode
+    100054: Vitres AV01
+    100056: "Sph\xE8re01"
+    400000: Anti brouillard
+    400002: Caisse
+    400004: Calandre
+    400006: Calandre01
+    400008: //RootNode
+    400010: Echappement
+    400012: Grille
+    400014: Grilles
+    400016: Jante Av
+    400018: Jante Av002
+    400020: Jante Av003
+    400022: Jante Av01
+    400024: Jupe Ar
+    400026: Lunette Ar01
+    400028: Objet01
+    400030: ouies
+    400032: 'Ouies '
+    400034: Pare brise
+    400036: Phares
+    400038: Pneu Ar
+    400040: Pneu Ar001
+    400042: Pneu Av
+    400044: Pneu Av001
+    400046: Reflecteur Optique
+    400048: Sph__re01
+    400050: Tube01
+    400052: Vitre de custode
+    400054: Vitres AV01
+    400056: "Sph\xE8re01"
+    2300000: Anti brouillard
+    2300002: Caisse
+    2300004: Calandre
+    2300006: Calandre01
+    2300008: Echappement
+    2300010: Grille
+    2300012: Grilles
+    2300014: Jante Av
+    2300016: Jante Av002
+    2300018: Jante Av003
+    2300020: Jante Av01
+    2300022: Jupe Ar
+    2300024: Lunette Ar01
+    2300026: Objet01
+    2300028: ouies
+    2300030: 'Ouies '
+    2300032: Pare brise
+    2300034: Phares
+    2300036: Pneu Ar
+    2300038: Pneu Ar001
+    2300040: Pneu Av
+    2300042: Pneu Av001
+    2300044: Reflecteur Optique
+    2300046: Sph__re01
+    2300048: Tube01
+    2300050: Vitre de custode
+    2300052: Vitres AV01
+    2300054: "Sph\xE8re01"
+    3300000: Anti brouillard
+    3300002: Caisse
+    3300004: Calandre
+    3300006: Calandre01
+    3300008: Echappement
+    3300010: Grille
+    3300012: Grilles
+    3300014: Jante Av
+    3300016: Jante Av002
+    3300018: Jante Av003
+    3300020: Jante Av01
+    3300022: Jupe Ar
+    3300024: Lunette Ar01
+    3300026: Objet01
+    3300028: ouies
+    3300030: 'Ouies '
+    3300032: Pare brise
+    3300034: Phares
+    3300036: Pneu Ar
+    3300038: Pneu Ar001
+    3300040: Pneu Av
+    3300042: Pneu Av001
+    3300044: Reflecteur Optique
+    3300046: Sph__re01
+    3300048: Tube01
+    3300050: Vitre de custode
+    3300052: Vitres AV01
+    3300054: "Sph\xE8re01"
+    4300000: Caisse
+    4300002: ouies
+    4300004: Calandre
+    4300006: Calandre01
+    4300008: Objet01
+    4300010: Vitres AV01
+    4300012: Pare brise
+    4300014: Lunette Ar01
+    4300016: Phares
+    4300018: 'Ouies '
+    4300020: Anti brouillard
+    4300022: Grilles
+    4300024: Tube01
+    4300026: Sph__re01
+    4300028: Reflecteur Optique
+    4300030: Jante Av
+    4300032: Pneu Av
+    4300034: Pneu Ar
+    4300036: Jupe Ar
+    4300038: Echappement
+    4300040: Grille
+    4300042: Vitre de custode
+    4300044: Jante Av01
+    4300046: Pneu Av001
+    4300048: Jante Av002
+    4300050: Jante Av003
+    4300052: Pneu Ar001
+    4300054: "Sph\xE8re01"
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.01
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

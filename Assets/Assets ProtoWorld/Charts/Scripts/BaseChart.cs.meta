@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 27330781f0a52e54c9040a23e7101df3
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - axisText: {fileID: 113094, guid: 1b6853ac1ee0ac54082d7fb344a85724, type: 2}
+  - legendText: {fileID: 113094, guid: 44f3f881da222ca41b089c8451573afa, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
