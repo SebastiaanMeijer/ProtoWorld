@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="GaPSlabs Openstreetmap Road Network Generator">
+    <Position X="0.5" Y="0.5" Height="0.531" Width="2.794" />
+  </Comment>
+  <Class Name="Openstreetmap_Road_Network_Generator.Program">
+    <Position X="0.5" Y="1.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>RAAgAAAAACCASAAAAAAAAgACAAQAAgAAABAIBAAQAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

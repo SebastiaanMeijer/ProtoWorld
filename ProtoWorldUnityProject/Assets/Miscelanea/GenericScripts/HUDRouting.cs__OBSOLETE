@@ -1,0 +1,239 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using GapslabWCFservice;
+[ExecuteInEditMode()]
+public class HUDRouting : MonoBehaviour
+{
+
+    [Compact]
+    public Rect WindowSize = new Rect(10, 10, 210, 200);
+    public string Point1 = "";
+    public string Point2 = "";
+    public float Margin = 10f;
+    private GeoInfo geoinfo;
+    private MapBoundaries mapBoundaries;
+    private BoundsWCF GameBoundaries;
+    public BoundsWCF boundsTemp;
+    public float[] GameBoundLat;
+    public float[] GameBoundLon;
+    [Compact]
+    public Vector3 MinPointOnMap;
+    public float[] MinMaxLat;
+    public float[] MinMaxLon;
+    public string WindowName = "Router GUI";
+    public float CameraHeightOnRoute = 2f;
+    public bool isRouting = false;
+    public bool disabled = true;
+    private string wcfCon = ServicePropertiesClass.ConnectionPostgreDatabase;
+
+    private ServiceGapslabsClient client;
+    void Start()
+    {
+        client = ServicePropertiesClass.GetGapslabsService(ServicePropertiesClass.ServiceUri);
+
+        var go = GameObject.Find("AramGISBoundaries");
+        var connection = go.GetComponent<MapBoundaries>();
+        wcfCon = connection.OverrideDatabaseConnection ? connection.OverridenConnectionString : ServicePropertiesClass.ConnectionPostgreDatabase;
+
+        Interpolations.MyLog("HUD Router - init Router");
+        client.InitializeRouter(wcfCon);
+        Interpolations.MyLog("HUD Router - Router initialized successfully.");
+
+        geoinfo = transform.GetComponent<GeoInfo>();
+        mapBoundaries = go.GetComponent<MapBoundaries>();
+
+        boundsTemp = client.GetBounds(wcfCon);
+        // Temporary - it appears the data for sweden includes some data that go to the north pole and it ruins all interpolations.
+        //boundsTemp.maxlon=32;
+
+        MinMaxLat = new float[2];
+        MinMaxLon = new float[2];
+        // Setting local values for target boundaries (Openstreetmap database). Used in interpolation as destination boundary.
+        MinMaxLat[0] = (float)boundsTemp.minlat;
+        MinMaxLat[1] = (float)boundsTemp.maxlat;
+        MinMaxLon[0] = (float)boundsTemp.minlon;
+        MinMaxLon[1] = (float)boundsTemp.maxlon;
+
+
+
+        // Setting local values for 3d world boundaries. Used in interpolation as source boundary
+        GameBoundaries = new BoundsWCF();
+        GameBoundaries.minlat = mapBoundaries.minMaxX[0];
+        GameBoundaries.maxlat = mapBoundaries.minMaxX[1];
+        GameBoundaries.minlon = mapBoundaries.minMaxY[0];
+        GameBoundaries.maxlon = mapBoundaries.minMaxY[1];
+
+        if (mapBoundaries.CorrectAspectRatio)
+        {
+            var aspectRatio = System.Math.Abs(boundsTemp.maxlat - boundsTemp.minlat) / System.Math.Abs(boundsTemp.maxlon - boundsTemp.minlon);
+            GameBoundaries.maxlon = (float)(GameBoundaries.maxlat / aspectRatio);
+        }
+
+
+        GameBoundLat = new float[2];
+        GameBoundLat[0] = (float)GameBoundaries.minlat;
+        GameBoundLat[1] = (float)GameBoundaries.maxlat;
+        GameBoundLon = new float[2];
+        GameBoundLon[0] = (float)GameBoundaries.minlon;
+        GameBoundLon[1] = (float)GameBoundaries.maxlon;
+
+
+
+
+        float[] MinPointOnArea =
+            Interpolations.SimpleInterpolation(
+                (float)mapBoundaries.minLat,
+                (float)mapBoundaries.minLon,
+                boundsTemp,
+                GameBoundLat, GameBoundLon);
+        MinPointOnMap = new Vector3(MinPointOnArea[0], 0, MinPointOnArea[1]);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void OnGUI()
+    {
+        if (!disabled)
+        {
+            GUI.color = Color.green;
+            WindowSize = SetWindowMargins(WindowSize, Margin);
+            // Without dragging
+            //GUI.Window(1,WindowSize,DoMyWindow,"Router");
+            // With dragging
+            WindowSize = GUI.Window(2, WindowSize, DoMyWindow, WindowName);
+        }
+    }
+    Vector2 ScrollRouter;
+    void DoMyWindow(int windowID)
+    {
+        //if (Application.isPlaying)
+        if (windowID == 2)
+        {
+            // var result=Interpolations.SimpleInterpolation((float)node.lat,(float)node.lon,boundsTemp/*SelectedArea*/,minmaxX,minmaxY);
+
+            GUI.Label(new Rect(10, 20, 50, 20), "Point A:");
+            Point1 = GUI.TextField(new Rect(10 + 50, 20, WindowSize.width - 50 - 10 - 10, 20), Point1);
+            GUI.Label(new Rect(10, 50, 50, 20), "Point B:");
+            Point2 = GUI.TextField(new Rect(10 + 50, 50, WindowSize.width - 50 - 10 - 10, 20), Point2);
+            string routeText = isRouting ? "Routing..." : "Route";
+            if (GUI.Button(new Rect(10, 80, WindowSize.width - 20, 20), routeText))
+            {
+                if (!isRouting)
+                {
+                    routeText = "Routing...";
+                    isRouting = true;
+                    Route();
+                }
+            }
+            GUI.Label(
+                new Rect(10, 110, WindowSize.width, 20),
+                "Real: 59.3395890f,17.9391974f");
+            if (GUI.Button(new Rect(10, 140, WindowSize.width - 20, 20), "PolygonTest"))
+            {
+                var nodes = client.GetWayNodes("35003688", wcfCon);
+                float[] boundGeo = new float[] 
+			{
+				(float)boundsTemp.minlat, 
+				(float)boundsTemp.maxlat, 
+				(float)boundsTemp.minlon, 
+				(float)32//boundsTemp.maxlon 
+			};
+                float[] gameboundInfloat = new float[] { GameBoundLat[0], GameBoundLat[1], GameBoundLon[0], GameBoundLon[1] };
+                var pointsC = nodes.ToInterpolatedPointsCPoint2D(boundGeo, gameboundInfloat, MinPointOnMap, mapBoundaries.Scale);
+
+                PolygonCuttingEar.CPolygonShape shp = new PolygonCuttingEar.CPolygonShape(pointsC.ToArray());
+                shp.CutEar();
+                Debug.LogWarning("Running");
+                //            LineDraw ld=LineDraw.CreateInstance<LineDraw>();
+                shp.GenerateShape(LineDraw.OSMType.Polygon, "TEST Shape", "", "Building");
+                //             for (int i = 0; i < shp.NumberOfPolygons; i++)
+                //             {
+                //             	ld.Draw(shp.Polygons(i).ToVector3(2),Color.yellow,Color.yellow,1,1,LineDraw.OSMType.Line,"asdsad","","RouteResult");
+                //             	Interpolations.MyLog("Polygon "+i+": " +shp.Polygons(i).ToVector2().Length);
+                //             }
+
+            }
+            //		GUI.Label(
+            //			new Rect(10,100,WindowSize.width,20),
+            //			"WORLD:" + ToWorld[0] + ", " + ToWorld[1]);
+            //		GUI.Label(
+            //			new Rect(10,120,WindowSize.width,20),
+            //			"TEST Reverse:" + p_prime[0] + ", " + p_prime[1]);
+            //			
+
+            GUI.DragWindow(new Rect(0, 0, 10000, WindowSize.height));
+        }
+    }
+
+    public void Route()
+    {
+        var objectstobeDestroyed = GameObject.FindGameObjectsWithTag("RouteResult");
+        foreach (var o in objectstobeDestroyed)
+            Object.DestroyImmediate(o);
+        var p1 = Point1.Split(new string[] { ";", " " }, System.StringSplitOptions.RemoveEmptyEntries);
+        var p2 = Point2.Split(new string[] { ";", " " }, System.StringSplitOptions.RemoveEmptyEntries);
+        if (p1.Length == 2 && p2.Length == 2)
+        {
+            OsmNodeWCF a = new OsmNodeWCF();
+            a.lat = double.Parse(p1[0]);
+            a.lon = double.Parse(p1[1]);
+            OsmNodeWCF b = new OsmNodeWCF();
+            b.lat = double.Parse(p2[0]);
+            b.lon = double.Parse(p2[1]);
+            var result = client.RouteUsingDykstra(OsmSharp.Routing.VehicleEnum.Car, a, b);
+            List<Vector3> points = new List<Vector3>();
+            foreach (var res in result)
+            {
+                float[] ToWorld = Interpolations.SimpleInterpolation((float)res.lat, (float)res.lon, boundsTemp, GameBoundLat, GameBoundLon);
+                ToWorld[0] -= MinPointOnMap.x;
+                ToWorld[1] -= MinPointOnMap.z;
+                ToWorld[0] *= mapBoundaries.Scale.x;
+                ToWorld[1] *= mapBoundaries.Scale.y;
+                points.Add(new Vector3(ToWorld[0], 1f, ToWorld[1]));
+            }
+            if (result.Length > 0)
+            {
+                Interpolations.MyLog("Result found");
+                // LineDraw ld=ScriptableObject.CreateInstance(typeof(LineDraw)) as LineDraw;
+                // ld.Draw(points.ToArray(),Color.white,Color.white,1.5f,1.5f, LineDraw.OSMType.Line,"RouteResult","","RouteResult","RouteResult");
+                LineDraw.MeshGenerationFilledCorners(points.ToArray(), 1.5f, LineDraw.OSMType.Line, "RouteResult", "", "RouteResult", "RouteResult", 0.2f);
+                geoinfo.locatorArrowA.transform.position = new Vector3(points[0].x, 0, points[0].z);
+                geoinfo.locatorArrowB.transform.position = new Vector3(points[points.Count - 1].x, 0, points[points.Count - 1].z);
+                Camera.main.transform.position = points[0];
+                Camera.main.transform.LookAt(points[1]);
+                Camera.main.GetComponent<CameraControl>().targetCameraPosition = new Vector3(points[0].x, CameraHeightOnRoute, points[0].z);
+            }
+        }
+        else
+            Interpolations.MyLog("No routes found");
+        isRouting = false;
+    }
+    public static Rect SetWindowMargins(Rect WindowRectangle, float Margin)
+    {
+        if (WindowRectangle.x < Margin)
+            WindowRectangle = new Rect(Margin, WindowRectangle.y, WindowRectangle.width, WindowRectangle.height);
+        if (WindowRectangle.x + WindowRectangle.width > Screen.width - Margin)
+            WindowRectangle = new Rect(Screen.width - Margin - WindowRectangle.width, WindowRectangle.y, WindowRectangle.width, WindowRectangle.height);
+        if (WindowRectangle.y < Margin)
+            WindowRectangle = new Rect(WindowRectangle.x, Margin, WindowRectangle.width, WindowRectangle.height);
+        if (WindowRectangle.y + WindowRectangle.height > Screen.height - Margin)
+            WindowRectangle = new Rect(WindowRectangle.x, Screen.height - Margin - WindowRectangle.height, WindowRectangle.width, WindowRectangle.height);
+        return WindowRectangle;
+    }
+    public float[] GamePointToGeoPoint(Vector3 GamePoint)
+    {
+
+        Vector3 gp = GamePoint;
+        gp.x /= mapBoundaries.Scale.x;
+        gp.z /= mapBoundaries.Scale.y;
+        gp.x += MinPointOnMap.x;
+        gp.z += MinPointOnMap.z;
+        float[] ret = Interpolations.SimpleInterpolation(gp.x, gp.z, GameBoundaries, MinMaxLat, MinMaxLon);
+        return ret;
+    }
+}

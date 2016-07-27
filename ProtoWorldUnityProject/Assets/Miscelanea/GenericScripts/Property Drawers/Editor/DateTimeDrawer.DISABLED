@@ -1,0 +1,14 @@
+﻿using UnityEditor;
+using UnityEngine;
+using System;
+
+[CustomPropertyDrawer(typeof(DateTime))]
+public class DateTimeDrawer : PropertyDrawer {
+
+    public override void OnGUI(Rect position, SerializedProperty prop, GUIContent label)
+    {
+        EditorGUIUtility.LookLikeControls();
+        SerializedProperty seconds= prop.FindPropertyRelative("Second");
+        EditorGUI.SelectableLabel(position, label.text + " " + seconds.intValue);
+    }
+}

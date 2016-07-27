@@ -1,0 +1,1 @@
+"../../PopulateOSMToDB/PopulateOSMToDB.bat" TestDB ./test.osm

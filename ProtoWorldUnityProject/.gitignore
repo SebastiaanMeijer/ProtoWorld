@@ -1,0 +1,45 @@
+# =============== #
+# Unity generated #
+# =============== #
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Ll]ibrary/
+sysinfo.txt
+*.stackdump
+
+*.csv
+ 
+# =============== #
+# ProtoWorld related #
+# =============== #
+Assets/Cases ProtoWorld/
+Assets/Cases ProtoWorld.meta
+Assets/Miscelanea/Legacy/SEStarIntegration/
+Assets/Miscelanea/Legacy/SEStarIntegration.meta
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+[Ee]xported[Oo]bj/
+.vs/
+/*.userprefs
+/*.pidb
+/*.suo
+/*.user
+/*.unityproj
+/*.booproj
+/*.sln
+/*.csproj
+ 
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+[Tt]humbs.db
+[Dd]esktop.ini

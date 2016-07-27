@@ -1,0 +1,27 @@
+c:\users\admgaming\documents\visual studio 2012\Projects\AramOSMParser\AramOSMParser\bin\Debug\AramOSMParser.dll
+c:\users\admgaming\documents\visual studio 2012\Projects\AramOSMParser\AramOSMParser\bin\Debug\AramOSMParser.pdb
+c:\users\admgaming\documents\visual studio 2012\Projects\AramOSMParser\AramOSMParser\obj\Debug\AramOSMParser.dll
+c:\users\admgaming\documents\visual studio 2012\Projects\AramOSMParser\AramOSMParser\obj\Debug\AramOSMParser.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\AramOSMParser\bin\Debug\Mono.Security.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\AramOSMParser\bin\Debug\Npgsql.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\AramOSMParser\bin\Debug\policy.2.0.Npgsql.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\AramOSMParser\bin\Debug\Npgsql.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\AramOSMParser\bin\Debug\Npgsql.xml
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\AramOSMParser\bin\Debug\policy.2.0.Npgsql.config
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\AramOSMParser\obj\Debug\AramOSMParser.csprojResolveAssemblyReference.cache
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\AramOSMParser.XML
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\AramOSMParser.dll
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\AramOSMParser.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\Npgsql.dll
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\Mono.Security.dll
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\Npgsql.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\Npgsql.xml
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\de\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\es\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\fi\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\fr\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\ja\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\bin\Debug\zh-CN\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\obj\Debug\AramOSMParser.csprojResolveAssemblyReference.cache
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\obj\Debug\AramOSMParser.dll
+G:\Data miguelrc\Documents\GitHub\WCF\AramOSMParser\obj\Debug\AramOSMParser.pdb

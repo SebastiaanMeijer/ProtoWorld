@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<vvis_queries>
+  <queries>
+		<query name="Query A" query="select count(distinct vid) as uniqueVcount, osm_id from trajectory_paths group by osm_id order by uniqueVcount desc limit 100" info="This is the info for query A"/>
+		<query name="Query B" query="select count(*) as count, osm_id from trajectory_paths group by osm_id  order by count desc limit 100" info="This is the info for query B"/>
+		<query name="Query ERROR" query="select count(*) as cot, osm_id from trajectpaths group by osm_id  or0" info="This is the info for query ERROR"/>
+   </queries>
+</vvis_queries>

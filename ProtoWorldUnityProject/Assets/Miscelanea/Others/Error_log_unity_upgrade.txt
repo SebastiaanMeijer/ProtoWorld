@@ -1,0 +1,72 @@
+Internal compiler error. See the console log for more information. output was:
+Unhandled Exception: System.Reflection.ReflectionTypeLoadException: The classes in the module cannot be loaded.
+
+  at (wrapper managed-to-native) System.Reflection.Assembly:GetTypes (bool)
+
+  at System.Reflection.Assembly.GetTypes () [0x00000] in <filename unknown>:0 
+
+  at Mono.CSharp.RootNamespace.ComputeNamespaces (System.Reflection.Assembly assembly, System.Type extensionType) [0x00000] in <filename unknown>:0 
+
+  at Mono.CSharp.RootNamespace.ComputeNamespace (Mono.CSharp.CompilerContext ctx, System.Type extensionType) [0x00000] in <filename unknown>:0 
+
+  at Mono.CSharp.GlobalRootNamespace.ComputeNamespaces (Mono.CSharp.CompilerContext ctx) [0x00000] in <filename unknown>:0 
+
+  at Mono.CSharp.Driver.LoadReferences () [0x00000] in <filename unknown>:0 
+
+  at Mono.CSharp.Driver.Compile () [0x00000] in <filename unknown>:0 
+
+  at Mono.CSharp.Driver.Main (System.String[] args) [0x00000] in <filename unknown>:0 
+  
+=> Restarted the upgrade procedure and it went away.  
+________________________________________________________________________________________  
+
+Complains about shaders
+
+=> Removed "C:\Users\admgaming\Documents\GapslabsProject_151214\Assets\Standard Assets\Image Effects (Pro Only)"  and its meta...
+________________________________________________________________________________________  
+    
+  Failed to run script updater.
+Please, report a bug to Unity with these details
+
+	
+	System.BadImageFormatException: Could not load file or assembly 'Assets/Plugins/Utilities\System.Data.dll' or one of its dependencies. An attempt was made to load a program with an incorrect format.
+	File name: 'Assets/Plugins/Utilities\System.Data.dll'
+	  at (wrapper managed-to-native) System.Reflection.Assembly:LoadFrom (string,bool)
+	  at System.Reflection.Assembly.LoadFrom (System.String assemblyFile) [0x00000] in <filename unknown>:0 
+	  at System.Linq.Enumerable+<CreateSelectIterator>c__Iterator10`2[System.String,System.Reflection.Assembly].MoveNext () [0x00000] in <filename unknown>:0 
+	  at System.Linq.Enumerable.ToArray[Assembly] (IEnumerable`1 source) [0x00000] in <filename unknown>:0 
+	  at BooUpdater.BooUpdater.LoadAssembliesToReference (IEnumerable`1 references) [0x00000] in <filename unknown>:0 
+	  at BooUpdater.BooUpdater.SetupCompilerParameters (BooUpdater.BooUpdateContext context, IEnumerable`1 defines, IEnumerable`1 references) [0x00000] in <filename unknown>:0 
+	  at UnityScriptUpdater.UnityScriptUpdater.SetupCompilerParameters (BooUpdater.BooUpdateContext context, IEnumerable`1 defines, IEnumerable`1 references) [0x00000] in <filename unknown>:0 
+	  at BooUpdater.BooUpdater.CreatAndInitializeCompiler (BooUpdater.BooUpdateContext context, IEnumerable`1 inputs, IEnumerable`1 defines, IEnumerable`1 references) [0x00000] in <filename unknown>:0 
+	  at BooUpdater.BooUpdater.CompileScripts (IEnumerable`1 inputs, IEnumerable`1 defines, IEnumerable`1 references) [0x00000] in <filename unknown>:0 
+	  at BooUpdater.BooUpdater.RunUpdater (APIUpdater.Framework.Core.SourceFile[] inputs, IEnumerable`1 defines, IEnumerable`1 references) [0x00000] in <filename unknown>:0 
+	  at APIUpdater.Framework.Core.APIUpdaterBase.Update (APIUpdater.Framework.Core.SourceFile[] inputs, IEnumerable`1 defines, IEnumerable`1 references) [0x00000] in <filename unknown>:0 
+	  at ScriptUpdater.Program.UpdateLanguage (IScriptUpdater updater, APIUpdater.Framework.Configuration.CompilerResponseFile responseFile, System.String unityDataPath, System.String outputPath) [0x00000] in <filename unknown>:0 
+	  at ScriptUpdater.Program.Main (System.String[] args) [0x00000] in <filename unknown>:0 
+UnityEditor.Scripting.Compilers.ScriptCompilerBase:BeginCompiling()
+
+=> removed System.Data.dll
+________________________________________________________________________________________  
+
+Assets/Qualcomm Augmented Reality/Scripts/TrackableBehaviour.cs(16,23): error CS0737: `TrackableBehaviour' does not implement interface member `IEditorTrackableBehaviour.renderer.get' and the best implementing candidate `TrackableBehaviour.IEditorTrackableBehaviour.CorrectScale()' in not public
+
+=> removed "Assets/Qualcomm Augmented Reality/" as we don't use it anymore.
+________________________________________________________________________________________  
+
+Assets/Scripts/GaPSLabs/Polygon.cs(43,54): error CS1061: Type `UnityEngine.MeshCollider' does not contain a definition for `mesh' and no extension method `mesh' of type `UnityEngine.MeshCollider' could be found (are you missing a using directive or an assembly reference?)
+
+=> changed
+ 			//GetComponent<MeshCollider>().mesh=mesh;           GetComponent<MeshCollider>().sharedMesh = mesh;
+________________________________________________________________________________________  
+
+Assets/Editor/ImageEffects/EdgeDetectionEditor.cs(7,27): error CS0246: The type or namespace name `EdgeDetection' could not be found. Are you missing a using directive or an assembly reference?
+
+=> removed "C:\Users\admgaming\Documents\GapslabsProject\Assets\Editor\Image Effects" and its meta...
+________________________________________________________________________________________  
+(When running SUMO&SEStar_test.scene)
+Non-convex MeshCollider cannot be used as a trigger in Unity 5.
+If you want to use this mesh as a trigger you have to make the MeshCollider convex. Scene hierarchy path "Lines/Line|1|106624865|tertiary", Mesh asset path "" Mesh name ""
+
+=> clicked "convex" in Inspector for all line.
+________________________________________________________________________________________  

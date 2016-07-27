@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GaPSLabs.Geometry" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GaPSLabs.Geometry" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="Vector3">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="x" type="xs:float" />
+      <xs:element minOccurs="0" name="y" type="xs:float" />
+      <xs:element minOccurs="0" name="z" type="xs:float" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Vector3" nillable="true" type="tns:Vector3" />
+  <xs:complexType name="MapProperties">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BuildingColor" nillable="true" type="tns:Color" />
+      <xs:element minOccurs="0" name="BuildingHeight" type="xs:float" />
+      <xs:element minOccurs="0" name="BuildingLineThickness" type="xs:float" />
+      <xs:element minOccurs="0" name="BuildingMaterial" nillable="true" type="tns:Material" />
+      <xs:element minOccurs="0" name="CombinationOptimizationSize" nillable="true" type="tns:Vector2" />
+      <xs:element minOccurs="0" name="CorrectAspectRatio" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CycleWayMaterial" nillable="true" type="tns:Material" />
+      <xs:element minOccurs="0" name="CyclewayWidth" type="xs:float" />
+      <xs:element minOccurs="0" name="FootWayMaterial" nillable="true" type="tns:Material" />
+      <xs:element minOccurs="0" name="FootwayWidth" type="xs:float" />
+      <xs:element minOccurs="0" name="LineColorEnd" nillable="true" type="tns:Color" />
+      <xs:element minOccurs="0" name="LineColorStart" nillable="true" type="tns:Color" />
+      <xs:element minOccurs="0" name="MinPointOnMap" nillable="true" type="tns:Vector3" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OverrideDatabaseConnection" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OverridenConnectionString" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RailWayMaterial" nillable="true" type="tns:Material" />
+      <xs:element minOccurs="0" name="RoadLineThickness" type="xs:float" />
+      <xs:element minOccurs="0" name="RoadMaterial" nillable="true" type="tns:Material" />
+      <xs:element minOccurs="0" name="RoadWidth" type="xs:float" />
+      <xs:element minOccurs="0" name="Scale" nillable="true" type="tns:Vector2" />
+      <xs:element minOccurs="0" name="StepsMaterial" nillable="true" type="tns:Material" />
+      <xs:element minOccurs="0" name="filename" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="maxLat" type="xs:double" />
+      <xs:element minOccurs="0" name="maxLon" type="xs:double" />
+      <xs:element minOccurs="0" name="minLat" type="xs:double" />
+      <xs:element minOccurs="0" name="minLon" type="xs:double" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="minMaxX" nillable="true" type="q1:ArrayOffloat" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="minMaxY" nillable="true" type="q2:ArrayOffloat" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MapProperties" nillable="true" type="tns:MapProperties" />
+  <xs:complexType name="Color">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="B" type="xs:int" />
+      <xs:element minOccurs="0" name="G" type="xs:int" />
+      <xs:element minOccurs="0" name="R" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Color" nillable="true" type="tns:Color" />
+  <xs:complexType name="Material">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Material" nillable="true" type="tns:Material" />
+  <xs:complexType name="Vector2">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="x" type="xs:float" />
+      <xs:element minOccurs="0" name="y" type="xs:float" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Vector2" nillable="true" type="tns:Vector2" />
+  <xs:complexType name="GameObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="material" nillable="true" type="tns:Material" />
+      <xs:element minOccurs="0" name="mesh" nillable="true" type="tns:Mesh" />
+      <xs:element minOccurs="0" name="position" nillable="true" type="tns:Vector3" />
+      <xs:element minOccurs="0" name="tag" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="type" type="tns:GameObject.OSMType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GameObject" nillable="true" type="tns:GameObject" />
+  <xs:complexType name="Mesh">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="normals" nillable="true" type="tns:ArrayOfVector3" />
+      <xs:element minOccurs="0" name="tangents" nillable="true" type="tns:ArrayOfVector4" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="triangles" nillable="true" type="q3:ArrayOfint" />
+      <xs:element minOccurs="0" name="uv" nillable="true" type="tns:ArrayOfVector2" />
+      <xs:element minOccurs="0" name="vertices" nillable="true" type="tns:ArrayOfVector3" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Mesh" nillable="true" type="tns:Mesh" />
+  <xs:complexType name="ArrayOfVector3">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Vector3" nillable="true" type="tns:Vector3" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVector3" nillable="true" type="tns:ArrayOfVector3" />
+  <xs:complexType name="ArrayOfVector4">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Vector4" nillable="true" type="tns:Vector4" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVector4" nillable="true" type="tns:ArrayOfVector4" />
+  <xs:complexType name="Vector4">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="w" type="xs:float" />
+      <xs:element minOccurs="0" name="x" type="xs:float" />
+      <xs:element minOccurs="0" name="y" type="xs:float" />
+      <xs:element minOccurs="0" name="z" type="xs:float" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Vector4" nillable="true" type="tns:Vector4" />
+  <xs:complexType name="ArrayOfVector2">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Vector2" nillable="true" type="tns:Vector2" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVector2" nillable="true" type="tns:ArrayOfVector2" />
+  <xs:simpleType name="GameObject.OSMType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Node" />
+      <xs:enumeration value="Line" />
+      <xs:enumeration value="Polygon" />
+      <xs:enumeration value="Relation" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="GameObject.OSMType" nillable="true" type="tns:GameObject.OSMType" />
+</xs:schema>

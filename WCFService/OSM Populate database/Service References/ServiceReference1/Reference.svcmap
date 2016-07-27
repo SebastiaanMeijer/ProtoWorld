@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="24629eba-0070-4dad-b288-0f9637cc86e4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:53869/ServiceGapslabs.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceGapslabs.xsd" MetadataType="Schema" ID="4f5c0d3f-fdf4-4c78-846c-b1c2aa5b368f" SourceId="1" SourceUrl="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd4" />
+    <MetadataFile FileName="ServiceGapslabs.wsdl" MetadataType="Wsdl" ID="4183fa62-ab99-47b3-8040-58b88b8b4aea" SourceId="1" SourceUrl="http://localhost:53869/ServiceGapslabs.svc?wsdl" />
+    <MetadataFile FileName="ServiceGapslabs1.xsd" MetadataType="Schema" ID="88473b44-5d86-4307-af63-713387fc5694" SourceId="1" SourceUrl="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd5" />
+    <MetadataFile FileName="ServiceGapslabs2.xsd" MetadataType="Schema" ID="8ffa3f84-a073-4de9-be27-4eed64eae9f6" SourceId="1" SourceUrl="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceGapslabs3.xsd" MetadataType="Schema" ID="56d431d6-24c7-4889-9afb-fac3141201b3" SourceId="1" SourceUrl="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceGapslabs4.xsd" MetadataType="Schema" ID="61758387-3619-4cbe-84ad-11c32c3e9a02" SourceId="1" SourceUrl="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceGapslabs5.xsd" MetadataType="Schema" ID="e3631966-ba94-4c16-9812-507520544206" SourceId="1" SourceUrl="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd3" />
+    <MetadataFile FileName="ServiceGapslabs.disco" MetadataType="Disco" ID="cbeffdc8-5db4-4281-8a39-13df4de3eb31" SourceId="1" SourceUrl="http://localhost:53869/ServiceGapslabs.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,518 @@
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\Npgsql.xml
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\Npgsql.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\Npgsql.pdb
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\de\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\fr\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\es\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\fi\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\ja\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\zh-CN\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\Mono.Security.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.PGUtil.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.es.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.fi.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.es.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.fi.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.es.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.fi.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.es.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.fi.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.es.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.fi.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.es.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.fi.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.PGUtil.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.PGUtil.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.de.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.fr.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.PGUtil.ja.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.PGUtil.zh-CN.resources
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.csproj.GenerateResource.Cache
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\de\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\fr\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\es\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\fi\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\ja\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\zh-CN\Npgsql.resources.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.dll
+D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\obj\Debug-net20\Npgsql.pdb
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.csprojResolveAssemblyReference.cache
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.PGUtil.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.es.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.fi.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.es.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.fi.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.es.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.fi.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.es.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.fi.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.es.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.fi.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.es.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.fi.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.PGUtil.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.PGUtil.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.de.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.fr.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.PGUtil.ja.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.PGUtil.zh-CN.resources
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.csproj.GenerateResource.Cache
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\Npgsql.pdb
+E:\GaPSLabs\AramOSMParser\Npgsql\bin\Debug-net20\Npgsql.xml
+E:\GaPSLabs\AramOSMParser\Npgsql\bin\Debug-net20\Npgsql.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\bin\Debug-net20\Npgsql.pdb
+E:\GaPSLabs\AramOSMParser\Npgsql\bin\Debug-net20\de\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\bin\Debug-net20\fr\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\bin\Debug-net20\es\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\bin\Debug-net20\fi\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\bin\Debug-net20\ja\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\bin\Debug-net20\zh-CN\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\de\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\fr\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\es\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\fi\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\ja\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Npgsql\obj\Debug-net20\zh-CN\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\bin\Debug-net20\Npgsql.xml
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\bin\Debug-net20\Npgsql.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\bin\Debug-net20\Npgsql.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\bin\Debug-net20\de\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\bin\Debug-net20\fr\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\bin\Debug-net20\es\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\bin\Debug-net20\fi\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\bin\Debug-net20\ja\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\bin\Debug-net20\zh-CN\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.PGUtil.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.es.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.fi.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.es.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.fi.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.es.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.fi.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.es.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.fi.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.es.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.fi.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.es.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.fi.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.PGUtil.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.PGUtil.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.de.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.fr.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.PGUtil.ja.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.PGUtil.zh-CN.resources
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.csproj.GenerateResource.Cache
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\de\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\fr\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\es\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\fi\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\ja\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\zh-CN\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Npgsql\obj\Debug-net20\Npgsql.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\Npgsql.xml
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\Npgsql.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\Npgsql.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\de\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\fr\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\es\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\fi\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\ja\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\zh-CN\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.PGUtil.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.es.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.fi.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.es.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.fi.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.es.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.fi.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.es.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.fi.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.es.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.fi.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.es.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.fi.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.PGUtil.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.PGUtil.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.de.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.fr.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.PGUtil.ja.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.PGUtil.zh-CN.resources
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.csproj.GenerateResource.Cache
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\de\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\fr\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\es\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\fi\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\ja\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\zh-CN\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\Npgsql.xml
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\Npgsql.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\Npgsql.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\de\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\fr\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\es\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\fi\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\ja\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\zh-CN\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.csprojResolveAssemblyReference.cache
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.PGUtil.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.es.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.fi.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.es.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.fi.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnection.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.es.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.fi.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlEventLog.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.es.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.fi.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameter.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.es.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.fi.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlParameterCollection.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlRow.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.es.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.fi.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlTransaction.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.PGUtil.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.PGUtil.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectedState.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.de.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.fr.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlConnectionStringBuilder.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlException.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlReadyState.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlState.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.PGUtil.ja.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.PGUtil.zh-CN.resources
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.csproj.GenerateResource.Cache
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\de\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\fr\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\es\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\fi\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\ja\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\zh-CN\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.pdb

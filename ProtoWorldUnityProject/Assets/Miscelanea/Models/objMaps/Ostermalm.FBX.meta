@@ -1,0 +1,164 @@
+fileFormatVersion: 2
+guid: 464c10ae4af76564f84a83999d5cdc48
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Layer:Allmaen byggnad - gyS3D
+    100002: Layer:Ekonomibyggnad - gyS3D
+    100004: Layer:Enbostadshus - gyS3D
+    100006: Layer:Flerbostadshus - gyS3D
+    100008: Layer:Flerbostadshus - gyS3D_MeshPart0
+    100010: Layer:Flerbostadshus - gyS3D_MeshPart1
+    100012: Layer:Handel - gyS3D
+    100014: Layer:Hotell - gyS3D
+    100016: Layer:Idrott - gyS3D
+    100018: Layer:Industribyggnad - gyS3D
+    100020: Layer:Kolonistuga - gyS3D
+    100022: Layer:Komplementbyggnad - gyS3D
+    100024: Layer:Kontor - gyS3D
+    100026: Layer:Ospec. industribyggnad - gyS3D
+    100028: Layer:Ospec. samfundsbyggnad - gyS3D
+    100030: Layer:Ospec. verksamhetsbyggnad - gyS3D
+    100032: Layer:Ospecificerad byggnad - gyS3D
+    100034: Layer:Parkering - gyS3D
+    100036: Layer:Transformator - gyS3D
+    100038: Layer:Vaardbyggnad - gyS3D
+    100040: Layer:Vattentorn - gyS3D
+    100042: //RootNode
+    400000: Layer:Allmaen byggnad - gyS3D
+    400002: Layer:Ekonomibyggnad - gyS3D
+    400004: Layer:Enbostadshus - gyS3D
+    400006: Layer:Flerbostadshus - gyS3D
+    400008: Layer:Flerbostadshus - gyS3D_MeshPart0
+    400010: Layer:Flerbostadshus - gyS3D_MeshPart1
+    400012: Layer:Handel - gyS3D
+    400014: Layer:Hotell - gyS3D
+    400016: Layer:Idrott - gyS3D
+    400018: Layer:Industribyggnad - gyS3D
+    400020: Layer:Kolonistuga - gyS3D
+    400022: Layer:Komplementbyggnad - gyS3D
+    400024: Layer:Kontor - gyS3D
+    400026: Layer:Ospec. industribyggnad - gyS3D
+    400028: Layer:Ospec. samfundsbyggnad - gyS3D
+    400030: Layer:Ospec. verksamhetsbyggnad - gyS3D
+    400032: Layer:Ospecificerad byggnad - gyS3D
+    400034: Layer:Parkering - gyS3D
+    400036: Layer:Transformator - gyS3D
+    400038: Layer:Vaardbyggnad - gyS3D
+    400040: Layer:Vattentorn - gyS3D
+    400042: //RootNode
+    2300000: Layer:Allmaen byggnad - gyS3D
+    2300002: Layer:Ekonomibyggnad - gyS3D
+    2300004: Layer:Enbostadshus - gyS3D
+    2300006: Layer:Flerbostadshus - gyS3D_MeshPart0
+    2300008: Layer:Flerbostadshus - gyS3D_MeshPart1
+    2300010: Layer:Handel - gyS3D
+    2300012: Layer:Hotell - gyS3D
+    2300014: Layer:Idrott - gyS3D
+    2300016: Layer:Industribyggnad - gyS3D
+    2300018: Layer:Kolonistuga - gyS3D
+    2300020: Layer:Komplementbyggnad - gyS3D
+    2300022: Layer:Kontor - gyS3D
+    2300024: Layer:Ospec. industribyggnad - gyS3D
+    2300026: Layer:Ospec. samfundsbyggnad - gyS3D
+    2300028: Layer:Ospec. verksamhetsbyggnad - gyS3D
+    2300030: Layer:Ospecificerad byggnad - gyS3D
+    2300032: Layer:Parkering - gyS3D
+    2300034: Layer:Transformator - gyS3D
+    2300036: Layer:Vaardbyggnad - gyS3D
+    2300038: Layer:Vattentorn - gyS3D
+    3300000: Layer:Allmaen byggnad - gyS3D
+    3300002: Layer:Ekonomibyggnad - gyS3D
+    3300004: Layer:Enbostadshus - gyS3D
+    3300006: Layer:Flerbostadshus - gyS3D_MeshPart0
+    3300008: Layer:Flerbostadshus - gyS3D_MeshPart1
+    3300010: Layer:Handel - gyS3D
+    3300012: Layer:Hotell - gyS3D
+    3300014: Layer:Idrott - gyS3D
+    3300016: Layer:Industribyggnad - gyS3D
+    3300018: Layer:Kolonistuga - gyS3D
+    3300020: Layer:Komplementbyggnad - gyS3D
+    3300022: Layer:Kontor - gyS3D
+    3300024: Layer:Ospec. industribyggnad - gyS3D
+    3300026: Layer:Ospec. samfundsbyggnad - gyS3D
+    3300028: Layer:Ospec. verksamhetsbyggnad - gyS3D
+    3300030: Layer:Ospecificerad byggnad - gyS3D
+    3300032: Layer:Parkering - gyS3D
+    3300034: Layer:Transformator - gyS3D
+    3300036: Layer:Vaardbyggnad - gyS3D
+    3300038: Layer:Vattentorn - gyS3D
+    4300000: Layer:Ospec. samfundsbyggnad - gyS3D
+    4300002: Layer:Flerbostadshus - gyS3D_MeshPart0
+    4300004: Layer:Flerbostadshus - gyS3D_MeshPart1
+    4300006: Layer:Allmaen byggnad - gyS3D
+    4300008: Layer:Industribyggnad - gyS3D
+    4300010: Layer:Transformator - gyS3D
+    4300012: Layer:Ospec. industribyggnad - gyS3D
+    4300014: Layer:Enbostadshus - gyS3D
+    4300016: Layer:Kontor - gyS3D
+    4300018: Layer:Ospecificerad byggnad - gyS3D
+    4300020: Layer:Komplementbyggnad - gyS3D
+    4300022: Layer:Handel - gyS3D
+    4300024: Layer:Ospec. verksamhetsbyggnad - gyS3D
+    4300026: Layer:Idrott - gyS3D
+    4300028: Layer:Vaardbyggnad - gyS3D
+    4300030: Layer:Ekonomibyggnad - gyS3D
+    4300032: Layer:Parkering - gyS3D
+    4300034: Layer:Kolonistuga - gyS3D
+    4300036: Layer:Vattentorn - gyS3D
+    4300038: Layer:Hotell - gyS3D
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

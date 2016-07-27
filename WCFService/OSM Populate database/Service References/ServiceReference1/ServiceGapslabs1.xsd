@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OsmSharp.Routing" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OsmSharp.Routing" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="VehicleEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Pedestrian" />
+      <xs:enumeration value="Bicycle" />
+      <xs:enumeration value="Moped" />
+      <xs:enumeration value="MotorCycle" />
+      <xs:enumeration value="Car" />
+      <xs:enumeration value="SmallTruck" />
+      <xs:enumeration value="BigTruck" />
+      <xs:enumeration value="Bus" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="VehicleEnum" nillable="true" type="tns:VehicleEnum" />
+</xs:schema>

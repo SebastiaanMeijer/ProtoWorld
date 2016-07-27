@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="GaPSlabs Windows Communication Foundation Service">
+    <Position X="4.629" Y="0.5" Height="0.291" Width="5.138" />
+  </Comment>
+  <Class Name="GapslabWCFservice.BoundsWCF">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAIAAAAAAgAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BoundsWCF.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.geometryCollection">
+    <Position X="7" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>gAAoQCAABAAEAAAQAAQACAAASAAEEAAAAADQAAAAAgA=</HashCode>
+      <FileName>geometryCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.GaPSlabsVersion">
+    <Position X="7" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>geometryCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.DateTimeWithOffset">
+    <Position X="7" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>geometryCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.GaPSlabsTimeStamp">
+    <Position X="10" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>geometryCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.GPULibrary" Collapsed="true">
+    <Position X="0.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GPULibrary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.Vector3">
+    <Position X="5.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <FileName>GPULibrary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.CompositeType">
+    <Position X="5.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAgAAAAAAAAAAAAAAAgAAAAAAAQAAA=</HashCode>
+      <FileName>IServiceGapslabs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.OsmNodeWCF">
+    <Position X="12" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAABAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>OsmNodeWCF.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.ServiceGapslabs">
+    <Position X="2.25" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>BIlkADCGBBgQoJAAEAIgYADQAASBVBIgABRAQAAEAME=</HashCode>
+      <FileName>ServiceGapslabs.svc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.SUMOSimulationFCD">
+    <Position X="10" Y="1" Width="1.75" />
+    <NestedTypes>
+      <Enum Name="GapslabWCFservice.SUMOSimulationFCD.VehicleType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SUMOSimulationFCD.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>SUMOSimulationFCD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.TimeStep">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAABAEA=</HashCode>
+      <FileName>SUMOSimulationFCD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.SimpleTimeStep">
+    <Position X="5.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAACAAAAAAAAAAAAAAAAAAAAAABAAAAAAAABAEI=</HashCode>
+      <FileName>SUMOSimulationFCD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.VehicleFCD">
+    <Position X="10" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAEAAAAAAAAAIAAABAACAAAAAAUAAAAACAEA=</HashCode>
+      <FileName>SUMOSimulationFCD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GapslabWCFservice.TagWCF">
+    <Position X="12" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TagWCF.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="GapslabWCFservice.IServiceGapslabs">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IServiceGapslabs.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

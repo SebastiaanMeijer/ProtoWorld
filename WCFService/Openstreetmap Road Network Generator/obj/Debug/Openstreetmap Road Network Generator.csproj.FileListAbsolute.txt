@@ -1,0 +1,128 @@
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.csprojResolveAssemblyReference.cache
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\PostprocessingForWay_Ext.sql
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\PreprocessingForWay_Ext.sql
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe.config
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Npgsql.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\policy.2.0.Npgsql.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Zlib.Portable.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Mono.Security.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Npgsql.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Npgsql.xml
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Zlib.Portable.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\policy.2.0.Npgsql.config
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.exe
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\AramOSMParser\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.csprojResolveAssemblyReference.cache
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\PostprocessingForWay_Ext.sql
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\PreprocessingForWay_Ext.sql
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe.config
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Npgsql.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Zlib.Portable.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Mono.Security.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.xml
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Npgsql.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Npgsql.xml
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\de\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\es\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\fi\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\fr\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\ja\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\zh-CN\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.exe
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.pdb
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\PostprocessingForWay_Ext.sql
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\PreprocessingForWay_Ext.sql
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe.config
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.pdb
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.dll
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Npgsql.dll
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Zlib.Portable.dll
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Mono.Security.dll
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.pdb
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.xml
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Npgsql.pdb
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\Npgsql.xml
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\de\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\es\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\fi\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\fr\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\ja\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\bin\Debug\zh-CN\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.csprojResolveAssemblyReference.cache
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.exe
+E:\GaPSLabs\AramOSMParser\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\PostprocessingForWay_Ext.sql
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\PreprocessingForWay_Ext.sql
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe.config
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\Npgsql.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\Zlib.Portable.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\Mono.Security.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.xml
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\Npgsql.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\Npgsql.xml
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\de\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\es\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\fi\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\fr\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\ja\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\bin\Debug\zh-CN\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.csprojResolveAssemblyReference.cache
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.exe
+G:\Data miguelrc\Documents\GitHub\WCF\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\PostprocessingForWay_Ext.sql
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\PreprocessingForWay_Ext.sql
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe.config
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Npgsql.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Zlib.Portable.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Mono.Security.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.xml
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Npgsql.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Npgsql.xml
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\de\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\es\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\fi\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\fr\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\ja\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\zh-CN\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.csprojResolveAssemblyReference.cache
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.exe
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\PostprocessingForWay_Ext.sql
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\PreprocessingForWay_Ext.sql
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe.config
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Npgsql.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Zlib.Portable.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Mono.Security.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Npgsql.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\de\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\es\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\fi\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\fr\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\ja\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\zh-CN\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.csprojResolveAssemblyReference.cache
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.exe
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.xml
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Npgsql.xml

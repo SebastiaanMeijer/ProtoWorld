@@ -1,0 +1,820 @@
+﻿<gpx creator="CloudMade" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <author>
+      <name>CloudMade</name>
+      <email id="support" domain="cloudmade.com" />
+      <link href="http://maps.cloudmade.com"></link>
+    </author>
+    <copyright author="CloudMade">
+      <license>http://cloudmade.com/faq#license</license>
+    </copyright>
+    <time>2013-04-22T12:37:00</time>
+  </metadata>
+  <extensions>
+    <distance>13703</distance>
+    <time>1006</time>
+    <start>Gustav III:s boulevard</start>
+    <end>Västerängsvägen</end>
+  </extensions>
+  <wpt lat="59.374065" lon="18.01499"/>
+  <wpt lat="59.374123" lon="18.015133"/>
+  <wpt lat="59.373928" lon="18.015375"/>
+  <wpt lat="59.373451" lon="18.015823"/>
+  <wpt lat="59.373264" lon="18.016005"/>
+  <wpt lat="59.372894" lon="18.01635"/>
+  <wpt lat="59.372646" lon="18.016504"/>
+  <wpt lat="59.372345" lon="18.016617"/>
+  <wpt lat="59.371937" lon="18.016634"/>
+  <wpt lat="59.371857" lon="18.01663"/>
+  <wpt lat="59.371845" lon="18.016439"/>
+  <wpt lat="59.371796" lon="18.016285"/>
+  <wpt lat="59.371742" lon="18.016212"/>
+  <wpt lat="59.371662" lon="18.016165"/>
+  <wpt lat="59.371593" lon="18.016172"/>
+  <wpt lat="59.371513" lon="18.016245"/>
+  <wpt lat="59.371452" lon="18.016376"/>
+  <wpt lat="59.371437" lon="18.016468"/>
+  <wpt lat="59.371433" lon="18.016674"/>
+  <wpt lat="59.371452" lon="18.016771"/>
+  <wpt lat="59.371479" lon="18.01685"/>
+  <wpt lat="59.371548" lon="18.016953"/>
+  <wpt lat="59.371593" lon="18.017073"/>
+  <wpt lat="59.371593" lon="18.017178"/>
+  <wpt lat="59.371574" lon="18.017515"/>
+  <wpt lat="59.37154" lon="18.018042"/>
+  <wpt lat="59.37154" lon="18.018091"/>
+  <wpt lat="59.371563" lon="18.018225"/>
+  <wpt lat="59.371441" lon="18.018238"/>
+  <wpt lat="59.371273" lon="18.018286"/>
+  <wpt lat="59.370983" lon="18.018478"/>
+  <wpt lat="59.370819" lon="18.018694"/>
+  <wpt lat="59.370461" lon="18.019234"/>
+  <wpt lat="59.370216" lon="18.019575"/>
+  <wpt lat="59.370033" lon="18.019749"/>
+  <wpt lat="59.3689" lon="18.02013"/>
+  <wpt lat="59.367348" lon="18.020325"/>
+  <wpt lat="59.366829" lon="18.020475"/>
+  <wpt lat="59.366154" lon="18.020882"/>
+  <wpt lat="59.365616" lon="18.021246"/>
+  <wpt lat="59.364922" lon="18.022127"/>
+  <wpt lat="59.364323" lon="18.023031"/>
+  <wpt lat="59.363857" lon="18.023842"/>
+  <wpt lat="59.363354" lon="18.024586"/>
+  <wpt lat="59.362671" lon="18.025404"/>
+  <wpt lat="59.362034" lon="18.026035"/>
+  <wpt lat="59.361397" lon="18.026451"/>
+  <wpt lat="59.360649" lon="18.027027"/>
+  <wpt lat="59.359875" lon="18.027719"/>
+  <wpt lat="59.359112" lon="18.028528"/>
+  <wpt lat="59.358486" lon="18.029354"/>
+  <wpt lat="59.357674" lon="18.030642"/>
+  <wpt lat="59.356911" lon="18.031996"/>
+  <wpt lat="59.356792" lon="18.032198"/>
+  <wpt lat="59.356453" lon="18.032646"/>
+  <wpt lat="59.355709" lon="18.033876"/>
+  <wpt lat="59.354565" lon="18.035982"/>
+  <wpt lat="59.354244" lon="18.036562"/>
+  <wpt lat="59.353973" lon="18.037195"/>
+  <wpt lat="59.353603" lon="18.037868"/>
+  <wpt lat="59.353359" lon="18.038206"/>
+  <wpt lat="59.353043" lon="18.038719"/>
+  <wpt lat="59.352703" lon="18.039429"/>
+  <wpt lat="59.352455" lon="18.039986"/>
+  <wpt lat="59.352333" lon="18.040133"/>
+  <wpt lat="59.352135" lon="18.040342"/>
+  <wpt lat="59.351913" lon="18.040413"/>
+  <wpt lat="59.351685" lon="18.04043"/>
+  <wpt lat="59.351433" lon="18.040596"/>
+  <wpt lat="59.35133" lon="18.040785"/>
+  <wpt lat="59.351219" lon="18.041012"/>
+  <wpt lat="59.351089" lon="18.041264"/>
+  <wpt lat="59.350983" lon="18.041489"/>
+  <wpt lat="59.350937" lon="18.04154"/>
+  <wpt lat="59.350887" lon="18.041565"/>
+  <wpt lat="59.350845" lon="18.041565"/>
+  <wpt lat="59.350681" lon="18.041519"/>
+  <wpt lat="59.350651" lon="18.041533"/>
+  <wpt lat="59.350548" lon="18.041559"/>
+  <wpt lat="59.350475" lon="18.041634"/>
+  <wpt lat="59.350407" lon="18.041767"/>
+  <wpt lat="59.349991" lon="18.042288"/>
+  <wpt lat="59.349701" lon="18.042557"/>
+  <wpt lat="59.349609" lon="18.042641"/>
+  <wpt lat="59.34951" lon="18.042706"/>
+  <wpt lat="59.349422" lon="18.042664"/>
+  <wpt lat="59.349243" lon="18.042366"/>
+  <wpt lat="59.348934" lon="18.041355"/>
+  <wpt lat="59.347969" lon="18.040745"/>
+  <wpt lat="59.347687" lon="18.040564"/>
+  <wpt lat="59.347408" lon="18.040373"/>
+  <wpt lat="59.34724" lon="18.040262"/>
+  <wpt lat="59.346863" lon="18.040152"/>
+  <wpt lat="59.3466" lon="18.040092"/>
+  <wpt lat="59.345856" lon="18.039871"/>
+  <wpt lat="59.345345" lon="18.03973"/>
+  <wpt lat="59.345268" lon="18.039707"/>
+  <wpt lat="59.345261" lon="18.039495"/>
+  <wpt lat="59.345219" lon="18.039349"/>
+  <wpt lat="59.345177" lon="18.039261"/>
+  <wpt lat="59.345135" lon="18.039207"/>
+  <wpt lat="59.345104" lon="18.039164"/>
+  <wpt lat="59.345005" lon="18.039156"/>
+  <wpt lat="59.344959" lon="18.039167"/>
+  <wpt lat="59.344906" lon="18.039207"/>
+  <wpt lat="59.344826" lon="18.039309"/>
+  <wpt lat="59.344769" lon="18.039434"/>
+  <wpt lat="59.344727" lon="18.039616"/>
+  <wpt lat="59.344658" lon="18.039597"/>
+  <wpt lat="59.344273" lon="18.039389"/>
+  <wpt lat="59.343231" lon="18.03891"/>
+  <wpt lat="59.342876" lon="18.038765"/>
+  <wpt lat="59.342556" lon="18.03863"/>
+  <wpt lat="59.342251" lon="18.038424"/>
+  <wpt lat="59.341793" lon="18.038082"/>
+  <wpt lat="59.341343" lon="18.037714"/>
+  <wpt lat="59.341255" lon="18.037661"/>
+  <wpt lat="59.33968" lon="18.036695"/>
+  <wpt lat="59.339523" lon="18.036602"/>
+  <wpt lat="59.339375" lon="18.036484"/>
+  <wpt lat="59.338009" lon="18.035389"/>
+  <wpt lat="59.336754" lon="18.034401"/>
+  <wpt lat="59.335407" lon="18.033287"/>
+  <wpt lat="59.334835" lon="18.032837"/>
+  <wpt lat="59.33445" lon="18.032532"/>
+  <wpt lat="59.334461" lon="18.032419"/>
+  <wpt lat="59.334644" lon="18.030972"/>
+  <wpt lat="59.333588" lon="18.029947"/>
+  <wpt lat="59.333546" lon="18.029907"/>
+  <wpt lat="59.332935" lon="18.029291"/>
+  <wpt lat="59.332851" lon="18.029207"/>
+  <wpt lat="59.332607" lon="18.028959"/>
+  <wpt lat="59.332172" lon="18.028524"/>
+  <wpt lat="59.332108" lon="18.028486"/>
+  <wpt lat="59.332096" lon="18.028158"/>
+  <wpt lat="59.332146" lon="18.027617"/>
+  <wpt lat="59.331963" lon="18.023989"/>
+  <wpt lat="59.331772" lon="18.02389"/>
+  <wpt lat="59.330807" lon="18.023264"/>
+  <wpt lat="59.328972" lon="18.021868"/>
+  <wpt lat="59.328793" lon="18.021656"/>
+  <wpt lat="59.328609" lon="18.021458"/>
+  <wpt lat="59.328445" lon="18.021236"/>
+  <wpt lat="59.328293" lon="18.021179"/>
+  <wpt lat="59.328163" lon="18.02121"/>
+  <wpt lat="59.328117" lon="18.021463"/>
+  <wpt lat="59.327866" lon="18.022308"/>
+  <wpt lat="59.32782" lon="18.022512"/>
+  <wpt lat="59.327766" lon="18.022655"/>
+  <wpt lat="59.327698" lon="18.022867"/>
+  <wpt lat="59.327499" lon="18.023293"/>
+  <wpt lat="59.327263" lon="18.023705"/>
+  <wpt lat="59.326962" lon="18.024103"/>
+  <wpt lat="59.326691" lon="18.024427"/>
+  <wpt lat="59.323769" lon="18.02799"/>
+  <wpt lat="59.322704" lon="18.029264"/>
+  <wpt lat="59.322273" lon="18.02977"/>
+  <wpt lat="59.321999" lon="18.030062"/>
+  <wpt lat="59.321609" lon="18.030426"/>
+  <wpt lat="59.321262" lon="18.030643"/>
+  <wpt lat="59.320911" lon="18.030861"/>
+  <wpt lat="59.319962" lon="18.031387"/>
+  <wpt lat="59.319126" lon="18.031824"/>
+  <wpt lat="59.318729" lon="18.032007"/>
+  <wpt lat="59.318314" lon="18.032211"/>
+  <wpt lat="59.318188" lon="18.032291"/>
+  <wpt lat="59.31786" lon="18.032478"/>
+  <wpt lat="59.317806" lon="18.032522"/>
+  <wpt lat="59.317692" lon="18.032593"/>
+  <wpt lat="59.316792" lon="18.033094"/>
+  <wpt lat="59.316704" lon="18.033152"/>
+  <wpt lat="59.315929" lon="18.033625"/>
+  <wpt lat="59.315426" lon="18.033916"/>
+  <wpt lat="59.315395" lon="18.033934"/>
+  <wpt lat="59.315285" lon="18.034"/>
+  <wpt lat="59.315147" lon="18.034094"/>
+  <wpt lat="59.315128" lon="18.0341"/>
+  <wpt lat="59.314949" lon="18.034161"/>
+  <wpt lat="59.314751" lon="18.034208"/>
+  <wpt lat="59.314671" lon="18.03418"/>
+  <wpt lat="59.314556" lon="18.034033"/>
+  <wpt lat="59.314297" lon="18.033501"/>
+  <wpt lat="59.312153" lon="18.029562"/>
+  <wpt lat="59.312038" lon="18.029354"/>
+  <wpt lat="59.31118" lon="18.028193"/>
+  <wpt lat="59.31023" lon="18.026873"/>
+  <wpt lat="59.309826" lon="18.026323"/>
+  <wpt lat="59.309654" lon="18.026093"/>
+  <wpt lat="59.308552" lon="18.024645"/>
+  <wpt lat="59.307598" lon="18.023319"/>
+  <wpt lat="59.307251" lon="18.022884"/>
+  <wpt lat="59.307095" lon="18.022696"/>
+  <wpt lat="59.306763" lon="18.022306"/>
+  <wpt lat="59.306698" lon="18.022234"/>
+  <wpt lat="59.306541" lon="18.022083"/>
+  <wpt lat="59.306061" lon="18.021652"/>
+  <wpt lat="59.306" lon="18.021601"/>
+  <wpt lat="59.305492" lon="18.02113"/>
+  <wpt lat="59.30481" lon="18.020515"/>
+  <wpt lat="59.30442" lon="18.020164"/>
+  <wpt lat="59.304047" lon="18.019836"/>
+  <wpt lat="59.303612" lon="18.019444"/>
+  <wpt lat="59.303047" lon="18.018932"/>
+  <wpt lat="59.302853" lon="18.018757"/>
+  <wpt lat="59.302753" lon="18.018667"/>
+  <wpt lat="59.302719" lon="18.018623"/>
+  <wpt lat="59.302586" lon="18.018469"/>
+  <wpt lat="59.302505" lon="18.018385"/>
+  <wpt lat="59.302246" lon="18.01808"/>
+  <wpt lat="59.301884" lon="18.017515"/>
+  <wpt lat="59.300495" lon="18.01499"/>
+  <wpt lat="59.300251" lon="18.014376"/>
+  <wpt lat="59.300014" lon="18.013737"/>
+  <wpt lat="59.299755" lon="18.012602"/>
+  <wpt lat="59.299438" lon="18.011251"/>
+  <wpt lat="59.299255" lon="18.010452"/>
+  <wpt lat="59.298912" lon="18.009035"/>
+  <wpt lat="59.298695" lon="18.008265"/>
+  <wpt lat="59.298515" lon="18.007641"/>
+  <wpt lat="59.298367" lon="18.007183"/>
+  <wpt lat="59.298298" lon="18.007008"/>
+  <wpt lat="59.297775" lon="18.005823"/>
+  <wpt lat="59.29755" lon="18.005371"/>
+  <wpt lat="59.297195" lon="18.004791"/>
+  <wpt lat="59.29702" lon="18.00456"/>
+  <wpt lat="59.2966" lon="18.003937"/>
+  <wpt lat="59.296181" lon="18.003418"/>
+  <wpt lat="59.295841" lon="18.002945"/>
+  <wpt lat="59.295776" lon="18.002792"/>
+  <wpt lat="59.295795" lon="18.002604"/>
+  <wpt lat="59.295765" lon="18.002323"/>
+  <wpt lat="59.295708" lon="18.002205"/>
+  <wpt lat="59.295639" lon="18.002119"/>
+  <wpt lat="59.295586" lon="18.002096"/>
+  <wpt lat="59.295521" lon="18.002098"/>
+  <wpt lat="59.295456" lon="18.002094"/>
+  <wpt lat="59.295311" lon="18.002274"/>
+  <wpt lat="59.295212" lon="18.002443"/>
+  <wpt lat="59.295143" lon="18.002687"/>
+  <wpt lat="59.295113" lon="18.002966"/>
+  <wpt lat="59.295116" lon="18.003016"/>
+  <wpt lat="59.295128" lon="18.003143"/>
+  <wpt lat="59.294945" lon="18.003506"/>
+  <wpt lat="59.294861" lon="18.003378"/>
+  <wpt lat="59.29472" lon="18.003086"/>
+  <wpt lat="59.294502" lon="18.002657"/>
+  <wpt lat="59.294315" lon="18.002958"/>
+  <wpt lat="59.294216" lon="18.002748"/>
+  <wpt lat="59.294006" lon="18.002316"/>
+  <wpt lat="59.293419" lon="18.00119"/>
+  <wpt lat="59.293171" lon="18.000681"/>
+  <wpt lat="59.292503" lon="17.999409"/>
+  <wpt lat="59.292183" lon="17.998814"/>
+  <wpt lat="59.290897" lon="17.996599"/>
+  <wpt lat="59.290585" lon="17.995735"/>
+  <wpt lat="59.290356" lon="17.995108"/>
+  <wpt lat="59.290051" lon="17.99436"/>
+  <wpt lat="59.2897" lon="17.993635"/>
+  <wpt lat="59.289478" lon="17.992968"/>
+  <wpt lat="59.289429" lon="17.992764"/>
+  <wpt lat="59.289387" lon="17.992474"/>
+  <wpt lat="59.289303" lon="17.991611"/>
+  <wpt lat="59.289055" lon="17.990164"/>
+  <wpt lat="59.288853" lon="17.988686"/>
+  <wpt lat="59.288723" lon="17.987123"/>
+  <wpt lat="59.288548" lon="17.9865"/>
+  <wpt lat="59.288246" lon="17.986059"/>
+  <wpt lat="59.287998" lon="17.985876"/>
+  <wpt lat="59.28801" lon="17.985666"/>
+  <wpt lat="59.288071" lon="17.984381"/>
+  <wpt lat="59.28791" lon="17.984348"/>
+  <wpt lat="59.287743" lon="17.984341"/>
+  <wpt lat="59.28754" lon="17.984509"/>
+  <wpt lat="59.287197" lon="17.985008"/>
+  <wpt lat="59.286758" lon="17.985504"/>
+  <wpt lat="59.28664" lon="17.985634"/>
+  <wpt lat="59.286022" lon="17.985935"/>
+  <wpt lat="59.285633" lon="17.98592"/>
+  <wpt lat="59.284649" lon="17.985851"/>
+  <wpt lat="59.28434" lon="17.985815"/>
+  <wpt lat="59.283768" lon="17.985825"/>
+  <wpt lat="59.282497" lon="17.985701"/>
+  <wpt lat="59.281937" lon="17.985624"/>
+  <wpt lat="59.281357" lon="17.985483"/>
+  <wpt lat="59.281139" lon="17.985395"/>
+  <wpt lat="59.280949" lon="17.98527"/>
+  <wpt lat="59.280716" lon="17.985067"/>
+  <wpt lat="59.280502" lon="17.98485"/>
+  <wpt lat="59.280148" lon="17.984177"/>
+  <wpt lat="59.279697" lon="17.983376"/>
+  <wpt lat="59.278954" lon="17.982342"/>
+  <wpt lat="59.278297" lon="17.981647"/>
+  <wpt lat="59.278584" lon="17.981199"/>
+  <wpt lat="59.278728" lon="17.9809"/>
+  <rte>
+    <rtept lat="59.374065" lon="18.01499">
+      <desc>Head northeast on Gustav III:s boulevard, 10 m</desc>
+      <extensions>
+        <distance>10</distance>
+        <time>1</time>
+        <offset>0</offset>
+        <distance-text>10 m</distance-text>
+        <direction>NE</direction>
+        <azimuth>51.5</azimuth>
+      </extensions>
+    </rtept>
+    <rtept lat="59.374123" lon="18.015133">
+      <desc>Turn right at Gustav III:s Boulevard, 0.3 km</desc>
+      <extensions>
+        <distance>330</distance>
+        <time>40</time>
+        <offset>1</offset>
+        <distance-text>0.3 km</distance-text>
+        <direction>SE</direction>
+        <azimuth>147.2</azimuth>
+        <turn>TR</turn>
+        <turn-angle>95.6</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.371857" lon="18.01663">
+      <desc>Turn right at Gustav III:s Boulevard, 0.1 km</desc>
+      <extensions>
+        <distance>149</distance>
+        <time>18</time>
+        <offset>9</offset>
+        <distance-text>0.1 km</distance-text>
+        <direction>W</direction>
+        <azimuth>263.3</azimuth>
+        <turn>TR</turn>
+        <turn-angle>71.8</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.371548" lon="18.016953">
+      <desc>At the roundabout, take the 3rd exit, 94 m</desc>
+      <extensions>
+        <distance>94</distance>
+        <time>6</time>
+        <offset>21</offset>
+        <distance-text>94 m</distance-text>
+        <direction>NE</direction>
+        <azimuth>55.2</azimuth>
+        <turn>EXIT3</turn>
+        <turn-angle>0.0</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.371563" lon="18.018225">
+      <desc>Turn right, 0.8 km</desc>
+      <extensions>
+        <distance>787</distance>
+        <time>35</time>
+        <offset>27</offset>
+        <distance-text>0.8 km</distance-text>
+        <direction>S</direction>
+        <azimuth>176.8</azimuth>
+        <turn>TR</turn>
+        <turn-angle>82.1</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.366829" lon="18.020475">
+      <desc>Slight left at E4, 1.9 km</desc>
+      <extensions>
+        <distance>1911</distance>
+        <time>76</time>
+        <offset>37</offset>
+        <distance-text>1.9 km</distance-text>
+        <direction>S</direction>
+        <azimuth>163.0</azimuth>
+        <turn>TSLL</turn>
+        <turn-angle>351.6</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.356792" lon="18.032198">
+      <desc>Continue on E20/Uppsalavägen, 0.2 km</desc>
+      <extensions>
+        <distance>154</distance>
+        <time>7</time>
+        <offset>53</offset>
+        <distance-text>0.2 km</distance-text>
+        <direction>SE</direction>
+        <azimuth>146.0</azimuth>
+        <turn>C</turn>
+        <turn-angle>8.1</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.355709" lon="18.033876">
+      <desc>Slight left at E20/Uppsalavägen, 0.7 km</desc>
+      <extensions>
+        <distance>708</distance>
+        <time>32</time>
+        <offset>55</offset>
+        <distance-text>0.7 km</distance-text>
+        <direction>SE</direction>
+        <azimuth>136.8</azimuth>
+        <turn>TSLL</turn>
+        <turn-angle>356.9</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.351219" lon="18.041012">
+      <desc>Continue on E04, 0.1 km</desc>
+      <extensions>
+        <distance>123</distance>
+        <time>6</time>
+        <offset>70</offset>
+        <distance-text>0.1 km</distance-text>
+        <direction>SE</direction>
+        <azimuth>135.9</azimuth>
+        <turn>C</turn>
+        <turn-angle>0.7</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.350407" lon="18.041767">
+      <desc>Slight right at E04, 0.1 km</desc>
+      <extensions>
+        <distance>114</distance>
+        <time>5</time>
+        <offset>80</offset>
+        <distance-text>0.1 km</distance-text>
+        <direction>SE</direction>
+        <azimuth>147.7</azimuth>
+        <turn>TSLR</turn>
+        <turn-angle>5.4</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.34951" lon="18.042706">
+      <desc>Turn right at E04, 0.2 km</desc>
+      <extensions>
+        <distance>171</distance>
+        <time>8</time>
+        <offset>84</offset>
+        <distance-text>0.2 km</distance-text>
+        <direction>S</direction>
+        <azimuth>193.7</azimuth>
+        <turn>TR</turn>
+        <turn-angle>54.7</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.348934" lon="18.041355">
+      <desc>Slight left at Sankt Eriksgatan, 0.5 km</desc>
+      <extensions>
+        <distance>489</distance>
+        <time>25</time>
+        <offset>87</offset>
+        <distance-text>0.5 km</distance-text>
+        <direction>S</direction>
+        <azimuth>198.0</azimuth>
+        <turn>TSLL</turn>
+        <turn-angle>318.9</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.345268" lon="18.039707">
+      <desc>Turn right at Vanadisplan, 0.1 km</desc>
+      <extensions>
+        <distance>146</distance>
+        <time>8</time>
+        <offset>96</offset>
+        <distance-text>0.1 km</distance-text>
+        <direction>W</direction>
+        <azimuth>265.9</azimuth>
+        <turn>TR</turn>
+        <turn-angle>66.8</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.344727" lon="18.039616">
+      <desc>At the roundabout, take the 2nd exit onto Sankt Eriksgatan, 0.3 km</desc>
+      <extensions>
+        <distance>255</distance>
+        <time>13</time>
+        <offset>107</offset>
+        <distance-text>0.3 km</distance-text>
+        <direction>S</direction>
+        <azimuth>188.9</azimuth>
+        <turn>EXIT2</turn>
+        <turn-angle>0.0</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.342876" lon="18.038765">
+      <desc>Continue on Sankt Eriksgatan, 0.2 km</desc>
+      <extensions>
+        <distance>217</distance>
+        <time>11</time>
+        <offset>111</offset>
+        <distance-text>0.2 km</distance-text>
+        <direction>S</direction>
+        <azimuth>192.0</azimuth>
+        <turn>C</turn>
+        <turn-angle>0.1</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.341343" lon="18.037714">
+      <desc>Continue on Sankt Eriksgatan, 1.0 km</desc>
+      <extensions>
+        <distance>1006</distance>
+        <time>52</time>
+        <offset>115</offset>
+        <distance-text>1.0 km</distance-text>
+        <direction>S</direction>
+        <azimuth>197.3</azimuth>
+        <turn>C</turn>
+        <turn-angle>354.6</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.33445" lon="18.032532">
+      <desc>Turn right at Fleminggatan, 91 m</desc>
+      <extensions>
+        <distance>91</distance>
+        <time>5</time>
+        <offset>124</offset>
+        <distance-text>91 m</distance-text>
+        <direction>W</direction>
+        <azimuth>281.4</azimuth>
+        <turn>TR</turn>
+        <turn-angle>81.7</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.334644" lon="18.030972">
+      <desc>Turn left at Fridhemsgatan, 0.4 km</desc>
+      <extensions>
+        <distance>393</distance>
+        <time>47</time>
+        <offset>126</offset>
+        <distance-text>0.4 km</distance-text>
+        <direction>SW</direction>
+        <azimuth>206.3</azimuth>
+        <turn>TL</turn>
+        <turn-angle>282.4</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.332108" lon="18.028486">
+      <desc>Turn right at Drottningholmsvägen, 19 m</desc>
+      <extensions>
+        <distance>19</distance>
+        <time>1</time>
+        <offset>133</offset>
+        <distance-text>19 m</distance-text>
+        <direction>W</direction>
+        <azimuth>266.1</azimuth>
+        <turn>TR</turn>
+        <turn-angle>60.3</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.332096" lon="18.028158">
+      <desc>Slight right at Drottningholmsvägen, 0.2 km</desc>
+      <extensions>
+        <distance>239</distance>
+        <time>12</time>
+        <offset>134</offset>
+        <distance-text>0.2 km</distance-text>
+        <direction>W</direction>
+        <azimuth>279.4</azimuth>
+        <turn>TSLR</turn>
+        <turn-angle>13.3</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.331963" lon="18.023989">
+      <desc>Turn left at Mariebergsgatan, 0.5 km</desc>
+      <extensions>
+        <distance>536</distance>
+        <time>28</time>
+        <offset>136</offset>
+        <distance-text>0.5 km</distance-text>
+        <direction>S</direction>
+        <azimuth>194.6</azimuth>
+        <turn>TL</turn>
+        <turn-angle>290.1</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.328445" lon="18.021236">
+      <desc>Slight left at Västerbroplan, 47 m</desc>
+      <extensions>
+        <distance>47</distance>
+        <time>2</time>
+        <offset>142</offset>
+        <distance-text>47 m</distance-text>
+        <direction>S</direction>
+        <azimuth>190.1</azimuth>
+        <turn>TSLL</turn>
+        <turn-angle>334.7</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.328163" lon="18.02121">
+      <desc>Turn left at Västerbroplan, 15 m</desc>
+      <extensions>
+        <distance>15</distance>
+        <time>1</time>
+        <offset>144</offset>
+        <distance-text>15 m</distance-text>
+        <direction>E</direction>
+        <azimuth>109.3</azimuth>
+        <turn>TL</turn>
+        <turn-angle>286.7</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.328117" lon="18.021463">
+      <desc>Slight right at Västerbron, 1.4 km</desc>
+      <extensions>
+        <distance>1413</distance>
+        <time>73</time>
+        <offset>145</offset>
+        <distance-text>1.4 km</distance-text>
+        <direction>SE</direction>
+        <azimuth>120.3</azimuth>
+        <turn>TSLR</turn>
+        <turn-angle>11.0</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.318729" lon="18.032007">
+      <desc>Continue on Långholmsgatan, 0.9 km</desc>
+      <extensions>
+        <distance>886</distance>
+        <time>46</time>
+        <offset>163</offset>
+        <distance-text>0.9 km</distance-text>
+        <direction>S</direction>
+        <azimuth>165.7</azimuth>
+        <turn>C</turn>
+        <turn-angle>358.7</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.312038" lon="18.029354">
+      <desc>Slight left at Södertäljevägen, 0.5 km</desc>
+      <extensions>
+        <distance>454</distance>
+        <time>23</time>
+        <offset>183</offset>
+        <distance-text>0.5 km</distance-text>
+        <direction>SW</direction>
+        <azimuth>214.6</azimuth>
+        <turn>TSLL</turn>
+        <turn-angle>351.3</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.309654" lon="18.026093">
+      <desc>Continue on Södertäljevägen, 0.4 km</desc>
+      <extensions>
+        <distance>408</distance>
+        <time>21</time>
+        <offset>187</offset>
+        <distance-text>0.4 km</distance-text>
+        <direction>SW</direction>
+        <azimuth>213.9</azimuth>
+        <turn>C</turn>
+        <turn-angle>358.8</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.307598" lon="18.023319">
+      <desc>Continue on Södertäljevägen, 0.5 km</desc>
+      <extensions>
+        <distance>515</distance>
+        <time>26</time>
+        <offset>189</offset>
+        <distance-text>0.5 km</distance-text>
+        <direction>SW</direction>
+        <azimuth>212.8</azimuth>
+        <turn>C</turn>
+        <turn-angle>357.4</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.303612" lon="18.019444">
+      <desc>Continue on Södertäljevägen, 0.2 km</desc>
+      <extensions>
+        <distance>183</distance>
+        <time>9</time>
+        <offset>201</offset>
+        <distance-text>0.2 km</distance-text>
+        <direction>SW</direction>
+        <azimuth>204.9</azimuth>
+        <turn>C</turn>
+        <turn-angle>0.2</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.302246" lon="18.01808">
+      <desc>Continue on Södertäljevägen, 0.3 km</desc>
+      <extensions>
+        <distance>308</distance>
+        <time>16</time>
+        <offset>208</offset>
+        <distance-text>0.3 km</distance-text>
+        <direction>SW</direction>
+        <azimuth>218.2</azimuth>
+        <turn>C</turn>
+        <turn-angle>6.7</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.300251" lon="18.014376">
+      <desc>Continue on Södertäljevägen, 0.7 km</desc>
+      <extensions>
+        <distance>748</distance>
+        <time>38</time>
+        <offset>211</offset>
+        <distance-text>0.7 km</distance-text>
+        <direction>SW</direction>
+        <azimuth>234.6</azimuth>
+        <turn>C</turn>
+        <turn-angle>2.5</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.298298" lon="18.007008">
+      <desc>Slight left at Södertäljevägen, 0.4 km</desc>
+      <extensions>
+        <distance>395</distance>
+        <time>20</time>
+        <offset>220</offset>
+        <distance-text>0.4 km</distance-text>
+        <direction>SW</direction>
+        <azimuth>229.2</azimuth>
+        <turn>TSLL</turn>
+        <turn-angle>353.1</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.295776" lon="18.002792">
+      <desc>Slight right at Västbergamotet, 0.2 km</desc>
+      <extensions>
+        <distance>161</distance>
+        <time>8</time>
+        <offset>228</offset>
+        <distance-text>0.2 km</distance-text>
+        <direction>W</direction>
+        <azimuth>281.3</azimuth>
+        <turn>TSLR</turn>
+        <turn-angle>48.9</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.295128" lon="18.003143">
+      <desc>At the roundabout, take the 3rd exit onto Västbergavägen, 29 m</desc>
+      <extensions>
+        <distance>29</distance>
+        <time>2</time>
+        <offset>241</offset>
+        <distance-text>29 m</distance-text>
+        <direction>SE</direction>
+        <azimuth>134.6</azimuth>
+        <turn>EXIT3</turn>
+        <turn-angle>0.0</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.294945" lon="18.003506">
+      <desc>Turn right, 0.2 km</desc>
+      <extensions>
+        <distance>180</distance>
+        <time>65</time>
+        <offset>242</offset>
+        <distance-text>0.2 km</distance-text>
+        <direction>SW</direction>
+        <azimuth>217.9</azimuth>
+        <turn>TR</turn>
+        <turn-angle>83.3</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.294315" lon="18.002958">
+      <desc>Turn right at Kontrollvägen, 1.3 km</desc>
+      <extensions>
+        <distance>1278</distance>
+        <time>307</time>
+        <offset>246</offset>
+        <distance-text>1.3 km</distance-text>
+        <direction>SW</direction>
+        <azimuth>227.3</azimuth>
+        <turn>TR</turn>
+        <turn-angle>86.8</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.287998" lon="17.985876">
+      <desc>Turn right at 271/Älvsjövägen, 86 m</desc>
+      <extensions>
+        <distance>86</distance>
+        <time>4</time>
+        <offset>267</offset>
+        <distance-text>86 m</distance-text>
+        <direction>W</direction>
+        <azimuth>274.1</azimuth>
+        <turn>TR</turn>
+        <turn-angle>74.5</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.288071" lon="17.984381">
+      <desc>Turn left at Svartlösavägen, 1.2 km</desc>
+      <extensions>
+        <distance>1226</distance>
+        <time>74</time>
+        <offset>269</offset>
+        <distance-text>1.2 km</distance-text>
+        <direction>S</direction>
+        <azimuth>185.7</azimuth>
+        <turn>TL</turn>
+        <turn-angle>270.1</turn-angle>
+      </extensions>
+    </rtept>
+    <rtept lat="59.278297" lon="17.981647">
+      <desc>Turn right at Västerängsvägen, 64 m</desc>
+      <extensions>
+        <distance>64</distance>
+        <time>8</time>
+        <offset>291</offset>
+        <distance-text>64 m</distance-text>
+        <direction>NW</direction>
+        <azimuth>321.4</azimuth>
+        <turn>TR</turn>
+        <turn-angle>112.8</turn-angle>
+      </extensions>
+    </rtept>
+  </rte>
+</gpx>

@@ -1,41 +1,33 @@
-# =============== #
-# Unity generated #
-# =============== #
-[Tt]emp/
-[Oo]bj/
-[Bb]uild
-/[Ll]ibrary/
-sysinfo.txt
-*.stackdump
+# ROOT GITIGNORE #
+###################
 
-*.csv
- 
-# ===================================== #
-# Visual Studio / MonoDevelop generated #
-# ===================================== #
-[Ee]xported[Oo]bj/
-.vs/
-/*.userprefs
-/*.pidb
-/*.suo
-/*.user
-/*.unityproj
-/*.booproj
-/*.sln
-/*.csproj
+# Compiled source #
+###################
+*.com
+*.class
+*.exe
+*.o
+*.so
 
-# Unity3D generated meta files
-#*.pidb.meta
-#*.meta
- 
-# ============ #
-# OS generated #
-# ============ #
-.DS_Store*
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-Icon?
 ehthumbs.db
-[Tt]humbs.db
-[Dd]esktop.ini
+Thumbs.db

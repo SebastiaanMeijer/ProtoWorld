@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<decision_tree>
+  <scenarios>
+  
+    <scenario id="0" name="scen0">
+      <simulation path="C:\Users\protoworld\Desktop\ProtoWorld\ScriptsAndTools\Tests\DecisionTreeTest\PWSFiles\NullPWS\null_.pws.meta"/>
+      <question id="1" time="5.0" text="1. Choose Scenario">
+		<choice text="Scenario 1: With Car traffic">
+          <execScen>1</execScen>
+        </choice>
+        <choice text="Scenario 2: Without car traffic">
+          <execScen>2</execScen>
+        </choice>
+      </question>
+    </scenario>
+	
+	<scenario id="1" name="scen1" >
+      <simulation path="C:\Users\protoworld\Desktop\ProtoWorld\ScriptsAndTools\Tests\DecisionTreeTest\PWSFiles\TrafficPWS\pwstest_.pws.meta"/>
+	  	<question id="2" time="10" text="Please, observe the behaviour of pedestrians in this point." landmark="1">
+			<choice text="Continue"></choice>
+		</question>
+		<question id="3" time="50" text="The amount of pedestrians in the area is very high, should the traffic be redirected somewhere else?" landmark="1">
+			<choice text="Yes"><execScen>2</execScen></choice>
+			<choice text="No"></choice>
+		</question>
+		<question id="4" time="52" text="You have reached the last event, thank you for participating!">			
+			<choice text="Continue"></choice>				
+		</question>
+    </scenario>
+	
+	<scenario id="2" name="scen2" >
+      <simulation path="C:\Users\protoworld\Desktop\ProtoWorld\ScriptsAndTools\Tests\DecisionTreeTest\PWSFiles\NullPWS\null_.pws.meta"/>
+	  	<question id="5" time="10" text="Please, observe the behaviour of pedestrians in this point." landmark="1">
+			<choice text="Continue"></choice>
+		</question>
+		<question id="6" time="30" text="Do you think that using the roads of the scene as pedestrian areas is a good choice?" landmark="1">
+			<choice text="Yes"></choice>
+			<choice text="No"></choice>
+		</question>
+		<question id="4" time="32" text="You have reached the last event, thank you for participating!">			
+			<choice text="Continue"></choice>				
+		</question>
+    </scenario>
+	
+  </scenarios>
+</decision_tree>

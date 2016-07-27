@@ -1,0 +1,160 @@
+fileFormatVersion: 2
+guid: 7fd200a176d91134fbbaf48f9634d42f
+timeCreated: 1455631211
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bench
+    100002: Bridge
+    100004: Building
+    100006: BusStop
+    100008: Fence
+    100010: Forest
+    100012: Forest_MeshPart0
+    100014: Forest_MeshPart1
+    100016: //RootNode
+    100018: Road
+    100020: RoadArea
+    100022: RoadConnector
+    100024: RoadCrossingAtConnector
+    100026: RoadJunction
+    100028: SurfaceArea
+    100030: SurfaceParking
+    100032: Tunnel
+    100034: WasteBasket
+    100036: Waterway
+    400000: Bench
+    400002: Bridge
+    400004: Building
+    400006: BusStop
+    400008: Fence
+    400010: Forest
+    400012: Forest_MeshPart0
+    400014: Forest_MeshPart1
+    400016: //RootNode
+    400018: Road
+    400020: RoadArea
+    400022: RoadConnector
+    400024: RoadCrossingAtConnector
+    400026: RoadJunction
+    400028: SurfaceArea
+    400030: SurfaceParking
+    400032: Tunnel
+    400034: WasteBasket
+    400036: Waterway
+    2300000: Bench
+    2300002: Bridge
+    2300004: Building
+    2300006: BusStop
+    2300008: Fence
+    2300010: Forest_MeshPart0
+    2300012: Forest_MeshPart1
+    2300014: Road
+    2300016: RoadArea
+    2300018: RoadConnector
+    2300020: RoadCrossingAtConnector
+    2300022: RoadJunction
+    2300024: SurfaceArea
+    2300026: SurfaceParking
+    2300028: Tunnel
+    2300030: WasteBasket
+    2300032: Waterway
+    3300000: Bench
+    3300002: Bridge
+    3300004: Building
+    3300006: BusStop
+    3300008: Fence
+    3300010: Forest_MeshPart0
+    3300012: Forest_MeshPart1
+    3300014: Road
+    3300016: RoadArea
+    3300018: RoadConnector
+    3300020: RoadCrossingAtConnector
+    3300022: RoadJunction
+    3300024: SurfaceArea
+    3300026: SurfaceParking
+    3300028: Tunnel
+    3300030: WasteBasket
+    3300032: Waterway
+    4300000: Bench
+    4300002: Bridge
+    4300004: Building
+    4300006: BusStop
+    4300008: Fence
+    4300010: Forest_MeshPart0
+    4300012: Forest_MeshPart1
+    4300014: Road
+    4300016: RoadArea
+    4300018: RoadConnector
+    4300020: RoadCrossingAtConnector
+    4300022: RoadJunction
+    4300024: SurfaceArea
+    4300026: SurfaceParking
+    4300028: Tunnel
+    4300030: WasteBasket
+    4300032: Waterway
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

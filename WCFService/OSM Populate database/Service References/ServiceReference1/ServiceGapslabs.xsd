@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GapslabWCFservice" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GapslabWCFservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="BoundsWCF">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="maxlat" type="xs:double" />
+      <xs:element minOccurs="0" name="maxlon" type="xs:double" />
+      <xs:element minOccurs="0" name="minlat" type="xs:double" />
+      <xs:element minOccurs="0" name="minlon" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BoundsWCF" nillable="true" type="tns:BoundsWCF" />
+  <xs:complexType name="OsmNodeWCF">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="lat" type="xs:double" />
+      <xs:element minOccurs="0" name="lon" type="xs:double" />
+      <xs:element minOccurs="0" name="order" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OsmNodeWCF" nillable="true" type="tns:OsmNodeWCF" />
+  <xs:complexType name="ArrayOfOsmNodeWCF">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OsmNodeWCF" nillable="true" type="tns:OsmNodeWCF" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOsmNodeWCF" nillable="true" type="tns:ArrayOfOsmNodeWCF" />
+  <xs:complexType name="ArrayOfTagWCF">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TagWCF" nillable="true" type="tns:TagWCF" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTagWCF" nillable="true" type="tns:ArrayOfTagWCF" />
+  <xs:complexType name="TagWCF">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="KeyValue" nillable="true" type="q1:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TagWCF" nillable="true" type="tns:TagWCF" />
+  <xs:complexType name="TimeStep">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Vehicles" nillable="true" type="tns:ArrayOfVehicleFCD" />
+      <xs:element minOccurs="0" name="iMobilityTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="index" type="xs:int" />
+      <xs:element minOccurs="0" name="time" type="xs:float" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TimeStep" nillable="true" type="tns:TimeStep" />
+  <xs:complexType name="ArrayOfVehicleFCD">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VehicleFCD" nillable="true" type="tns:VehicleFCD" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVehicleFCD" nillable="true" type="tns:ArrayOfVehicleFCD" />
+  <xs:complexType name="VehicleFCD">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Angle" type="xs:float" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Lane" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Latitude" type="xs:float" />
+      <xs:element minOccurs="0" name="Longitude" type="xs:float" />
+      <xs:element minOccurs="0" name="Pos" type="xs:float" />
+      <xs:element minOccurs="0" name="Slope" type="xs:float" />
+      <xs:element minOccurs="0" name="Speed" type="xs:float" />
+      <xs:element minOccurs="0" name="VehicleType" type="tns:SUMOSimulationFCD.VehicleType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VehicleFCD" nillable="true" type="tns:VehicleFCD" />
+  <xs:simpleType name="SUMOSimulationFCD.VehicleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default" />
+      <xs:enumeration value="Simple" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SUMOSimulationFCD.VehicleType" nillable="true" type="tns:SUMOSimulationFCD.VehicleType" />
+  <xs:complexType name="SimpleTimeStep">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="VehicleIds" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="VehicleLats" nillable="true" type="q3:ArrayOffloat" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="VehicleLongs" nillable="true" type="q4:ArrayOffloat" />
+      <xs:element minOccurs="0" name="iMobilityTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="index" type="xs:int" />
+      <xs:element minOccurs="0" name="time" type="xs:float" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SimpleTimeStep" nillable="true" type="tns:SimpleTimeStep" />
+</xs:schema>

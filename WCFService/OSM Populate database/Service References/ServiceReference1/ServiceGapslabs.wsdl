@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServiceGapslabs" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Aram.OSMParser" />
+      <xsd:import schemaLocation="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/GapslabWCFservice" />
+      <xsd:import schemaLocation="http://localhost:53869/ServiceGapslabs.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/OsmSharp.Routing" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ServiceGapslabs_GetRelationIds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationIds" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetRelationIds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetRelationMembers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationMembers" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetRelationMembers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationMembersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayIds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayIds" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayIds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayIdsWithIdCriteria_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayIdsWithIdCriteria" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayIdsWithIdCriteria_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayIdsWithIdCriteriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayIdsInStockholm_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayIdsInStockholm" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayIdsInStockholm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayIdsInStockholmResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayIdsInBound_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayIdsInBound" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayIdsInBound_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayIdsInBoundResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayExtIdsInBound_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayExtIdsInBound" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayExtIdsInBound_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayExtIdsInBoundResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetNodeIdsInBoundWithInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNodeIdsInBoundWithInfo" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetNodeIdsInBoundWithInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNodeIdsInBoundWithInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetNodeIdsInBoundWithKeyValueTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNodeIdsInBoundWithKeyValueTag" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetNodeIdsInBoundWithKeyValueTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNodeIdsInBoundWithKeyValueTagResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetNodeInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNodeInfo" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetNodeInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNodeInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayExtNodes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayExtNodes" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayExtNodes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayExtNodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayNodes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayNodes" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayNodes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayNodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetRelationTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationTags" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetRelationTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayTags" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayTagsStockholm_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayTagsStockholm" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetWayTagsStockholm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWayTagsStockholmResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetNodeTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNodeTags" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetNodeTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNodeTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetBounds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBounds" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetBounds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBoundsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_InitializeRouter_InputMessage">
+    <wsdl:part name="parameters" element="tns:InitializeRouter" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_InitializeRouter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InitializeRouterResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_ResolvePoint_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResolvePoint" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_ResolvePoint_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResolvePointResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_RouteUsingDykstra_InputMessage">
+    <wsdl:part name="parameters" element="tns:RouteUsingDykstra" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_RouteUsingDykstra_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RouteUsingDykstraResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetGeometryCollectionSingleObject_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGeometryCollectionSingleObject" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetGeometryCollectionSingleObject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGeometryCollectionSingleObjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetGeometryCollection_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGeometryCollection" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetGeometryCollection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGeometryCollectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetGeometryCollectionMinimal_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGeometryCollectionMinimal" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetGeometryCollectionMinimal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGeometryCollectionMinimalResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_InitializeSimulationList_InputMessage">
+    <wsdl:part name="parameters" element="tns:InitializeSimulationList" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_InitializeSimulationList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InitializeSimulationListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_DisposeSimulation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisposeSimulation" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_DisposeSimulation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisposeSimulationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GenerateRandomID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateRandomID" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GenerateRandomID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateRandomIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetTotalTimesteps_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotalTimesteps" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetTotalTimesteps_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotalTimestepsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetTotalTimestepsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotalTimestepsList" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetTotalTimestepsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotalTimestepsListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetTimestepAt_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTimestepAt" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetTimestepAt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTimestepAtResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetTimestepAtList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTimestepAtList" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetTimestepAtList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTimestepAtListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetSimpleTimestepAtList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimpleTimestepAtList" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetSimpleTimestepAtList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimpleTimestepAtListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetSimulationName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimulationName" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetSimulationName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimulationNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetSimulationNameList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimulationNameList" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetSimulationNameList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimulationNameListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetSimulationDescription_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimulationDescription" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetSimulationDescription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimulationDescriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetSimulationDescriptionList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimulationDescriptionList" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_GetSimulationDescriptionList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimulationDescriptionListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_IsSimulationLoaded_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsSimulationLoaded" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_IsSimulationLoaded_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsSimulationLoadedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_IsSimulationLoadedList_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsSimulationLoadedList" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_IsSimulationLoadedList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsSimulationLoadedListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_LoadSUMOFCDSimulation_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoadSUMOFCDSimulation" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_LoadSUMOFCDSimulation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadSUMOFCDSimulationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_LoadSUMOFCDSimulationList_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoadSUMOFCDSimulationList" />
+  </wsdl:message>
+  <wsdl:message name="ServiceGapslabs_LoadSUMOFCDSimulationList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadSUMOFCDSimulationListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceGapslabs">
+    <wsdl:operation name="GetRelationIds">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetRelationIds" message="tns:ServiceGapslabs_GetRelationIds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetRelationIdsResponse" message="tns:ServiceGapslabs_GetRelationIds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationMembers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetRelationMembers" message="tns:ServiceGapslabs_GetRelationMembers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetRelationMembersResponse" message="tns:ServiceGapslabs_GetRelationMembers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWayIds">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayIds" message="tns:ServiceGapslabs_GetWayIds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayIdsResponse" message="tns:ServiceGapslabs_GetWayIds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWayIdsWithIdCriteria">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayIdsWithIdCriteria" message="tns:ServiceGapslabs_GetWayIdsWithIdCriteria_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayIdsWithIdCriteriaResponse" message="tns:ServiceGapslabs_GetWayIdsWithIdCriteria_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWayIdsInStockholm">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayIdsInStockholm" message="tns:ServiceGapslabs_GetWayIdsInStockholm_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayIdsInStockholmResponse" message="tns:ServiceGapslabs_GetWayIdsInStockholm_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWayIdsInBound">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayIdsInBound" message="tns:ServiceGapslabs_GetWayIdsInBound_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayIdsInBoundResponse" message="tns:ServiceGapslabs_GetWayIdsInBound_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWayExtIdsInBound">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayExtIdsInBound" message="tns:ServiceGapslabs_GetWayExtIdsInBound_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayExtIdsInBoundResponse" message="tns:ServiceGapslabs_GetWayExtIdsInBound_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeIdsInBoundWithInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetNodeIdsInBoundWithInfo" message="tns:ServiceGapslabs_GetNodeIdsInBoundWithInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetNodeIdsInBoundWithInfoResponse" message="tns:ServiceGapslabs_GetNodeIdsInBoundWithInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeIdsInBoundWithKeyValueTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetNodeIdsInBoundWithKeyValueTag" message="tns:ServiceGapslabs_GetNodeIdsInBoundWithKeyValueTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetNodeIdsInBoundWithKeyValueTagResponse" message="tns:ServiceGapslabs_GetNodeIdsInBoundWithKeyValueTag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetNodeInfo" message="tns:ServiceGapslabs_GetNodeInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetNodeInfoResponse" message="tns:ServiceGapslabs_GetNodeInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWayExtNodes">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayExtNodes" message="tns:ServiceGapslabs_GetWayExtNodes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayExtNodesResponse" message="tns:ServiceGapslabs_GetWayExtNodes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWayNodes">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayNodes" message="tns:ServiceGapslabs_GetWayNodes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayNodesResponse" message="tns:ServiceGapslabs_GetWayNodes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetRelationTags" message="tns:ServiceGapslabs_GetRelationTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetRelationTagsResponse" message="tns:ServiceGapslabs_GetRelationTags_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWayTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayTags" message="tns:ServiceGapslabs_GetWayTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayTagsResponse" message="tns:ServiceGapslabs_GetWayTags_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWayTagsStockholm">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayTagsStockholm" message="tns:ServiceGapslabs_GetWayTagsStockholm_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetWayTagsStockholmResponse" message="tns:ServiceGapslabs_GetWayTagsStockholm_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetNodeTags" message="tns:ServiceGapslabs_GetNodeTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetNodeTagsResponse" message="tns:ServiceGapslabs_GetNodeTags_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBounds">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetBounds" message="tns:ServiceGapslabs_GetBounds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetBoundsResponse" message="tns:ServiceGapslabs_GetBounds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InitializeRouter">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/InitializeRouter" message="tns:ServiceGapslabs_InitializeRouter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/InitializeRouterResponse" message="tns:ServiceGapslabs_InitializeRouter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResolvePoint">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/ResolvePoint" message="tns:ServiceGapslabs_ResolvePoint_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/ResolvePointResponse" message="tns:ServiceGapslabs_ResolvePoint_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RouteUsingDykstra">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/RouteUsingDykstra" message="tns:ServiceGapslabs_RouteUsingDykstra_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/RouteUsingDykstraResponse" message="tns:ServiceGapslabs_RouteUsingDykstra_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGeometryCollectionSingleObject">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetGeometryCollectionSingleObject" message="tns:ServiceGapslabs_GetGeometryCollectionSingleObject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetGeometryCollectionSingleObjectResponse" message="tns:ServiceGapslabs_GetGeometryCollectionSingleObject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGeometryCollection">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetGeometryCollection" message="tns:ServiceGapslabs_GetGeometryCollection_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetGeometryCollectionResponse" message="tns:ServiceGapslabs_GetGeometryCollection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGeometryCollectionMinimal">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetGeometryCollectionMinimal" message="tns:ServiceGapslabs_GetGeometryCollectionMinimal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetGeometryCollectionMinimalResponse" message="tns:ServiceGapslabs_GetGeometryCollectionMinimal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InitializeSimulationList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/InitializeSimulationList" message="tns:ServiceGapslabs_InitializeSimulationList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/InitializeSimulationListResponse" message="tns:ServiceGapslabs_InitializeSimulationList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisposeSimulation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/DisposeSimulation" message="tns:ServiceGapslabs_DisposeSimulation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/DisposeSimulationResponse" message="tns:ServiceGapslabs_DisposeSimulation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateRandomID">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GenerateRandomID" message="tns:ServiceGapslabs_GenerateRandomID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GenerateRandomIDResponse" message="tns:ServiceGapslabs_GenerateRandomID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalTimesteps">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetTotalTimesteps" message="tns:ServiceGapslabs_GetTotalTimesteps_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetTotalTimestepsResponse" message="tns:ServiceGapslabs_GetTotalTimesteps_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalTimestepsList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetTotalTimestepsList" message="tns:ServiceGapslabs_GetTotalTimestepsList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetTotalTimestepsListResponse" message="tns:ServiceGapslabs_GetTotalTimestepsList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTimestepAt">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetTimestepAt" message="tns:ServiceGapslabs_GetTimestepAt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetTimestepAtResponse" message="tns:ServiceGapslabs_GetTimestepAt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTimestepAtList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetTimestepAtList" message="tns:ServiceGapslabs_GetTimestepAtList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetTimestepAtListResponse" message="tns:ServiceGapslabs_GetTimestepAtList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSimpleTimestepAtList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetSimpleTimestepAtList" message="tns:ServiceGapslabs_GetSimpleTimestepAtList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetSimpleTimestepAtListResponse" message="tns:ServiceGapslabs_GetSimpleTimestepAtList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSimulationName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetSimulationName" message="tns:ServiceGapslabs_GetSimulationName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetSimulationNameResponse" message="tns:ServiceGapslabs_GetSimulationName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSimulationNameList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetSimulationNameList" message="tns:ServiceGapslabs_GetSimulationNameList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetSimulationNameListResponse" message="tns:ServiceGapslabs_GetSimulationNameList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSimulationDescription">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetSimulationDescription" message="tns:ServiceGapslabs_GetSimulationDescription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetSimulationDescriptionResponse" message="tns:ServiceGapslabs_GetSimulationDescription_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSimulationDescriptionList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/GetSimulationDescriptionList" message="tns:ServiceGapslabs_GetSimulationDescriptionList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/GetSimulationDescriptionListResponse" message="tns:ServiceGapslabs_GetSimulationDescriptionList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsSimulationLoaded">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/IsSimulationLoaded" message="tns:ServiceGapslabs_IsSimulationLoaded_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/IsSimulationLoadedResponse" message="tns:ServiceGapslabs_IsSimulationLoaded_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsSimulationLoadedList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/IsSimulationLoadedList" message="tns:ServiceGapslabs_IsSimulationLoadedList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/IsSimulationLoadedListResponse" message="tns:ServiceGapslabs_IsSimulationLoadedList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadSUMOFCDSimulation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/LoadSUMOFCDSimulation" message="tns:ServiceGapslabs_LoadSUMOFCDSimulation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/LoadSUMOFCDSimulationResponse" message="tns:ServiceGapslabs_LoadSUMOFCDSimulation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadSUMOFCDSimulationList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceGapslabs/LoadSUMOFCDSimulationList" message="tns:ServiceGapslabs_LoadSUMOFCDSimulationList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceGapslabs/LoadSUMOFCDSimulationListResponse" message="tns:ServiceGapslabs_LoadSUMOFCDSimulationList_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ServiceGapslabs" type="tns:ServiceGapslabs">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRelationIds">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetRelationIds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationMembers">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetRelationMembers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWayIds">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetWayIds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWayIdsWithIdCriteria">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetWayIdsWithIdCriteria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWayIdsInStockholm">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetWayIdsInStockholm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWayIdsInBound">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetWayIdsInBound" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWayExtIdsInBound">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetWayExtIdsInBound" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeIdsInBoundWithInfo">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetNodeIdsInBoundWithInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeIdsInBoundWithKeyValueTag">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetNodeIdsInBoundWithKeyValueTag" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeInfo">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetNodeInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWayExtNodes">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetWayExtNodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWayNodes">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetWayNodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationTags">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetRelationTags" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWayTags">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetWayTags" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWayTagsStockholm">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetWayTagsStockholm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeTags">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetNodeTags" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBounds">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetBounds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitializeRouter">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/InitializeRouter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolvePoint">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/ResolvePoint" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RouteUsingDykstra">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/RouteUsingDykstra" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeometryCollectionSingleObject">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetGeometryCollectionSingleObject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeometryCollection">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetGeometryCollection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeometryCollectionMinimal">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetGeometryCollectionMinimal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitializeSimulationList">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/InitializeSimulationList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisposeSimulation">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/DisposeSimulation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateRandomID">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GenerateRandomID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalTimesteps">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetTotalTimesteps" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalTimestepsList">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetTotalTimestepsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTimestepAt">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetTimestepAt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTimestepAtList">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetTimestepAtList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSimpleTimestepAtList">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetSimpleTimestepAtList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSimulationName">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetSimulationName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSimulationNameList">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetSimulationNameList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSimulationDescription">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetSimulationDescription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSimulationDescriptionList">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/GetSimulationDescriptionList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSimulationLoaded">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/IsSimulationLoaded" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSimulationLoadedList">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/IsSimulationLoadedList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadSUMOFCDSimulation">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/LoadSUMOFCDSimulation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadSUMOFCDSimulationList">
+      <soap:operation soapAction="http://tempuri.org/ServiceGapslabs/LoadSUMOFCDSimulationList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceGapslabs">
+    <wsdl:port name="BasicHttpBinding_ServiceGapslabs" binding="tns:BasicHttpBinding_ServiceGapslabs">
+      <soap:address location="http://localhost:53869/ServiceGapslabs.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
