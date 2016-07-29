@@ -113,7 +113,7 @@ public class CombineChildrenExtended : MonoBehaviour {
 				GetComponent<Renderer>().material = (Material)de.Key;
 				GetComponent<Renderer>().enabled = true;
                 if (addMeshCollider) gameObject.AddComponent<MeshCollider>();
-                GetComponent<Renderer>().shadowCastingMode = castShadow ? UnityEngine.Rendering.ShadowCastingMode.On : UnityEngine.Rendering.ShadowCastingMode.Off;
+                GetComponent<Renderer>().castShadows = castShadow;
                 GetComponent<Renderer>().receiveShadows = receiveShadow;
 			}
 			// We have multiple materials to take care of, build one mesh / gameobject for each material
@@ -132,7 +132,7 @@ public class CombineChildrenExtended : MonoBehaviour {
 				MeshFilter filter = (MeshFilter)go.GetComponent(typeof(MeshFilter));
 				if(Application.isPlaying)filter.mesh = MeshCombineUtility.Combine(instances, generateTriangleStrips);
                 else filter.sharedMesh = MeshCombineUtility.Combine(instances, generateTriangleStrips);
-                go.GetComponent<Renderer>().shadowCastingMode = castShadow ? UnityEngine.Rendering.ShadowCastingMode.On : UnityEngine.Rendering.ShadowCastingMode.Off;
+                go.GetComponent<Renderer>().castShadows = castShadow;
                 go.GetComponent<Renderer>().receiveShadows = receiveShadow;
                 if (addMeshCollider) go.AddComponent<MeshCollider>();
             }

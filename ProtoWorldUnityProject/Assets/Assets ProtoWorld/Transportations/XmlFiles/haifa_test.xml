@@ -1,31 +1,3 @@
-<?xml version="1.0" encoding="Windows-1252"?>
-<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <stations>
-    <station stationId="15" x="-85.34277" y="-2" z="1797.83545" name="no station name" />
-    <station stationId="14" x="-390.5786" y="-2" z="1738.33789" name="no station name" />
-    <station stationId="13" x="-824.510742" y="-2" z="7785.22266" name="no name 3" />
-    <station stationId="12" x="-882.0342" y="-2" z="8502.556" name="no name 2" />
-    <station stationId="11" x="-69.46777" y="-2" z="7758.98535" name="no name 1" />
-    <station stationId="4" x="-2676.78613" y="-2" z="6434.905" name="The docks" />
-    <station stationId="1" x="-1171.729" y="-2" z="2853.56567" name="Hill station" />
-    <station stationId="9" x="-4500.38574" y="-2" z="4427.19238" name="Coast E" />
-    <station stationId="3" x="-852.222168" y="-2" z="5403.03174" name="Stadium" />
-    <station stationId="8" x="-5802.761" y="-2" z="3140.3833" name="Coast D" />
-    <station stationId="6" x="-4349.22754" y="-2" z="547.104" name="Coast B" />
-    <station stationId="7" x="-5404.01074" y="-2" z="1376.55" name="Coast C" />
-    <station stationId="10" x="-3424.47852" y="-2" z="2445.01343" name="Over the hill" />
-    <station stationId="0" x="-419.59082" y="-2" z="1206.82849" name="Industial station" />
-    <station stationId="5" x="-2609.454" y="-2" z="701.0626" name="Coast A" />
-    <station stationId="2" x="-963.9214" y="-2" z="4729.00049" name="Valley station" />
-    <station stationId="16" x="-3910.504" y="-2" z="8196.857" name="Dock 2" />
-    <station stationId="17" x="-3046.94067" y="-2" z="7459.56543" name="dock 3" />
-  </stations>
-  <transportlines>
-    <line transportId="4" category="Metro" name="short line" stationIds="15,14,0" travelingTimes="120,120" />
-    <line transportId="3" category="Tram" name="small townline" stationIds="11,13,12" travelingTimes="180,180" />
-    <line transportId="2" category="Metro" name="Over the hill line" stationIds="7,10,1" travelingTimes="720,840" />
-    <line transportId="0" category="Tram" name="101" stationIds="0,1,2,3,4" travelingTimes="900,300,300,300" />
-    <line transportId="1" category="Train" name="Coast Line" stationIds="5,6,7,8,9" travelingTimes="840,240,240,300" />
-    <line transportId="5" category="Tram" name="Dock line" stationIds="16,17,4,13" travelingTimes="600,600,1200" />
-  </transportlines>
-</root>
+version https://git-lfs.github.com/spec/v1
+oid sha256:cb049fcde131c9a6f9f0c774b912e2ac2489fba4301722fd9ff08a3d153a3fa8
+size 2462

@@ -1,28 +1,3 @@
-<?xml version="1.0" encoding="Windows-1252"?>
-<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <stations>
-    <station stationId="0" x="80" y="0" z="-50" name="San Giovanni" />
-    <station stationId="1" x="70" y="0" z="-30" name="Termini" />
-    <station stationId="2" x="60" y="0" z="-20" name="Spagna" />
-    <station stationId="3" x="35" y="0" z="-10" name="Ottaviano" />
-    <station stationId="4" x="90" y="0" z="-10" name="Roma Tiburtina" />
-    <station stationId="5" x="60" y="0" z="-40" name="Colosseo" />
-    <station stationId="6" x="60" y="0" z="-50" name="Piramide" />
-    <station stationId="7" x="90" y="0" z="-20" name="Tiburtina" />
-    <station stationId="8" x="60" y="0" z="-60" name="Ostiense" />
-    <station stationId="9" x="30" y="0" z="-50" name="Trastevere" />
-    <station stationId="10" x="25" y="0" z="-30" name="San Pietro" />
-    <station stationId="11" x="45" y="0" z="-50" name="Porta San Paolo" />
-    <station stationId="12" x="40" y="0" z="-80" name="Basilica San Paolo" />
-    <station stationId="13" x="50" y="0" z="-10" name="Lepanto" />
-    <station stationId="14" x="20" y="0" z="-10" name="Cipro" />
-    <station stationId="15" x="28.42" y="0" z="-26.71" name="Largo Di Porta Cavalleggeri- Fornac" />
-    <station stationId="16" x="36.05" y="0" z="-23.69" name="Lungotevere In Sassia- Santo Spirito" />
-    <station stationId="17" x="40" y="0" z="-5" name="Milizie- Distretto Militare" />
-    <station stationId="18" x="55" y="0" z="-5" name="Flaminio" />
-    <station stationId="19" x="75" y="0" z="-10" name="Croce Rossa" />
-    <station stationId="20" x="42" y="0" z="-27.24" name="Lungotevere fiorentini-paoli" />
-    <station stationId="21" x="30" y="0" z="-78" name="Marconi- Edison" />
-  </stations>
-  <transportlines />
-</root>
+version https://git-lfs.github.com/spec/v1
+oid sha256:e6bddcf0bf448d538f3c9ef60bab73ab56a614cc0ca170952105663b0f543a19
+size 1863

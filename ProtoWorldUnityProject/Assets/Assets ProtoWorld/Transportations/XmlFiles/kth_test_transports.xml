@@ -1,14 +1,3 @@
-<?xml version="1.0" encoding="Windows-1252"?>
-<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <stations>
-    <station stationId="5" x="-234.107422" y="0" z="894.198242" name="Östrastation" />
-    <station stationId="4" x="-551.4243" y="0" z="821.9551" name="L building" />
-    <station stationId="3" x="-460.094727" y="0" z="1076.94727" name="KTH back" />
-    <station stationId="2" x="-232.875977" y="0" z="983.910156" name="KTH" />
-    <station stationId="1" x="-835.9595" y="0" z="613.457031" name="KTH outback" />
-    <station stationId="0" x="-390.182617" y="0" z="573.1577" name="Valhallavagen" />
-  </stations>
-  <transportlines>
-    <line transportId="0" category="Metro" name="kth express" stationIds="1,4,3,2,5,0" travelingTimes="5,5,5,5,5" />
-  </transportlines>
-</root>
+version https://git-lfs.github.com/spec/v1
+oid sha256:0c1fd9fda8adc4f30613e63fefe34845aaeb2e7693ec4ddd52b589ad7feec88d
+size 854
