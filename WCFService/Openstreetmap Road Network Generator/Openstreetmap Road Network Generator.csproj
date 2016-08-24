@@ -42,7 +42,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Zlib.Portable">
-      <HintPath>..\OsmParserTestApplication\bin\x86\Debug\Zlib.Portable.dll</HintPath>
+      <HintPath>..\Libraries\Zlib.Portable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

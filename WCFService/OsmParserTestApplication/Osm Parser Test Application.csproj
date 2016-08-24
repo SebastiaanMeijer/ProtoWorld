@@ -60,29 +60,29 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MongoDB.Bson">
-      <HintPath>D:\!!Necessary Software\MongoDB\CSharpDriver-1.9\MongoDB.Bson.dll</HintPath>
+      <HintPath>..\Libraries\MongoDB.Bson.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver">
-      <HintPath>D:\!!Necessary Software\MongoDB\CSharpDriver-1.9\MongoDB.Driver.dll</HintPath>
+      <HintPath>..\Libraries\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Osm">
-      <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\SQLServer\OsmSharp.Osm.Data.SQLServer\bin\Debug\OsmSharp.Osm.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Osm3.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Osm.Data.PostgreSQL">
-      <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\PostgreSQL\Output\OsmSharp.Osm.Data.PostgreSQL.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Osm.Data.PostgreSQL.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Osm.Data.SQLServer, Version=0.1.0.9999, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\SQLServer\OsmSharp.Osm.Data.SQLServer\bin\Debug\OsmSharp.Osm.Data.SQLServer.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Osm.Data.SQLServer.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Routing">
-      <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\SQLServer\OsmSharp.Osm.Data.SQLServer\bin\Debug\OsmSharp.Routing.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Routing3.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Tools">
-      <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\SQLServer\OsmSharp.Osm.Data.SQLServer\bin\Debug\OsmSharp.Tools.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Tools.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
-      <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\SQLServer\OsmSharp.Osm.Data.SQLServer\bin\Debug\protobuf-net.dll</HintPath>
+      <HintPath>..\Libraries\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -95,7 +95,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Zlib.Portable">
-      <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\SQLServer\OsmSharp.Osm.Data.SQLServer\bin\Debug\Zlib.Portable.dll</HintPath>
+      <HintPath>..\Libraries\Zlib.Portable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -49,32 +49,26 @@
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\ReferenceAssemblies\v2.0\Microsoft.VisualStudio.DebuggerVisualizers.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Security">
-      <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\PostgreSQL\Output\Mono.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Npgsql">
-      <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\PostgreSQL\Output\Npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="Oracle.ManagedDataAccess">
-      <HintPath>D:\!!Necessary Software\OSM Sharp\Latest\OsmSharp-master\Output\Debug\Any CPU\Oracle.ManagedDataAccess.dll</HintPath>
+      <HintPath>..\Libraries\Mono.Security2.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp">
-      <HintPath>I:\!!Necessary Software\OsmSharp 4.x\Any CPU\OsmSharp.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Data.PostgreSQL">
-      <HintPath>I:\!!Necessary Software\OsmSharp 4.x\Any CPU\OsmSharp.Data.PostgreSQL.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Data.PostgreSQL.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Data.SQLServer">
-      <HintPath>I:\!!Necessary Software\OsmSharp 4.x\Any CPU\OsmSharp.Data.SQLServer.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Data.SQLServer.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Osm">
-      <HintPath>I:\!!Necessary Software\OsmSharp 4.x\Any CPU\OsmSharp.Osm.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Osm4.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Routing">
-      <HintPath>I:\!!Necessary Software\OsmSharp 4.x\Any CPU\OsmSharp.Routing.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Routing4.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>I:\!!Necessary Software\OsmSharp 4.x\Any CPU\protobuf-net.dll</HintPath>
+      <HintPath>..\Libraries\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -86,7 +80,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Zlib.Portable">
-      <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\SQLServer\OsmSharp.Osm.Data.SQLServer\bin\Debug\Zlib.Portable.dll</HintPath>
+      <HintPath>..\Libraries\Zlib.Portable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +147,10 @@
     <ProjectReference Include="..\GaPSlabsSimulationLibrary\GaPSlabsSimulationLibrary.csproj">
       <Project>{2e5b4bc2-a7ac-4f58-8146-7aced2af1914}</Project>
       <Name>GaPSlabsSimulationLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Npgsql\Npgsql.csproj">
+      <Project>{9d13b739-62b1-4190-b386-7a9547304eb3}</Project>
+      <Name>Npgsql</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
