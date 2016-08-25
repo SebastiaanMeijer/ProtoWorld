@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+* 
+* Visualizer for levels of details
+* Furkan Sonmez
+* 
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class Visualizer : MonoBehaviour {

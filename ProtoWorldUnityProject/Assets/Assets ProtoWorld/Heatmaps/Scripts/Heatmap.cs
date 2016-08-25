@@ -20,13 +20,16 @@ public class Heatmap : MonoBehaviour
 
     public int count = 5000;
 	public int counted = 0;
-	public float intensity = 0.1f;
-	public float radius = 0.1f;
+	public static float HMIntensity = 0.1f;
+	public static float HMRadius = 0.1f;
 	public float maxRadius = 20f;
 	public float refreshTime = 2f;
 	public int minCameraHeight = 100;
+	public float heightHM;
 
-	public bool activeHeatMaps = true; 
+	public static bool activeHeatMaps = true; 
+	public static bool activatedHM = false;
+	public bool zoomedIn;
 
 	public IEnumerator refreshCoroutine;
 
@@ -35,18 +38,15 @@ public class Heatmap : MonoBehaviour
 		cameraObject = FindObjectOfType<CameraControl>();
 
 		positions = new Vector3[count];
-		//radiuses = new float[count];
-		// intensities= new float[count];
 		pedestrians = new Transform[count];
 		material.SetInt("_Points_Length", count);
 		for (int i = 0; i < count; i++)
 		{
 			positions [i] = new Vector3 (0, -1000, 0);
-			//positions[i] += new Vector3(Random.Range(-0.1f,+0.1f), Random.Range(-0.1f, +0.1f)) * Time.deltaTime ;
 			material.SetVector("_Points" + i.ToString(), positions[i]);
 
 			// Vector2 properties = new Vector2(radiuses[i], intensities[i]); // OLD
-			properties = new Vector2(radius, intensity); // NEW
+			properties = new Vector2(HMRadius, HMIntensity); // NEW
 			material.SetVector("_Properties" + i.ToString(), properties);
 		}
 
@@ -74,7 +74,7 @@ public class Heatmap : MonoBehaviour
 			counted = 0;
 		}
 
-		positions[counted] = new Vector3(posX, this.transform.position.y, posZ);
+		//positions[counted] = new Vector3(posX, this.transform.position.y, posZ);
 		//radiuses[counted] = radius;
 		//intensities[counted] = intensity;
 		pedestrians [counted] = AnObject;
@@ -83,7 +83,20 @@ public class Heatmap : MonoBehaviour
 
 	}
 
+	public static void changeParameterIntensityHM(float intensity){
+		//Debug.LogError (theChange);
+		//properties = new Vector2 (20, theChange/50);
+		Heatmap.HMIntensity = intensity/50;
+	}
+
+	public static void changeParameterRadiusHM(float radius){
+		//Debug.LogError (theChange);
+		//properties = new Vector2 (20, theChange/50);
+		Heatmap.HMRadius = radius/3;
+	}
+
 	/*
+	 * 
     void FixedUpdate()
     {
 		
@@ -105,27 +118,39 @@ public class Heatmap : MonoBehaviour
 
 	public void Update(){
 
-		if (Input.GetKeyUp (KeyCode.H) && activeHeatMaps == true) {
-			activeHeatMaps = false;
+		if (activatedHM == true) {
+			//activeHeatMaps = false;
+			if (activeHeatMaps == false) {
+				material.SetInt ("_Points_Length", count);
+				for (int i = 0; i < count; i++) {
+					positions [i] = new Vector3 (0, -1000, 0);
+					//positions[i] += new Vector3(Random.Range(-0.1f,+0.1f), Random.Range(-0.1f, +0.1f)) * Time.deltaTime ;
+					material.SetVector ("_Points" + i.ToString (), positions [i]);
 
-			material.SetInt ("_Points_Length", count);
-			for (int i = 0; i < count; i++) {
-				positions [i] = new Vector3 (0, -1000, 0);
-				//positions[i] += new Vector3(Random.Range(-0.1f,+0.1f), Random.Range(-0.1f, +0.1f)) * Time.deltaTime ;
-				material.SetVector ("_Points" + i.ToString (), positions [i]);
-
-				// Vector2 properties = new Vector2(radiuses[i], intensities[i]); // OLD
-				properties = new Vector2 (radius, intensity); // NEW
-				material.SetVector ("_Properties" + i.ToString (), properties);
+					// Vector2 properties = new Vector2(radiuses[i], intensities[i]); // OLD
+					properties = new Vector2 (HMRadius, HMIntensity); // NEW
+					material.SetVector ("_Properties" + i.ToString (), properties);
+				}
 			}
+			activatedHM = false;
+		} 
 
-
-		} else if (Input.GetKeyUp (KeyCode.H) && activeHeatMaps == false) {
-			activeHeatMaps = true;
+		if (Input.GetKeyUp (KeyCode.H)) {
+			activateDeactivateHM ();
 		}
 
 	}
 
+	public void activateDeactivateHM(){
+		activatedHM = true;
+		if (activeHeatMaps == true) {
+			activeHeatMaps = false;
+
+		} else if (activeHeatMaps == false) {
+			activeHeatMaps = true;
+		}
+
+	}
 
 
 	public IEnumerator heatmapRefresh(){
@@ -133,16 +158,21 @@ public class Heatmap : MonoBehaviour
 			yield return new WaitForSeconds (refreshTime);
 			//material.SetInt("_Points_Length", count);
 		if (activeHeatMaps) {
+			/*
 			properties.x = cameraObject.targetCameraPosition.y/10;
 			if (properties.x > maxRadius)
 				properties.x = maxRadius;
-			
-			transform.position = new Vector3(transform.position.x, properties.x, transform.position.z);
-			if (cameraObject.targetCameraPosition.y > minCameraHeight)
+			*/
+			properties.x = HMRadius;
+			properties.y = HMIntensity;
+				
+			transform.position = new Vector3(transform.position.x, heightHM, transform.position.z);
+			if (cameraObject.targetCameraPosition.y > minCameraHeight) {
+				zoomedIn = false;
 				for (int i = 0; i < counted; i++) {
-					positions [i] = new Vector3 (pedestrians [i].transform.position.x, this.transform.position.y*2 - 10, pedestrians [i].transform.position.z);
-					if(pedestrians[i].gameObject.activeSelf == false) 
-					positions [i] = new Vector3 (0, -1000, 0);
+					positions [i] = new Vector3 (pedestrians [i].transform.position.x, heightHM, pedestrians [i].transform.position.z);
+					if (pedestrians [i].gameObject.activeSelf == false)
+						positions [i] = new Vector3 (0, -1000, 0);
 					//positions[i] += new Vector3(Random.Range(-0.1f,+0.1f), Random.Range(-0.1f, +0.1f)) * Time.deltaTime ;
 					material.SetVector ("_Points" + i.ToString (), positions [i]);
 
@@ -150,16 +180,19 @@ public class Heatmap : MonoBehaviour
 					//Vector2 properties = new Vector2(radius, intensity); // NEW
 					material.SetVector ("_Properties" + i.ToString (), properties);
 				}
-			else {
+			}
+			else if(zoomedIn == false){
+				
 				for (int i = 0; i < count; i++) {
-					positions [i] = new Vector3 (0, this.transform.position.y, 0);
+					positions [i] = new Vector3 (0, -1000, 0);
 					//positions[i] += new Vector3(Random.Range(-0.1f,+0.1f), Random.Range(-0.1f, +0.1f)) * Time.deltaTime ;
 					material.SetVector ("_Points" + i.ToString (), positions [i]);
 
 					// Vector2 properties = new Vector2(radiuses[i], intensities[i]); // OLD
-					properties = new Vector2 (radius, intensity); // NEW
+					properties = new Vector2 (HMRadius, HMIntensity); // NEW
 					material.SetVector ("_Properties" + i.ToString (), properties);
 				}
+				zoomedIn = true;
 			}
 
 		}
