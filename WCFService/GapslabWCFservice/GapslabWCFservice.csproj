@@ -41,10 +41,10 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MongoDB.Bson">
-      <HintPath>D:\!!Necessary Software\MongoDB\CSharpDriver-1.9\MongoDB.Bson.dll</HintPath>
+      <HintPath>..\Libraries\MongoDB.Bson.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver">
-      <HintPath>D:\!!Necessary Software\MongoDB\CSharpDriver-1.9\MongoDB.Driver.dll</HintPath>
+      <HintPath>..\Libraries\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -52,22 +52,22 @@
     </Reference>
     <Reference Include="Npgsql, Version=2.1.1.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\Npgsql.dll</HintPath>
+      <HintPath>..\Npgsql\bin\Debug-net20\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Osm">
-      <HintPath>..\OsmParserTestApplication\bin\x86\Debug\OsmSharp.Osm.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Osm3.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Osm.Data.PostgreSQL">
-      <HintPath>..\OsmParserTestApplication\bin\x86\Debug\OsmSharp.Osm.Data.PostgreSQL.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Osm.Data.PostgreSQL.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Osm.Data.SQLServer">
-      <HintPath>..\OsmParserTestApplication\bin\x86\Debug\OsmSharp.Osm.Data.SQLServer.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Osm.Data.SQLServer.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Routing">
-      <HintPath>..\OsmParserTestApplication\bin\x86\Debug\OsmSharp.Routing.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Routing3.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Tools">
-      <HintPath>..\OsmParserTestApplication\bin\x86\Debug\OsmSharp.Tools.dll</HintPath>
+      <HintPath>..\Libraries\OsmSharp.Tools.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -87,7 +87,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Zlib.Portable">
-      <HintPath>..\OsmParserTestApplication\bin\x86\Debug\Zlib.Portable.dll</HintPath>
+      <HintPath>..\Libraries\Zlib.Portable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
