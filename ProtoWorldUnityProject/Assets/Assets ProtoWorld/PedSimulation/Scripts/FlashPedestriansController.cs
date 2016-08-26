@@ -124,7 +124,7 @@ public class FlashPedestriansController : TravelerController
 
 
 		//Deactivate render if zoomed out
-		if (Visualizer.microZoomStatus != true) {
+		if (Visualizer.microZoomStatus != true && heatMap != null) {
 			StartCoroutine (LateStart (0.5f));
 		}
 
