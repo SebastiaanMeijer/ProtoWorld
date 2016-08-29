@@ -525,7 +525,6 @@ D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\es\Npgsql
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\fi\Npgsql.resources.dll
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\ja\Npgsql.resources.dll
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Npgsql\bin\Debug-net20\zh-CN\Npgsql.resources.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.csprojResolveAssemblyReference.cache
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlNetworkStream.resources
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommand.resources
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Npgsql\obj\Debug-net20\Npgsql.NpgsqlCommandBuilder.resources
