@@ -1,6 +1,0 @@
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\bin\Debug\Trafiklab.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\bin\Debug\Trafiklab.pdb
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\bin\Debug\MongoDB.Bson.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\bin\Debug\MongoDB.Driver.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.pdb

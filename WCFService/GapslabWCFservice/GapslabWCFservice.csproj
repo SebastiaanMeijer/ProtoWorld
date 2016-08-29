@@ -50,11 +50,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\OSM 3D City Generator\ThirdPartyLibraries\JSON.NET\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Npgsql, Version=2.1.1.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\!!Necessary Software\Npgsql\Npgsql-2.1.1\Npgsql\bin\Debug-net20\Npgsql.dll</HintPath>
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OsmSharp.Osm, Version=3.1.4833.1811, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -93,8 +89,9 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Zlib.Portable">
-      <HintPath>..\OsmParserTestApplication\bin\x86\Debug\Zlib.Portable.dll</HintPath>
+    <Reference Include="Zlib.Portable, Version=1.9.1.9000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Zlib.Portable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +143,10 @@
     <ProjectReference Include="..\GaPSlabsSimulationLibrary\GaPSlabsSimulationLibrary.csproj">
       <Project>{2e5b4bc2-a7ac-4f58-8146-7aced2af1914}</Project>
       <Name>GaPSlabsSimulationLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Npgsql\Npgsql.csproj">
+      <Project>{9d13b739-62b1-4190-b386-7a9547304eb3}</Project>
+      <Name>Npgsql</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

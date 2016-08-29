@@ -1,7 +1,0 @@
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\AramOSMParser\bin\x86\Debug\AramOSMParser.XML
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\AramOSMParser\bin\x86\Debug\AramOSMParser.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\AramOSMParser\bin\x86\Debug\AramOSMParser.pdb
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\AramOSMParser\bin\x86\Debug\Npgsql.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\AramOSMParser\bin\x86\Debug\protobuf-net.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\AramOSMParser\obj\x86\Debug\AramOSMParser.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\AramOSMParser\obj\x86\Debug\AramOSMParser.pdb
