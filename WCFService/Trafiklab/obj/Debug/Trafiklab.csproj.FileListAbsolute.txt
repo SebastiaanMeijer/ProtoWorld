@@ -1,38 +1,6 @@
-C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\Trafiklab.dll
-C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\Trafiklab.pdb
-C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Trafiklab\obj\Debug\Trafiklab.dll
-C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Trafiklab\obj\Debug\Trafiklab.pdb
-C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\MongoDB.Bson.dll
-C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\MongoDB.Driver.dll
-C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\MongoDB.Bson.pdb
-C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\MongoDB.Bson.xml
-C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\MongoDB.Driver.pdb
-C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\MongoDB.Driver.xml
-E:\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\Trafiklab.dll
-E:\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\Trafiklab.pdb
-E:\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\MongoDB.Bson.pdb
-E:\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\MongoDB.Bson.xml
-E:\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\MongoDB.Driver.pdb
-E:\GaPSLabs\AramOSMParser\Trafiklab\bin\Debug\MongoDB.Driver.xml
-E:\GaPSLabs\AramOSMParser\Trafiklab\obj\Debug\Trafiklab.csprojResolveAssemblyReference.cache
-E:\GaPSLabs\AramOSMParser\Trafiklab\obj\Debug\Trafiklab.dll
-E:\GaPSLabs\AramOSMParser\Trafiklab\obj\Debug\Trafiklab.pdb
-G:\Data miguelrc\Documents\GitHub\WCF\Trafiklab\bin\Debug\Trafiklab.dll
-G:\Data miguelrc\Documents\GitHub\WCF\Trafiklab\bin\Debug\Trafiklab.pdb
-G:\Data miguelrc\Documents\GitHub\WCF\Trafiklab\obj\Debug\Trafiklab.csprojResolveAssemblyReference.cache
-G:\Data miguelrc\Documents\GitHub\WCF\Trafiklab\obj\Debug\Trafiklab.dll
-G:\Data miguelrc\Documents\GitHub\WCF\Trafiklab\obj\Debug\Trafiklab.pdb
-C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Trafiklab\bin\Debug\Trafiklab.dll
-C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Trafiklab\bin\Debug\Trafiklab.pdb
-C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.csprojResolveAssemblyReference.cache
-C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.dll
-C:\Users\protoworld\Desktop\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.pdb
-G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Trafiklab\bin\Debug\Trafiklab.dll
-G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Trafiklab\bin\Debug\Trafiklab.pdb
-G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.csprojResolveAssemblyReference.cache
-G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.dll
-G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.pdb
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\bin\Debug\Trafiklab.dll
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\bin\Debug\Trafiklab.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\bin\Debug\MongoDB.Bson.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\bin\Debug\MongoDB.Driver.dll
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.dll
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.pdb
