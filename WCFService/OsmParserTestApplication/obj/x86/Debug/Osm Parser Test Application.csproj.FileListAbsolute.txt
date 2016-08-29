@@ -1,0 +1,155 @@
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\mapKTH.osm
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe.config
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\GaPSlabsVisualizers.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\MongoDB.Bson.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\MongoDB.Driver.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Npgsql.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Trafiklab.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\GapslabWCFservice.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Mono.Security.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.xml
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\GaPSlabsVisualizers.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Trafiklab.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Npgsql.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Npgsql.xml
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\MongoDB.Bson.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\MongoDB.Bson.xml
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\MongoDB.Driver.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\MongoDB.Driver.xml
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\GapslabWCFservice.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\de\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\es\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\fi\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\fr\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\ja\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\zh-CN\Npgsql.resources.dll
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\obj\x86\Debug\Osm Parser Test Application.csprojResolveAssemblyReference.cache
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.exe
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.pdb
+C:\Users\admgaming\Documents\Visual Studio 2012\Projects\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\GapslabWCFservice.xml
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\mapKTH.osm
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe.config
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.pdb
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.dll
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.dll
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Npgsql.dll
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Trafiklab.dll
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Mono.Security.dll
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.pdb
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.xml
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.pdb
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Trafiklab.pdb
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Npgsql.pdb
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\Npgsql.xml
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\de\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\es\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\fi\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\fr\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\ja\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\bin\x86\Debug\zh-CN\Npgsql.resources.dll
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\obj\x86\Debug\Osm Parser Test Application.csprojResolveAssemblyReference.cache
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.exe
+E:\GaPSLabs\AramOSMParser\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\mapKTH.osm
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe.config
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.dll
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.dll
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\Npgsql.dll
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\Trafiklab.dll
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\Mono.Security.dll
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.xml
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\Trafiklab.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\Npgsql.pdb
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\Npgsql.xml
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\de\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\es\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\fi\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\fr\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\ja\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\bin\x86\Debug\zh-CN\Npgsql.resources.dll
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\obj\x86\Debug\Osm Parser Test Application.csprojResolveAssemblyReference.cache
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.exe
+G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\mapKTH.osm
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe.config
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Npgsql.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Trafiklab.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Mono.Security.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.xml
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Trafiklab.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Npgsql.pdb
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Npgsql.xml
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\de\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\es\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\fi\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\fr\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\ja\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\zh-CN\Npgsql.resources.dll
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\Osm Parser Test Application.csprojResolveAssemblyReference.cache
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.exe
+C:\Users\protoworld\Desktop\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\mapKTH.osm
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe.config
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Npgsql.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Trafiklab.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Mono.Security.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Trafiklab.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Npgsql.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\de\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\es\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\fi\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\fr\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\ja\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\zh-CN\Npgsql.resources.dll
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\Osm Parser Test Application.csprojResolveAssemblyReference.cache
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.exe
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.pdb
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.xml
+G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Npgsql.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\mapKTH.osm
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe.config
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\MongoDB.Bson.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\MongoDB.Driver.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Npgsql.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmSharp.Osm.Data.PostgreSQL.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmSharp.Osm.Data.SQLServer.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmSharp.Osm.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmSharp.Routing.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmSharp.Tools.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\protobuf-net.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Trafiklab.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Zlib.Portable.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Trafiklab.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\Osm Parser Test Application.csprojResolveAssemblyReference.cache
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.exe
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.pdb
