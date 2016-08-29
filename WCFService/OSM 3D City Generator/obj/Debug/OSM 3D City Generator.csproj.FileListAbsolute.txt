@@ -103,19 +103,9 @@ D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\PolygonCuttingEar.dll
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\Poly2Tri.dll
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\protobuf-net.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\Mono.Security.dll
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\AramOSMParser.pdb
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\AramOSMParser.xml
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\GaPSLabsGeometry.pdb
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\Npgsql.pdb
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\Npgsql.xml
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\Newtonsoft.Json.xml
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\de\Npgsql.resources.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\es\Npgsql.resources.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\fi\Npgsql.resources.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\fr\Npgsql.resources.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\ja\Npgsql.resources.dll
-D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\bin\Debug\zh-CN\Npgsql.resources.dll
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\obj\Debug\OSM 3D City Generator.csprojResolveAssemblyReference.cache
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\obj\Debug\OSM 3D City Generator.exe
 D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM 3D City Generator\obj\Debug\OSM 3D City Generator.pdb
