@@ -1,5 +1,0 @@
-E:\GaPSLabs\AramOSMParser\GaPSlabsSimulationLibrary\bin\Release\GaPSlabsSimulationLibrary.dll
-E:\GaPSLabs\AramOSMParser\GaPSlabsSimulationLibrary\bin\Release\GaPSlabsSimulationLibrary.pdb
-E:\GaPSLabs\AramOSMParser\GaPSlabsSimulationLibrary\obj\Release\GaPSlabsSimulationLibrary.csprojResolveAssemblyReference.cache
-E:\GaPSLabs\AramOSMParser\GaPSlabsSimulationLibrary\obj\Release\GaPSlabsSimulationLibrary.dll
-E:\GaPSLabs\AramOSMParser\GaPSlabsSimulationLibrary\obj\Release\GaPSlabsSimulationLibrary.pdb
