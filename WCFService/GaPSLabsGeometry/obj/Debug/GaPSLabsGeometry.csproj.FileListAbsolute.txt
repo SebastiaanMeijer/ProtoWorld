@@ -120,3 +120,27 @@ G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debu
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\GaPSLabsGeometry\obj\Debug\GaPSLabsGeometry.csprojResolveAssemblyReference.cache
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\GaPSLabsGeometry\obj\Debug\GaPSLabsGeometry.dll
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\GaPSLabsGeometry\obj\Debug\GaPSLabsGeometry.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\GaPSLabsGeometry.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\GaPSLabsGeometry.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\AramOSMParser.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\GeometryUtility.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\Newtonsoft.Json.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\Npgsql.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\Poly2Tri.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\PolygonCuttingEar.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\protobuf-net.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\Mono.Security.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\AramOSMParser.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\AramOSMParser.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\Npgsql.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\Npgsql.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\Newtonsoft.Json.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\de\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\es\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\fi\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\fr\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\ja\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\bin\Debug\zh-CN\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\obj\Debug\GaPSLabsGeometry.csprojResolveAssemblyReference.cache
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\obj\Debug\GaPSLabsGeometry.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSLabsGeometry\obj\Debug\GaPSLabsGeometry.pdb
