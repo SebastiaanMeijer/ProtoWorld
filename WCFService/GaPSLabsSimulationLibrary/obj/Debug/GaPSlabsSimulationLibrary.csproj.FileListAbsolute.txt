@@ -27,3 +27,7 @@ G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\GaPSlabsSimulationLibrary
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\GaPSlabsSimulationLibrary\obj\Debug\GaPSlabsSimulationLibrary.csprojResolveAssemblyReference.cache
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\GaPSlabsSimulationLibrary\obj\Debug\GaPSlabsSimulationLibrary.dll
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\GaPSlabsSimulationLibrary\obj\Debug\GaPSlabsSimulationLibrary.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSlabsSimulationLibrary\bin\Debug\GaPSlabsSimulationLibrary.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSlabsSimulationLibrary\bin\Debug\GaPSlabsSimulationLibrary.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSlabsSimulationLibrary\obj\Debug\GaPSlabsSimulationLibrary.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\GaPSlabsSimulationLibrary\obj\Debug\GaPSlabsSimulationLibrary.pdb

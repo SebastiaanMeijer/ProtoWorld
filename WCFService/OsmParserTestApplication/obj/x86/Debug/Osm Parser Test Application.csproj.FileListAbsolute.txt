@@ -129,3 +129,27 @@ G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.pdb
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.xml
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Npgsql.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\mapKTH.osm
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe.config
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.exe
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\OsmParserTestApplication.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Npgsql.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Trafiklab.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Mono.Security.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\AramOSMParser.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\GaPSlabsSimulationLibrary.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Trafiklab.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Npgsql.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\Npgsql.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\de\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\es\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\fi\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\fr\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\ja\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\bin\x86\Debug\zh-CN\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\Osm Parser Test Application.csprojResolveAssemblyReference.cache
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.exe
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OsmParserTestApplication\obj\x86\Debug\OsmParserTestApplication.pdb

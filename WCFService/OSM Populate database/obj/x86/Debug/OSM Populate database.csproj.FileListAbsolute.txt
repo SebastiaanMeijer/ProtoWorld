@@ -117,3 +117,15 @@ G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OSM Populate database\obj
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OSM Populate database\obj\x86\Debug\OSM Populate database.exe
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OSM Populate database\obj\x86\Debug\OSM Populate database.pdb
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\OSM Populate database\bin\x86\Debug\AramOSMParser.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\bin\x86\Debug\mapKTH.osm
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\bin\x86\Debug\OSM Populate database.exe.config
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\bin\x86\Debug\OSM Populate database.exe
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\bin\x86\Debug\OSM Populate database.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\bin\x86\Debug\AramOSMParser.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\bin\x86\Debug\GaPSlabsSimulationLibrary.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\bin\x86\Debug\AramOSMParser.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\bin\x86\Debug\AramOSMParser.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\bin\x86\Debug\GaPSlabsSimulationLibrary.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\obj\x86\Debug\OSM Populate database.csprojResolveAssemblyReference.cache
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\obj\x86\Debug\OSM Populate database.exe
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\OSM Populate database\obj\x86\Debug\OSM Populate database.pdb

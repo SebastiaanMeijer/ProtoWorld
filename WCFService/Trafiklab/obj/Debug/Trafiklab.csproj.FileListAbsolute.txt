@@ -32,3 +32,7 @@ G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Trafiklab\bin\Debug\Trafi
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.csprojResolveAssemblyReference.cache
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.dll
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\bin\Debug\Trafiklab.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\bin\Debug\Trafiklab.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Trafiklab\obj\Debug\Trafiklab.pdb

@@ -25,3 +25,7 @@ G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\SUMO Packet Listener TEST
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\SUMO Packet Listener TEST\obj\Debug\SUMO Packet Listener TEST.csprojResolveAssemblyReference.cache
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\SUMO Packet Listener TEST\obj\Debug\SUMO Packet Listener TEST.exe
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\SUMO Packet Listener TEST\obj\Debug\SUMO Packet Listener TEST.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\SUMO Packet Listener TEST\bin\Debug\SUMO Packet Listener TEST.exe
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\SUMO Packet Listener TEST\bin\Debug\SUMO Packet Listener TEST.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\SUMO Packet Listener TEST\obj\Debug\SUMO Packet Listener TEST.exe
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\SUMO Packet Listener TEST\obj\Debug\SUMO Packet Listener TEST.pdb

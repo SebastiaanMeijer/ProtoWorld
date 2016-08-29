@@ -126,3 +126,25 @@ G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Networ
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.pdb
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.xml
 G:\Data miguelrc\Documents\Unity\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Npgsql.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\PostprocessingForWay_Ext.sql
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\PreprocessingForWay_Ext.sql
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe.config
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.exe
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Openstreetmap Road Network Generator.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Npgsql.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Zlib.Portable.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Mono.Security.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\AramOSMParser.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Npgsql.pdb
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\Npgsql.xml
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\de\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\es\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\fi\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\fr\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\ja\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\bin\Debug\zh-CN\Npgsql.resources.dll
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.csprojResolveAssemblyReference.cache
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.exe
+D:\Local\Nathan\Projecten\ProtoWorld\WCFService\Openstreetmap Road Network Generator\obj\Debug\Openstreetmap Road Network Generator.pdb
