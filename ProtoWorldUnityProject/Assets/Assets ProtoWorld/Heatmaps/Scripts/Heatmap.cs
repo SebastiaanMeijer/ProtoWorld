@@ -33,10 +33,26 @@ public class Heatmap : MonoBehaviour
 
 	public IEnumerator refreshCoroutine;
 
+
+	/// <summary>
+	/// Awake method.
+	/// </summary>
 	void Awake()
 	{
 		cameraObject = FindObjectOfType<CameraControl>();
 
+
+
+
+	}
+
+
+	/// <summary>
+	/// Start method.
+	/// </summary>
+    void Start ()
+    {
+       
 		positions = new Vector3[count];
 		pedestrians = new Transform[count];
 		material.SetInt("_Points_Length", count);
@@ -44,29 +60,16 @@ public class Heatmap : MonoBehaviour
 		{
 			positions [i] = new Vector3 (0, -1000, 0);
 			material.SetVector("_Points" + i.ToString(), positions[i]);
-
-			// Vector2 properties = new Vector2(radiuses[i], intensities[i]); // OLD
 			properties = new Vector2(HMRadius, HMIntensity); // NEW
 			material.SetVector("_Properties" + i.ToString(), properties);
 		}
-
-
-	}
-
-    void Start ()
-    {
-       
-
-        //for (int i = 0; i < positions.Length; i++)
-        //{
-        //    positions[i] = new Vector2(Random.Range(-0.4f, +0.4f), Random.Range(-0.4f, +0.4f));
-        //    radiuses[i] = Random.Range(0f, 0.25f);
-       //     intensities[i] = Random.Range(-0.25f, 1f);
-        //}
 		refreshCoroutine = heatmapRefresh ();
 		StartCoroutine(refreshCoroutine);
     }
 
+	/// <summary>
+	/// Put the following information about the pedestrian into the array of the heatmap method
+	/// </summary>
 	public void putInArray(float posX, float posY, float posZ, Transform AnObject)
 	{
 
@@ -74,61 +77,39 @@ public class Heatmap : MonoBehaviour
 			counted = 0;
 		}
 
-		//positions[counted] = new Vector3(posX, this.transform.position.y, posZ);
-		//radiuses[counted] = radius;
-		//intensities[counted] = intensity;
 		pedestrians [counted] = AnObject;
 
 		counted = counted + 1;
 
 	}
 
+
+	/// <summary>
+	/// Change intensity when slider is moved
+	/// </summary>
 	public static void changeParameterIntensityHM(float intensity){
-		//Debug.LogError (theChange);
-		//properties = new Vector2 (20, theChange/50);
 		Heatmap.HMIntensity = intensity/50;
 	}
 
+	/// <summary>
+	/// Change radius when slider is moved
+	/// </summary>
 	public static void changeParameterRadiusHM(float radius){
-		//Debug.LogError (theChange);
-		//properties = new Vector2 (20, theChange/50);
 		Heatmap.HMRadius = radius/3;
 	}
-
-	/*
-	 * 
-    void FixedUpdate()
-    {
 		
-        material.SetInt("_Points_Length", positions.Length);
-        for (int i = 0; i < counted; i++)
-        {
-			positions [i] = new Vector3 (pedestrians [i].transform.position.x, this.transform.position.y, pedestrians [i].transform.position.z);
-
-            //positions[i] += new Vector3(Random.Range(-0.1f,+0.1f), Random.Range(-0.1f, +0.1f)) * Time.deltaTime ;
-            material.SetVector("_Points" + i.ToString(), positions[i]);
-
-           // Vector2 properties = new Vector2(radiuses[i], intensities[i]); // OLD
-			Vector2 properties = new Vector2(radius, intensity); // NEW
-            material.SetVector("_Properties" + i.ToString(), properties);
-        }
-        
-    }
-	*/
-
+	/// <summary>
+	/// Update method.
+	/// </summary>
 	public void Update(){
 
 		if (activatedHM == true) {
-			//activeHeatMaps = false;
 			if (activeHeatMaps == false) {
 				material.SetInt ("_Points_Length", count);
 				for (int i = 0; i < count; i++) {
 					positions [i] = new Vector3 (0, -1000, 0);
-					//positions[i] += new Vector3(Random.Range(-0.1f,+0.1f), Random.Range(-0.1f, +0.1f)) * Time.deltaTime ;
 					material.SetVector ("_Points" + i.ToString (), positions [i]);
-
-					// Vector2 properties = new Vector2(radiuses[i], intensities[i]); // OLD
-					properties = new Vector2 (HMRadius, HMIntensity); // NEW
+					properties = new Vector2 (HMRadius, HMIntensity);
 					material.SetVector ("_Properties" + i.ToString (), properties);
 				}
 			}
@@ -141,6 +122,10 @@ public class Heatmap : MonoBehaviour
 
 	}
 
+
+	/// <summary>
+	/// Activate or deactivate the heatmap when button is pressed
+	/// </summary>
 	public void activateDeactivateHM(){
 		activatedHM = true;
 		if (activeHeatMaps == true) {
@@ -152,17 +137,13 @@ public class Heatmap : MonoBehaviour
 
 	}
 
-
+	/// <summary>
+	/// Refresh the heatmap every refreshTime seconds
+	/// </summary>
 	public IEnumerator heatmapRefresh(){
 		
 			yield return new WaitForSeconds (refreshTime);
-			//material.SetInt("_Points_Length", count);
 		if (activeHeatMaps) {
-			/*
-			properties.x = cameraObject.targetCameraPosition.y/10;
-			if (properties.x > maxRadius)
-				properties.x = maxRadius;
-			*/
 			properties.x = HMRadius;
 			properties.y = HMIntensity;
 				
@@ -173,23 +154,15 @@ public class Heatmap : MonoBehaviour
 					positions [i] = new Vector3 (pedestrians [i].transform.position.x, heightHM, pedestrians [i].transform.position.z);
 					if (pedestrians [i].gameObject.activeSelf == false)
 						positions [i] = new Vector3 (0, -1000, 0);
-					//positions[i] += new Vector3(Random.Range(-0.1f,+0.1f), Random.Range(-0.1f, +0.1f)) * Time.deltaTime ;
 					material.SetVector ("_Points" + i.ToString (), positions [i]);
-
-					// Vector2 properties = new Vector2(radiuses[i], intensities[i]); // OLD
-					//Vector2 properties = new Vector2(radius, intensity); // NEW
 					material.SetVector ("_Properties" + i.ToString (), properties);
 				}
 			}
 			else if(zoomedIn == false){
-				
 				for (int i = 0; i < count; i++) {
 					positions [i] = new Vector3 (0, -1000, 0);
-					//positions[i] += new Vector3(Random.Range(-0.1f,+0.1f), Random.Range(-0.1f, +0.1f)) * Time.deltaTime ;
 					material.SetVector ("_Points" + i.ToString (), positions [i]);
-
-					// Vector2 properties = new Vector2(radiuses[i], intensities[i]); // OLD
-					properties = new Vector2 (HMRadius, HMIntensity); // NEW
+					properties = new Vector2 (HMRadius, HMIntensity);
 					material.SetVector ("_Properties" + i.ToString (), properties);
 				}
 				zoomedIn = true;
@@ -198,6 +171,18 @@ public class Heatmap : MonoBehaviour
 		}
 			StartCoroutine(heatmapRefresh());
 
+	}
+
+	/// <summary>
+	/// Reset the heatmap after the game ends
+	/// </summary>
+	public void OnDestroy(){
+		for (int i = 0; i < count; i++) {
+			positions [i] = new Vector3 (0, -1000, 0);
+			material.SetVector ("_Points" + i.ToString (), positions [i]);
+			properties = new Vector2 (HMRadius, HMIntensity);
+			material.SetVector ("_Properties" + i.ToString (), properties);
+		}
 	}
     
 }
