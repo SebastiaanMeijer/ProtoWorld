@@ -9,6 +9,9 @@ sysinfo.txt
 *.stackdump
 
 *.csv
+
+ProjectSettings/
+
  
 # =============== #
 # ProtoWorld related #
