@@ -1,6 +1,14 @@
-﻿// Made by Alan Zucconi
-// www.alanzucconi.com
-// Modified by Furkan Sonmez
+﻿// Heatmap by Alan Zucconi www.alanzucconi.com
+// Furkan Sonmez
+
+/*
+* 
+* Heatmap
+* FlashPedestriansController.cs
+* Miguel Ramos Carretero
+* Johnson Ho
+* 
+*/
 
 using UnityEngine;
 using System.Collections;
