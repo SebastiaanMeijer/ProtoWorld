@@ -32,22 +32,31 @@
   <ItemGroup>
     <Reference Include="GeometryUtility, Version=1.0.4849.17403, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>ThirdPartyLibraries\GeometryUtility.dll</HintPath>
+      <HintPath>lib\GeometryUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="INI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\INI.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>ThirdPartyLibraries\JSON.NET\Newtonsoft.Json.dll</HintPath>
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=2.1.1.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="Poly2Tri, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>ThirdPartyLibraries\Poly2Tri.dll</HintPath>
+      <HintPath>lib\Poly2Tri.dll</HintPath>
     </Reference>
     <Reference Include="PolygonCuttingEar, Version=1.0.4876.17827, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>ThirdPartyLibraries\PolygonCuttingEar.dll</HintPath>
+      <HintPath>lib\PolygonCuttingEar.dll</HintPath>
     </Reference>
-    <Reference Include="protobuf-net">
-      <HintPath>I:\!!Necessary Software\Protobuf-net\protobuf-net r668\Full\net30\protobuf-net.dll</HintPath>
+    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -88,10 +97,6 @@
     <ProjectReference Include="..\AramOSMParser\AramOSMParser.csproj">
       <Project>{a6b1ccfe-2094-4b1e-80ff-f1a6e3613bc0}</Project>
       <Name>AramOSMParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Npgsql\Npgsql.csproj">
-      <Project>{9d13b739-62b1-4190-b386-7a9547304eb3}</Project>
-      <Name>Npgsql</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

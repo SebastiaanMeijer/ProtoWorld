@@ -1,2 +1,0 @@
-G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\obj\Debug\Osm Parser Test Application.csprojResolveAssemblyReference.cache
-G:\Data miguelrc\Documents\GitHub\WCF\OsmParserTestApplication\obj\Debug\OsmParserTestApplication.exe
