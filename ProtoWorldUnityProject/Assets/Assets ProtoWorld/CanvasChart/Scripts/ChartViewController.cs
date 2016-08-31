@@ -72,6 +72,7 @@ public class ChartViewController : MonoBehaviour
             case UIChartTypes.Pie:
                 break;
             case UIChartTypes.StackedArea:
+                DrawStackedLineChart();
                 break;
             case UIChartTypes.Line:
                 DrawLineChart();
@@ -186,6 +187,36 @@ public class ChartViewController : MonoBehaviour
 
             renderer.Clear();
             renderer.SetMaterial(controller.materials[idx], null); 
+            renderer.SetMesh(lineMesh);
+        }
+    }
+
+    private void DrawStackedLineChart()
+    {
+        Vector3[] baselines = new Vector3[0];
+        for (int idx = 0; idx < controller.SeriesCount; idx++)
+        {
+            List<TimedData> dataCollection = controller.DataContainer.GetTimedDataCollection(idx);
+
+            Vector3[] lines = ChartUtils.CreateLinesFromData(dataCollection, chartHolder, controller.GetMinMaxOfAll());
+            if (baselines.Length == 0)
+            {
+                baselines = lines;
+            }
+            else
+            {
+                for (int i = 0; i < baselines.Length; i++)
+                    baselines[i] += new Vector3(0,lines[i].y,0);
+                lines = baselines;
+            }
+            Mesh lineMesh = ChartUtils.GenerateLineMesh(lines, 1.5f);
+
+            string name = ChartUtils.NameGenerator(chartChildString, idx);
+            GameObject obj = chartHolder.Find(name).gameObject;
+            CanvasRenderer renderer = obj.GetComponent<CanvasRenderer>();
+
+            renderer.Clear();
+            renderer.SetMaterial(controller.materials[idx], null);
             renderer.SetMesh(lineMesh);
         }
     }
