@@ -33,13 +33,16 @@ public class KPIFeederEditor : Editor
     SerializedProperty m_Property;
 
     void OnEnable()
-    {
-        m_Feeder = target as KPIFeeder;
-        m_Feeder.gameObjects = new List<GameObject>();
-        m_Feeder.kpiStrings = new List<string>();
-        m_Feeder.kpiNames = new List<string>();
-        m_Feeder.kpiColors = new List<Color>();
+    {	
+		m_Feeder = target as KPIFeeder;
 
+		//Only initialize the list when not loaded, else all chosen kpi's are being deleted on save/load/start
+		if (m_Feeder.gameObjects == null) {
+			m_Feeder.gameObjects = new List<GameObject>();
+			m_Feeder.kpiStrings = new List<string>();
+			m_Feeder.kpiNames = new List<string>();
+			m_Feeder.kpiColors = new List<Color>();
+		}   
     }
 
     public override void OnInspectorGUI()
@@ -119,7 +122,8 @@ public class KPIFeederEditor : Editor
                                     if (propType.Equals(SerializedPropertyType.Integer) || propType.Equals(SerializedPropertyType.Float))
                                     {
                                         foundProp = true;
-                                        var str = path + ":" + props.name + "." + go.GetHashCode();
+										//Hashcode is different when loading/saves scenes, so chosen KPI's are added to the options while already being active
+										var str = path + ":" + props.name;// + "." + go.GetHashCode();
                                         if (!m_Feeder.kpiStrings.Contains(str))
                                         {
                                             GUI.color = Color.cyan;

@@ -57,7 +57,7 @@ public class KPIFeeder : MonoBehaviour
     /// </summary>
     /// <param name="kpiString"></param>
     /// <returns></returns>
-    string[] SplitKPIString(string kpiString)
+    public string[] SplitKPIString(string kpiString)
     {
         var split1 = kpiString.Split(' ');
         var objName = split1[0];
@@ -66,7 +66,7 @@ public class KPIFeeder : MonoBehaviour
         scriptName = scriptName.Substring(1, scriptName.Length - 2);
         var split3 = split2[1].Split('.');
         var propName = split3[0];
-        var hashCode = split3[1];
+		var hashCode = "0";//split3[1];
 
         return new string[] { objName, scriptName, propName, hashCode };
     }
@@ -137,10 +137,10 @@ public class KPIFeeder : MonoBehaviour
         }
         foreach (var str in kpiCleanse)
         {
-            RemoveKPI(str);
+            //RemoveKPI(str);
         }
     }
-
+		
     public ChartController GetChartController()
     {
         controller = GetComponent<ChartController>();
