@@ -12,7 +12,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
+/*
  * 
  * KPI MODULE
  * Johnson Ho
@@ -33,16 +33,14 @@ public class KPIFeederEditor : Editor
     SerializedProperty m_Property;
 
     void OnEnable()
-    {	
-		m_Feeder = target as KPIFeeder;
+    {
+        m_Feeder = target as KPIFeeder;
 
-		//Only initialize the list when not loaded, else all chosen kpi's are being deleted on save/load/start
-		if (m_Feeder.gameObjects == null) {
-			m_Feeder.gameObjects = new List<GameObject>();
-			m_Feeder.kpiStrings = new List<string>();
-			m_Feeder.kpiNames = new List<string>();
-			m_Feeder.kpiColors = new List<Color>();
-		}   
+        //Only initialize the list when not loaded, else all chosen kpi's are being deleted on save/load/start
+        if (m_Feeder.gameObjects == null) m_Feeder.gameObjects = new List<GameObject>();
+        if (m_Feeder.kpiStrings == null) m_Feeder.kpiStrings = new List<string>();
+        if (m_Feeder.kpiNames == null) m_Feeder.kpiNames = new List<string>();
+        if (m_Feeder.kpiColors == null) m_Feeder.kpiColors = new List<Color>();
     }
 
     public override void OnInspectorGUI()
@@ -119,11 +117,12 @@ public class KPIFeederEditor : Editor
                                 var propType = props.propertyType;
                                 if (!propType.Equals(SerializedPropertyType.ObjectReference))
                                 {
-                                    if (propType.Equals(SerializedPropertyType.Integer) || propType.Equals(SerializedPropertyType.Float))
+                                    if (propType.Equals(SerializedPropertyType.Integer) ||
+                                        propType.Equals(SerializedPropertyType.Float))
                                     {
                                         foundProp = true;
-										//Hashcode is different when loading/saves scenes, so chosen KPI's are added to the options while already being active
-										var str = path + ":" + props.name;// + "." + go.GetHashCode();
+                                        //Hashcode is different when loading/saves scenes, so chosen KPI's are added to the options while already being active
+                                        var str = path + ":" + props.name; // + "." + go.GetHashCode();
                                         if (!m_Feeder.kpiStrings.Contains(str))
                                         {
                                             GUI.color = Color.cyan;
@@ -142,7 +141,6 @@ public class KPIFeederEditor : Editor
                             }
                             props.Reset();
                         }
-
                     }
                 }
             }
@@ -157,8 +155,5 @@ public class KPIFeederEditor : Editor
             // Apply the property, handle undo
             m_Object.ApplyModifiedProperties();
         }
-
-
-
     }
 }

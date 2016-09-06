@@ -12,7 +12,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
+/*
  * 
  * KPI MODULE
  * Johnson Ho
@@ -46,6 +46,11 @@ public class ChartController : MonoBehaviour
     public int chartId;
 
     /// <summary>
+    /// The name, appears in the toolbar.
+    /// </summary>
+    public string name;
+
+    /// <summary>
     /// Whether this is a streaming chart or a static chart. 
     /// </summary>
     public bool streaming = false;
@@ -71,8 +76,7 @@ public class ChartController : MonoBehaviour
     /// In streaming chart:
     /// How many data points to be visualized.
     /// </summary>
-    [Range(2, 1000)]
-    public int numberOfSamples = 100;
+    [Range(2, 1000)] public int numberOfSamples = 100;
 
     /// <summary>
     /// How the Y-values are formated.
@@ -105,7 +109,7 @@ public class ChartController : MonoBehaviour
     /// <summary>
     /// Colors for the different series.
     /// </summary>
-    public Color32[] seriesColors = new Color32[] { Color.blue, Color.green, Color.red, Color.magenta, Color.black };
+    public Color32[] seriesColors = new Color32[] {Color.blue, Color.green, Color.red, Color.magenta, Color.black};
 
     /// <summary>
     /// Names for the different series.
@@ -116,14 +120,12 @@ public class ChartController : MonoBehaviour
     /// Used by this and the axisController to set the colors of the series
     /// and the background of the legends.
     /// </summary>
-    [HideInInspector]
-    public Material[] materials = new Material[5];
+    [HideInInspector] public Material[] materials = new Material[5];
 
     /// <summary>
     /// Used by the valueIndicator. 
     /// </summary>
-    [HideInInspector]
-    public float[] values;
+    [HideInInspector] public float[] values;
 
     /// <summary>
     /// Every series has its own update timer.
@@ -133,8 +135,7 @@ public class ChartController : MonoBehaviour
     /// <summary>
     /// Used by the valueIndicator.
     /// </summary>
-    [HideInInspector]
-    public float valueTime;
+    [HideInInspector] public float valueTime;
 
     /// <summary>
     /// An indicator that shows when a logged event occured in relation to the time-data series.
@@ -168,18 +169,27 @@ public class ChartController : MonoBehaviour
     /// Whether we should generate random data for testing.
     /// </summary>
     public bool testing = false;
+
     /// <summary>
     /// Number of series used in testing.
     /// </summary>
     public int numberOfSeries = 0;
+
     /// <summary>
     /// Upper bound of the random value.
     /// </summary>
     public float randomSeedUpper = 20;
+
     /// <summary>
     /// Lower bound of the random value.
     /// </summary>
     public float randomSeedLower = -20;
+
+
+    /// <summary>
+    /// Minimize button
+    /// </summary>
+    public GameObject contentPanel;
 
     void Awake()
     {
@@ -200,7 +210,6 @@ public class ChartController : MonoBehaviour
 
         eventIndicatorView = GetComponentInChildren<EventIndicatorController>();
         valueIndicatorView = GetComponentInChildren<ValueIndicatorController>();
-
     }
 
     /// <summary>
@@ -469,7 +478,6 @@ public class ChartController : MonoBehaviour
     /// </summary>
     void UpdateTimeInEventIndicator()
     {
-
         eventIndicatorView.SetMinTime(DataContainer.GetFirstDataTime(0));
         eventIndicatorView.SetMaxTime(DataContainer.GetLastDataTime(0));
     }
@@ -508,7 +516,7 @@ public class ChartController : MonoBehaviour
             if (dataCollection.Count < 1)
                 continue;
 
-            int idx = Mathf.RoundToInt((dataCollection.Count - 1) * relativePosition);
+            int idx = Mathf.RoundToInt((dataCollection.Count - 1)*relativePosition);
 
             //Debug.Log("i: " + i + " count: " + dataCollection.Count);
             //Debug.Log("rel: " + relativePosition + " idx: " + idx);
@@ -533,7 +541,7 @@ public class ChartController : MonoBehaviour
         for (int i = 0; i < SeriesCount; i++)
         {
             var dataCollection = DataContainer.GetTimedDataCollection(i);
-            int idx = Mathf.RoundToInt((dataCollection.Count - 1) * relativePosition);
+            int idx = Mathf.RoundToInt((dataCollection.Count - 1)*relativePosition);
             //Debug.Log("list count: " + list.Count + " idx: " + idx);
             values[i] = dataCollection[idx].GetData();
             valueTime = dataCollection[idx].time;
@@ -619,4 +627,21 @@ public class ChartController : MonoBehaviour
         return DataContainer.GetTotalMinTime();
     }
 
+    public void ToggleVisibility()
+    {
+        contentPanel.SetActive(!contentPanel.activeSelf);
+
+        //Clear the CanvasRenderer, else the axis/lines remain visible.
+        Transform content = this.transform.Find("Content");
+        Transform chartView = content.Find("ChartView");
+        Transform chartHolder = chartView.transform.Find("ChartHolder");
+
+        CanvasRenderer[] renderers = chartHolder.gameObject.GetComponentsInChildren<CanvasRenderer>();
+        foreach (CanvasRenderer canvasRenderer in renderers)
+            canvasRenderer.Clear();
+        
+        Transform axisHolder = chartView.transform.Find("AxisHolder");
+        CanvasRenderer renderer = axisHolder.gameObject.GetComponent<CanvasRenderer>();
+        renderer.Clear();
+    }
 }
