@@ -36,7 +36,7 @@ public class FlashPedestriansInformer : MonoBehaviour
     public FlashPedestriansGlobalParameters globalParam;
 
     RoutingController routingController;
-    System.Collections.Generic.Dictionary<int, FlashPedestriansController> activePedestrians;
+    public Dictionary<int, FlashPedestriansController> activePedestrians;
 
     private float secondsPerMeter;
 

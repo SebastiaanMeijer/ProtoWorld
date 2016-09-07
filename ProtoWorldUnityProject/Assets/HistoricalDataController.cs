@@ -3,64 +3,116 @@ using System.Collections;
 using UnityEditor;
 using System;
 using System.Xml;
+using System.Xml.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
-public class HistoricalDataController : MonoBehaviour {
+public class HistoricalDataController : MonoBehaviour
+{
 
-    public XmlDocument logFile;
-    private bool fileBrowserOpen;
+    public int logInterval = 3;
+
+    private bool fileBrowserOpened;
     private string savedLogFilePath;
     private string loadedLogFilePath;
-    private string loadedLogfileContents;
-    string logFileName;
+    private string logFileName;
+
+    private XDocument logFile;
+    private XElement timeStamp;
+    private XElement logFileRootElement;
+
+    private TimeController timeController;
+    private FlashPedestriansInformer pedestrianInformer;
 
     // Use this for initialization
-    void Start () {
-        //timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
-        logFile = new XmlDocument();
-        fileBrowserOpen = false;
-
-        XmlNode declaration = logFile.CreateXmlDeclaration("1.0", "UTF-8", null);
-        logFile.AppendChild(declaration);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (!fileBrowserOpen)
-        {
-            writeToLogFile(null);
-        }
-	}
-
-    public void writeToLogFile(string content)
+    void Start()
     {
-        //XmlElement element = logFile.CreateElement(String.Empty,"test",String.Empty);
-        //logFile.AppendChild(element);
-        //logFile.create
-        //XmlElement root = logFile.DocumentElement;
-        ////XmlNode node = logFile.CreateNode("element", "test", "");
-        ////node.InnerText = "test element";
-        ////root.AppendChild(node);
-        //print(root.ToString());
+
+        timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
+        pedestrianInformer = GameObject.Find("FlashInformer").GetComponent<FlashPedestriansInformer>();
+        fileBrowserOpened = false;
+
+        logFile = new XDocument();
+        logFileRootElement = new XElement("LogData");
+        logFile.Add(logFileRootElement);
+
+        StartCoroutine(processLogData());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void processPedestrianData()
+    {
+        foreach (FlashPedestriansController.LogData data in getPedestrianData())
+        {
+            XElement pedestrianElement = new XElement("Pedestrian");
+            pedestrianElement.Add(new XAttribute("id", data.id));
+            pedestrianElement.Add(new XElement("PedestrianPosition",
+                new XElement("PositionX", data.posX),
+                new XElement("PositionY", data.posY),
+                new XElement("PositionZ", data.posZ)),
+                new XElement("Destination", data.destination));
+            timeStamp.Add(pedestrianElement);
+        }
+    }
+
+    List<FlashPedestriansController.LogData> getPedestrianData()
+    {
+        List<FlashPedestriansController.LogData> logData = new List<FlashPedestriansController.LogData>();
+        foreach (KeyValuePair<int, FlashPedestriansController> pair in pedestrianInformer.activePedestrians)
+        {
+            logData.Add(pair.Value.getLogData());
+        }
+        return logData;
+    }
+
+    public void processLoadedLogData(string timeStamp)
+    {
+        if (loadedLogFilePath.Length <= 0)
+        {
+            throw new Exception("no loaded logFile!");
+        }
+
+    }
+
+    public IEnumerator processLogData()
+    {
+        while (!fileBrowserOpened)
+        {
+            timeStamp = new XElement("TimeStamp");
+            timeStamp.Add(new XAttribute("time", timeController.timerText.text));
+            processPedestrianData();
+            logFileRootElement.Add(timeStamp);
+
+            yield return new WaitForSeconds(logInterval);
+        }
     }
 
     public void SaveHistoricalData()
     {
-        fileBrowserOpen = true;
+        fileBrowserOpened = true;
         logFileName = DateTime.Now.ToString("ddMMyyyy_HH-mm-ss");
         savedLogFilePath = EditorUtility.SaveFilePanel("Save Data", "/Assets/SimulationLogs", logFileName, ".xml");
         logFile.Save(savedLogFilePath);
-        fileBrowserOpen = false;
+        fileBrowserOpened = false;
     }
 
     public void LoadHistoricalData()
     {
-        fileBrowserOpen = true;
+        fileBrowserOpened = true;
+        //open dialog
         loadedLogFilePath = EditorUtility.OpenFilePanel("Load Data", "/Assets/SimulationLogs", "xml");
-        if (!loadedLogFilePath.Contains(".xml"))
+        //if xml
+        if (loadedLogFilePath.Contains(".xml"))
         {
-            logFile.Load(loadedLogFilePath);
-            loadedLogfileContents = logFile.InnerXml;
+            //load data
+            logFile = XDocument.Load(loadedLogFilePath);
         }
-        fileBrowserOpen = false;
+        processLoadedLogData(null);
+        fileBrowserOpened = false;
     }
 }

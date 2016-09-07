@@ -713,4 +713,25 @@ public class FlashPedestriansController : TravelerController
 
         currentWeather = newWeatherCondition;
     }
+
+    public LogData getLogData()
+    {
+        LogData logData = new LogData();
+        logData.id = uniqueId;
+        logData.posX = transform.position.x;
+        logData.posY = transform.position.y;
+        logData.posZ = transform.position.z;
+        //logData.destination = this.destination.position.ToString();
+        return logData;
+    }
+
+    public struct LogData
+    {
+        public int id;
+        public float posX;
+        public float posY;
+        public float posZ;
+        public string destination;
+    }
+
 }
