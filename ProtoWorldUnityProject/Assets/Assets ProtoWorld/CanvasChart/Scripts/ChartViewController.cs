@@ -70,6 +70,7 @@ public class ChartViewController : MonoBehaviour
                 DrawBarChart();
                 break;
             case UIChartTypes.Pie:
+                DrawPieChart();
                 break;
             case UIChartTypes.StackedArea:
                 DrawStackedLineChart();
@@ -118,7 +119,6 @@ public class ChartViewController : MonoBehaviour
     {
         if (controller.SeriesCount < 1)
             return;
-
         
         float mBarHeight = chartHolder.rect.height;
         float mBarSector = chartHolder.rect.width / controller.SeriesCount;
@@ -143,7 +143,6 @@ public class ChartViewController : MonoBehaviour
             if (obj.transform.childCount > 0)
             {
                 rt = obj.transform.GetChild(0) as RectTransform;
-
             }
             else
             {
@@ -156,7 +155,6 @@ public class ChartViewController : MonoBehaviour
                 t.font = font;
 
                 rt = go.transform as RectTransform;
-
             }
 
             rt.localPosition = new Vector3(x, -7);
@@ -164,7 +162,43 @@ public class ChartViewController : MonoBehaviour
             var text = obj.GetComponentInChildren<Text>();
             if (text != null)
                 text.text = controller.values[idx].ToString();
+        }
+    }
 
+    private void DrawPieChart()
+    {
+        float total = 0;
+        for (int idx = 0; idx < controller.SeriesCount; idx++)
+        {
+            total += controller.values[idx];
+        }
+        if (total > 0.0001f)
+        {
+            float startangle = 0;
+            for (int idx = 0; idx < controller.SeriesCount; idx++)
+            {
+                float part = controller.values[idx] / total;
+
+                float width = 200, height = 100;
+
+                Vector2 center = new Vector2(width / 2f, height / 2f);
+                float radius = Mathf.Min(width, height) / 2f;
+                float angle = part * Mathf.PI * 2f;
+                Mesh pieMesh = ChartUtils.CreatePieSectorMesh(center, radius, startangle, angle);
+                startangle += angle;
+
+                string name = ChartUtils.NameGenerator(chartChildString, idx);
+                GameObject obj = chartHolder.Find(name).gameObject;
+                CanvasRenderer renderer = obj.GetComponent<CanvasRenderer>();
+
+                renderer.Clear();
+                renderer.SetMaterial(controller.materials[idx], null);
+                renderer.SetMesh(pieMesh);
+            }
+        }
+        else
+        {
+            //empty pie
         }
     }
 
