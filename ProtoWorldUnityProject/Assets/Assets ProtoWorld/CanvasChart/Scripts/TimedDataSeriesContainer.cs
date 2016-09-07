@@ -84,6 +84,20 @@ public class TimedDataSeriesContainer
         }
     }
 
+    public Rect MinMaxStacked
+    {
+        get
+        {
+            return new Rect()
+            {
+                xMin = GetTotalMinTime(),
+                xMax = GetTotalMaxTime(),
+                yMin = GetTotalMinValue(),
+                yMax = GetStackedMaxValue()
+            };
+        }
+    }
+
     /// <summary>
     /// Set the i-th series name.
     /// </summary>
@@ -331,6 +345,23 @@ public class TimedDataSeriesContainer
                 max = time;
         }
         return max;
+    }
+
+    public float GetStackedMaxValue()
+    {
+        //float max = float.MinValue;
+        float[] values = new float[100];
+        foreach (TimedDataSeries item in container.Values)
+        {
+            for (int i = 0; i< item.TimedDataList.Count; i++)
+            {
+                TimedData td = item.TimedDataList[i];
+                float value = td.GetData();
+                if (!float.IsNaN(value))
+                    values[i] += value;
+            }
+        }
+        return Mathf.Max(values);
     }
 
     public void SetChartType(int seriesIndex, UIChartTypes chartType)

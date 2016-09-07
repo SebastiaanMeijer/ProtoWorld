@@ -396,7 +396,6 @@ public class ChartController : MonoBehaviour
             DataContainer.Add(0, i, UnityEngine.Random.Range(randomSeedLower, randomSeedUpper));
         }
         SetChartType(UIChartTypes.Line);
-        SetChartType(UIChartTypes.Line);
         for (int i = 0; i < numberOfSamples; i++)
         {
             DataContainer.Add(1, i, UnityEngine.Random.Range(randomSeedLower, randomSeedUpper));
@@ -566,7 +565,10 @@ public class ChartController : MonoBehaviour
         //    }
         //}
 
-        var minmax = DataContainer.MinMaxOfAll;
+        Rect minmax = DataContainer.MinMaxOfAll;
+        if (chartType == UIChartTypes.StackedArea)
+            minmax = DataContainer.MinMaxStacked;
+
         if (maxYCanOnlyIncrease)
             currentMaxY = (minmax.yMax > currentMaxY) ? minmax.yMax : currentMaxY;
         else
