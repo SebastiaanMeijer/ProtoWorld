@@ -87,6 +87,15 @@ public class CameraControl : MonoBehaviour
 
     private Vector3 keyBoardControlToMove = Vector3.zero;
 
+	public GameObject ScrollbarMMV; 
+
+
+	void Awake(){
+
+		ScrollbarMMV = GameObject.Find ("ScrollbarMMV");
+
+	}
+
     /// <summary>
     /// Initializes the camera control logic
     /// </summary>
@@ -453,6 +462,10 @@ public class CameraControl : MonoBehaviour
                 Mathf.Clamp(this.GetComponent<Camera>().orthographicSize + deltaHeight * -moveSpeed,
                 minHeight, maxHeight);
         }
+
+		//ScrollbarMMV.GetComponent<ZoomScrollbarMMV> ().height = targetCameraPosition.y;
+		ScrollbarMMV.GetComponent<ZoomScrollbarMMV> ().zoomedInOut(targetCameraPosition.y);
+
     }
 
     /// <summary>

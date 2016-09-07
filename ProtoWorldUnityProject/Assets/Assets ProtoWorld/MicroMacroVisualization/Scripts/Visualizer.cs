@@ -16,10 +16,14 @@ public class Visualizer : MonoBehaviour {
 	public int zoomBorder = 150;
 	public bool activatedMicroMacro = true;
 
+	public int previousLevel;
 
 	public GameObject[] objectRenders;
+	public int[] objectRendersLvl;
 	public GameObject[] objectScales;
+	public int[] objectScalesLvl;
 	public GameObject[] objectSelf;
+	public int[] objectSelfLvl;
 
 	bool[] objectRendersA = new bool[100];
 	bool[] objectScalesA = new bool[100];
@@ -31,6 +35,22 @@ public class Visualizer : MonoBehaviour {
 		cameraObject = FindObjectOfType<CameraControl>();
 	}
 
+
+	public void Update(){
+
+		if (previousLevel != ZoomScrollbarMMV.level) {
+			previousLevel = ZoomScrollbarMMV.level;
+			for (int i = 0; objectRenders.Length > i; i++) {
+				
+				changeVisualizationRenderer (previousLevel,objectRendersLvl[i]);
+				changeVisualizationActive (previousLevel,objectScalesLvl[i]);
+				changeVisualizationScale (previousLevel,objectSelfLvl[i]);
+			}
+
+
+		}
+
+	}
 
 	/// <summary>
 	/// Activate or deactivate the visualizer when button is pressed
@@ -155,9 +175,10 @@ public class Visualizer : MonoBehaviour {
 
 	//public bool onOff = true;
 
-	public void changeVisualizationRenderer(int arrayNumber){
+public void changeVisualizationRenderer(int levelNumber, int arrayNumber){
 		if (activatedMicroMacro) {
 
+		/*
 			Renderer[] rs = objectRenders [arrayNumber].GetComponentsInChildren<Renderer> ();
 			if (rs [0].enabled == true) {
 				foreach (Renderer r in rs) {
@@ -170,12 +191,94 @@ public class Visualizer : MonoBehaviour {
 				}
 				objectRendersA [arrayNumber] = true;
 			}
+		*/
+
+		for (int i = 0; i < objectRenders.Length; i++) {
+			Renderer[] rs = objectRenders [i].GetComponentsInChildren<Renderer> ();
+			foreach (Renderer r in rs)
+				r.enabled = true;
+		}
+
+
+
+			for (int i = 0; i < objectRenders.Length; i++) {
+				Renderer[] rs = objectRenders [i].GetComponentsInChildren<Renderer> ();
+				if (objectRendersLvl [i] > levelNumber) {
+					foreach (Renderer r in rs) {
+					r.enabled = true;
+					}
+				}
+				else if(objectRendersLvl[i] <= levelNumber){
+					foreach (Renderer r in rs) {
+					r.enabled = false;
+					}
+
+
+				}
+			}
+
+
+			/*
+			for (int i = 0; i < arrayNumber; i++) {
+			Renderer[] rs = objectRenders [i].GetComponentsInChildren<Renderer> ();
+			if (rs [0].enabled == true) {
+				foreach (Renderer r in rs) {
+					r.enabled = false;
+				}
+				objectRendersA [arrayNumber] = false;
+			}
+
+
+			}
+			for (int i = arrayNumber; i < objectRenders.Length; i++) {
+			
+			Renderer[] rs = objectRenders [i].GetComponentsInChildren<Renderer> ();
+				foreach (Renderer r in rs) {
+					r.enabled = true;
+			}
+				objectRendersA [arrayNumber] = true;
+
+
+			}
+		*/
 
 		}
 	}
 
-	public void changeVisualizationActive(int arrayNumber){
+	public void changeVisualizationActive(int levelNumber, int arrayNumber){
 		if (activatedMicroMacro) {
+
+
+		for (int i = 0; i < objectSelf.Length; i++) {
+			GameObject rs1 = objectSelf [i];
+				if (objectSelfLvl [i] > levelNumber) {
+					rs1.gameObject.SetActive (true);
+
+				} else if (objectSelfLvl [i] <= levelNumber) {
+				rs1.gameObject.SetActive (false);
+				}
+		}
+
+
+		/*
+		for (int i = 0; i < objectRenders.Length; i++) {
+			Renderer[] rs = objectRenders [i].GetComponentsInChildren<Renderer> ();
+			if (objectRendersLvl [i] > levelNumber) {
+				foreach (Renderer r in rs) {
+					r.enabled = true;
+				}
+			}
+			else if(objectRendersLvl[i] <= levelNumber){
+				foreach (Renderer r in rs) {
+					r.enabled = false;
+				}
+
+
+			}
+		}
+*/
+
+		/*
 			GameObject rs1 = objectSelf [arrayNumber];
 			if (rs1.activeSelf == true) {
 				rs1.gameObject.SetActive (false);
@@ -184,6 +287,9 @@ public class Visualizer : MonoBehaviour {
 				rs1.gameObject.SetActive (true);
 				objectSelfA [arrayNumber] = true;
 			}
+		*/
+
+
 		}
 	}
 		/*
@@ -196,18 +302,34 @@ public class Visualizer : MonoBehaviour {
 		*/
 
 
-	public void changeVisualizationScale(int arrayNumber){
+	public void changeVisualizationScale(int levelNumber, int arrayNumber){
 		if (activatedMicroMacro) {
-			if (objectScales [arrayNumber].transform.localScale.y == 0) {
-				objectScales [arrayNumber].transform.localScale = new Vector3 (1, 1, 1);
-				objectScalesA [arrayNumber] = true;
-			} else {
-				objectScales [arrayNumber].transform.localScale = new Vector3 (1, 0, 1);
-				objectScalesA [arrayNumber] = false;
-			}	
+			for (int i = 0; i < objectScales.Length; i++) {
+				GameObject rs1 = objectSelf [i];
+				if (objectScalesLvl [i] > levelNumber) {
+					objectScales [i].transform.localScale = new Vector3 (1, 1, 1);
+					objectScalesA [i] = true;
+				} else {
+
+				objectScales [i].transform.localScale = new Vector3 (1, 0, 1);
+				objectScalesA [i] = false;
+
+				}
+			}
+
 		}
 
 	}
+		/*
+		 * 	if (objectScales [arrayNumber].transform.localScale.y == 0) {
+					objectScales [arrayNumber].transform.localScale = new Vector3 (1, 1, 1);
+					objectScalesA [arrayNumber] = true;
+				} else {
+					objectScales [arrayNumber].transform.localScale = new Vector3 (1, 0, 1);
+					objectScalesA [arrayNumber] = false;
+				}
+				*/
+
 
 
 			//}
