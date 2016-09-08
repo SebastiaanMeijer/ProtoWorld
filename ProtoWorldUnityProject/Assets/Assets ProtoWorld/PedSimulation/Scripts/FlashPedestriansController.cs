@@ -123,8 +123,9 @@ public class FlashPedestriansController : TravelerController
 			heatMap.putInArray (this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform);
 
 
+		Renderer rsp = GetComponentInParent<Renderer> ();
 		//Deactivate render if zoomed out
-		if (Visualizer.microZoomStatus != true && heatMap != null) {
+		if (rsp.enabled != true) {
 			StartCoroutine (LateStart (0.5f));
 		}
 
