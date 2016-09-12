@@ -237,7 +237,7 @@ public class FlashPedestriansSpawner : MonoBehaviour
     /// </summary>
     /// <param name="profile">Profile object that will be used by the pedestrian.</param>
     /// <param name="routing">Routing object that will be used by the pedestrian.</param>
-    private void SpawnPedestrian(Vector3 spawningPoint, FlashPedestriansProfile profile, FlashPedestriansDestination destination, Itinerary itinerary)
+    public void SpawnPedestrian(Vector3 spawningPoint, FlashPedestriansProfile profile, FlashPedestriansDestination destination, Itinerary itinerary)
     {
         GameObject newAgent;
 
