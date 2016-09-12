@@ -104,12 +104,9 @@ public class HistoricalDataController : MonoBehaviour
     public void LoadHistoricalData()
     {
         fileBrowserOpened = true;
-        //open dialog
         loadedLogFilePath = EditorUtility.OpenFilePanel("Load Data", "/Assets/SimulationLogs", "xml");
-        //if xml
         if (loadedLogFilePath.Contains(".xml"))
         {
-            //load data
             logFile = XDocument.Load(loadedLogFilePath);
         }
         processLoadedLogData(null);
