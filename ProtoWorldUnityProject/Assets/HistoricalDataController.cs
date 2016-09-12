@@ -84,8 +84,8 @@ public class HistoricalDataController : MonoBehaviour
 			//TODO start timer at log-time
 			//TODO break up this function into seperate readable ones
 			List<XElement> pedestrians = 
-				from pedestrian in historicalTimeStamps [timeStamp].Descendants ("Pedestrian")
-				select pedestrian;
+				(from pedestrian in historicalTimeStamps [timeStamp].Descendants ("Pedestrian")
+					select pedestrian).ToList();
 			foreach (XElement pedestrian in pedestrians) {
 				XElement pedestrianPosition = pedestrian.Descendants ("PedestrianPosition").Single ();
 				/*
@@ -95,11 +95,6 @@ public class HistoricalDataController : MonoBehaviour
 					pedestrian.Descendants ("Destination").Single (),
 					pedestrian.Descendants ("Itinerary").Single ());
 					*/
-				pedestrianSpawner.SpawnPedestrian (
-					new Vector3 (pedestrianPosition.Descendants ("PositionX").Single (), pedestrianPosition.Descendants ("PositionY").Single (), pedestrianPosition.Descendants ("PositionZ").Single ()),
-					new FlashPedestriansProfile(),
-					new FlashPedestriansDestination(),
-					new Itinerary());
 			}
 		}
     }
@@ -137,7 +132,7 @@ public class HistoricalDataController : MonoBehaviour
 			createTimeStampList();
         }
 		removeActiveData();
-		processLoadedLogData(historicalTimeStamps.Keys.First); //TODO Make people select which timestamp to load
+		//processLoadedLogData(historicalTimeStamps.Keys.First); //TODO Make people select which timestamp to load
         fileBrowserOpened = false;
     }
 
@@ -150,11 +145,11 @@ public class HistoricalDataController : MonoBehaviour
 
 	public void createTimeStampList(){
 		List<XElement> timeStampElements =
-			from timeStampElement in logFileRootElement.Descendants("TimeStamp")
-			select timeStampElement;
+			(from timeStampElement in logFileRootElement.Descendants("TimeStamp")
+				select timeStampElement).ToList();
 
 		foreach (XElement timeStampElement in timeStampElements) {
-			historicalTimeStamps.Add ((string)timeStampElement.Attribute ("time"), timeStampElement);
+			historicalTimeStamps.Add (timeStampElement.Attribute ("time").ToString(), timeStampElement);
 		}
 	}
 }
