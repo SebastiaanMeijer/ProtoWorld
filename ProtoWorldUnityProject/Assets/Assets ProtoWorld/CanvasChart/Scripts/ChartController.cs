@@ -646,4 +646,8 @@ public class ChartController : MonoBehaviour
         CanvasRenderer renderer = axisHolder.gameObject.GetComponent<CanvasRenderer>();
         renderer.Clear();
     }
+
+
+
+
 }
