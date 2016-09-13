@@ -116,6 +116,9 @@ public class ChartController : MonoBehaviour
     /// </summary>
     public string[] seriesNames = new string[5];
 
+    //Hidden KPI's
+    public List<string> kpiHidden;
+
     /// <summary>
     /// Used by this and the axisController to set the colors of the series
     /// and the background of the legends.
@@ -641,13 +644,64 @@ public class ChartController : MonoBehaviour
         CanvasRenderer[] renderers = chartHolder.gameObject.GetComponentsInChildren<CanvasRenderer>();
         foreach (CanvasRenderer canvasRenderer in renderers)
             canvasRenderer.Clear();
-        
+
         Transform axisHolder = chartView.transform.Find("AxisHolder");
         CanvasRenderer renderer = axisHolder.gameObject.GetComponent<CanvasRenderer>();
         renderer.Clear();
     }
 
+    public void ToggleKPI(GameObject button)
+    {
+        Button btn = button.GetComponent<Button>();
+        Text txt = btn.GetComponentInChildren<Text>();
 
+        if (!kpiHidden.Contains(txt.text))
+        {
+            Debug.Log("Adding: " + txt.text);
+            kpiHidden.Add(txt.text);
+        }
+        else
+        {
+            kpiHidden.Remove(txt.text);
+        }
+    }
 
+    public void SetChartType(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                chartType = UIChartTypes.Bar;
+                break;
+            case 1:
+                //Pie
+                chartType = UIChartTypes.Pie;
+                break;
+            case 2:
+                //Line
+                chartType = UIChartTypes.Line;
+                break;
+            case 3:
+                //stacked
+                chartType = UIChartTypes.StackedArea;
+                break;
+            default:
+                chartType = UIChartTypes.ToBeDecided;
+                break;
+        }
+    }
 
+    public void ToggleLegend()
+    {
+        Transform content = this.transform.Find("Content");
+        Transform legendView = content.Find("Legend");
+
+        RectTransform contentRectTransform = content.GetComponent<RectTransform>();
+
+        bool active = legendView.gameObject.activeSelf;
+        legendView.gameObject.SetActive(!active);
+
+        if(active) contentRectTransform.offsetMax = new Vector2(0, contentRectTransform.offsetMax.y);
+        else contentRectTransform.offsetMax = new Vector2(-100, contentRectTransform.offsetMax.y);
+    }
 }

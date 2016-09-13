@@ -34,8 +34,6 @@ public class LegendViewController : MonoBehaviour
     void Start()
     {
         controller = GetComponentInParent<ChartController>();
-
-        Debug.Log(controller);
         rectTransform = GetComponent<RectTransform>();
     }
 

@@ -12,7 +12,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
+/*
  * 
  * KPI MODULE
  * Johnson Ho
@@ -62,7 +62,7 @@ public class ChartViewController : MonoBehaviour
         // Make sure that there are enough materials for the charts.
         if (controller.SeriesCount > controller.materials.Length)
             return;
-        
+
         // Draw chart.
         switch (controller.chartType)
         {
@@ -115,20 +115,21 @@ public class ChartViewController : MonoBehaviour
             }
         }
     }
+
     private void DrawBarChart()
     {
         if (controller.SeriesCount < 1)
             return;
-        
+
         float mBarHeight = chartHolder.rect.height;
-        float mBarSector = chartHolder.rect.width / controller.SeriesCount;
-        float mBarWidth = mBarSector * 0.67f;
+        float mBarSector = chartHolder.rect.width/controller.SeriesCount;
+        float mBarWidth = mBarSector*0.67f;
 
         for (int idx = 0; idx < controller.SeriesCount; idx++)
         {
-            float x = (idx + 0.5f) * mBarSector;
-            float y = controller.values[idx] / controller.GetTotalMaxValue() * mBarHeight;
-            Vector3[] lines = new Vector3[] { new Vector3(x, 0), new Vector3(x, y) };
+            float x = (idx + 0.5f)*mBarSector;
+            float y = controller.values[idx]/controller.GetTotalMaxValue()*mBarHeight;
+            Vector3[] lines = new Vector3[] {new Vector3(x, 0), new Vector3(x, y)};
             Mesh lineMesh = ChartUtils.GenerateLineMesh(lines, mBarWidth);
 
             string name = ChartUtils.NameGenerator(chartChildString, idx);
@@ -148,7 +149,7 @@ public class ChartViewController : MonoBehaviour
             {
                 var go = new GameObject();
                 go.transform.SetParent(obj.transform);
-                
+
                 var t = go.AddComponent<Text>();
                 t.alignment = TextAnchor.MiddleCenter;
                 t.color = Color.black;
@@ -177,13 +178,13 @@ public class ChartViewController : MonoBehaviour
             float startangle = 0;
             for (int idx = 0; idx < controller.SeriesCount; idx++)
             {
-                float part = controller.values[idx] / total;
+                float part = controller.values[idx]/total;
 
                 float width = 200, height = 100;
 
-                Vector2 center = new Vector2(width / 2f, height / 2f);
-                float radius = Mathf.Min(width, height) / 2f;
-                float angle = part * Mathf.PI * 2f;
+                Vector2 center = new Vector2(width/2f, height/2f);
+                float radius = Mathf.Min(width, height)/2f;
+                float angle = part*Mathf.PI*2f;
                 Mesh pieMesh = ChartUtils.CreatePieSectorMesh(center, radius, startangle, angle);
                 startangle += angle;
 
@@ -216,12 +217,16 @@ public class ChartViewController : MonoBehaviour
             Mesh lineMesh = ChartUtils.GenerateLineMesh(lines, 1.5f);
 
             string name = ChartUtils.NameGenerator(chartChildString, idx);
+
             GameObject obj = chartHolder.Find(name).gameObject;
             CanvasRenderer renderer = obj.GetComponent<CanvasRenderer>();
 
             renderer.Clear();
-            renderer.SetMaterial(controller.materials[idx], null); 
-            renderer.SetMesh(lineMesh);
+            if (!controller.kpiHidden.Contains(controller.seriesNames[idx]))
+            {
+                renderer.SetMaterial(controller.materials[idx], null);
+                renderer.SetMesh(lineMesh);
+            }
         }
     }
 
@@ -240,7 +245,7 @@ public class ChartViewController : MonoBehaviour
             else
             {
                 for (int i = 0; i < baselines.Length; i++)
-                    baselines[i] += new Vector3(0,lines[i].y,0);
+                    baselines[i] += new Vector3(0, lines[i].y, 0);
                 lines = baselines;
             }
             Mesh lineMesh = ChartUtils.GenerateLineMesh(lines, 1.5f);

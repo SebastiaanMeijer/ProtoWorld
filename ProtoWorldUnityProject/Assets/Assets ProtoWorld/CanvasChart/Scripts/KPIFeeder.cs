@@ -38,7 +38,7 @@ public class KPIFeeder : MonoBehaviour
     public List<string> kpiStrings;
     public List<string> kpiNames;
     public List<Color> kpiColors;
-    public List<string> kpiHidden;
+
 
     //[HideInInspector]
     //public List<string> kpiTypes;
@@ -221,18 +221,5 @@ public class KPIFeeder : MonoBehaviour
         //kpiTypes.Clear();
     }
 
-    public void toggleKPI(GameObject button)
-    {
-        Button btn = button.GetComponent<Button>();
-        Text txt = btn.GetComponentInChildren<Text>();
 
-        if (!kpiHidden.Contains(txt.text))
-        {
-            kpiHidden.Add(txt.text);
-        }
-        else
-        {
-            kpiHidden.Remove(txt.text);
-        }
-    }
 }
