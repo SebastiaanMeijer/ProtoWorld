@@ -22,6 +22,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class FlashPedestriansProfile 
 {
@@ -49,4 +50,20 @@ public class FlashPedestriansProfile
         this.carAwareness = carAwareness;
         this.travelPreference = preference;
     }
+
+	public Dictionary<string,string> getLogData()
+	{
+		Dictionary<string,string> structuredData = new Dictionary<string,string> ();
+		structuredData.Add ("speed", speed.ToString());
+		structuredData.Add ("englishSpeaker", englishSpeaker.ToString());
+		structuredData.Add ("italianSpeaker", italianSpeaker.ToString());
+		structuredData.Add ("chanceOfSubscription", chanceOfSubscription.ToString());
+		structuredData.Add ("willingToChangeDestination", willingToChangeDestination.ToString());
+		structuredData.Add ("chanceOfTakingABike", chanceOfTakingABike.ToString());
+		structuredData.Add ("weatherFactorOnTakingBikes", weatherFactorOnTakingBikes.ToString());
+		structuredData.Add ("chanceOfBelievingRumours", chanceOfBelievingRumours.ToString());
+		structuredData.Add ("carAwareness", carAwareness.ToString());
+		structuredData.Add ("travelPreference", travelPreference.ToString());
+		return structuredData;
+	}
 }

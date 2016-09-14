@@ -26,6 +26,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 
+
 public class FlashPedestriansController : TravelerController
 {
     public int uniqueId;
@@ -714,24 +715,22 @@ public class FlashPedestriansController : TravelerController
         currentWeather = newWeatherCondition;
     }
 
-    public LogData getLogData()
-    {
-        LogData logData = new LogData();
-        logData.id = uniqueId;
-        logData.posX = transform.position.x;
-        logData.posY = transform.position.y;
-        logData.posZ = transform.position.z;
-        //logData.destination = this.destination.position.ToString();
-        return logData;
-    }
+	public Dictionary<string, string> getSingleValueLogData(){
+		Dictionary<string,string> structuredData = new Dictionary<string,string> ();
+		structuredData.Add ("id", uniqueId.ToString());
+		structuredData.Add ("Destination", destination.ToString()); //TODO
+		return structuredData;
 
-    public struct LogData
-    {
-        public int id;
-        public float posX;
-        public float posY;
-        public float posZ;
-        public string destination;
-    }
+	}
 
+	public Dictionary<string, Dictionary<string, string>> getMultipleValueLogData(){
+		Dictionary<string,Dictionary<string,string>> structuredData = new Dictionary<string,Dictionary<string,string>> ();
+		structuredData.Add ("PedestrianPosition", new Dictionary<string,string> ());
+		structuredData["PedestrianPosition"].Add("PositionX", transform.position.x.ToString());
+		structuredData["PedestrianPosition"].Add("PositionY", transform.position.y.ToString());
+		structuredData["PedestrianPosition"].Add("PositionZ", transform.position.z.ToString());
+		structuredData.Add ("PedestrianProfile", profile.getLogData());
+		return structuredData;
+
+	}
 }

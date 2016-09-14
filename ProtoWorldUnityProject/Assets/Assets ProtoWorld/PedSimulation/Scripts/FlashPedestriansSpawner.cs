@@ -232,12 +232,20 @@ public class FlashPedestriansSpawner : MonoBehaviour
         }
     }
 
+	public void SpawnPedestrianFromLog(Vector3 spawningPoint, FlashPedestriansProfile profile, Vector3 destination){
+		//Find the best itinerary using the travel preferences in the pedestrian profile.
+		//Itinerary itinerary = flashInformer.FindBestItinerary(spawningPoint, destination, stationsNearThisSpawner, profile.travelPreference);
+		//TODO: recreate profile
+		//TODO: recreate destination
+
+	}
+
     /// <summary>
     /// Spawns a Flash Pedestrian given its profile and its routing objects. 
     /// </summary>
     /// <param name="profile">Profile object that will be used by the pedestrian.</param>
     /// <param name="routing">Routing object that will be used by the pedestrian.</param>
-    public void SpawnPedestrian(Vector3 spawningPoint, FlashPedestriansProfile profile, FlashPedestriansDestination destination, Itinerary itinerary)
+    private void SpawnPedestrian(Vector3 spawningPoint, FlashPedestriansProfile profile, FlashPedestriansDestination destination, Itinerary itinerary)
     {
         GameObject newAgent;
 
