@@ -222,11 +222,8 @@ public class ChartViewController : MonoBehaviour
             CanvasRenderer renderer = obj.GetComponent<CanvasRenderer>();
 
             renderer.Clear();
-            if (!controller.kpiHidden.Contains(controller.seriesNames[idx]))
-            {
-                renderer.SetMaterial(controller.materials[idx], null);
-                renderer.SetMesh(lineMesh);
-            }
+            renderer.SetMaterial(controller.materials[idx], null);
+            renderer.SetMesh(lineMesh);
         }
     }
 

@@ -116,9 +116,6 @@ public class ChartController : MonoBehaviour
     /// </summary>
     public string[] seriesNames = new string[5];
 
-    //Hidden KPI's
-    public List<string> kpiHidden;
-
     /// <summary>
     /// Used by this and the axisController to set the colors of the series
     /// and the background of the legends.
@@ -648,22 +645,6 @@ public class ChartController : MonoBehaviour
         Transform axisHolder = chartView.transform.Find("AxisHolder");
         CanvasRenderer renderer = axisHolder.gameObject.GetComponent<CanvasRenderer>();
         renderer.Clear();
-    }
-
-    public void ToggleKPI(GameObject button)
-    {
-        Button btn = button.GetComponent<Button>();
-        Text txt = btn.GetComponentInChildren<Text>();
-
-        if (!kpiHidden.Contains(txt.text))
-        {
-            Debug.Log("Adding: " + txt.text);
-            kpiHidden.Add(txt.text);
-        }
-        else
-        {
-            kpiHidden.Remove(txt.text);
-        }
     }
 
     public void SetChartType(int id)
