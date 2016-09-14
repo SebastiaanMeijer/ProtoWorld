@@ -52,25 +52,37 @@ public class HistoricalDataController : MonoBehaviour
 
     void processPedestrianData()
     {
-        foreach (FlashPedestriansController.LogData data in getPedestrianData())
+
+        foreach (FlashPedestriansController data in getPedestrianData())
         {
 			XElement pedestrianElement = new XElement("Pedestrian");
-			pedestrianElement.Add(new XAttribute("id", data.id));
-			pedestrianElement.Add(new XElement("PedestrianPosition",
-				new XElement("PositionX", data.posX),
-				new XElement("PositionY", data.posY),
-				new XElement("PositionZ", data.posZ)),
-				new XElement("Destination", data.destination));
+			Dictionary<string,string> singleValueLogData = data.getSingleValueLogData ();
+			Dictionary<string,Dictionary<string,string>> multipleValueLogData = data.getMultipleValueLogData ();
+			foreach (string key in singleValueLogData.Keys) {
+				if (key.Equals ("id")) {
+					pedestrianElement.Add (new XAttribute ("id", singleValueLogData [key]));
+				} else {
+					pedestrianElement.Add (new XElement (key, singleValueLogData [key]));
+				}
+			}
+			foreach (string key in multipleValueLogData.Keys) {
+				Dictionary<string,string> catagoryLogData = multipleValueLogData [key];
+				XElement catagoryElement = new XElement(key);
+				pedestrianElement.Add (catagoryElement);
+				foreach (string catagoryDataKey in catagoryLogData.Keys) {
+					catagoryElement.Add (new XElement (catagoryDataKey, catagoryLogData[catagoryDataKey]));
+				}
+			}
 			timeStamp.Add(pedestrianElement);
         }
     }
 
-    List<FlashPedestriansController.LogData> getPedestrianData()
+    List<FlashPedestriansController> getPedestrianData()
     {
-        List<FlashPedestriansController.LogData> logData = new List<FlashPedestriansController.LogData>();
+        List<FlashPedestriansController> logData = new List<FlashPedestriansController>();
         foreach (KeyValuePair<int, FlashPedestriansController> pair in pedestrianInformer.activePedestrians)
         {
-            logData.Add(pair.Value.getLogData());
+            logData.Add(pair.Value);
         }
         return logData;
     }
