@@ -718,7 +718,7 @@ public class FlashPedestriansController : TravelerController
 	public Dictionary<string, string> getSingleValueLogData(){
 		Dictionary<string,string> structuredData = new Dictionary<string,string> ();
 		structuredData.Add ("id", uniqueId.ToString());
-		structuredData.Add ("Destination", destination.ToString()); //TODO
+		structuredData.Add ("Destination", navAgent.destination.ToString()); //TODO
 		return structuredData;
 
 	}
