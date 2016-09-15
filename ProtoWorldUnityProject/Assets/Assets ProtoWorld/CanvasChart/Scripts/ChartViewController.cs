@@ -137,8 +137,12 @@ public class ChartViewController : MonoBehaviour
             CanvasRenderer renderer = obj.GetComponent<CanvasRenderer>();
 
             renderer.Clear();
-            renderer.SetMaterial(controller.materials[idx], null);
-            renderer.SetMesh(lineMesh);
+            string kpi_name = controller.seriesNames[idx];
+            if (!controller.seriesHidden.Contains(kpi_name))
+            {
+                renderer.SetMaterial(controller.materials[idx], null);
+                renderer.SetMesh(lineMesh);
+            }
 
             RectTransform rt;
             if (obj.transform.childCount > 0)
@@ -222,8 +226,12 @@ public class ChartViewController : MonoBehaviour
             CanvasRenderer renderer = obj.GetComponent<CanvasRenderer>();
 
             renderer.Clear();
-            renderer.SetMaterial(controller.materials[idx], null);
-            renderer.SetMesh(lineMesh);
+            string kpi_name = controller.seriesNames[idx];
+            if (!controller.seriesHidden.Contains(kpi_name))
+            {
+                renderer.SetMaterial(controller.materials[idx], null);
+                renderer.SetMesh(lineMesh);
+            }
         }
     }
 

@@ -116,6 +116,8 @@ public class ChartController : MonoBehaviour
     /// </summary>
     public string[] seriesNames = new string[5];
 
+    public List<string> seriesHidden = new List<string>();
+
     /// <summary>
     /// Used by this and the axisController to set the colors of the series
     /// and the background of the legends.
@@ -634,14 +636,16 @@ public class ChartController : MonoBehaviour
         contentPanel.SetActive(!contentPanel.activeSelf);
 
         //Clear the CanvasRenderer, else the axis/lines remain visible.
-        Transform content = this.transform.Find("Content");
+        Transform content = transform.Find("Content");
         Transform chartView = content.Find("ChartView");
         Transform chartHolder = chartView.transform.Find("ChartHolder");
 
+        //Clear all renderers
         CanvasRenderer[] renderers = chartHolder.gameObject.GetComponentsInChildren<CanvasRenderer>();
         foreach (CanvasRenderer canvasRenderer in renderers)
             canvasRenderer.Clear();
 
+        //Also clear the axis
         Transform axisHolder = chartView.transform.Find("AxisHolder");
         CanvasRenderer renderer = axisHolder.gameObject.GetComponent<CanvasRenderer>();
         renderer.Clear();
