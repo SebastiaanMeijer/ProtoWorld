@@ -718,7 +718,6 @@ public class FlashPedestriansController : TravelerController
 	public Dictionary<string, string> getSingleValueLogData(){
 		Dictionary<string,string> structuredData = new Dictionary<string,string> ();
 		structuredData.Add ("id", uniqueId.ToString());
-		structuredData.Add ("Destination", navAgent.destination.ToString()); //TODO
 		return structuredData;
 
 	}
@@ -729,7 +728,11 @@ public class FlashPedestriansController : TravelerController
 		structuredData["PedestrianPosition"].Add("PositionX", transform.position.x.ToString());
 		structuredData["PedestrianPosition"].Add("PositionY", transform.position.y.ToString());
 		structuredData["PedestrianPosition"].Add("PositionZ", transform.position.z.ToString());
-		structuredData.Add ("PedestrianProfile", profile.getLogData());
+        structuredData.Add("PedestrianDestination", new Dictionary<string, string>());
+        structuredData["PedestrianDestination"].Add("PositionX", navAgent.destination.x.ToString());
+        structuredData["PedestrianDestination"].Add("PositionY", navAgent.destination.y.ToString());
+        structuredData["PedestrianDestination"].Add("PositionZ", navAgent.destination.z.ToString());
+        structuredData.Add ("PedestrianProfile", profile.getLogData());
 		return structuredData;
 
 	}

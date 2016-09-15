@@ -6,6 +6,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 public class HistoricalDataController : MonoBehaviour
 {
@@ -22,12 +23,16 @@ public class HistoricalDataController : MonoBehaviour
     private XElement timeStamp;
     private XElement logFileRootElement;
 
-	Dictionary<string,XElement> historicalTimeStamps;
+	private Dictionary<string,XElement> historicalTimeStamps;
 
     private TimeController timeController;
     private FlashPedestriansInformer pedestrianInformer;
 
 	private FlashPedestriansSpawner pedestrianSpawner;
+
+    private GameObject loadLogWindow;
+    private Dropdown timestampDropdown;
+    
 
     // Use this for initialization
     void Start()
@@ -35,11 +40,15 @@ public class HistoricalDataController : MonoBehaviour
 
         timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
         pedestrianInformer = GameObject.Find("FlashInformer").GetComponent<FlashPedestriansInformer>();
+        loadLogWindow = GameObject.Find("LoadLogCanvas");
+        timestampDropdown = GameObject.Find("LoadFileTimestampDropdown").GetComponent<Dropdown>();
+        loadLogWindow.SetActive(false);
         fileBrowserOpened = false;
 
         logFile = new XDocument();
         logFileRootElement = new XElement("LogData");
         logFile.Add(logFileRootElement);
+        //historicalTimeStamps = new Dictionary<string, XElement>();
 
         StartCoroutine(processLogData());
     }
@@ -89,26 +98,30 @@ public class HistoricalDataController : MonoBehaviour
 
     public void processLoadedLogData(string timeStamp)
     {
-		if (loadedLogFilePath.Length <= 0) {
-			throw new Exception ("no loaded logFile!");
-		} else {
-			//TODO Initiate new pedestrians from a selected timestamp in stead of the first
-			//TODO start timer at log-time
-			//TODO break up this function into seperate readable ones
-			List<XElement> pedestrians = 
-				(from pedestrian in historicalTimeStamps [timeStamp].Descendants ("Pedestrian")
-					select pedestrian).ToList();
-			foreach (XElement pedestrian in pedestrians) {
-				XElement pedestrianPosition = pedestrian.Descendants ("PedestrianPosition").Single ();
-				/*
+        if (loadedLogFilePath.Length <= 0)
+        {
+            throw new Exception("no loaded logFile!");
+        }
+        else
+        {
+            //TODO Initiate new pedestrians from a selected timestamp in stead of the first
+            //TODO start timer at log-time
+            //TODO break up this function into seperate readable ones
+            List<XElement> pedestrians =
+                (from pedestrian in historicalTimeStamps[timeStamp].Descendants("Pedestrian")
+                 select pedestrian).ToList();
+            foreach (XElement pedestrian in pedestrians)
+            {
+                XElement pedestrianPosition = pedestrian.Descendants("PedestrianPosition").Single();
+                /*
 				pedestrianSpawner.SpawnPedestrian (
 					new Vector3 (pedestrianPosition.Descendants ("PositionX").Single (), pedestrianPosition.Descendants ("PositionY").Single (), pedestrianPosition.Descendants ("PositionZ").Single ()),
 					pedestrian.Descendants ("Profile").Single (),
 					pedestrian.Descendants ("Destination").Single (),
 					pedestrian.Descendants ("Itinerary").Single ());
 					*/
-			}
-		}
+            }
+        }
     }
 
     public IEnumerator processLogData()
@@ -133,22 +146,48 @@ public class HistoricalDataController : MonoBehaviour
         fileBrowserOpened = false;
     }
 
-    public void LoadHistoricalData()
+    public void openLoadLogFileWindow()
     {
         fileBrowserOpened = true;
+        loadLogWindow.SetActive(true);
+        timestampDropdown.options.Clear();
+        timestampDropdown.captionText.text = "";
+    }
+
+    public void loadLogfile()
+    {
         loadedLogFilePath = EditorUtility.OpenFilePanel("Load Data", "/Assets/SimulationLogs", "xml");
         if (loadedLogFilePath.Contains(".xml"))
         {
             logFile = XDocument.Load(loadedLogFilePath);
-			logFileRootElement = logFile.Root;
-			createTimeStampList();
+            logFileRootElement = logFile.Root;
+            createTimeStampList();
+            foreach (KeyValuePair<string, XElement> timeStamp in historicalTimeStamps)
+            {
+                timestampDropdown.options.Add(new Dropdown.OptionData() { text = timeStamp.Key });
+            }
+            timestampDropdown.value = 1;
+            timestampDropdown.value = 0;
         }
-		removeActiveData();
-		//processLoadedLogData(historicalTimeStamps.Keys.First); //TODO Make people select which timestamp to load
-        fileBrowserOpened = false;
+        removeActiveData();
     }
 
-	public void removeActiveData(){
+    public void cancelLoadLogFile()
+    {
+        loadedLogFilePath = "";
+        timestampDropdown.options.Clear();
+        timestampDropdown.captionText.text = "";
+        loadLogWindow.SetActive(false);
+    }
+
+    public void LoadLogdata()
+    {
+        processLoadedLogData(timestampDropdown.options[timestampDropdown.value].text);
+        fileBrowserOpened = false;
+        loadLogWindow.SetActive(false);
+    }
+
+    public void removeActiveData(){
 		GameObject[] currentPedestrians = GameObject.FindGameObjectsWithTag ("Pedestrian");
 		foreach (GameObject pedestrian in currentPedestrians) {
 			Destroy (pedestrian);
@@ -159,9 +198,10 @@ public class HistoricalDataController : MonoBehaviour
 		List<XElement> timeStampElements =
 			(from timeStampElement in logFileRootElement.Descendants("TimeStamp")
 				select timeStampElement).ToList();
-
-		foreach (XElement timeStampElement in timeStampElements) {
+        historicalTimeStamps = new Dictionary<string, XElement>();
+        foreach (XElement timeStampElement in timeStampElements) {
 			historicalTimeStamps.Add (timeStampElement.Attribute ("time").ToString(), timeStampElement);
 		}
+        print(historicalTimeStamps.Count);
 	}
 }
