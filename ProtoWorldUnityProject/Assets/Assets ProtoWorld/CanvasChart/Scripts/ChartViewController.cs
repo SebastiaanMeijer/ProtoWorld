@@ -180,15 +180,15 @@ public class ChartViewController : MonoBehaviour
         if (total > 0.0001f)
         {
             float startangle = 0;
+            float width = chartHolder.rect.width, height = chartHolder.rect.height;
+
             for (int idx = 0; idx < controller.SeriesCount; idx++)
             {
-                float part = controller.values[idx]/total;
+                float part = controller.values[idx] / total;
 
-                float width = 200, height = 100;
-
-                Vector2 center = new Vector2(width/2f, height/2f);
-                float radius = Mathf.Min(width, height)/2f;
-                float angle = part*Mathf.PI*2f;
+                Vector2 center = new Vector2(width / 2f, height / 2f);
+                float radius = Mathf.Min(width, height) / 2f;
+                float angle = part * Mathf.PI * 2f;
                 Mesh pieMesh = ChartUtils.CreatePieSectorMesh(center, radius, startangle, angle);
                 startangle += angle;
 

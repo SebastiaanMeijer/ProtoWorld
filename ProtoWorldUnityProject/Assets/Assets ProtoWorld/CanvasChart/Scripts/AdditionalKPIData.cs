@@ -3,19 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class AdditionalKPIData : MonoBehaviour {
-    public ChartController chart1, chart2, chart3;
+    public ChartController chart1, chart2, chart3, chart4;
     public static int arrived = 0;
 
     private float dataTimer = 1f;
     private List<int> walkers, cyclists, busPassengers, trainPassengers, drivers, others, arrivals;
-    private Transform spawnerPoints, transLines;
+    private Transform spawnerPoints, transLines, destinationPoints;
 
     private List<int> pieCyc = new List<int>(), pieBus = new List<int>(), pieArriv = new List<int>();
+
+    private Dictionary<string, int> destinationCount;
 
 	// Use this for initialization
 	void Start () {
         spawnerPoints = GameObject.Find("SpawnerPoints").transform;
         transLines = GameObject.Find("TransLines").transform;
+        destinationPoints = GameObject.Find("DestinationPoints").transform;
 
         walkers = new List<int>();
         cyclists = new List<int>();
@@ -52,6 +55,14 @@ public class AdditionalKPIData : MonoBehaviour {
             chart3.SetSeriesName(1, "To Passengers");
             chart3.SetSeriesName(2, "To Arrivals");
         }
+
+        destinationCount = new Dictionary<string, int>();
+        foreach (Transform destinationPoint in destinationPoints) {
+            FlashPedestriansDestination fpd = destinationPoint.GetComponent<FlashPedestriansDestination>();
+            chart4.RegisterNewKPI();
+            chart4.SetSeriesName(destinationCount.Count, fpd.destinationName);
+            destinationCount.Add(fpd.destinationName,0);
+        }
     }
 	
 	// Update is called once per frame
@@ -64,6 +75,8 @@ public class AdditionalKPIData : MonoBehaviour {
             getBuses();
             getCars();
             getArrived();
+
+            getDestinations();
 
             chart1.AddTimedData(0, walkers.Count, walkers[walkers.Count - 1]);
             chart1.AddTimedData(1, cyclists.Count, cyclists[cyclists.Count - 1]);
@@ -105,6 +118,13 @@ public class AdditionalKPIData : MonoBehaviour {
                     chart3.AddTimedData(1, busPassengers.Count, totalBus);
                     chart3.AddTimedData(2, cyclists.Count, totalArriv);
                 }
+            }
+
+            int j = 0;
+            foreach (string key in destinationCount.Keys)
+            {
+                chart4.AddTimedData(j, 0, destinationCount[key]);
+                j++;
             }
         }
         dataTimer += Time.deltaTime;
@@ -199,5 +219,37 @@ public class AdditionalKPIData : MonoBehaviour {
         pieArriv.Add(arrived);
 
         arrived = 0;
+    }
+
+    private void getDestinations()
+    {
+        List<string> keys = new List<string>(destinationCount.Keys);
+        foreach (string key in keys)
+        {
+            destinationCount[key] = 0;
+        }
+
+        foreach (Transform spawner in spawnerPoints)
+        {
+            if (spawner.gameObject.activeSelf)
+            {
+                foreach (Transform pedestrian in spawner)
+                {
+                    if (pedestrian.gameObject.activeSelf)
+                    {
+                        FlashPedestriansController fpc = pedestrian.GetComponent<FlashPedestriansController>();
+                        string destName = fpc.routing.destinationPoint.destinationName;
+                        if (!destinationCount.ContainsKey(destName))
+                        {
+                            destinationCount.Add(destName, 1);
+                        }
+                        else
+                        {
+                            destinationCount[destName]++;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
