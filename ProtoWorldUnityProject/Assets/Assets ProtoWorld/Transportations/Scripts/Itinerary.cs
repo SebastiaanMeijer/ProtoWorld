@@ -47,10 +47,12 @@ public class Itinerary
     public float GetTotalTravelTime()
     {
         float totalTime = 0;
-        foreach (var info in StageInfos)
-        {
-            totalTime += info.TravelTime;
-        }
+		if (StageInfos != null) {
+			foreach (var info in StageInfos)
+			{
+				totalTime += info.TravelTime;
+			}
+		}
         return totalTime;
     }
 
@@ -88,11 +90,16 @@ public class Itinerary
     public override string ToString()
     {
         string str = "";
-        foreach (var station in WayPoints)
-        {
-            str += station + ",";
-        }
-        return str.Remove(str.Length - 1) + "TT: " + GetTotalTravelTime();
+
+		foreach (var station in WayPoints)
+		{
+			str += station + ",";
+		}
+		if (str.Length > 1) {
+			return str.Remove (str.Length - 1) + "TT: " + GetTotalTravelTime ();
+		} else {
+			return str + "TT: " + GetTotalTravelTime ();
+		}
     }
 
     /// <summary>
@@ -217,6 +224,14 @@ public class Itinerary
 
         return true;
     }
+	public Dictionary<string, string> getLogData(){
+		Dictionary<string, string> logData = new Dictionary<string, string>();
+		logData.Add("TravelTime", this.GetTotalTravelTime().ToString());
+		foreach (var station in WayPoints){
+			logData.Add("Station", station.ToString());
+		}
+		return logData;
+	}
 
 }
 
