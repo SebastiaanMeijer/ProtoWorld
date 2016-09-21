@@ -112,7 +112,9 @@ public class HistoricalDataController : MonoBehaviour
                  select pedestrian).ToList();
             foreach (XElement pedestrian in pedestrians)
             {
-                XElement pedestrianPosition = pedestrian.Descendants("PedestrianPosition").Single();
+                FlashPedestriansProfile profile = recreatePedestrianProfile(pedestrian.Descendants("PedestrianProfile").Single());
+                //print(profile.speed);
+                //XElement pedestrianPosition = pedestrian.Descendants("PedestrianPosition").Single();
                 /*
 				pedestrianSpawner.SpawnPedestrian (
 					new Vector3 (pedestrianPosition.Descendants ("PositionX").Single (), pedestrianPosition.Descendants ("PositionY").Single (), pedestrianPosition.Descendants ("PositionZ").Single ()),
@@ -122,6 +124,25 @@ public class HistoricalDataController : MonoBehaviour
 					*/
             }
         }
+    }
+
+    public FlashPedestriansProfile recreatePedestrianProfile(XElement profileData)
+    {
+        float speed = float.Parse(profileData.Descendants("speed").Single().Value.ToString());
+        bool englishSpeaker = bool.Parse(profileData.Descendants("englishSpeaker").Single().Value.ToString());
+        bool italianSpeaker = bool.Parse(profileData.Descendants("italianSpeaker").Single().Value.ToString());
+        float chanceOfSubscription = float.Parse(profileData.Descendants("chanceOfSubscription").Single().Value.ToString());
+        bool willingToChangeDestination = bool.Parse(profileData.Descendants("willingToChangeDestination").Single().Value.ToString());
+        float chanceOfTakingABike = float.Parse(profileData.Descendants("chanceOfTakingABike").Single().Value.ToString());
+        float weatherFactorOnTakingBikes = float.Parse(profileData.Descendants("weatherFactorOnTakingBikes").Single().Value.ToString());
+        float chanceOfBelievingRumours = float.Parse(profileData.Descendants("chanceOfBelievingRumours").Single().Value.ToString());
+        bool carAwareness = bool.Parse(profileData.Descendants("carAwareness").Single().Value.ToString());
+        TravelPreference travelPreference = new TravelPreference();
+
+        FlashPedestriansProfile profile = new FlashPedestriansProfile(speed, englishSpeaker, italianSpeaker, chanceOfSubscription, willingToChangeDestination, chanceOfTakingABike,
+            chanceOfBelievingRumours, carAwareness, travelPreference);
+
+        return profile;
     }
 
     public IEnumerator processLogData()
@@ -200,7 +221,7 @@ public class HistoricalDataController : MonoBehaviour
 				select timeStampElement).ToList();
         historicalTimeStamps = new Dictionary<string, XElement>();
         foreach (XElement timeStampElement in timeStampElements) {
-			historicalTimeStamps.Add (timeStampElement.Attribute ("time").ToString(), timeStampElement);
+			historicalTimeStamps.Add (timeStampElement.Attribute ("time").Value.ToString(), timeStampElement);
 		}
         print(historicalTimeStamps.Count);
 	}
