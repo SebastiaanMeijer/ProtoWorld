@@ -53,10 +53,12 @@ public class LegendViewController : MonoBehaviour
             }
             else if (transform.childCount < controller.SeriesCount)
             {
-                GameObject obj =
-                    Instantiate(legendButtonPrefab, transform.localPosition, Quaternion.identity) as GameObject;
-                obj.transform.SetParent(transform);
-                obj.transform.position = transform.position;
+                if (legendButtonPrefab != null)
+                {
+                    GameObject obj = Instantiate(legendButtonPrefab, transform.localPosition, Quaternion.identity) as GameObject;
+                    obj.transform.SetParent(transform);
+                    obj.transform.position = transform.position;
+                }
             }
         }
 

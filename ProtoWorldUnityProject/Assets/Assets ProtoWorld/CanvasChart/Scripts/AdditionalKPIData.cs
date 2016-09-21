@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class AdditionalKPIData : MonoBehaviour {
-    public ChartController chart1, chart2, chart3, chart4;
+    public ChartController chartTravel, chartTransfer, chartTransferPedestrian, chartDestination;
     public static int arrived = 0;
 
     private float dataTimer = 1f;
@@ -28,40 +28,50 @@ public class AdditionalKPIData : MonoBehaviour {
         others = new List<int>();
         arrivals = new List<int>();
 
-        chart1.RegisterNewKPI();
-        chart1.RegisterNewKPI();
-        chart1.RegisterNewKPI();
-        chart1.SetSeriesName(0, "Pedestrians");
-        chart1.SetSeriesName(1, "Cyclists");
-        chart1.SetSeriesName(2, "Passengers");
-
-        chart2.RegisterNewKPI();
-        chart2.RegisterNewKPI();
-        chart2.RegisterNewKPI();
-        chart2.RegisterNewKPI();
-        chart2.RegisterNewKPI();
-        chart2.SetSeriesName(0, "Ped To Cyc");
-        chart2.SetSeriesName(1, "Cyc To Ped");
-        chart2.SetSeriesName(2, "Ped To Pass");
-        chart2.SetSeriesName(3, "Pass To Ped");
-        chart2.SetSeriesName(4, "Arrivals");
-
-        if (chart3 != null)
+        if (chartTravel != null)
         {
-            chart3.RegisterNewKPI();
-            chart3.RegisterNewKPI();
-            chart3.RegisterNewKPI();
-            chart3.SetSeriesName(0, "To Cyclists");
-            chart3.SetSeriesName(1, "To Passengers");
-            chart3.SetSeriesName(2, "To Arrivals");
+            chartTravel.RegisterNewKPI();
+            chartTravel.RegisterNewKPI();
+            chartTravel.RegisterNewKPI();
+            chartTravel.SetSeriesName(0, "Pedestrians");
+            chartTravel.SetSeriesName(1, "Cyclists");
+            chartTravel.SetSeriesName(2, "Passengers");
+        }
+
+        if (chartTransfer != null)
+        {
+            chartTransfer.RegisterNewKPI();
+            chartTransfer.RegisterNewKPI();
+            chartTransfer.RegisterNewKPI();
+            chartTransfer.RegisterNewKPI();
+            chartTransfer.RegisterNewKPI();
+            chartTransfer.SetSeriesName(0, "Ped To Cyc");
+            chartTransfer.SetSeriesName(1, "Cyc To Ped");
+            chartTransfer.SetSeriesName(2, "Ped To Pass");
+            chartTransfer.SetSeriesName(3, "Pass To Ped");
+            chartTransfer.SetSeriesName(4, "Arrivals");
+        }
+
+        if (chartTransferPedestrian != null)
+        {
+            chartTransferPedestrian.RegisterNewKPI();
+            chartTransferPedestrian.RegisterNewKPI();
+            chartTransferPedestrian.RegisterNewKPI();
+            chartTransferPedestrian.SetSeriesName(0, "To Cyclists");
+            chartTransferPedestrian.SetSeriesName(1, "To Passengers");
+            chartTransferPedestrian.SetSeriesName(2, "To Arrivals");
         }
 
         destinationCount = new Dictionary<string, int>();
-        foreach (Transform destinationPoint in destinationPoints) {
-            FlashPedestriansDestination fpd = destinationPoint.GetComponent<FlashPedestriansDestination>();
-            chart4.RegisterNewKPI();
-            chart4.SetSeriesName(destinationCount.Count, fpd.destinationName);
-            destinationCount.Add(fpd.destinationName,0);
+        if (chartDestination != null)
+        {
+            foreach (Transform destinationPoint in destinationPoints)
+            {
+                FlashPedestriansDestination fpd = destinationPoint.GetComponent<FlashPedestriansDestination>();
+                chartDestination.RegisterNewKPI();
+                chartDestination.SetSeriesName(destinationCount.Count, fpd.destinationName);
+                destinationCount.Add(fpd.destinationName, 0);
+            }
         }
     }
 	
@@ -78,20 +88,26 @@ public class AdditionalKPIData : MonoBehaviour {
 
             getDestinations();
 
-            chart1.AddTimedData(0, walkers.Count, walkers[walkers.Count - 1]);
-            chart1.AddTimedData(1, cyclists.Count, cyclists[cyclists.Count - 1]);
-            chart1.AddTimedData(2, busPassengers.Count, busPassengers[busPassengers.Count - 1]);
+            if (chartTravel != null)
+            {
+                chartTravel.AddTimedData(0, walkers.Count, walkers[walkers.Count - 1]);
+                chartTravel.AddTimedData(1, cyclists.Count, cyclists[cyclists.Count - 1]);
+                chartTravel.AddTimedData(2, busPassengers.Count, busPassengers[busPassengers.Count - 1]);
+            }
 
             if (cyclists.Count >= 2)
             {
-                chart2.AddTimedData(0, cyclists.Count, Mathf.Max(cyclists[cyclists.Count - 1] - cyclists[cyclists.Count - 2], 0));
-                chart2.AddTimedData(1, cyclists.Count, Mathf.Max(cyclists[cyclists.Count - 2] - cyclists[cyclists.Count - 1], 0));
-                chart2.AddTimedData(2, busPassengers.Count, Mathf.Max(busPassengers[busPassengers.Count - 1] - busPassengers[busPassengers.Count - 2], 0));
-                chart2.AddTimedData(3, busPassengers.Count, Mathf.Max(busPassengers[busPassengers.Count - 2] - busPassengers[busPassengers.Count - 1], 0));
-                //arrived
-                chart2.AddTimedData(4, arrivals.Count, arrivals[arrivals.Count - 1]);
+                if (chartTransfer != null)
+                {
+                    chartTransfer.AddTimedData(0, cyclists.Count, Mathf.Max(cyclists[cyclists.Count - 1] - cyclists[cyclists.Count - 2], 0));
+                    chartTransfer.AddTimedData(1, cyclists.Count, Mathf.Max(cyclists[cyclists.Count - 2] - cyclists[cyclists.Count - 1], 0));
+                    chartTransfer.AddTimedData(2, busPassengers.Count, Mathf.Max(busPassengers[busPassengers.Count - 1] - busPassengers[busPassengers.Count - 2], 0));
+                    chartTransfer.AddTimedData(3, busPassengers.Count, Mathf.Max(busPassengers[busPassengers.Count - 2] - busPassengers[busPassengers.Count - 1], 0));
+                    //arrived
+                    chartTransfer.AddTimedData(4, arrivals.Count, arrivals[arrivals.Count - 1]);
+                }
 
-                if (chart3 != null)
+                if (chartTransferPedestrian != null)
                 {
                     //pie chart
                     if (pieCyc.Count >= 50)
@@ -114,17 +130,20 @@ public class AdditionalKPIData : MonoBehaviour {
                     }
                     //int totalPie = totalCyc + totalBus + totalArriv;
 
-                    chart3.AddTimedData(0, cyclists.Count, totalCyc);
-                    chart3.AddTimedData(1, busPassengers.Count, totalBus);
-                    chart3.AddTimedData(2, cyclists.Count, totalArriv);
+                    chartTransferPedestrian.AddTimedData(0, cyclists.Count, totalCyc);
+                    chartTransferPedestrian.AddTimedData(1, busPassengers.Count, totalBus);
+                    chartTransferPedestrian.AddTimedData(2, cyclists.Count, totalArriv);
                 }
             }
 
-            int j = 0;
-            foreach (string key in destinationCount.Keys)
+            if (chartDestination != null)
             {
-                chart4.AddTimedData(j, 0, destinationCount[key]);
-                j++;
+                int j = 0;
+                foreach (string key in destinationCount.Keys)
+                {
+                    chartDestination.AddTimedData(j, 0, destinationCount[key]);
+                    j++;
+                }
             }
         }
         dataTimer += Time.deltaTime;
@@ -251,5 +270,35 @@ public class AdditionalKPIData : MonoBehaviour {
                 }
             }
         }
+    }
+
+    private void getDelays()
+    {
+        //get delays for car transport and public transport
+
+        //and delta delays
+    }
+
+    private void getQueues()
+    {
+        //get waiting lines at public transport stations
+
+        //number
+        //time
+    }
+
+    private void getAccidents()
+    {
+        //google maps marker overlay
+    }
+
+    private void getBlockedRoads()
+    {
+        //google maps marker overlay
+    }
+
+    private void getStaticPublicTransport()
+    {
+        //all busses and trams that are not moving
     }
 }
