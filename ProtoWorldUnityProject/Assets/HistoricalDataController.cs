@@ -113,17 +113,36 @@ public class HistoricalDataController : MonoBehaviour
             foreach (XElement pedestrian in pedestrians)
             {
                 FlashPedestriansProfile profile = recreatePedestrianProfile(pedestrian.Descendants("PedestrianProfile").Single());
-                //print(profile.speed);
-                //XElement pedestrianPosition = pedestrian.Descendants("PedestrianPosition").Single();
-                /*
-				pedestrianSpawner.SpawnPedestrian (
-					new Vector3 (pedestrianPosition.Descendants ("PositionX").Single (), pedestrianPosition.Descendants ("PositionY").Single (), pedestrianPosition.Descendants ("PositionZ").Single ()),
-					pedestrian.Descendants ("Profile").Single (),
-					pedestrian.Descendants ("Destination").Single (),
-					pedestrian.Descendants ("Itinerary").Single ());
-					*/
+                FlashPedestriansDestination destination = recreatePedestrianDestination(pedestrian.Descendants("PedestrianDestination").Single());
+                Vector3 spawnPoint = recreatePedestrianSpawnPoint(pedestrian.Descendants("PedestrianPosition").Single());
+                pedestrianSpawner.SpawnPedestrianFromLog(spawnPoint, profile, destination);
             }
         }
+    }
+
+    public Vector3 recreatePedestrianSpawnPoint(XElement destinationData)
+    {
+        Vector3 spawnPoint = new Vector3();
+
+        spawnPoint.x = float.Parse(destinationData.Descendants("PositionX").Single().Value.ToString());
+        spawnPoint.y = float.Parse(destinationData.Descendants("PositionY").Single().Value.ToString());
+        spawnPoint.z = float.Parse(destinationData.Descendants("PositionZ").Single().Value.ToString());
+
+        return spawnPoint;
+    }
+
+    public FlashPedestriansDestination recreatePedestrianDestination(XElement destinationData)
+    {
+        FlashPedestriansDestination destination = new FlashPedestriansDestination();
+        Vector3 position = new Vector3();
+
+        position.x = float.Parse(destinationData.Descendants("PositionX").Single().Value.ToString());
+        position.y = float.Parse(destinationData.Descendants("PositionY").Single().Value.ToString());
+        position.z = float.Parse(destinationData.Descendants("PositionZ").Single().Value.ToString());
+
+        destination.destinationTransform.position = position;
+
+        return destination;
     }
 
     public FlashPedestriansProfile recreatePedestrianProfile(XElement profileData)

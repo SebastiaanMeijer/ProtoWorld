@@ -730,9 +730,12 @@ public class FlashPedestriansController : TravelerController
 		structuredData["PedestrianPosition"].Add("PositionY", transform.position.y.ToString());
 		structuredData["PedestrianPosition"].Add("PositionZ", transform.position.z.ToString());
         structuredData.Add("PedestrianDestination", new Dictionary<string, string>());
-        structuredData["PedestrianDestination"].Add("PositionX", navAgent.destination.x.ToString());
-        structuredData["PedestrianDestination"].Add("PositionY", navAgent.destination.y.ToString());
-        structuredData["PedestrianDestination"].Add("PositionZ", navAgent.destination.z.ToString());
+        structuredData["PedestrianDestination"].Add("Name", routing.destinationPoint.destinationName);
+        structuredData["PedestrianDestination"].Add("PositionX", routing.destinationPoint.destinationTransform.position.x.ToString());
+        structuredData["PedestrianDestination"].Add("PositionY", routing.destinationPoint.destinationTransform.position.y.ToString());
+        structuredData["PedestrianDestination"].Add("PositionZ", routing.destinationPoint.destinationTransform.position.z.ToString());
+        structuredData["PedestrianDestination"].Add("CheckRadius", routing.destinationPoint.radiousToCheckStations.ToString());
+        structuredData["PedestrianDestination"].Add("Priority", routing.destinationPoint.destinationPriority.ToString());
         structuredData.Add ("PedestrianProfile", profile.getLogData());
 		structuredData.Add ("Itinerary", new Dictionary<string, string>());
 		Dictionary<string, string> itineraryData = routing.itinerary.getLogData ();

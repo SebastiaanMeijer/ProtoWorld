@@ -234,8 +234,8 @@ public class FlashPedestriansSpawner : MonoBehaviour
 
 	public void SpawnPedestrianFromLog(Vector3 spawningPoint, FlashPedestriansProfile profile, Vector3 destination){
 		//Find the best itinerary using the travel preferences in the pedestrian profile.
-		//Itinerary itinerary = flashInformer.FindBestItinerary(spawningPoint, destination, stationsNearThisSpawner, profile.travelPreference);
-		//TODO: recreate profile
+		Itinerary itinerary = flashInformer.FindBestItinerary(spawningPoint, null, stationsNearThisSpawner, profile.travelPreference);
+        SpawnPedestrian(spawningPoint, profile, null, itinerary);
 		//TODO: recreate destination
 
 	}
