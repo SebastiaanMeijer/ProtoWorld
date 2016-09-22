@@ -12,16 +12,17 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
- * 
- * FLASH PEDESTRIAN SIMULATOR
- * FlashPedestriansDestination.cs
- * Miguel Ramos Carretero
- * 
- */
+/*
+* 
+* FLASH PEDESTRIAN SIMULATOR
+* FlashPedestriansDestination.cs
+* Miguel Ramos Carretero
+* 
+*/
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Class that defines a destination entry for Flash Pedestrians (composed of a transform, 
@@ -56,5 +57,25 @@ public class FlashPedestriansDestination : MonoBehaviour
 
         //Debug.Log(this.gameObject.name + " has found " + stationsNearThisDestination.Length 
             //+ " stations nearby");
+    }
+
+    public Dictionary<string, string> getSingleValueLogData()
+    {
+        Dictionary<string, string> structuredData = new Dictionary<string, string>();
+        structuredData.Add("name", destinationName.ToString());
+        return structuredData;
+
+    }
+
+    public Dictionary<string, Dictionary<string, string>> getMultipleValueLogData()
+    {
+        Dictionary<string, Dictionary<string, string>> structuredData = new Dictionary<string, Dictionary<string, string>>();
+        structuredData.Add("DestinationData", new Dictionary<string, string>());
+        structuredData["DestinationData"].Add("PositionX", destinationTransform.position.x.ToString());
+        structuredData["DestinationData"].Add("PositionY", destinationTransform.position.y.ToString());
+        structuredData["DestinationData"].Add("PositionZ", destinationTransform.position.z.ToString());
+        structuredData["DestinationData"].Add("CheckRadius", radiousToCheckStations.ToString());
+        structuredData["DestinationData"].Add("Priority", destinationPriority.ToString());
+        return structuredData;
     }
 }

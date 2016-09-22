@@ -86,12 +86,55 @@ public class HistoricalDataController : MonoBehaviour
         }
     }
 
+    void processDestinationData()
+    {
+
+        foreach (FlashPedestriansDestination data in getDestinationData())
+        {
+            XElement destinationElement = new XElement("Destination");
+            Dictionary<string, string> singleValueLogData = data.getSingleValueLogData();
+            Dictionary<string, Dictionary<string, string>> multipleValueLogData = data.getMultipleValueLogData();
+            foreach (string key in singleValueLogData.Keys)
+            {
+                if (key.Equals("name"))
+                {
+                    destinationElement.Add(new XAttribute("name", singleValueLogData[key]));
+                }
+                else
+                {
+                    destinationElement.Add(new XElement(key, singleValueLogData[key]));
+                }
+            }
+            foreach (string key in multipleValueLogData.Keys)
+            {
+                Dictionary<string, string> categoryLogData = multipleValueLogData[key];
+                XElement categoryElement = new XElement(key);
+                destinationElement.Add(categoryElement);
+                foreach (string catagoryDataKey in categoryLogData.Keys)
+                {
+                    categoryElement.Add(new XElement(catagoryDataKey, categoryLogData[catagoryDataKey]));
+                }
+            }
+            timeStamp.Add(destinationElement);
+        }
+    }
+
     List<FlashPedestriansController> getPedestrianData()
     {
         List<FlashPedestriansController> logData = new List<FlashPedestriansController>();
         foreach (KeyValuePair<int, FlashPedestriansController> pair in pedestrianInformer.activePedestrians)
         {
             logData.Add(pair.Value);
+        }
+        return logData;
+    }
+
+    List<FlashPedestriansDestination> getDestinationData()
+    {
+        List<FlashPedestriansDestination> logData = new List<FlashPedestriansDestination>();
+        foreach (GameObject destination in GameObject.FindGameObjectsWithTag("Destination"))
+        {
+            logData.Add(destination.GetComponent<FlashPedestriansDestination>());
         }
         return logData;
     }
@@ -107,15 +150,32 @@ public class HistoricalDataController : MonoBehaviour
             //TODO Initiate new pedestrians from a selected timestamp in stead of the first
             //TODO start timer at log-time
             //TODO break up this function into seperate readable ones
+
+            List<FlashPedestriansDestination> destinationList = new List<FlashPedestriansDestination>();
+            List<XElement> destinations =
+                (from destination in historicalTimeStamps[timeStamp].Descendants("Destination")
+                 select destination).ToList();
+            foreach (XElement destination in destinations)
+            {
+                destinationList.Add(recreatePedestrianDestination(destination.Descendants("DestinationData").Single()));
+            }
+
             List<XElement> pedestrians =
                 (from pedestrian in historicalTimeStamps[timeStamp].Descendants("Pedestrian")
                  select pedestrian).ToList();
             foreach (XElement pedestrian in pedestrians)
             {
                 FlashPedestriansProfile profile = recreatePedestrianProfile(pedestrian.Descendants("PedestrianProfile").Single());
-                FlashPedestriansDestination destination = recreatePedestrianDestination(pedestrian.Descendants("PedestrianDestination").Single());
                 Vector3 spawnPoint = recreatePedestrianSpawnPoint(pedestrian.Descendants("PedestrianPosition").Single());
-                pedestrianSpawner.SpawnPedestrianFromLog(spawnPoint, profile, destination);
+
+                foreach(FlashPedestriansDestination destination in destinationList)
+                {
+                    if (destination.name == pedestrian.Descendants("Destination").Single().Value.ToString());
+                    {
+                        pedestrianSpawner.SpawnPedestrianFromLog(spawnPoint, profile, destination);
+                    }
+                }
+                //pedestrianSpawner.SpawnPedestrianFromLog(spawnPoint, profile, destination);
             }
         }
     }
@@ -171,6 +231,7 @@ public class HistoricalDataController : MonoBehaviour
             timeStamp = new XElement("TimeStamp");
             timeStamp.Add(new XAttribute("time", timeController.timerText.text));
             processPedestrianData();
+            processDestinationData();
             logFileRootElement.Add(timeStamp);
 
             yield return new WaitForSeconds(logInterval);
