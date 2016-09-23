@@ -15,6 +15,8 @@ public class LegendButtonScript : MonoBehaviour
     void Start()
     {
         controller = transform.parent.parent.parent.GetComponent<ChartController>();
+        if(controller == null)
+            controller = transform.parent.parent.GetComponent<ChartController>();
         text = GetComponentInChildren<Text>();
         image = GetComponent<Image>();
     }

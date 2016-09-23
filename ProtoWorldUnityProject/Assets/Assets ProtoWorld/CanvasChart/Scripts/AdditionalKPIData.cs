@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class AdditionalKPIData : MonoBehaviour {
-    public ChartController chartTravel, chartTransfer, chartTransferPedestrian, chartDestination;
+    public ChartController chartTravel, chartTransfer, chartTransferPedestrian, chartDestination, chartDelays, chartQueues;
     public static int arrived = 0;
 
     private float dataTimer = 1f;
-    private List<int> walkers, cyclists, busPassengers, trainPassengers, drivers, others, arrivals;
+    private List<int> walkers, cyclists, busPassengers, trainPassengers, drivers, others, arrivals, queuing;
     private Transform spawnerPoints, transLines, destinationPoints;
 
     private List<int> pieCyc = new List<int>(), pieBus = new List<int>(), pieArriv = new List<int>();
@@ -27,6 +27,7 @@ public class AdditionalKPIData : MonoBehaviour {
         drivers = new List<int>();
         others = new List<int>();
         arrivals = new List<int>();
+        queuing = new List<int>();
 
         if (chartTravel != null)
         {
@@ -73,6 +74,17 @@ public class AdditionalKPIData : MonoBehaviour {
                 destinationCount.Add(fpd.destinationName, 0);
             }
         }
+
+        if (chartDelays != null)
+        {
+
+        }
+
+        if (chartQueues != null)
+        {
+            chartQueues.RegisterNewKPI();
+            chartQueues.SetSeriesName(0, "Queues");
+        }
     }
 	
 	// Update is called once per frame
@@ -87,6 +99,8 @@ public class AdditionalKPIData : MonoBehaviour {
             getArrived();
 
             getDestinations();
+            getDelays();
+            getQueues();
 
             if (chartTravel != null)
             {
@@ -144,6 +158,16 @@ public class AdditionalKPIData : MonoBehaviour {
                     chartDestination.AddTimedData(j, 0, destinationCount[key]);
                     j++;
                 }
+            }
+
+            if (chartDelays != null)
+            {
+
+            }
+
+            if (chartQueues != null)
+            {
+                chartQueues.AddTimedData(0, queuing.Count, queuing[queuing.Count - 1]);
             }
         }
         dataTimer += Time.deltaTime;
@@ -282,6 +306,16 @@ public class AdditionalKPIData : MonoBehaviour {
     private void getQueues()
     {
         //get waiting lines at public transport stations
+        int queues = 0;
+
+        Transform stations = GameObject.Find("Stations").transform;
+        foreach (Transform station in stations)
+        {
+            StationController sc = station.GetComponent<StationController>();
+            queues += sc.queuing;
+        }
+
+        queuing.Add(queues);
 
         //number
         //time
