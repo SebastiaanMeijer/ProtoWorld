@@ -411,6 +411,13 @@ public class ChartController : MonoBehaviour
         return SeriesCount - 1;
     }
 
+    public void RegisterNewKPI(string kpi)
+    {
+        int series = RegisterNewKPI();
+        SetSeriesName(series, kpi);
+        Debug.Log("Registered KPI " + series + " - " + kpi);
+    }
+
     public void AddTimedData(int seriesIndex, float value)
     {
         AddTimedData(seriesIndex, Time.time, value);

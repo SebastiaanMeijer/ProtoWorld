@@ -31,36 +31,25 @@ public class AdditionalKPIData : MonoBehaviour {
 
         if (chartTravel != null)
         {
-            chartTravel.RegisterNewKPI();
-            chartTravel.RegisterNewKPI();
-            chartTravel.RegisterNewKPI();
-            chartTravel.SetSeriesName(0, "Pedestrians");
-            chartTravel.SetSeriesName(1, "Cyclists");
-            chartTravel.SetSeriesName(2, "Passengers");
+            chartTravel.RegisterNewKPI("Pedestrians");
+            chartTravel.RegisterNewKPI("Cyclists");
+            chartTravel.RegisterNewKPI("Passengers");
         }
 
         if (chartTransfer != null)
         {
-            chartTransfer.RegisterNewKPI();
-            chartTransfer.RegisterNewKPI();
-            chartTransfer.RegisterNewKPI();
-            chartTransfer.RegisterNewKPI();
-            chartTransfer.RegisterNewKPI();
-            chartTransfer.SetSeriesName(0, "Ped To Cyc");
-            chartTransfer.SetSeriesName(1, "Cyc To Ped");
-            chartTransfer.SetSeriesName(2, "Ped To Pass");
-            chartTransfer.SetSeriesName(3, "Pass To Ped");
-            chartTransfer.SetSeriesName(4, "Arrivals");
+            chartTransfer.RegisterNewKPI("Ped To Cyc");
+            chartTransfer.RegisterNewKPI("Cyc To Ped");
+            chartTransfer.RegisterNewKPI("Ped To Pass");
+            chartTransfer.RegisterNewKPI("Pass To Ped");
+            chartTransfer.RegisterNewKPI("Arrivals");
         }
 
         if (chartTransferPedestrian != null)
         {
-            chartTransferPedestrian.RegisterNewKPI();
-            chartTransferPedestrian.RegisterNewKPI();
-            chartTransferPedestrian.RegisterNewKPI();
-            chartTransferPedestrian.SetSeriesName(0, "To Cyclists");
-            chartTransferPedestrian.SetSeriesName(1, "To Passengers");
-            chartTransferPedestrian.SetSeriesName(2, "To Arrivals");
+            chartTransferPedestrian.RegisterNewKPI("To Cyclists");
+            chartTransferPedestrian.RegisterNewKPI("To Passengers");
+            chartTransferPedestrian.RegisterNewKPI("To Arrivals");
         }
 
         destinationCount = new Dictionary<string, int>();
@@ -82,8 +71,7 @@ public class AdditionalKPIData : MonoBehaviour {
 
         if (chartQueues != null)
         {
-            chartQueues.RegisterNewKPI();
-            chartQueues.SetSeriesName(0, "Queues");
+            chartQueues.RegisterNewKPI("Queues");
         }
     }
 	
