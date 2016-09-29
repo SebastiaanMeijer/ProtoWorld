@@ -32,6 +32,7 @@ public class HandleChartViewClick : MonoBehaviour, IPointerDownHandler
     public void Start()
     {
         controller = transform.parent.parent.GetComponent<ChartController>();
+        if(controller == null) controller = transform.parent.GetComponent<ChartController>();
         chartRect = transform as RectTransform;
         GetComponent<Image>().color = new Color(0, 0, 0, 0);
     }
