@@ -1,4 +1,4 @@
-@echo off
+REM @echo off
 
 REM OSM TO DATABASE POPULATOR
 REM ---------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ psql -U %PGUSER% -d %PGDATABASE% -f "%SETUP_FILE%"
 
 REM -- Populate osm database --
 echo Populating OSM database...
-"..\..\..\WCFService\OSM Populate database\bin\x86\Debug\OSM Populate database.exe" %LOAD_FILE% "Server=%URL%;Port=%PGPORT%;Database=%PGDATABASE%;User Id=%PGUSER%;Password=%PGPASSWORD%;"
+"..\..\WCFService\OSM Populate database\bin\x86\Debug\OSM Populate database.exe" %LOAD_FILE% "Server=%URL%;Port=%PGPORT%;Database=%PGDATABASE%;User Id=%PGUSER%;Password=%PGPASSWORD%;"
 
 REM -- Populate full extent -- 
 echo Post-processing...

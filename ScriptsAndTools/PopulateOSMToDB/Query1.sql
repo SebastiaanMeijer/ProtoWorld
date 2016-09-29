@@ -1,4 +1,4 @@
-﻿-- Dummy call --
+-- Dummy call --
 SET statement_timeout = 0;
 
 SET statement_timeout = 0;
