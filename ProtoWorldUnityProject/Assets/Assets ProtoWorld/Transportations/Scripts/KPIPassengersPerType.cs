@@ -1,0 +1,71 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class KPIPassengersPerType : MonoBehaviour
+{
+    public int busPassengers = 0;
+    public int trainPassengers = 0;
+
+    public LineStatistics lineStatistics;
+    public int tramPassengers = 0;
+    public int metroPassengers = 0;
+    public int carPassengers = 0;
+
+    private Transform spawnerPoints, transLines, destinationPoints;
+
+    // Use this for initialization
+    void Start()
+    {
+        //Fetch the gameobjects to gather this dataz
+        spawnerPoints = GameObject.Find("SpawnerPoints").transform;
+        transLines = GameObject.Find("TransLines").transform;
+        destinationPoints = GameObject.Find("DestinationPoints").transform;
+
+        lineStatistics = GetComponentInChildren<LineStatistics>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        busPassengers = getBusPassengers();
+        tramPassengers = lineStatistics.totalTraveling;
+        trainPassengers = getTrainPassengers();
+        metroPassengers = getMetroPassengers();
+        carPassengers = getCarPassengers();
+    }
+
+    private int getBusPassengers()
+    {
+        int buscount = 0;
+        foreach (Transform transType in transLines)
+        {
+            if (transType.gameObject.activeSelf)
+            {
+                foreach (Transform carriage in transType)
+                {
+                    if (carriage.gameObject.activeSelf)
+                    {
+                        VehicleController vc = carriage.GetComponent<VehicleController>();
+                        if (vc != null) buscount += vc.headCount;
+                    }
+                }
+            }
+        }
+        return buscount;
+    }
+
+    private int getCarPassengers()
+    {
+       return 0;
+    }
+
+    private int getMetroPassengers()
+    {
+        return 0;
+    }
+
+    private int getTrainPassengers()
+    {
+        return 0;
+    }
+}
