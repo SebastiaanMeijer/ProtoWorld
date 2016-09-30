@@ -71,6 +71,7 @@ public class FlashPedestriansDestination : MonoBehaviour
     {
         Dictionary<string, Dictionary<string, string>> structuredData = new Dictionary<string, Dictionary<string, string>>();
         structuredData.Add("DestinationData", new Dictionary<string, string>());
+        structuredData["DestinationData"].Add("Name", destinationName);
         structuredData["DestinationData"].Add("PositionX", destinationTransform.position.x.ToString());
         structuredData["DestinationData"].Add("PositionY", destinationTransform.position.y.ToString());
         structuredData["DestinationData"].Add("PositionZ", destinationTransform.position.z.ToString());

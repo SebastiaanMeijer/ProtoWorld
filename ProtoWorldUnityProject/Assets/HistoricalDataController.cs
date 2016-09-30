@@ -14,7 +14,7 @@ public class HistoricalDataController : MonoBehaviour
 
     public int logInterval = 3;
 
-    private bool fileBrowserOpened;
+    private bool canLog;
     private string savedLogFilePath;
     private string loadedLogFilePath;
     private string logFileName;
@@ -32,7 +32,11 @@ public class HistoricalDataController : MonoBehaviour
 
     private GameObject loadLogWindow;
     private Dropdown timestampDropdown;
-    
+
+    GameObject flashPedestriansModule;
+    GameObject pedestrianDestionationPoints;
+    GameObject pedestrianSpawnerPoints;
+
 
     // Use this for initialization
     void Start()
@@ -43,7 +47,10 @@ public class HistoricalDataController : MonoBehaviour
         loadLogWindow = GameObject.Find("LoadLogCanvas");
         timestampDropdown = GameObject.Find("LoadFileTimestampDropdown").GetComponent<Dropdown>();
         loadLogWindow.SetActive(false);
-        fileBrowserOpened = false;
+        canLog = true;
+        flashPedestriansModule = GameObject.Find("FlashPedestrianModule");
+        pedestrianDestionationPoints = GameObject.Find("DestinationPoints");
+        pedestrianSpawnerPoints = GameObject.Find("SpawnerPoints");
 
         logFile = new XDocument();
         logFileRootElement = new XElement("LogData");
@@ -150,33 +157,37 @@ public class HistoricalDataController : MonoBehaviour
             //TODO Initiate new pedestrians from a selected timestamp in stead of the first
             //TODO start timer at log-time
             //TODO break up this function into seperate readable ones
+            removeActiveData();
 
-            List<FlashPedestriansDestination> destinationList = new List<FlashPedestriansDestination>();
+            List<GameObject> destinationList = new List<GameObject>();
             List<XElement> destinations =
                 (from destination in historicalTimeStamps[timeStamp].Descendants("Destination")
                  select destination).ToList();
             foreach (XElement destination in destinations)
             {
-                destinationList.Add(recreatePedestrianDestination(destination.Descendants("DestinationData").Single()));
+                destinationList.Add(recreatePedestrianDestination(destination.Descendants("DestinationData").SingleOrDefault()));
             }
 
-            List<XElement> pedestrians =
-                (from pedestrian in historicalTimeStamps[timeStamp].Descendants("Pedestrian")
-                 select pedestrian).ToList();
-            foreach (XElement pedestrian in pedestrians)
-            {
-                FlashPedestriansProfile profile = recreatePedestrianProfile(pedestrian.Descendants("PedestrianProfile").Single());
-                Vector3 spawnPoint = recreatePedestrianSpawnPoint(pedestrian.Descendants("PedestrianPosition").Single());
+            //List<XElement> pedestrians =
+            //    (from pedestrian in historicalTimeStamps[timeStamp].Descendants("Pedestrian")
+            //     select pedestrian).ToList();
+            //foreach (XElement pedestrian in pedestrians)
+            //{
+            //    FlashPedestriansProfile profile = recreatePedestrianProfile(pedestrian.Descendants("PedestrianProfile").SingleOrDefault());
+            //    Vector3 spawnPoint = recreatePedestrianSpawnPoint(pedestrian.Descendants("PedestrianPosition").SingleOrDefault());
 
-                foreach(FlashPedestriansDestination destination in destinationList)
-                {
-                    if (destination.name == pedestrian.Descendants("Destination").Single().Value.ToString());
-                    {
-                        pedestrianSpawner.SpawnPedestrianFromLog(spawnPoint, profile, destination);
-                    }
-                }
-                //pedestrianSpawner.SpawnPedestrianFromLog(spawnPoint, profile, destination);
-            }
+            //    foreach(FlashPedestriansDestination destination in destinationList)
+            //    {
+            //        if (destination.name == pedestrian.Descendants("Destination").SingleOrDefault().Value.ToString());
+            //        {
+            //            pedestrianSpawner.SpawnPedestrianFromLog(spawnPoint, profile, destination);
+            //        }
+            //    }
+            //    //pedestrianSpawner.SpawnPedestrianFromLog(spawnPoint, profile, destination);
+            //}
+            timeController.gameTime = 0f;
+            timeController.PauseGame(false);
+           
         }
     }
 
@@ -191,18 +202,25 @@ public class HistoricalDataController : MonoBehaviour
         return spawnPoint;
     }
 
-    public FlashPedestriansDestination recreatePedestrianDestination(XElement destinationData)
+    public GameObject recreatePedestrianDestination(XElement destinationData)
     {
-        FlashPedestriansDestination destination = new FlashPedestriansDestination();
+        GameObject flashDestination = new GameObject();
+        flashDestination.AddComponent<FlashPedestriansDestination>();
+        FlashPedestriansDestination destination = flashDestination.GetComponent<FlashPedestriansDestination>();
         Vector3 position = new Vector3();
 
         position.x = float.Parse(destinationData.Descendants("PositionX").Single().Value.ToString());
         position.y = float.Parse(destinationData.Descendants("PositionY").Single().Value.ToString());
         position.z = float.Parse(destinationData.Descendants("PositionZ").Single().Value.ToString());
+        destination.destinationName = destinationData.Descendants("Name").Single().Value.ToString();
 
+        flashDestination.transform.parent = pedestrianDestionationPoints.transform;
+        flashDestination.name = "FlashDestination";
         destination.destinationTransform.position = position;
+        destination.transform.position = position;
+        
 
-        return destination;
+        return flashDestination;
     }
 
     public FlashPedestriansProfile recreatePedestrianProfile(XElement profileData)
@@ -226,7 +244,7 @@ public class HistoricalDataController : MonoBehaviour
 
     public IEnumerator processLogData()
     {
-        while (!fileBrowserOpened)
+        while (canLog)
         {
             timeStamp = new XElement("TimeStamp");
             timeStamp.Add(new XAttribute("time", timeController.timerText.text));
@@ -240,16 +258,18 @@ public class HistoricalDataController : MonoBehaviour
 
     public void SaveHistoricalData()
     {
-        fileBrowserOpened = true;
+        canLog = false;
         logFileName = DateTime.Now.ToString("ddMMyyyy_HH-mm-ss");
         savedLogFilePath = EditorUtility.SaveFilePanel("Save Data", "/Assets/SimulationLogs", logFileName, ".xml");
         logFile.Save(savedLogFilePath);
-        fileBrowserOpened = false;
+        canLog = true;
     }
 
     public void openLoadLogFileWindow()
     {
-        fileBrowserOpened = true;
+        //stop game time
+        canLog = false;
+        timeController.PauseGame(true);
         loadLogWindow.SetActive(true);
         timestampDropdown.options.Clear();
         timestampDropdown.captionText.text = "";
@@ -270,7 +290,6 @@ public class HistoricalDataController : MonoBehaviour
             timestampDropdown.value = 1;
             timestampDropdown.value = 0;
         }
-        removeActiveData();
     }
 
     public void cancelLoadLogFile()
@@ -284,16 +303,26 @@ public class HistoricalDataController : MonoBehaviour
     public void LoadLogdata()
     {
         processLoadedLogData(timestampDropdown.options[timestampDropdown.value].text);
-        fileBrowserOpened = false;
+        canLog = true;
         loadLogWindow.SetActive(false);
     }
 
     public void removeActiveData(){
+        GameObject[] currentPedestrianSpawnerPoints = GameObject.FindGameObjectsWithTag("PedestrianSpawner");
+        GameObject[] currentPedestrianDestinationPoints = GameObject.FindGameObjectsWithTag("PedestrianDestination");
 		GameObject[] currentPedestrians = GameObject.FindGameObjectsWithTag ("Pedestrian");
 		foreach (GameObject pedestrian in currentPedestrians) {
 			Destroy (pedestrian);
 		}
-	}
+        foreach (GameObject spawner in currentPedestrianSpawnerPoints)
+        {
+            Destroy(spawner);
+        }
+        foreach (GameObject destination in currentPedestrianDestinationPoints)
+        {
+            Destroy(destination);
+        }
+    }
 
 	public void createTimeStampList(){
 		List<XElement> timeStampElements =
