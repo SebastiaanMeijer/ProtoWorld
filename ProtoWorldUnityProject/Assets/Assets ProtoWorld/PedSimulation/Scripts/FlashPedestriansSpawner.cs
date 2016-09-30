@@ -319,6 +319,23 @@ public class FlashPedestriansSpawner : MonoBehaviour
 
         return priorities;
     }
+
+    public Dictionary<string, string> getSingleValueLogData()
+    {
+        Dictionary<string, string> structuredData = new Dictionary<string, string>();
+        structuredData.Add("MaxNumberOfPedestriansToSpawn", maxNumberOfPedestriansToSpawn.ToString());
+        structuredData.Add("SpawnPedestriansInInfiteLoop", spawnPedestriansInInfiniteLoop.ToString());
+        structuredData.Add("MinPedestriansPerSpawningIteration", minPedestriansPerSpawningIteration.ToString());
+        structuredData.Add("MaxPedestriansPerSpawningIteration", maxPedestriansPerSpawningIteration.ToString());
+        structuredData.Add("PedestrianSpawnFrequencyInSeconds", spawningFrequencyInSeconds.ToString());
+        structuredData.Add("SpawningArea", spawningArea.ToString());
+        structuredData.Add("RadiousToCheckStations", radiousToCheckStations.ToString());
+        structuredData.Add("SpawningDelayAtStart", spawningDelayAtStart.ToString());
+        structuredData.Add("InitialNumberOfPedestriansInCache", initialNumberOfPedestriansInCache.ToString());
+        structuredData.Add("NumberOfPedestriansGenerated", numberOfPedestriansGenerated.ToString());
+        structuredData.Add("NumberOfPedestriansOnDestination", numberOfPedestriansOnDestination.ToString());
+        return structuredData;
+    }
 }
 
 

@@ -62,21 +62,13 @@ public class FlashPedestriansDestination : MonoBehaviour
     public Dictionary<string, string> getSingleValueLogData()
     {
         Dictionary<string, string> structuredData = new Dictionary<string, string>();
-        structuredData.Add("name", destinationName.ToString());
+        structuredData.Add("Name", destinationName);
+        structuredData.Add("PositionX", destinationTransform.position.x.ToString());
+        structuredData.Add("PositionY", destinationTransform.position.y.ToString());
+        structuredData.Add("PositionZ", destinationTransform.position.z.ToString());
+        structuredData.Add("CheckRadius", radiousToCheckStations.ToString());
+        structuredData.Add("Priority", destinationPriority.ToString());
         return structuredData;
 
-    }
-
-    public Dictionary<string, Dictionary<string, string>> getMultipleValueLogData()
-    {
-        Dictionary<string, Dictionary<string, string>> structuredData = new Dictionary<string, Dictionary<string, string>>();
-        structuredData.Add("DestinationData", new Dictionary<string, string>());
-        structuredData["DestinationData"].Add("Name", destinationName);
-        structuredData["DestinationData"].Add("PositionX", destinationTransform.position.x.ToString());
-        structuredData["DestinationData"].Add("PositionY", destinationTransform.position.y.ToString());
-        structuredData["DestinationData"].Add("PositionZ", destinationTransform.position.z.ToString());
-        structuredData["DestinationData"].Add("CheckRadius", radiousToCheckStations.ToString());
-        structuredData["DestinationData"].Add("Priority", destinationPriority.ToString());
-        return structuredData;
     }
 }

@@ -75,11 +75,7 @@ public class HistoricalDataController : MonoBehaviour
 			Dictionary<string,string> singleValueLogData = data.getSingleValueLogData ();
 			Dictionary<string,Dictionary<string,string>> multipleValueLogData = data.getMultipleValueLogData ();
 			foreach (string key in singleValueLogData.Keys) {
-				if (key.Equals ("id")) {
-					pedestrianElement.Add (new XAttribute ("id", singleValueLogData [key]));
-				} else {
 					pedestrianElement.Add (new XElement (key, singleValueLogData [key]));
-				}
 			}
 			foreach (string key in multipleValueLogData.Keys) {
 				Dictionary<string,string> catagoryLogData = multipleValueLogData [key];
@@ -93,34 +89,31 @@ public class HistoricalDataController : MonoBehaviour
         }
     }
 
-    void processDestinationData()
+    void processPedestrianSpawnData()
     {
 
-        foreach (FlashPedestriansDestination data in getDestinationData())
+        foreach (FlashPedestriansSpawner data in getPedestrianSpawnerData())
         {
-            XElement destinationElement = new XElement("Destination");
+            XElement spawnerElement = new XElement("PedestrianSpawner");
             Dictionary<string, string> singleValueLogData = data.getSingleValueLogData();
-            Dictionary<string, Dictionary<string, string>> multipleValueLogData = data.getMultipleValueLogData();
             foreach (string key in singleValueLogData.Keys)
             {
-                if (key.Equals("name"))
-                {
-                    destinationElement.Add(new XAttribute("name", singleValueLogData[key]));
-                }
-                else
-                {
-                    destinationElement.Add(new XElement(key, singleValueLogData[key]));
-                }
+                spawnerElement.Add(new XElement(key, singleValueLogData[key]));
             }
-            foreach (string key in multipleValueLogData.Keys)
+            timeStamp.Add(spawnerElement);
+        }
+    }
+
+    void processPedestrianDestinationData()
+    {
+
+        foreach (FlashPedestriansDestination data in getPedestrianDestinationData())
+        {
+            XElement destinationElement = new XElement("PedestrianDestination");
+            Dictionary<string, string> singleValueLogData = data.getSingleValueLogData();
+            foreach (string key in singleValueLogData.Keys)
             {
-                Dictionary<string, string> categoryLogData = multipleValueLogData[key];
-                XElement categoryElement = new XElement(key);
-                destinationElement.Add(categoryElement);
-                foreach (string catagoryDataKey in categoryLogData.Keys)
-                {
-                    categoryElement.Add(new XElement(catagoryDataKey, categoryLogData[catagoryDataKey]));
-                }
+                destinationElement.Add(new XElement(key, singleValueLogData[key]));
             }
             timeStamp.Add(destinationElement);
         }
@@ -136,12 +129,22 @@ public class HistoricalDataController : MonoBehaviour
         return logData;
     }
 
-    List<FlashPedestriansDestination> getDestinationData()
+    List<FlashPedestriansDestination> getPedestrianDestinationData()
     {
         List<FlashPedestriansDestination> logData = new List<FlashPedestriansDestination>();
-        foreach (GameObject destination in GameObject.FindGameObjectsWithTag("Destination"))
+        foreach (GameObject destination in GameObject.FindGameObjectsWithTag("PedestrianDestination"))
         {
             logData.Add(destination.GetComponent<FlashPedestriansDestination>());
+        }
+        return logData;
+    }
+
+    List<FlashPedestriansSpawner> getPedestrianSpawnerData()
+    {
+        List<FlashPedestriansSpawner> logData = new List<FlashPedestriansSpawner>();
+        foreach (GameObject spawner in GameObject.FindGameObjectsWithTag("PedestrianSpawner"))
+        {
+            logData.Add(spawner.GetComponent<FlashPedestriansSpawner>());
         }
         return logData;
     }
@@ -249,7 +252,8 @@ public class HistoricalDataController : MonoBehaviour
             timeStamp = new XElement("TimeStamp");
             timeStamp.Add(new XAttribute("time", timeController.timerText.text));
             processPedestrianData();
-            processDestinationData();
+            processPedestrianDestinationData();
+            processPedestrianSpawnData();
             logFileRootElement.Add(timeStamp);
 
             yield return new WaitForSeconds(logInterval);
