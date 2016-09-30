@@ -5,12 +5,12 @@ public class KPIPassengersPerType : MonoBehaviour
 {
     public int busPassengers = 0;
     public int trainPassengers = 0;
-
-    public LineStatistics lineStatistics;
     public int tramPassengers = 0;
     public int metroPassengers = 0;
     public int carPassengers = 0;
+    public int bicyclePassengers = 0;
 
+    private LineStatistics lineStatistics;
     private Transform spawnerPoints, transLines, destinationPoints;
 
     // Use this for initialization
@@ -32,6 +32,7 @@ public class KPIPassengersPerType : MonoBehaviour
         trainPassengers = getTrainPassengers();
         metroPassengers = getMetroPassengers();
         carPassengers = getCarPassengers();
+        bicyclePassengers = getBicyclePassengers();
     }
 
     private int getBusPassengers()
@@ -67,5 +68,31 @@ public class KPIPassengersPerType : MonoBehaviour
     private int getTrainPassengers()
     {
         return 0;
+    }
+
+    private int getBicyclePassengers()
+    {
+        int cyclists = 0;
+        foreach (Transform spawner in spawnerPoints)
+        {
+            if (spawner.gameObject.activeSelf)
+            {
+                foreach (Transform pedestrian in spawner)
+                {
+                    if (pedestrian.gameObject.activeSelf)
+                    {
+                        foreach (Transform child in pedestrian)
+                        {
+                            if (child.name == "bike" && child.gameObject.activeSelf)
+                            {
+                                cyclists++;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return cyclists;
     }
 }

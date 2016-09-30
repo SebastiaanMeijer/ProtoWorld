@@ -250,7 +250,9 @@ public class ChartViewController : MonoBehaviour
             else
             {
                 for (int i = 0; i < baselines.Length; i++)
+                {
                     baselines[i] += new Vector3(0, lines[i].y, 0);
+                }
                 lines = baselines;
             }
             Mesh lineMesh = ChartUtils.GenerateLineMesh(lines, 1.5f);
