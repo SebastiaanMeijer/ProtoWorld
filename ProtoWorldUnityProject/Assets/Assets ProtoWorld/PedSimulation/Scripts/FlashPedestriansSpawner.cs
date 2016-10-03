@@ -115,7 +115,7 @@ public class FlashPedestriansSpawner : MonoBehaviour
     /// <summary>
     /// Reference to the script that defines the global parameters for the Flash Pedestrians.
     /// </summary>
-    private FlashPedestriansGlobalParameters pedGlobalParameters;
+    public FlashPedestriansGlobalParameters pedGlobalParameters;
 
     /// <summary>
     /// Itinerary informer that handles the commuting of pedestrians.
@@ -130,12 +130,12 @@ public class FlashPedestriansSpawner : MonoBehaviour
     /// <summary>
     /// Static int to get the unique ids for the pedestrians.
     /// </summary>
-    private static int nextIdForPedestrian = 0;
+    public static int nextIdForPedestrian = 0;
 
     /// <summary>
     /// Awakes the script.
     /// </summary>
-    void Awake()
+    public void Awake()
     {
         // Get the global parameters of Flash Pedestrians
         pedGlobalParameters = GetComponentInParent<FlashPedestriansGlobalParameters>();
@@ -323,6 +323,9 @@ public class FlashPedestriansSpawner : MonoBehaviour
     public Dictionary<string, string> getSingleValueLogData()
     {
         Dictionary<string, string> structuredData = new Dictionary<string, string>();
+        structuredData.Add("PositionX", transform.position.x.ToString());
+        structuredData.Add("PositionY", transform.position.y.ToString());
+        structuredData.Add("PositionZ", transform.position.z.ToString());
         structuredData.Add("MaxNumberOfPedestriansToSpawn", maxNumberOfPedestriansToSpawn.ToString());
         structuredData.Add("SpawnPedestriansInInfiteLoop", spawnPedestriansInInfiniteLoop.ToString());
         structuredData.Add("MinPedestriansPerSpawningIteration", minPedestriansPerSpawningIteration.ToString());
