@@ -92,7 +92,7 @@ public class ZoomScrollbarMMV : MonoBehaviour {
 					level = i;
 					ZoomScrollbarMMV.level = level;
 
-					handleText.text = "" + stagesHeights [i];
+					handleText.text = "" + displayText [i];
 
 				}
 			}
