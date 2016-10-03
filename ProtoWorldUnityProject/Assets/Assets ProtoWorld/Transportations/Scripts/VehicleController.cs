@@ -49,6 +49,9 @@ public class VehicleController : MonoBehaviour
 
     protected TimeController timeController;
 
+    //Delay of the previous leg
+    public float delay = 0;
+
 
     [System.Serializable]
     public class DisembarkStats
@@ -184,6 +187,11 @@ public class VehicleController : MonoBehaviour
         {
             if (DistanceToNextStation < 1)
             {
+                //Calucate delay
+                float endtime = timeController.gameTime;
+                float duration = endtime - startTime;
+                delay = duration - LegTravelTime;
+
                 ArrivedAtNextStation();
                 //startTime = Time.time;
                 ResetTimer();
