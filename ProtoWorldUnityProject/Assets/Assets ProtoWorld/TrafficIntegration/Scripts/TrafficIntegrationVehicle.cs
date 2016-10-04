@@ -176,12 +176,12 @@ public class TrafficIntegrationVehicle : MonoBehaviour
         transform.position = newPosition;
 
         //Fix the rotation
-        //Note: There are not conventions for angles between different 
+        //Note: There are no conventions for angles between different 
         //simulations, so car rotations may appear wrong in the simulation. 
         //If that is the case, fix it in the following lines:
         transform.rotation = Quaternion.Euler(0, 90.0f, 0);
-        this.transform.Rotate(Vector3.up, angle + 180);
-        //this.transform.Rotate(Vector3.up, -angle);
+        //this.transform.Rotate(Vector3.up, angle + 180);
+        this.transform.Rotate(Vector3.up, -angle);
 
         if (tellMeWhatYouAreDoing)
             UnityEngine.Debug.Log("Vehicle " + this.name + " is rotating: " + angle);

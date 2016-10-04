@@ -43,12 +43,15 @@ public class SimulationReader : MonoBehaviour
     protected bool useDataBase;
 
     protected string connectionString;
-
+    
+    [HideInInspector]
     public string fileName;
 
     public SimulationIOBase simulationIO;
 
     private static string moduleName = "SimulationReader";
+
+    Thread thread;
 
     void Awake()
     {
@@ -214,7 +217,7 @@ public class SimulationReader : MonoBehaviour
             if (trafficDB != null)
                 simulationIO.SetTrafficDB(trafficDB);
 
-            Thread thread = new Thread(simulationIO.Read);
+            thread = new Thread(simulationIO.Read);
             switch (trafficController.typeOfIntegration)
             {
                 case TrafficIntegrationController.TypeOfIntegration.SumoLiveIntegration:
@@ -260,12 +263,20 @@ public class SimulationReader : MonoBehaviour
         return trafficDB;
     }
 
+    /// <summary>
+    /// Releases the resources when the object containing the script is being destroyed.
+    /// </summary>
     void OnDestroy()
     {
         if (simulationIO != null)
         {
             simulationIO.RequestStop();
             //simulationIO.CloseWindow();
+        }
+
+        if (thread != null)
+        {
+            thread.Abort();
         }
     }
 
@@ -278,6 +289,11 @@ public class SimulationReader : MonoBehaviour
         if (simulationIO != null)
         {
             simulationIO.RequestStop();
+
+            if (thread != null)
+                thread.Abort();
+            return;
+
             //simulationIO.CloseWindow();
         }
     }
