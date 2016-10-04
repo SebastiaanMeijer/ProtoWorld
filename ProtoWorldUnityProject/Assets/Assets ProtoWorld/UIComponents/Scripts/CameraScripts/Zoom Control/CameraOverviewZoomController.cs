@@ -89,7 +89,7 @@ public class CameraOverviewZoomController : MonoBehaviour
                 log.Info(string.Format("{0}:{1}:{2}:{3}", logSeriesId, "action", 0, "Zoomed out"));
 
             if (ebpc != null)
-                ebpc.AddEvent(Time.time, "Zoomed out");
+                ebpc.AddEvent(Time.time, "Zoomed out", false);
         }
     }
 }

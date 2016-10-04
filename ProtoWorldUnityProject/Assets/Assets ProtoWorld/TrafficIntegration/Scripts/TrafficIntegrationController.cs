@@ -83,7 +83,7 @@ public class TrafficIntegrationController : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        string path = Application.dataPath + "/confTraffic.cfg";
+        string path = Application.streamingAssetsPath + "/confTraffic.cfg";
         //Debug.Log("This is the path of the traffic config file: " + path);
 
         //Use the confTraffic.cgf in order to make the project portable

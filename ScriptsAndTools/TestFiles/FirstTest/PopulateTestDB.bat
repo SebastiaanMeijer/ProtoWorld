@@ -1,1 +1,2 @@
-"../../PopulateOSMToDB/PopulateOSMToDB.bat" TestDB ./test.osm
+cd "../../PopulateOSMToDB/"
+"PopulateOSMToDB.bat" TestDB ../TestFiles/FirstTest/test.osm
