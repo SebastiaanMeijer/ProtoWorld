@@ -7,9 +7,12 @@ public class KPIDeltaDelaysPerType : MonoBehaviour
     public int deltaCarDelay = 0;
     public int deltaTramDelay = 0;
 
+    private KPIDelays delays;
+
     // Use this for initialization
     void Start()
     {
+        delays = transform.GetComponent<KPIDelays>();
     }
 
     // Update is called once per frame
