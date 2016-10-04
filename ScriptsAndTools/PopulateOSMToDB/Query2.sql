@@ -1,6 +1,3 @@
-﻿-- Dummy call --
-select * from node limit 1;
-
 -- Specifying the country boundaries
 -- NOTE: Modify the given numbers to reflect your own country. This is
 -- internally used by the visualization engine to interpolate the coordinate conversions

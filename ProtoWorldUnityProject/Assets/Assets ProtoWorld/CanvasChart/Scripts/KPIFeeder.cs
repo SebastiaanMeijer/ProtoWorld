@@ -32,7 +32,7 @@ public class KPIFeeder : MonoBehaviour
     private static readonly log4net.ILog log =
         log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-    public UIChartTypes chartType = UIChartTypes.Bar;
+    public UIChartTypes chartType = UIChartTypes.Line;
 
     public List<GameObject> gameObjects;
     public List<string> kpiStrings;
@@ -182,7 +182,6 @@ public class KPIFeeder : MonoBehaviour
             controller.SetSeriesName(i, kpiNames[i]);
         }
     }
-
 
     public void AddKPI(string kpi, string legend, string type)
     {

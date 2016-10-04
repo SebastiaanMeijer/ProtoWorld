@@ -276,6 +276,15 @@ public class ProtoWorldMenu : MonoBehaviour
             rectTrans.localPosition = Vector3.zero;
             // If the module is newly added, the scale somehow became 0,0,0 (?!)
             rectTrans.localScale = Vector3.one;
+
+            //Initialize the values of the KPIChart
+            var feeder = chart.GetComponent<KPIFeeder>();
+            feeder.chartType = UIChartTypes.Line;
+            feeder.gameObjects = new List<GameObject>();
+            feeder.kpiStrings = new List<string>();
+            feeder.kpiNames = new List<string>();
+            feeder.kpiColors = new List<Color>();
+
             Selection.activeGameObject = chart;
         }
     }

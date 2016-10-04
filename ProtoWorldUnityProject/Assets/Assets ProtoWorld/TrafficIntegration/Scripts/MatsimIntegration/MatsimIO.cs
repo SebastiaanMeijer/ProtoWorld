@@ -41,6 +41,8 @@ public class MatsimIO : SimulationIOBase
         {
             NpgsqlConnection dbConn = new NpgsqlConnection(connectionString);
 
+            // TODO It might generate a connection timeout if this query the whole table,
+            // therefor more reasonable to split up the query by eventtime (eg. using a for-loop)...
             string commandString = string.Format("SELECT * FROM {0} order by eventtime, veh_id;", vehTable);
             //Debug.Log(commandString);
             var dbCommand = new NpgsqlCommand(commandString, dbConn);
