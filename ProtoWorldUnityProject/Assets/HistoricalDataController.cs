@@ -12,7 +12,6 @@ public class HistoricalDataController : MonoBehaviour
 {
     public int logInterval = 3;
 
-    private bool canLog;
     private string savedLogFilePath;
     private string loadedLogFilePath;
     private string logFileName;
@@ -21,12 +20,17 @@ public class HistoricalDataController : MonoBehaviour
     private XElement timeStamp;
     private XElement logFileRootElement;
 
-	private Dictionary<string,XElement> historicalTimeStamps;
+	private Dictionary<float,XElement> historicalTimeStamps;
 
     private TimeController timeController;
 
     private GameObject loadLogWindow;
     private Dropdown timestampDropdown;
+
+	GameObject flashPedestriansModule;
+	private FlashPedestriansGlobalParameters globalParameters;
+
+    private List<float> gametimeEntries;
 
     // Use this for initialization
     void Start()
@@ -35,8 +39,9 @@ public class HistoricalDataController : MonoBehaviour
         loadLogWindow = GameObject.Find("LoadLogCanvas");
         timestampDropdown = GameObject.Find("LoadFileTimestampDropdown").GetComponent<Dropdown>();
         loadLogWindow.SetActive(false);
-        canLog = true;
-
+        flashPedestriansModule = GameObject.Find("FlashPedestriansModule");
+        globalParameters = flashPedestriansModule.GetComponent<FlashPedestriansGlobalParameters>();
+		gametimeEntries = new List<float>();
         logFile = new XDocument();
         logFileRootElement = new XElement("LogData");
         logFile.Add(logFileRootElement);
@@ -48,20 +53,24 @@ public class HistoricalDataController : MonoBehaviour
     void Update()
     {
     }
+		
+	public void activateAllObjects()
+	{
+
+	}
 
 	public IEnumerator processLogData()
 	{
-		while (canLog)
+		while (!globalParameters.flashPedestriansPaused)
 		{
 			timeStamp = new XElement("TimeStamp");
-			timeStamp.Add(new XAttribute("time", timeController.timerText.text));
+			timeStamp.Add(new XAttribute("timestamp", timeController.gameTime));
 			foreach (LogObject logObject in InterfaceHelper.FindObjects<LogObject>())
 			{
 				processObjectLogData (new XElement (logObject.getLogData().Keys.First()), logObject.getLogData());
 			}
 			logFileRootElement.Add(timeStamp);
 			yield return new WaitForSeconds(logInterval);
-
 		}
 	}
 
@@ -86,21 +95,19 @@ public class HistoricalDataController : MonoBehaviour
 
 	public void SaveHistoricalData()
 	{
-		canLog = false;
+		timeController.PauseGame(true);
 		logFileName = DateTime.Now.ToString("ddMMyyyy_HH-mm-ss");
 		savedLogFilePath = EditorUtility.SaveFilePanel("Save Data", "/Assets/SimulationLogs", logFileName, "xml");
 		logFile.Save(savedLogFilePath);
-		canLog = true;
+		timeController.PauseGame(false);
 	}
 
 	public void openLoadLogFileWindow()
 	{
-		//stop game time
-		canLog = false;
 		timeController.PauseGame(true);
 		loadLogWindow.SetActive(true);
 		timestampDropdown.options.Clear();
-		timestampDropdown.captionText.text = "";
+		timestampDropdown.captionText.text = "Please choose File";
 	}
 
 	public void loadLogfile()
@@ -111,9 +118,9 @@ public class HistoricalDataController : MonoBehaviour
 			logFile = XDocument.Load(loadedLogFilePath);
 			logFileRootElement = logFile.Root;
 			createTimeStampList();
-			foreach (KeyValuePair<string, XElement> timeStamp in historicalTimeStamps)
+			foreach (KeyValuePair<float, XElement> timeStamp in historicalTimeStamps)
 			{
-				timestampDropdown.options.Add(new Dropdown.OptionData() { text = timeStamp.Key });
+				timestampDropdown.options.Add(new Dropdown.OptionData() { text = timeController.gameTimeToTimeStamp(timeStamp.Key)});
 			}
 			timestampDropdown.value = 1;
 			timestampDropdown.value = 0;
@@ -124,9 +131,10 @@ public class HistoricalDataController : MonoBehaviour
 		List<XElement> timeStampElements =
 			(from timeStampElement in logFileRootElement.Descendants("TimeStamp")
 				select timeStampElement).ToList();
-		historicalTimeStamps = new Dictionary<string, XElement>();
-		foreach (XElement timeStampElement in timeStampElements) {
-			historicalTimeStamps.Add (timeStampElement.Attribute ("time").Value.ToString(), timeStampElement);
+        historicalTimeStamps = new Dictionary<float, XElement>();
+        foreach (XElement timeStampElement in timeStampElements) {
+            gametimeEntries.Add(float.Parse(timeStampElement.Attribute("timestamp").Value.ToString()));
+			historicalTimeStamps.Add (float.Parse(timeStampElement.Attribute ("timestamp").Value.ToString()), timeStampElement);
 		}
 		print(historicalTimeStamps.Count);
 	}
@@ -137,9 +145,10 @@ public class HistoricalDataController : MonoBehaviour
 		timestampDropdown.options.Clear();
 		timestampDropdown.captionText.text = "";
 		loadLogWindow.SetActive(false);
+		timeController.PauseGame(false);
 	}
 
-	public void recreateLogDataFromTimeStamp(string timeStamp){
+	public void recreateLogDataFromTimeStamp(float timeStamp){
 		foreach (LogObject logObject in InterfaceHelper.FindObjects<LogObject>()){
 			foreach (XElement loggedObject in historicalTimeStamps[timeStamp].Descendants(((MonoBehaviour)logObject).gameObject.tag)) {
 				Dictionary<string, Dictionary<string, string>> logData = new Dictionary<string,Dictionary<string,string>> ();
@@ -168,15 +177,7 @@ public class HistoricalDataController : MonoBehaviour
 
 	public void LoadLogdata()
 	{
-		if (loadedLogFilePath.Length <= 0) {
-			throw new Exception ("no loaded logFile!");
-		} else {
-			removeActiveData ();
-			recreateLogDataFromTimeStamp (timestampDropdown.options[timestampDropdown.value].text);
-			timeController.gameTime = 0f;
-			timeController.PauseGame(false);
-		}
-		canLog = true;
+		recreateLogDataFromTimeStamp(gametimeEntries[timestampDropdown.value]);
 		loadLogWindow.SetActive(false);
 	}
 }

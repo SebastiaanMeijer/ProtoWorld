@@ -48,6 +48,11 @@ public class FlashPedestriansDestination : MonoBehaviour, LogObject
 
     void Awake()
     {
+        initializeDestination();
+    }
+
+    public void initializeDestination()
+    {
         destinationTransform = this.transform;
 
         FlashPedestriansGlobalParameters pedGlobalParameters = GetComponent<FlashPedestriansGlobalParameters>();
@@ -56,7 +61,7 @@ public class FlashPedestriansDestination : MonoBehaviour, LogObject
         stationsNearThisDestination = Physics.OverlapSphere(destinationTransform.position, radiousToCheckStations, 1 << LayerMask.NameToLayer("Stations"));
 
         //Debug.Log(this.gameObject.name + " has found " + stationsNearThisDestination.Length 
-            //+ " stations nearby");
+        //+ " stations nearby");
     }
 
 	public Dictionary<string, Dictionary<string, string>> getLogData(){
@@ -72,19 +77,21 @@ public class FlashPedestriansDestination : MonoBehaviour, LogObject
 	}
 
 	public void rebuildFromLog(Dictionary<string, Dictionary<string, string>> logData){
-		GameObject flashDestination = new GameObject();
-		flashDestination.AddComponent<FlashPedestriansDestination>();
-		FlashPedestriansDestination destination = flashDestination.GetComponent<FlashPedestriansDestination>();
+		GameObject flashDestinationObject = GameObject.Instantiate(gameObject) as GameObject;
+		FlashPedestriansDestination flashDestinationScript = flashDestinationObject.GetComponent<FlashPedestriansDestination>();
 		Vector3 position = new Vector3();
 
-		position.x = float.Parse(logData[tag]["PositionX"].ToString());
-		position.y = float.Parse(logData[tag]["PositionY"].ToString());
-		position.z = float.Parse(logData[tag]["PositionZ"].ToString());
-		destination.destinationName = logData[tag]["Name"].ToString();
+		position.x = float.Parse(logData [tag]["PositionX"]);
+		position.y = float.Parse(logData [tag]["PositionY"]);
+		position.z = float.Parse(logData [tag]["PositionZ"]);
+		flashDestinationScript.destinationName = logData [tag]["Name"];
+		flashDestinationScript.radiousToCheckStations = float.Parse(logData [tag]["CheckRadius"]);
+		flashDestinationScript.destinationPriority = float.Parse(logData [tag]["Priority"]);
+		flashDestinationObject.transform.parent = GameObject.Find("DestinationPoints").transform;
+		flashDestinationObject.name = "FlashDestination";
+		flashDestinationScript.destinationTransform.position = position;
 
-		flashDestination.transform.parent = GameObject.Find("DestinationPoints").transform;
-		flashDestination.name = "FlashDestination";
-		destination.destinationTransform.position = position;
-		destination.transform.position = position;
+		flashDestinationScript.initializeDestination();
+		flashDestinationScript.enabled = true;
 	}
 }

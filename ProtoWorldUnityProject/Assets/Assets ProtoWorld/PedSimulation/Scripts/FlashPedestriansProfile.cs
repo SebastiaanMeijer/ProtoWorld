@@ -67,7 +67,8 @@ public class FlashPedestriansProfile
 		return structuredData;
 	}
 
-	public void rebuildFromLog(Dictionary<string, string> logData){
+    public FlashPedestriansProfile rebuildFromLog(Dictionary<string, string> logData)
+    {
 		float speed = float.Parse(logData["speed"].ToString());
 		bool englishSpeaker = bool.Parse(logData["englishSpeaker"].ToString());
 		bool italianSpeaker = bool.Parse(logData["italianSpeaker"].ToString());
@@ -81,5 +82,7 @@ public class FlashPedestriansProfile
 
 		FlashPedestriansProfile profile = new FlashPedestriansProfile(speed, englishSpeaker, italianSpeaker, chanceOfSubscription, willingToChangeDestination, chanceOfTakingABike,
 			chanceOfBelievingRumours, carAwareness, travelPreference);
+
+        return profile;
 	}
 }

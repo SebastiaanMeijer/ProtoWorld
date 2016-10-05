@@ -124,6 +124,30 @@ public class TimeController : MonoBehaviour
         Time.timeScale = timeVelocity;
     }
 
+    public string gameTimeToTimeStamp(float time)
+    {
+        int hours = 0;
+        int minutes = 0;
+        int seconds = 0;
+
+        hours = Mathf.FloorToInt(time / 3600F);
+        minutes = Mathf.FloorToInt(time / 60F - hours * 60);
+        seconds = Mathf.FloorToInt(time % 60);
+
+        return string.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+    }
+
+    public float TimeStampToGameTime(string timeStamp)
+    {
+        string[] timeStampSplitted = timeStamp.Split(':');
+
+        float hours = (float.Parse(timeStampSplitted[0]) / 3600F);
+        float minutes = (float.Parse(timeStampSplitted[1]) / 60F - hours * 60);
+        float seconds = (float.Parse(timeStampSplitted[2]) % 60);
+
+        return hours + minutes + seconds;
+    }
+
     /// <summary>
     /// Update method.
     /// </summary>
