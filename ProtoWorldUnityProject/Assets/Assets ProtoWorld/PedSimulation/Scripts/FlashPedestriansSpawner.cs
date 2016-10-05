@@ -29,7 +29,7 @@ using System.Threading;
 /// <summary>
 /// Implementation of the behaviour of a spawner for Flash Pedestrians.
 /// </summary>
-public class FlashPedestriansSpawner : MonoBehaviour
+public class FlashPedestriansSpawner : MonoBehaviour, LogObject
 {
     /// <summary>
     /// Maximum number of pedestrians that the object will spawn. 
@@ -320,22 +320,26 @@ public class FlashPedestriansSpawner : MonoBehaviour
         return priorities;
     }
 
-    public Dictionary<string, string> getSingleValueLogData()
-    {
-        Dictionary<string, string> structuredData = new Dictionary<string, string>();
-        structuredData.Add("MaxNumberOfPedestriansToSpawn", maxNumberOfPedestriansToSpawn.ToString());
-        structuredData.Add("SpawnPedestriansInInfiteLoop", spawnPedestriansInInfiniteLoop.ToString());
-        structuredData.Add("MinPedestriansPerSpawningIteration", minPedestriansPerSpawningIteration.ToString());
-        structuredData.Add("MaxPedestriansPerSpawningIteration", maxPedestriansPerSpawningIteration.ToString());
-        structuredData.Add("PedestrianSpawnFrequencyInSeconds", spawningFrequencyInSeconds.ToString());
-        structuredData.Add("SpawningArea", spawningArea.ToString());
-        structuredData.Add("RadiousToCheckStations", radiousToCheckStations.ToString());
-        structuredData.Add("SpawningDelayAtStart", spawningDelayAtStart.ToString());
-        structuredData.Add("InitialNumberOfPedestriansInCache", initialNumberOfPedestriansInCache.ToString());
-        structuredData.Add("NumberOfPedestriansGenerated", numberOfPedestriansGenerated.ToString());
-        structuredData.Add("NumberOfPedestriansOnDestination", numberOfPedestriansOnDestination.ToString());
-        return structuredData;
-    }
+	public Dictionary<string, Dictionary<string, string>> getLogData(){
+		Dictionary<string, Dictionary<string, string>>logData = new Dictionary<string,Dictionary<string,string>> ();
+		logData.Add (gameObject.tag, new Dictionary<string,string> ());
+		logData [tag].Add("MaxNumberOfPedestriansToSpawn", maxNumberOfPedestriansToSpawn.ToString());
+		logData [tag].Add("SpawnPedestriansInInfiteLoop", spawnPedestriansInInfiniteLoop.ToString());
+		logData [tag].Add("MinPedestriansPerSpawningIteration", minPedestriansPerSpawningIteration.ToString());
+		logData [tag].Add("MaxPedestriansPerSpawningIteration", maxPedestriansPerSpawningIteration.ToString());
+		logData [tag].Add("PedestrianSpawnFrequencyInSeconds", spawningFrequencyInSeconds.ToString());
+		logData [tag].Add("SpawningArea", spawningArea.ToString());
+		logData [tag].Add("RadiousToCheckStations", radiousToCheckStations.ToString());
+		logData [tag].Add("SpawningDelayAtStart", spawningDelayAtStart.ToString());
+		logData [tag].Add("InitialNumberOfPedestriansInCache", initialNumberOfPedestriansInCache.ToString());
+		logData [tag].Add("NumberOfPedestriansGenerated", numberOfPedestriansGenerated.ToString());
+		logData [tag].Add("NumberOfPedestriansOnDestination", numberOfPedestriansOnDestination.ToString());
+		return logData;
+	}
+
+	public void rebuildFromLog(Dictionary<string, Dictionary<string, string>> logData){
+
+	}
 }
 
 

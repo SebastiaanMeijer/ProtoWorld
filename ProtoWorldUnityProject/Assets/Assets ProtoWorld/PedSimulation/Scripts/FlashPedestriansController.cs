@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using System.Threading;
 
 
-public class FlashPedestriansController : TravelerController
+public class FlashPedestriansController : TravelerController, LogObject
 {
     public int uniqueId;
 
@@ -715,27 +715,25 @@ public class FlashPedestriansController : TravelerController
         currentWeather = newWeatherCondition;
     }
 
-	public Dictionary<string, string> getSingleValueLogData(){
-		Dictionary<string,string> structuredData = new Dictionary<string,string> ();
-		structuredData.Add ("id", uniqueId.ToString());
-		structuredData.Add ("Destination", routing.destinationPoint.destinationName);
-		return structuredData;
-
-	}
-
-	public Dictionary<string, Dictionary<string, string>> getMultipleValueLogData(){
-		Dictionary<string,Dictionary<string,string>> structuredData = new Dictionary<string,Dictionary<string,string>> ();
-		structuredData.Add ("PedestrianPosition", new Dictionary<string,string> ());
-		structuredData["PedestrianPosition"].Add("PositionX", transform.position.x.ToString());
-		structuredData["PedestrianPosition"].Add("PositionY", transform.position.y.ToString());
-		structuredData["PedestrianPosition"].Add("PositionZ", transform.position.z.ToString());
-        structuredData.Add ("PedestrianProfile", profile.getLogData());
-		structuredData.Add ("Itinerary", new Dictionary<string, string>());
+	public Dictionary<string, Dictionary<string, string>> getLogData(){
+		Dictionary<string, Dictionary<string, string>>logData = new Dictionary<string,Dictionary<string,string>> ();
+		logData.Add (gameObject.tag, new Dictionary<string,string> ());
+		logData [tag].Add ("id", uniqueId.ToString ());
+		logData [tag].Add ("Destination", routing.destinationPoint.destinationName);
+		logData.Add ("PedestrianPosition", new Dictionary<string,string> ());
+		logData["PedestrianPosition"].Add("PositionX", transform.position.x.ToString());
+		logData["PedestrianPosition"].Add("PositionY", transform.position.y.ToString());
+		logData["PedestrianPosition"].Add("PositionZ", transform.position.z.ToString());
+		logData.Add ("PedestrianProfile", profile.getLogData());
+		logData.Add ("Itinerary", new Dictionary<string, string>());
 		Dictionary<string, string> itineraryData = routing.itinerary.getLogData ();
 		foreach (KeyValuePair<string, string> item in itineraryData) {
-			structuredData ["Itinerary"].Add (item.Key, item.Value);
+			logData ["Itinerary"].Add (item.Key, item.Value);
 		}
-		return structuredData;
+		return logData;
+	}
+
+	public void rebuildFromLog(Dictionary<string, Dictionary<string, string>> logData){
 
 	}
 }
