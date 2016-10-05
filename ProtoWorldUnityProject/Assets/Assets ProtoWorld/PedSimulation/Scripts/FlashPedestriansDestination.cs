@@ -48,6 +48,11 @@ public class FlashPedestriansDestination : MonoBehaviour
 
     void Awake()
     {
+        initializeDestination();
+    }
+
+    public void initializeDestination()
+    {
         destinationTransform = this.transform;
 
         FlashPedestriansGlobalParameters pedGlobalParameters = GetComponent<FlashPedestriansGlobalParameters>();
@@ -56,7 +61,7 @@ public class FlashPedestriansDestination : MonoBehaviour
         stationsNearThisDestination = Physics.OverlapSphere(destinationTransform.position, radiousToCheckStations, 1 << LayerMask.NameToLayer("Stations"));
 
         //Debug.Log(this.gameObject.name + " has found " + stationsNearThisDestination.Length 
-            //+ " stations nearby");
+        //+ " stations nearby");
     }
 
     public Dictionary<string, string> getSingleValueLogData()

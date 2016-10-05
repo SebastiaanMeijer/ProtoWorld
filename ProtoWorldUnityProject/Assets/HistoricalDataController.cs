@@ -38,6 +38,7 @@ public class HistoricalDataController : MonoBehaviour
 
     public GameObject pedestrianSpawnerPrefab;
     public GameObject pedestrianDestinationPrefab;
+    public GameObject pedestrianPrefab;
 
     private List<float> gametimeEntries;
 
@@ -74,21 +75,24 @@ public class HistoricalDataController : MonoBehaviour
 
         foreach (FlashPedestriansController data in getPedestrianData())
         {
-			XElement pedestrianElement = new XElement("Pedestrian");
-			Dictionary<string,string> singleValueLogData = data.getSingleValueLogData ();
-			Dictionary<string,Dictionary<string,string>> multipleValueLogData = data.getMultipleValueLogData ();
-			foreach (string key in singleValueLogData.Keys) {
-					pedestrianElement.Add (new XElement (key, singleValueLogData [key]));
-			}
-			foreach (string key in multipleValueLogData.Keys) {
-				Dictionary<string,string> catagoryLogData = multipleValueLogData [key];
-				XElement catagoryElement = new XElement(key);
-				pedestrianElement.Add (catagoryElement);
-				foreach (string catagoryDataKey in catagoryLogData.Keys) {
-					catagoryElement.Add (new XElement (catagoryDataKey, catagoryLogData[catagoryDataKey]));
-				}
-			}
-			timeStamp.Add(pedestrianElement);
+                XElement pedestrianElement = new XElement("Pedestrian");
+                Dictionary<string, string> singleValueLogData = data.getSingleValueLogData();
+                Dictionary<string, Dictionary<string, string>> multipleValueLogData = data.getMultipleValueLogData();
+                foreach (string key in singleValueLogData.Keys)
+                {
+                    pedestrianElement.Add(new XElement(key, singleValueLogData[key]));
+                }
+                foreach (string key in multipleValueLogData.Keys)
+                {
+                    Dictionary<string, string> catagoryLogData = multipleValueLogData[key];
+                    XElement catagoryElement = new XElement(key);
+                    pedestrianElement.Add(catagoryElement);
+                    foreach (string catagoryDataKey in catagoryLogData.Keys)
+                    {
+                        catagoryElement.Add(new XElement(catagoryDataKey, catagoryLogData[catagoryDataKey]));
+                    }
+                }
+                timeStamp.Add(pedestrianElement);
         }
     }
 
@@ -161,29 +165,39 @@ public class HistoricalDataController : MonoBehaviour
         else
         {
             removeActiveData();
-            List<GameObject> pedestrianDestinationList = new List<GameObject>();
+            //List<GameObject> pedestrianDestinationList = new List<GameObject>();
             List<XElement> destinations =
                 (from destination in historicalTimeStamps[timeStamp].Descendants("PedestrianDestination")
                  select destination).ToList();
-            List<GameObject> pedestrianSpawnerList = new List<GameObject>();
+            //List<GameObject> pedestrianSpawnerList = new List<GameObject>();
             List<XElement> pedestrianSpawners =
                 (from spawner in historicalTimeStamps[timeStamp].Descendants("PedestrianSpawner")
                  select spawner).ToList();
+            //List<GameObject> pedestrians = new List<GameObject>();
+            List<XElement> pedestrians =
+                (from spawner in historicalTimeStamps[timeStamp].Descendants("PedestrianSpawner")
+                 select spawner).ToList();
+
 
             foreach (XElement destination in destinations)
             {
-                pedestrianDestinationList.Add(recreatePedestrianDestination(destination));
+                recreatePedestrianDestination(destination);
+                //pedestrianDestinationList.Add(recreatePedestrianDestination(destination));
             }
             foreach (XElement spawner in pedestrianSpawners)
             {
-                pedestrianSpawnerList.Add(recreatePedestrianSpawner(spawner));
+                recreatePedestrianSpawner(spawner);
+                //pedestrianSpawnerList.Add(recreatePedestrianSpawner(spawner));
             }
-
-            foreach (GameObject spawner in pedestrianSpawnerList)
+            foreach (XElement pedestrian in pedestrians)
             {
-                spawner.GetComponent<FlashPedestriansSpawner>().Awake();
-                spawner.GetComponent<FlashPedestriansSpawner>().enabled = true;
+                //pedestrianSpawnerList.Add(recreatePedestrian(pedestrian));
             }
+            //foreach (GameObject spawner in pedestrianSpawnerList)
+            //{
+            //    spawner.GetComponent<FlashPedestriansSpawner>().Awake();
+            //    spawner.GetComponent<FlashPedestriansSpawner>().enabled = true;
+            //}
 
             timeController.gameTime = timeStamp;
             timeController.PauseGame(false);
@@ -193,6 +207,13 @@ public class HistoricalDataController : MonoBehaviour
     public void activateAllObjects()
     {
 
+    }
+
+    public GameObject recreatePedestrian(XElement pedestrianData)
+    {
+        GameObject pedestrianObject = GameObject.Instantiate(pedestrianPrefab) as GameObject;
+
+        return pedestrianObject;
     }
 
     public GameObject recreatePedestrianSpawner(XElement spawnerdata)
@@ -219,7 +240,10 @@ public class HistoricalDataController : MonoBehaviour
         flashSpawnerScript.numberOfPedestriansOnDestination = int.Parse(spawnerdata.Descendants("NumberOfPedestriansOnDestination").SingleOrDefault().Value);
         flashSpawnerObject.name = "FlashSpawner";
         flashSpawnerObject.transform.parent = pedestrianSpawnerPoints.transform;
-        
+
+        flashSpawnerScript.initializeSpawner();
+        flashSpawnerScript.enabled = true;
+
         return flashSpawnerObject;
     }
 
@@ -238,6 +262,10 @@ public class HistoricalDataController : MonoBehaviour
         flashDestinationObject.transform.parent = pedestrianDestionationPoints.transform;
         flashDestinationObject.name = "FlashDestination";
         flashDestinationScript.destinationTransform.position = position;
+
+        flashDestinationScript.initializeDestination();
+        flashDestinationScript.enabled = true;
+
         return flashDestinationObject;
     }
 
@@ -323,7 +351,6 @@ public class HistoricalDataController : MonoBehaviour
     public void LoadLogdata()
     {
         processLoadedPedestrianLogData(gametimeEntries[timestampDropdown.value]);
-        timeController.PauseGame(false);
         loadLogWindow.SetActive(false);
     }
 

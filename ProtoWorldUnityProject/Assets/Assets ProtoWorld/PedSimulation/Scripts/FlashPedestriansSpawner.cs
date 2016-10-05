@@ -135,11 +135,15 @@ public class FlashPedestriansSpawner : MonoBehaviour
     /// <summary>
     /// Awakes the script.
     /// </summary>
-    public void Awake()
+    void Awake()
+    {
+        initializeSpawner();
+    }
+
+    public void initializeSpawner()
     {
         // Get the global parameters of Flash Pedestrians
-        pedGlobalParameters = GetComponentInParent<FlashPedestriansGlobalParameters>();
-
+        pedGlobalParameters = GameObject.Find("FlashPedestriansModule").GetComponent<FlashPedestriansGlobalParameters>();
         // Fill the cache with pedestrians
         for (int i = 0; i < initialNumberOfPedestriansInCache; i++)
         {
@@ -190,7 +194,6 @@ public class FlashPedestriansSpawner : MonoBehaviour
             // Create a new pedestrian profile
             FlashPedestriansProfile profile = new FlashPedestriansProfile(pedGlobalParameters.averageSpeed + Random.Range(-0.5f, 0.5f),
                 true /*future use*/, true /*future use*/, Random.Range(0.0f, 1.0f), false /*future use*/, Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), pedGlobalParameters.sumoCarAwarenessEnabled, TravelPreference.time);
-
             //Find a destination
             FlashPedestriansDestination destination = null;
             float[] priorityPercentages = getPrioritiesOfAllDestinations();
