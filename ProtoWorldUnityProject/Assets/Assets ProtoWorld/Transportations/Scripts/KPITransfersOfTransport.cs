@@ -1,70 +1,76 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class KPITransfersOfTransport : MonoBehaviour
 {
-    //Rome and Venice
-    public int pedestriansIn = 0;
-    public int pedestriansOut = 0;
+    private KPIPassengersPerType passenger_data;
 
-    //Rome and Hiafa
-    public int busIn = 0;
-    public int busOut = 0;
+    //Tram
+    private int current_tram = 0;
+    public int deltaTram = 0;
 
-    //Rome and Hiafa
-    public int carIn = 0;
-    public int carOut = 0;
+    //Train
+    private int current_train = 0;
+    public int deltaTrain = 0;
+
+    //Bus
+    private int current_bus = 0;
+    public int deltaBus = 0;
+
+    //Car
+    private int current_car = 0;
+    public int deltaCar = 0;
+
+    //Metro
+    private int current_metro = 0;
+    public int deltaMetro = 0;
+
 
     // Use this for initialization
     void Start()
     {
+        GameObject obj = GameObject.Find("TransportationModule");
+        passenger_data = obj.GetComponent<KPIPassengersPerType>();
     }
 
-    // Update is called once per frame
+    //Calculates the difference in passengers per type
     void Update()
     {
-        //I guess this isn't the right approach tho, also we need some sort of avg value
-        //Or keep the value on the same value for the time unit period.
-        //Or, as a noticed in KPIAdditionalData script, create combo methods.
-        //As long we don't execute the same loop 10 times, that would be silly :D
+        //Tram
+        if (passenger_data.tramPassengers != current_tram)
+        {
+            deltaTram = passenger_data.tramPassengers - current_tram;
+            current_tram = passenger_data.tramPassengers;
+        }
 
-        pedestriansOut = getPedestriansOut();
-        pedestriansIn = getPedestriansIn();
+        //Train
+        if(passenger_data.trainPassengers != current_train)
+        {
+            deltaTrain = passenger_data.trainPassengers - current_train;
+            current_train = passenger_data.trainPassengers;
+        }
 
-        busIn = getBusIn();
-        busOut = getBusOut();
+        //Bus
+        if (passenger_data.busPassengers != current_bus)
+        {
+            deltaBus = passenger_data.busPassengers - current_bus;
+            current_bus = passenger_data.busPassengers;
+        }
 
-        carIn = getCarIn();
-        carOut = getCarOut();
-    }
+        //Car
+        if (passenger_data.carPassengers != current_car)
+        {
+            deltaCar = passenger_data.carPassengers - current_car;
+            current_car = passenger_data.carPassengers;
+        }
 
-    private int getCarOut()
-    {
-        return 0;
-    }
+        //Metro
+        if (passenger_data.metroPassengers != current_metro)
+        {
+            deltaMetro = passenger_data.metroPassengers - current_metro;
+            current_metro = passenger_data.metroPassengers;
+        }
 
-    private int getCarIn()
-    {
-        return 0;
-    }
-
-    private int getBusOut()
-    {
-        return 0;
-    }
-
-    private int getBusIn()
-    {
-        return 0;
-    }
-
-    private int getPedestriansIn()
-    {
-        return 0;
-    }
-
-    private int getPedestriansOut()
-    {
-        return 0;
     }
 }
