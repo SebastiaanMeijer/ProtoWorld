@@ -719,23 +719,7 @@ public class FlashPedestriansController : TravelerController, LogObject
 
         currentWeather = newWeatherCondition;
     }
-
-<<<<<<< HEAD
-	public Dictionary<string, string> getSingleValueLogData(){
-		Dictionary<string,string> structuredData = new Dictionary<string,string> ();
-		structuredData.Add ("id", uniqueId.ToString());
-		structuredData.Add ("Destination", routing.destinationPoint.destinationName);
-        structuredData.Add("PositionX", transform.position.x.ToString());
-        structuredData.Add("PositionY", transform.position.y.ToString());
-        structuredData.Add("PositionZ", transform.position.z.ToString());
-        return structuredData;
-	}
-
-	public Dictionary<string, Dictionary<string, string>> getMultipleValueLogData(){
-		Dictionary<string,Dictionary<string,string>> structuredData = new Dictionary<string,Dictionary<string,string>> ();
-        structuredData.Add ("PedestrianProfile", profile.getLogData());
-		structuredData.Add ("Itinerary", new Dictionary<string, string>());
-=======
+		
 	public Dictionary<string, Dictionary<string, string>> getLogData(){
 		Dictionary<string, Dictionary<string, string>>logData = new Dictionary<string,Dictionary<string,string>> ();
 		logData.Add (gameObject.tag, new Dictionary<string,string> ());
@@ -747,7 +731,6 @@ public class FlashPedestriansController : TravelerController, LogObject
 		logData["PedestrianPosition"].Add("PositionZ", transform.position.z.ToString());
 		logData.Add ("PedestrianProfile", profile.getLogData());
 		logData.Add ("Itinerary", new Dictionary<string, string>());
->>>>>>> c6d2cbaa1f0a9ae5e2aab3c61d8d1ccc820f267d
 		Dictionary<string, string> itineraryData = routing.itinerary.getLogData ();
 		foreach (KeyValuePair<string, string> item in itineraryData) {
 			logData ["Itinerary"].Add (item.Key, item.Value);
