@@ -413,21 +413,27 @@ public class HistoricalDataController : MonoBehaviour
 	}
 
 	public void recreateLogDataFromTimeStamp(float timeStamp){
+		removeActiveData ();
+		List<string> recreatedTags = new List<string> ();
 		foreach (LogObject logObject in InterfaceHelper.FindObjects<LogObject>()){
-			foreach (XElement loggedObject in historicalTimeStamps[timeStamp].Descendants(((MonoBehaviour)logObject).gameObject.tag)) {
-				Dictionary<string, Dictionary<string, string>> logData = new Dictionary<string,Dictionary<string,string>> ();
-				logData.Add (((MonoBehaviour)logObject).gameObject.tag, new Dictionary<string,string> ());
-				foreach (XElement dataItem in loggedObject.Descendants()) {
-					if (dataItem.HasElements) {
-						logData [((MonoBehaviour)logObject).gameObject.tag].Add(dataItem.Name.ToString(), dataItem.Value);
-					} else {
-						logData.Add (dataItem.Name.ToString(), new Dictionary<string,string> ());
-						foreach (XElement dataItemChild in dataItem.Descendants()) {
-							logData [dataItem.Name.ToString()].Add(dataItemChild.Name.ToString(), dataItemChild.Value);
+			if (!recreatedTags.Contains (((MonoBehaviour)logObject).gameObject.tag)) {
+				recreatedTags.Add(((MonoBehaviour)logObject).gameObject.tag);
+				foreach (XElement loggedObject in historicalTimeStamps[timeStamp].Descendants(((MonoBehaviour)logObject).gameObject.tag)) {
+					Dictionary<string, Dictionary<string, string>> logData = new Dictionary<string,Dictionary<string,string>> ();
+					logData.Add (((MonoBehaviour)logObject).gameObject.tag, new Dictionary<string,string> ());
+					print (((MonoBehaviour)logObject).gameObject.tag);
+					foreach (XElement dataItem in loggedObject.Descendants()) {
+						if (!dataItem.HasElements) {
+							logData [((MonoBehaviour)logObject).gameObject.tag].Add(dataItem.Name.ToString(), dataItem.Value);
+						} else {
+							logData.Add (dataItem.Name.ToString(), new Dictionary<string,string> ());
+							foreach (XElement dataItemChild in dataItem.Descendants()) {
+								logData [dataItem.Name.ToString()].Add(dataItemChild.Name.ToString(), dataItemChild.Value);
+							}
 						}
 					}
+					logObject.rebuildFromLog (logData);
 				}
-				logObject.rebuildFromLog (logData);
 			}
 		}
 	}
