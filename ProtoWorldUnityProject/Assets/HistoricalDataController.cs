@@ -10,8 +10,6 @@ using UnityEngine.UI;
 
 public class HistoricalDataController : MonoBehaviour
 {
-	//public GameObject flashPedestrian;
-
     public int logInterval = 3;
 
     private string savedLogFilePath;
@@ -25,13 +23,11 @@ public class HistoricalDataController : MonoBehaviour
 	private Dictionary<float,XElement> historicalTimeStamps;
 
     private TimeController timeController;
-    private FlashPedestriansInformer pedestrianInformer;
-    private FlashPedestriansGlobalParameters globalParameters;
-	private FlashPedestriansSpawner pedestrianSpawner;
 
     private GameObject loadLogWindow;
     private Dropdown timestampDropdown;
 
+<<<<<<< HEAD
     GameObject flashPedestriansModule;
     GameObject pedestrianDestionationPoints;
     GameObject pedestrianSpawnerPoints;
@@ -41,24 +37,23 @@ public class HistoricalDataController : MonoBehaviour
     public GameObject pedestrianSpawnerPrefab;
     public GameObject pedestrianDestinationPrefab;
     public GameObject pedestrianPrefab;
+=======
+	GameObject flashPedestriansModule;
+	private FlashPedestriansGlobalParameters globalParameters;
+>>>>>>> c6d2cbaa1f0a9ae5e2aab3c61d8d1ccc820f267d
 
     private List<float> gametimeEntries;
-
 
     // Use this for initialization
     void Start()
     {
         timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
-        pedestrianInformer = GameObject.Find("FlashInformer").GetComponent<FlashPedestriansInformer>();
         loadLogWindow = GameObject.Find("LoadLogCanvas");
-        //globalParameters = GameObject.Find("FlashPedestrianModule").GetComponent<FlashPedestriansGlobalParameters>();
         timestampDropdown = GameObject.Find("LoadFileTimestampDropdown").GetComponent<Dropdown>();
         loadLogWindow.SetActive(false);
         flashPedestriansModule = GameObject.Find("FlashPedestriansModule");
         globalParameters = flashPedestriansModule.GetComponent<FlashPedestriansGlobalParameters>();
-        pedestrianDestionationPoints = GameObject.Find("DestinationPoints");
-        pedestrianSpawnerPoints = GameObject.Find("SpawnerPoints");
-        gametimeEntries = new List<float>();
+		gametimeEntries = new List<float>();
         logFile = new XDocument();
         logFileRootElement = new XElement("LogData");
         logFile.Add(logFileRootElement);
@@ -69,6 +64,7 @@ public class HistoricalDataController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
 
     }
 
@@ -200,8 +196,14 @@ public class HistoricalDataController : MonoBehaviour
     public void activateAllObjects()
     {
 
+=======
+>>>>>>> c6d2cbaa1f0a9ae5e2aab3c61d8d1ccc820f267d
     }
+		
+	public void activateAllObjects()
+	{
 
+<<<<<<< HEAD
     public GameObject recreatePedestrian(XElement pedestrianData)
     {
         GameObject flashPedestrianObject = GameObject.Instantiate(pedestrianPrefab) as GameObject;
@@ -317,65 +319,77 @@ public class HistoricalDataController : MonoBehaviour
         logFile.Save(savedLogFilePath);
         timeController.PauseGame(false);
     }
+=======
+	}
+>>>>>>> c6d2cbaa1f0a9ae5e2aab3c61d8d1ccc820f267d
 
-    public void openLoadLogFileWindow()
-    {
-        timeController.PauseGame(true);
-        loadLogWindow.SetActive(true);
-        timestampDropdown.options.Clear();
-        timestampDropdown.captionText.text = "Please choose File";
-    }
-
-    public void loadLogfile()
-    {
-        loadedLogFilePath = EditorUtility.OpenFilePanel("Load Data", "/Assets/SimulationLogs", "xml");
-        if (loadedLogFilePath.Contains(".xml"))
-        {
-            logFile = XDocument.Load(loadedLogFilePath);
-            logFileRootElement = logFile.Root;
-            createTimeStampList();
-            timestampDropdown.options.Clear();
-            Dropdown.OptionData option = new Dropdown.OptionData();
-            foreach (KeyValuePair<float, XElement> timeStamp in historicalTimeStamps)
-            {
-                timestampDropdown.options.Add(new Dropdown.OptionData() { text = timeController.gameTimeToTimeStamp(timeStamp.Key)});
-            }
-            timestampDropdown.value = 1;
-            timestampDropdown.value = 0;
-        }
-    }
-
-    public void cancelLoadLogFile()
-    {
-        loadedLogFilePath = "";
-        timestampDropdown.options.Clear();
-        timestampDropdown.captionText.text = "";
-        loadLogWindow.SetActive(false);
-        timeController.PauseGame(false);
-    }
-
-    public void LoadLogdata()
-    {
-        processLoadedPedestrianLogData(gametimeEntries[timestampDropdown.value]);
-        loadLogWindow.SetActive(false);
-    }
-
-    public void removeActiveData(){
-        GameObject[] currentPedestrianSpawnerPoints = GameObject.FindGameObjectsWithTag("PedestrianSpawner");
-        GameObject[] currentPedestrianDestinationPoints = GameObject.FindGameObjectsWithTag("PedestrianDestination");
-		GameObject[] currentPedestrians = GameObject.FindGameObjectsWithTag ("Pedestrian");
-		foreach (GameObject pedestrian in currentPedestrians) {
-			Destroy (pedestrian);
+	public IEnumerator processLogData()
+	{
+		while (!globalParameters.flashPedestriansPaused)
+		{
+			timeStamp = new XElement("TimeStamp");
+			timeStamp.Add(new XAttribute("timestamp", timeController.gameTime));
+			foreach (LogObject logObject in InterfaceHelper.FindObjects<LogObject>())
+			{
+				processObjectLogData (new XElement (logObject.getLogData().Keys.First()), logObject.getLogData());
+			}
+			logFileRootElement.Add(timeStamp);
+			yield return new WaitForSeconds(logInterval);
 		}
-        foreach (GameObject spawner in currentPedestrianSpawnerPoints)
-        {
-            Destroy(spawner);
-        }
-        foreach (GameObject destination in currentPedestrianDestinationPoints)
-        {
-            Destroy(destination);
-        }
-    }
+	}
+
+	void processObjectLogData(XElement parent, Dictionary<string, Dictionary<string, string>> logData)
+	{
+		foreach (string key in logData.Keys)
+		{
+			if (key.Equals(parent.Name.ToString())) {
+				foreach (string dataKey in logData[key].Keys) {
+					parent.Add (new XElement (dataKey, logData [key] [dataKey]));
+				}
+			} else {
+				XElement categoryElement = new XElement (key);
+				parent.Add (categoryElement);
+				foreach (string catagoryDataKey in logData[key].Keys) {
+					categoryElement.Add (new XElement (catagoryDataKey, logData[key][catagoryDataKey]));
+				}
+			}
+		}
+		timeStamp.Add(parent);
+	}
+
+	public void SaveHistoricalData()
+	{
+		timeController.PauseGame(true);
+		logFileName = DateTime.Now.ToString("ddMMyyyy_HH-mm-ss");
+		savedLogFilePath = EditorUtility.SaveFilePanel("Save Data", "/Assets/SimulationLogs", logFileName, "xml");
+		logFile.Save(savedLogFilePath);
+		timeController.PauseGame(false);
+	}
+
+	public void openLoadLogFileWindow()
+	{
+		timeController.PauseGame(true);
+		loadLogWindow.SetActive(true);
+		timestampDropdown.options.Clear();
+		timestampDropdown.captionText.text = "Please choose File";
+	}
+
+	public void loadLogfile()
+	{
+		loadedLogFilePath = EditorUtility.OpenFilePanel("Load Data", "/Assets/SimulationLogs", "xml");
+		if (loadedLogFilePath.Contains(".xml"))
+		{
+			logFile = XDocument.Load(loadedLogFilePath);
+			logFileRootElement = logFile.Root;
+			createTimeStampList();
+			foreach (KeyValuePair<float, XElement> timeStamp in historicalTimeStamps)
+			{
+				timestampDropdown.options.Add(new Dropdown.OptionData() { text = timeController.gameTimeToTimeStamp(timeStamp.Key)});
+			}
+			timestampDropdown.value = 1;
+			timestampDropdown.value = 0;
+		}
+	}
 
 	public void createTimeStampList(){
 		List<XElement> timeStampElements =
@@ -386,6 +400,48 @@ public class HistoricalDataController : MonoBehaviour
             gametimeEntries.Add(float.Parse(timeStampElement.Attribute("timestamp").Value.ToString()));
 			historicalTimeStamps.Add (float.Parse(timeStampElement.Attribute ("timestamp").Value.ToString()), timeStampElement);
 		}
-        print(historicalTimeStamps.Count);
+		print(historicalTimeStamps.Count);
+	}
+
+	public void cancelLoadLogFile()
+	{
+		loadedLogFilePath = "";
+		timestampDropdown.options.Clear();
+		timestampDropdown.captionText.text = "";
+		loadLogWindow.SetActive(false);
+		timeController.PauseGame(false);
+	}
+
+	public void recreateLogDataFromTimeStamp(float timeStamp){
+		foreach (LogObject logObject in InterfaceHelper.FindObjects<LogObject>()){
+			foreach (XElement loggedObject in historicalTimeStamps[timeStamp].Descendants(((MonoBehaviour)logObject).gameObject.tag)) {
+				Dictionary<string, Dictionary<string, string>> logData = new Dictionary<string,Dictionary<string,string>> ();
+				logData.Add (((MonoBehaviour)logObject).gameObject.tag, new Dictionary<string,string> ());
+				foreach (XElement dataItem in loggedObject.Descendants()) {
+					if (dataItem.HasElements) {
+						logData [((MonoBehaviour)logObject).gameObject.tag].Add(dataItem.Name.ToString(), dataItem.Value);
+					} else {
+						logData.Add (dataItem.Name.ToString(), new Dictionary<string,string> ());
+						foreach (XElement dataItemChild in dataItem.Descendants()) {
+							logData [dataItem.Name.ToString()].Add(dataItemChild.Name.ToString(), dataItemChild.Value);
+						}
+					}
+				}
+				logObject.rebuildFromLog (logData);
+			}
+		}
+	}
+
+	public void removeActiveData(){
+		foreach (LogObject logObject in InterfaceHelper.FindObjects<LogObject>())
+		{
+			Destroy (((MonoBehaviour)logObject).gameObject);
+		}
+	}
+
+	public void LoadLogdata()
+	{
+		recreateLogDataFromTimeStamp(gametimeEntries[timestampDropdown.value]);
+		loadLogWindow.SetActive(false);
 	}
 }

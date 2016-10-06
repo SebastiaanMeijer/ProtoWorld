@@ -66,4 +66,23 @@ public class FlashPedestriansProfile
 		structuredData.Add ("travelPreference", travelPreference.ToString());
 		return structuredData;
 	}
+
+    public FlashPedestriansProfile rebuildFromLog(Dictionary<string, string> logData)
+    {
+		float speed = float.Parse(logData["speed"].ToString());
+		bool englishSpeaker = bool.Parse(logData["englishSpeaker"].ToString());
+		bool italianSpeaker = bool.Parse(logData["italianSpeaker"].ToString());
+		float chanceOfSubscription = float.Parse(logData["chanceOfSubscription"].ToString());
+		bool willingToChangeDestination = bool.Parse(logData["willingToChangeDestination"].ToString());
+		float chanceOfTakingABike = float.Parse(logData["chanceOfTakingABike"].ToString());
+		float weatherFactorOnTakingBikes = float.Parse(logData["weatherFactorOnTakingBikes"].ToString());
+		float chanceOfBelievingRumours = float.Parse(logData["chanceOfBelievingRumours"].ToString());
+		bool carAwareness = bool.Parse(logData["carAwareness"].ToString());
+		TravelPreference travelPreference = new TravelPreference();
+
+		FlashPedestriansProfile profile = new FlashPedestriansProfile(speed, englishSpeaker, italianSpeaker, chanceOfSubscription, willingToChangeDestination, chanceOfTakingABike,
+			chanceOfBelievingRumours, carAwareness, travelPreference);
+
+        return profile;
+	}
 }
