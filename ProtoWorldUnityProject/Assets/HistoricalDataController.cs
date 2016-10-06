@@ -36,6 +36,8 @@ public class HistoricalDataController : MonoBehaviour
     GameObject pedestrianDestionationPoints;
     GameObject pedestrianSpawnerPoints;
 
+    List<GameObject> flashPedestrianSpawns;
+
     public GameObject pedestrianSpawnerPrefab;
     public GameObject pedestrianDestinationPrefab;
     public GameObject pedestrianPrefab;
@@ -165,15 +167,13 @@ public class HistoricalDataController : MonoBehaviour
         else
         {
             removeActiveData();
-            //List<GameObject> pedestrianDestinationList = new List<GameObject>();
             List<XElement> destinations =
                 (from destination in historicalTimeStamps[timeStamp].Descendants("PedestrianDestination")
                  select destination).ToList();
-            //List<GameObject> pedestrianSpawnerList = new List<GameObject>();
+            flashPedestrianSpawns = new List<GameObject>();
             List<XElement> pedestrianSpawners =
                 (from spawner in historicalTimeStamps[timeStamp].Descendants("PedestrianSpawner")
                  select spawner).ToList();
-            //List<GameObject> pedestrians = new List<GameObject>();
             List<XElement> pedestrians =
                 (from spawner in historicalTimeStamps[timeStamp].Descendants("PedestrianSpawner")
                  select spawner).ToList();
@@ -182,22 +182,15 @@ public class HistoricalDataController : MonoBehaviour
             foreach (XElement destination in destinations)
             {
                 recreatePedestrianDestination(destination);
-                //pedestrianDestinationList.Add(recreatePedestrianDestination(destination));
             }
             foreach (XElement spawner in pedestrianSpawners)
             {
-                recreatePedestrianSpawner(spawner);
-                //pedestrianSpawnerList.Add(recreatePedestrianSpawner(spawner));
+                flashPedestrianSpawns.Add(recreatePedestrianSpawner(spawner));
             }
             foreach (XElement pedestrian in pedestrians)
             {
-                //pedestrianSpawnerList.Add(recreatePedestrian(pedestrian));
+                recreatePedestrian(pedestrian);
             }
-            //foreach (GameObject spawner in pedestrianSpawnerList)
-            //{
-            //    spawner.GetComponent<FlashPedestriansSpawner>().Awake();
-            //    spawner.GetComponent<FlashPedestriansSpawner>().enabled = true;
-            //}
 
             timeController.gameTime = timeStamp;
             timeController.PauseGame(false);
@@ -211,9 +204,22 @@ public class HistoricalDataController : MonoBehaviour
 
     public GameObject recreatePedestrian(XElement pedestrianData)
     {
-        GameObject pedestrianObject = GameObject.Instantiate(pedestrianPrefab) as GameObject;
+        GameObject flashPedestrianObject = GameObject.Instantiate(pedestrianPrefab) as GameObject;
+        FlashPedestriansController flashPedestrianScript = flashPedestrianObject.GetComponent<FlashPedestriansController>();
+        Vector3 position = new Vector3();
 
-        return pedestrianObject;
+        position.x = float.Parse(pedestrianData.Descendants("PositionX").Single().Value);
+        position.y = float.Parse(pedestrianData.Descendants("PositionY").Single().Value);
+        position.z = float.Parse(pedestrianData.Descendants("PositionZ").Single().Value);
+        flashPedestrianObject.transform.position = position;
+        flashPedestrianScript.transform.position = position;
+
+        flashPedestrianScript.profile = recreatePedestrianProfile(pedestrianData.Descendants("Profile").Single());
+
+        flashPedestrianObject.name = "FlashPedestrian";
+        flashPedestrianScript.initializePedestrian();
+        flashPedestrianScript.enabled = true;
+        return flashPedestrianObject;
     }
 
     public GameObject recreatePedestrianSpawner(XElement spawnerdata)

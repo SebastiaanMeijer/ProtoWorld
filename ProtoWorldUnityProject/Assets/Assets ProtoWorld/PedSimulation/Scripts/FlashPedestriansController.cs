@@ -89,6 +89,11 @@ public class FlashPedestriansController : TravelerController
     /// </summary>
     void Awake()
     {
+        initializePedestrian();
+    }
+
+    public void initializePedestrian()
+    {
         globalParam = FindObjectOfType<FlashPedestriansGlobalParameters>();
         navAgent = gameObject.GetComponent<NavMeshAgent>();
         FSM = gameObject.GetComponent<Animator>();
@@ -719,16 +724,14 @@ public class FlashPedestriansController : TravelerController
 		Dictionary<string,string> structuredData = new Dictionary<string,string> ();
 		structuredData.Add ("id", uniqueId.ToString());
 		structuredData.Add ("Destination", routing.destinationPoint.destinationName);
-		return structuredData;
-
+        structuredData.Add("PositionX", transform.position.x.ToString());
+        structuredData.Add("PositionY", transform.position.y.ToString());
+        structuredData.Add("PositionZ", transform.position.z.ToString());
+        return structuredData;
 	}
 
 	public Dictionary<string, Dictionary<string, string>> getMultipleValueLogData(){
 		Dictionary<string,Dictionary<string,string>> structuredData = new Dictionary<string,Dictionary<string,string>> ();
-		structuredData.Add ("PedestrianPosition", new Dictionary<string,string> ());
-		structuredData["PedestrianPosition"].Add("PositionX", transform.position.x.ToString());
-		structuredData["PedestrianPosition"].Add("PositionY", transform.position.y.ToString());
-		structuredData["PedestrianPosition"].Add("PositionZ", transform.position.z.ToString());
         structuredData.Add ("PedestrianProfile", profile.getLogData());
 		structuredData.Add ("Itinerary", new Dictionary<string, string>());
 		Dictionary<string, string> itineraryData = routing.itinerary.getLogData ();
