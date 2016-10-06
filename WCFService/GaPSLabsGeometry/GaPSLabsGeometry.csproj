@@ -81,19 +81,6 @@
     <Compile Include="Vector.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ThirdPartyLibraries\Poly2Tri.dll" />
-    <Content Include="ThirdPartyLibraries\Poly2Tri.pdb" />
-    <Content Include="protobuf-net.dll" />
-    <Content Include="ThirdPartyLibraries\GeometryUtility.dll" />
-    <Content Include="ThirdPartyLibraries\GeometryUtility.pdb" />
-    <Content Include="ThirdPartyLibraries\INI.dll" />
-    <Content Include="ThirdPartyLibraries\JSON.NET\Newtonsoft.Json.dll" />
-    <Content Include="ThirdPartyLibraries\JSON.NET\Newtonsoft.Json.pdb" />
-    <Content Include="ThirdPartyLibraries\JSON.NET\Newtonsoft.Json.xml" />
-    <Content Include="ThirdPartyLibraries\PolygonCuttingEar.dll" />
-    <Content Include="ThirdPartyLibraries\PolygonCuttingEar.pdb" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AramOSMParser\AramOSMParser.csproj">
       <Project>{a6b1ccfe-2094-4b1e-80ff-f1a6e3613bc0}</Project>
       <Name>AramOSMParser</Name>

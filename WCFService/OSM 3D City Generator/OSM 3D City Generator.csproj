@@ -49,6 +49,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="Poly2Tri, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Poly2Tri.dll</HintPath>
+    </Reference>
     <Reference Include="PolygonCuttingEar, Version=1.0.4876.17827, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\PolygonCuttingEar.dll</HintPath>
@@ -80,17 +84,6 @@
       <Project>{c6fe84e6-59f7-43a1-93e7-251457220788}</Project>
       <Name>GaPSLabsGeometry</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ThirdPartyLibraries\GeometryUtility.dll" />
-    <Content Include="ThirdPartyLibraries\GeometryUtility.pdb" />
-    <Content Include="ThirdPartyLibraries\INI.dll" />
-    <Content Include="ThirdPartyLibraries\INI.pdb" />
-    <Content Include="ThirdPartyLibraries\JSON.NET\Newtonsoft.Json.dll" />
-    <Content Include="ThirdPartyLibraries\JSON.NET\Newtonsoft.Json.pdb" />
-    <Content Include="ThirdPartyLibraries\JSON.NET\Newtonsoft.Json.xml" />
-    <Content Include="ThirdPartyLibraries\PolygonCuttingEar.dll" />
-    <Content Include="ThirdPartyLibraries\PolygonCuttingEar.pdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
