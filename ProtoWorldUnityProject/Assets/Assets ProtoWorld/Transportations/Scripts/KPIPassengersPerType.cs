@@ -27,12 +27,41 @@ public class KPIPassengersPerType : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        busPassengers = getBusPassengers();
-        tramPassengers = lineStatistics.totalTraveling;
-        trainPassengers = getTrainPassengers();
-        metroPassengers = getMetroPassengers();
+        //busPassengers = getBusPassengers();
+        //tramPassengers = lineStatistics.totalTraveling;
+        //trainPassengers = getTrainPassengers();
+        //metroPassengers = getMetroPassengers();
         carPassengers = getCarPassengers();
         bicyclePassengers = getBicyclePassengers();
+
+        int tmpTram = 0;
+        int tmpTrain = 0;
+        int tmpBus = 0;
+        int tmpMetro = 0;
+
+        foreach (Transform transLine in transLines)
+        {
+            foreach (Transform item in transLine)
+            {
+                VehicleController vc = item.GetComponent<VehicleController>();
+                if (transLine.name.StartsWith("Tram_"))
+                    tmpTram += vc.headCount;
+
+                if (transLine.name.StartsWith("Train_"))
+                    tmpTrain += vc.headCount;
+
+                if (transLine.name.StartsWith("Bus_"))
+                    tmpBus += vc.headCount;
+
+                if (transLine.name.StartsWith("Metro_"))
+                    tmpMetro += vc.headCount;
+            }
+        }
+
+        tramPassengers = tmpTram;
+        busPassengers = tmpBus;
+        trainPassengers = tmpTrain;
+        metroPassengers = tmpMetro;
     }
 
     private int getBusPassengers()
