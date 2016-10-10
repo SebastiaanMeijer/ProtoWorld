@@ -94,8 +94,8 @@ public class BikeStationScript : MonoBehaviour
         if (isSelected && objectData != null)
         {
             objectData.ObjectName = "Bike Station " + bikeStationNum;
-            objectData.ObjectDescription = "Number of bikes left on this station: " + this.gameObject.GetComponent<BikeStationScript>().capacityNumber;
-            objectData.ObjectDescriptionText.text = this.gameObject.GetComponent<ObjectData>().ObjectDescription;
+            objectData.ObjectDescription = "Number of bikes left on this station: " + this.GetComponent<BikeStationScript>().capacityNumber;
+            objectData.ObjectDescriptionText.text = objectData.ObjectDescription;
         }
     }
 

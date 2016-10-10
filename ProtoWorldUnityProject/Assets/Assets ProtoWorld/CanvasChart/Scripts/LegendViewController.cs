@@ -12,7 +12,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
+/*
  * 
  * KPI MODULE
  * Johnson Ho
@@ -25,7 +25,6 @@ using UnityEngine.UI;
 
 public class LegendViewController : MonoBehaviour
 {
-
     private ChartController controller;
     private RectTransform rectTransform;
 
@@ -54,16 +53,22 @@ public class LegendViewController : MonoBehaviour
             }
             else if (transform.childCount < controller.SeriesCount)
             {
-                GameObject obj = Instantiate(legendButtonPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-                obj.transform.SetParent(transform);
+                if (legendButtonPrefab != null)
+                {
+                    GameObject obj = Instantiate(legendButtonPrefab, transform.localPosition, Quaternion.identity) as GameObject;
+                    obj.transform.SetParent(transform);
+                    obj.transform.position = transform.position;
+                }
             }
         }
+
         for (int idx = 0; idx < controller.SeriesCount; idx++)
         {
             GameObject obj = transform.GetChild(idx).gameObject;
             Image img = obj.GetComponent<Image>();
             img.color = controller.seriesColors[idx];
             Text txt = obj.GetComponentInChildren<Text>();
+            txt.gameObject.transform.position = obj.transform.position;
             txt.text = controller.seriesNames[idx];
         }
     }
@@ -74,7 +79,7 @@ public class LegendViewController : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
-        float deltaX = rectTransform.rect.width / controller.DataContainer.SeriesCount;
+        float deltaX = rectTransform.rect.width/controller.DataContainer.SeriesCount;
         for (int idx = 0; idx < controller.SeriesCount; idx++)
         {
             GameObject obj = Instantiate(legendButtonPrefab, Vector3.zero, Quaternion.identity) as GameObject;
@@ -86,6 +91,5 @@ public class LegendViewController : MonoBehaviour
             Text txt = obj.GetComponentInChildren<Text>();
             txt.text = controller.seriesNames[idx];
         }
-
     }
 }

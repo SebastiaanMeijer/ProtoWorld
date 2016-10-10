@@ -49,6 +49,13 @@ public class VehicleController : MonoBehaviour
 
     protected TimeController timeController;
 
+    //Delay of the previous leg
+    public float delay = 0;
+
+    //Elements for the not moving detector
+    public float speed = 0;
+    private float current_distance = 0;
+    private float previous_distance = 0;
 
     [System.Serializable]
     public class DisembarkStats
@@ -154,9 +161,9 @@ public class VehicleController : MonoBehaviour
         ResetTimer();
         if (line.useDefaultVehicleSymbol)
             TryAttachVehiclePrefab();
-    }
+}
 
-    void TryAttachVehiclePrefab()
+void TryAttachVehiclePrefab()
     {
         var template = GameObject.Find("VehicleSymbol");
         if (template != null)
@@ -182,8 +189,16 @@ public class VehicleController : MonoBehaviour
     {
         if (gameObject.activeInHierarchy)
         {
+
+            updateSpeed();
+
             if (DistanceToNextStation < 1)
             {
+                //Calucate delay
+                float endtime = timeController.gameTime;
+                float duration = endtime - startTime;
+                delay = duration - LegTravelTime;
+
                 ArrivedAtNextStation();
                 //startTime = Time.time;
                 ResetTimer();
@@ -210,6 +225,30 @@ public class VehicleController : MonoBehaviour
             float fracTime = journeyTime / LegTravelTime;
             transform.position = Vector3.Lerp(currentStation.transform.position, nextStation.transform.position, fracTime);
         }
+    }
+
+    public void updateSpeed()
+    {
+        speed = (previous_distance - current_distance) / Time.deltaTime;
+
+        previous_distance = current_distance;
+        current_distance = DistanceToNextStation;
+
+        //Transform symbol = transform.FindChild("VehicleSymbol(Clone)");
+        //Transform cylinder_l = symbol.FindChild("Cylinder_L");
+
+
+        //Check if the to be set shader is different, setting a shader every frame is not nice.
+        if (Math.Abs(speed) < 1)
+        {
+           //Set cylinder_l to alternative (red) shader/material
+        }
+        else
+        {
+            //Set it to the original white shader/material
+        }
+        
+
     }
 
     /// <summary>

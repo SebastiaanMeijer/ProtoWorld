@@ -162,6 +162,7 @@ public class FlashPedestriansController : TravelerController
                 // Arrives at the destination
                 goingToDestination = false;
                 FSM.SetBool("OnDestination", true);
+                AdditionalKPIData.arrived++;
             }
 
             // If going to take a bike, check if pedestrian has arrived to bike station

@@ -12,7 +12,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
+/*
  * 
  * KPI MODULE
  * Johnson Ho
@@ -62,7 +62,7 @@ public class ChartViewController : MonoBehaviour
         // Make sure that there are enough materials for the charts.
         if (controller.SeriesCount > controller.materials.Length)
             return;
-        
+
         // Draw chart.
         switch (controller.chartType)
         {
@@ -70,8 +70,10 @@ public class ChartViewController : MonoBehaviour
                 DrawBarChart();
                 break;
             case UIChartTypes.Pie:
+                DrawPieChart();
                 break;
             case UIChartTypes.StackedArea:
+                DrawStackedLineChart();
                 break;
             case UIChartTypes.Line:
                 DrawLineChart();
@@ -113,21 +115,21 @@ public class ChartViewController : MonoBehaviour
             }
         }
     }
+
     private void DrawBarChart()
     {
         if (controller.SeriesCount < 1)
             return;
 
-        
         float mBarHeight = chartHolder.rect.height;
-        float mBarSector = chartHolder.rect.width / controller.SeriesCount;
-        float mBarWidth = mBarSector * 0.67f;
+        float mBarSector = chartHolder.rect.width/controller.SeriesCount;
+        float mBarWidth = mBarSector*0.67f;
 
         for (int idx = 0; idx < controller.SeriesCount; idx++)
         {
-            float x = (idx + 0.5f) * mBarSector;
-            float y = controller.values[idx] / controller.GetTotalMaxValue() * mBarHeight;
-            Vector3[] lines = new Vector3[] { new Vector3(x, 0), new Vector3(x, y) };
+            float x = (idx + 0.5f)*mBarSector;
+            float y = controller.values[idx]/controller.GetTotalMaxValue()*mBarHeight;
+            Vector3[] lines = new Vector3[] {new Vector3(x, 0), new Vector3(x, y)};
             Mesh lineMesh = ChartUtils.GenerateLineMesh(lines, mBarWidth);
 
             string name = ChartUtils.NameGenerator(chartChildString, idx);
@@ -135,27 +137,29 @@ public class ChartViewController : MonoBehaviour
             CanvasRenderer renderer = obj.GetComponent<CanvasRenderer>();
 
             renderer.Clear();
-            renderer.SetMaterial(controller.materials[idx], null);
-            renderer.SetMesh(lineMesh);
+            string kpi_name = controller.seriesNames[idx];
+            if (!controller.seriesHidden.Contains(kpi_name))
+            {
+                renderer.SetMaterial(controller.materials[idx], null);
+                renderer.SetMesh(lineMesh);
+            }
 
             RectTransform rt;
             if (obj.transform.childCount > 0)
             {
                 rt = obj.transform.GetChild(0) as RectTransform;
-
             }
             else
             {
                 var go = new GameObject();
                 go.transform.SetParent(obj.transform);
-                
+
                 var t = go.AddComponent<Text>();
                 t.alignment = TextAnchor.MiddleCenter;
                 t.color = Color.black;
                 t.font = font;
 
                 rt = go.transform as RectTransform;
-
             }
 
             rt.localPosition = new Vector3(x, -7);
@@ -163,7 +167,43 @@ public class ChartViewController : MonoBehaviour
             var text = obj.GetComponentInChildren<Text>();
             if (text != null)
                 text.text = controller.values[idx].ToString();
+        }
+    }
 
+    private void DrawPieChart()
+    {
+        float total = 0;
+        for (int idx = 0; idx < controller.SeriesCount; idx++)
+        {
+            total += controller.values[idx];
+        }
+        if (total > 0.0001f)
+        {
+            float startangle = 0;
+            float width = chartHolder.rect.width, height = chartHolder.rect.height;
+
+            for (int idx = 0; idx < controller.SeriesCount; idx++)
+            {
+                float part = controller.values[idx] / total;
+
+                Vector2 center = new Vector2(width / 2f, height / 2f);
+                float radius = Mathf.Min(width, height) / 2f;
+                float angle = part * Mathf.PI * 2f;
+                Mesh pieMesh = ChartUtils.CreatePieSectorMesh(center, radius, startangle, angle);
+                startangle += angle;
+
+                string name = ChartUtils.NameGenerator(chartChildString, idx);
+                GameObject obj = chartHolder.Find(name).gameObject;
+                CanvasRenderer renderer = obj.GetComponent<CanvasRenderer>();
+
+                renderer.Clear();
+                renderer.SetMaterial(controller.materials[idx], null);
+                renderer.SetMesh(pieMesh);
+            }
+        }
+        else
+        {
+            //empty pie
         }
     }
 
@@ -181,11 +221,48 @@ public class ChartViewController : MonoBehaviour
             Mesh lineMesh = ChartUtils.GenerateLineMesh(lines, 1.5f);
 
             string name = ChartUtils.NameGenerator(chartChildString, idx);
+
             GameObject obj = chartHolder.Find(name).gameObject;
             CanvasRenderer renderer = obj.GetComponent<CanvasRenderer>();
 
             renderer.Clear();
-            renderer.SetMaterial(controller.materials[idx], null); 
+            string kpi_name = controller.seriesNames[idx];
+            if (!controller.seriesHidden.Contains(kpi_name))
+            {
+                renderer.SetMaterial(controller.materials[idx], null);
+                renderer.SetMesh(lineMesh);
+            }
+        }
+    }
+
+    private void DrawStackedLineChart()
+    {
+        Vector3[] baselines = new Vector3[0];
+        for (int idx = 0; idx < controller.SeriesCount; idx++)
+        {
+            List<TimedData> dataCollection = controller.DataContainer.GetTimedDataCollection(idx);
+
+            Vector3[] lines = ChartUtils.CreateLinesFromData(dataCollection, chartHolder, controller.GetMinMaxOfAll());
+            if (baselines.Length == 0)
+            {
+                baselines = lines;
+            }
+            else
+            {
+                for (int i = 0; i < baselines.Length; i++)
+                {
+                    baselines[i] += new Vector3(0, lines[i].y, 0);
+                }
+                lines = baselines;
+            }
+            Mesh lineMesh = ChartUtils.GenerateLineMesh(lines, 1.5f);
+
+            string name = ChartUtils.NameGenerator(chartChildString, idx);
+            GameObject obj = chartHolder.Find(name).gameObject;
+            CanvasRenderer renderer = obj.GetComponent<CanvasRenderer>();
+
+            renderer.Clear();
+            renderer.SetMaterial(controller.materials[idx], null);
             renderer.SetMesh(lineMesh);
         }
     }
