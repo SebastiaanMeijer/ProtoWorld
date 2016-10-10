@@ -22,6 +22,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class FlashPedestriansProfile 
 {
@@ -49,4 +50,39 @@ public class FlashPedestriansProfile
         this.carAwareness = carAwareness;
         this.travelPreference = preference;
     }
+
+	public Dictionary<string,string> getLogData()
+	{
+		Dictionary<string,string> structuredData = new Dictionary<string,string> ();
+		structuredData.Add ("speed", speed.ToString());
+		structuredData.Add ("englishSpeaker", englishSpeaker.ToString());
+		structuredData.Add ("italianSpeaker", italianSpeaker.ToString());
+		structuredData.Add ("chanceOfSubscription", chanceOfSubscription.ToString());
+		structuredData.Add ("willingToChangeDestination", willingToChangeDestination.ToString());
+		structuredData.Add ("chanceOfTakingABike", chanceOfTakingABike.ToString());
+		structuredData.Add ("weatherFactorOnTakingBikes", weatherFactorOnTakingBikes.ToString());
+		structuredData.Add ("chanceOfBelievingRumours", chanceOfBelievingRumours.ToString());
+		structuredData.Add ("carAwareness", carAwareness.ToString());
+		structuredData.Add ("travelPreference", travelPreference.ToString());
+		return structuredData;
+	}
+
+    public FlashPedestriansProfile rebuildFromLog(Dictionary<string, string> logData)
+    {
+		float speed = float.Parse(logData["speed"].ToString());
+		bool englishSpeaker = bool.Parse(logData["englishSpeaker"].ToString());
+		bool italianSpeaker = bool.Parse(logData["italianSpeaker"].ToString());
+		float chanceOfSubscription = float.Parse(logData["chanceOfSubscription"].ToString());
+		bool willingToChangeDestination = bool.Parse(logData["willingToChangeDestination"].ToString());
+		float chanceOfTakingABike = float.Parse(logData["chanceOfTakingABike"].ToString());
+		float weatherFactorOnTakingBikes = float.Parse(logData["weatherFactorOnTakingBikes"].ToString());
+		float chanceOfBelievingRumours = float.Parse(logData["chanceOfBelievingRumours"].ToString());
+		bool carAwareness = bool.Parse(logData["carAwareness"].ToString());
+		TravelPreference travelPreference = new TravelPreference();
+
+		FlashPedestriansProfile profile = new FlashPedestriansProfile(speed, englishSpeaker, italianSpeaker, chanceOfSubscription, willingToChangeDestination, chanceOfTakingABike,
+			chanceOfBelievingRumours, carAwareness, travelPreference);
+
+        return profile;
+	}
 }

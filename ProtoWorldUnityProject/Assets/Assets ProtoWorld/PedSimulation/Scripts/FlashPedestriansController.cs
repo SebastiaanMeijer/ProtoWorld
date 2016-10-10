@@ -26,7 +26,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 
-public class FlashPedestriansController : TravelerController
+
+public class FlashPedestriansController : TravelerController, LogObject
 {
     public int uniqueId;
 
@@ -87,6 +88,11 @@ public class FlashPedestriansController : TravelerController
     /// Awake method.
     /// </summary>
     void Awake()
+    {
+        initializePedestrian();
+    }
+
+    public void initializePedestrian()
     {
         globalParam = FindObjectOfType<FlashPedestriansGlobalParameters>();
         navAgent = gameObject.GetComponent<NavMeshAgent>();
@@ -714,4 +720,26 @@ public class FlashPedestriansController : TravelerController
 
         currentWeather = newWeatherCondition;
     }
+		
+	public Dictionary<string, Dictionary<string, string>> getLogData(){
+		Dictionary<string, Dictionary<string, string>>logData = new Dictionary<string,Dictionary<string,string>> ();
+		logData.Add (gameObject.tag, new Dictionary<string,string> ());
+		logData [tag].Add ("id", uniqueId.ToString ());
+		logData [tag].Add ("Destination", routing.destinationPoint.destinationName);
+		logData.Add ("PedestrianPosition", new Dictionary<string,string> ());
+		logData["PedestrianPosition"].Add("PositionX", transform.position.x.ToString());
+		logData["PedestrianPosition"].Add("PositionY", transform.position.y.ToString());
+		logData["PedestrianPosition"].Add("PositionZ", transform.position.z.ToString());
+		logData.Add ("PedestrianProfile", profile.getLogData());
+		logData.Add ("Itinerary", new Dictionary<string, string>());
+		Dictionary<string, string> itineraryData = routing.itinerary.getLogData ();
+		foreach (KeyValuePair<string, string> item in itineraryData) {
+			logData ["Itinerary"].Add (item.Key, item.Value);
+		}
+		return logData;
+	}
+
+	public void rebuildFromLog(Dictionary<string, Dictionary<string, string>> logData){
+
+	}
 }

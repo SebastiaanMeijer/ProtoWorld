@@ -12,22 +12,23 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
- * 
- * FLASH PEDESTRIAN SIMULATOR
- * FlashPedestriansDestination.cs
- * Miguel Ramos Carretero
- * 
- */
+/*
+* 
+* FLASH PEDESTRIAN SIMULATOR
+* FlashPedestriansDestination.cs
+* Miguel Ramos Carretero
+* 
+*/
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Class that defines a destination entry for Flash Pedestrians (composed of a transform, 
 /// a float priority and a array of colliders representing the stations nearby). 
 /// </summary>
-public class FlashPedestriansDestination : MonoBehaviour
+public class FlashPedestriansDestination : MonoBehaviour, LogObject
 {
     public string destinationName;
 
@@ -47,6 +48,11 @@ public class FlashPedestriansDestination : MonoBehaviour
 
     void Awake()
     {
+        initializeDestination();
+    }
+
+    public void initializeDestination()
+    {
         destinationTransform = this.transform;
 
         FlashPedestriansGlobalParameters pedGlobalParameters = GetComponent<FlashPedestriansGlobalParameters>();
@@ -55,6 +61,37 @@ public class FlashPedestriansDestination : MonoBehaviour
         stationsNearThisDestination = Physics.OverlapSphere(destinationTransform.position, radiousToCheckStations, 1 << LayerMask.NameToLayer("Stations"));
 
         //Debug.Log(this.gameObject.name + " has found " + stationsNearThisDestination.Length 
-            //+ " stations nearby");
+        //+ " stations nearby");
     }
+
+	public Dictionary<string, Dictionary<string, string>> getLogData(){
+		Dictionary<string, Dictionary<string, string>>logData = new Dictionary<string,Dictionary<string,string>> ();
+		logData.Add (tag, new Dictionary<string,string> ());
+		logData [tag].Add("Name", destinationName);
+		logData [tag].Add("PositionX", destinationTransform.position.x.ToString());
+		logData [tag].Add("PositionY", destinationTransform.position.y.ToString());
+		logData [tag].Add("PositionZ", destinationTransform.position.z.ToString());
+		logData [tag].Add("CheckRadius", radiousToCheckStations.ToString());
+		logData [tag].Add("Priority", destinationPriority.ToString());
+		return logData;
+	}
+
+	public void rebuildFromLog(Dictionary<string, Dictionary<string, string>> logData){
+		GameObject flashDestinationObject = GameObject.Instantiate(gameObject) as GameObject;
+		FlashPedestriansDestination flashDestinationScript = flashDestinationObject.GetComponent<FlashPedestriansDestination>();
+		Vector3 position = new Vector3();
+
+		position.x = float.Parse(logData [tag]["PositionX"]);
+		position.y = float.Parse(logData [tag]["PositionY"]);
+		position.z = float.Parse(logData [tag]["PositionZ"]);
+		flashDestinationScript.destinationName = logData [tag]["Name"];
+		flashDestinationScript.radiousToCheckStations = float.Parse(logData [tag]["CheckRadius"]);
+		flashDestinationScript.destinationPriority = float.Parse(logData [tag]["Priority"]);
+		flashDestinationObject.transform.parent = GameObject.Find("DestinationPoints").transform;
+		flashDestinationObject.name = "FlashDestination";
+		flashDestinationScript.destinationTransform.position = position;
+
+		flashDestinationScript.initializeDestination();
+		flashDestinationScript.enabled = true;
+	}
 }
