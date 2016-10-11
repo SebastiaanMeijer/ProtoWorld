@@ -27,13 +27,14 @@ public class ZoomScrollbarMMV : MonoBehaviour {
 	
 		scrollbar = this.gameObject.GetComponent<Scrollbar> ();
 		maxHeight = Camera.main.GetComponent<CameraControl> ().maxHeight;
-		handleText = this.gameObject.GetComponentInChildren<Transform> ().GetComponentInChildren<Text> ();
-		rt = this.GetComponent (typeof(RectTransform)) as RectTransform;
+        handleText = GameObject.Find("HandleTextMMV").GetComponent<Text>();
+        rt = this.GetComponent (typeof(RectTransform)) as RectTransform;
 	}
 
 	void Start(){
-		
-		for (int i = 0; i < stagesHeights.Length; i++) {
+        
+
+        for (int i = 0; i < stagesHeights.Length; i++) {
 
 			GameObject instantiatedIndicator = Instantiate (indicatorImage, new Vector3 (this.transform.position.x, (stagesHeights[i]/maxHeight)*rt.sizeDelta.y + transform.position.y - rt.sizeDelta.y/2, this.transform.position.z), Quaternion.identity) as GameObject;
 			instantiatedIndicator.transform.parent = this.transform;
