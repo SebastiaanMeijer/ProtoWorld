@@ -92,7 +92,7 @@ public class CameraControl : MonoBehaviour
 
 	void Awake(){
 
-		ScrollbarMMV = GameObject.Find ("ScrollbarMMV");
+		
 
 	}
 
@@ -101,6 +101,7 @@ public class CameraControl : MonoBehaviour
     /// </summary>
     void Start()
     {
+        ScrollbarMMV = GameObject.Find("ScrollbarMMV");
         targetCameraPosition = gameObject.transform.position;
 
         if (overviewPoint != null && changeViewAtStart)
