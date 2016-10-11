@@ -26,8 +26,8 @@
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.tif filter=lfs diff=lfs merge=lfs -text
 *.bmp filter=lfs diff=lfs merge=lfs -text
-*.fcd filter=lfs diff=lfs merge=lfs -text
-*.xml filter=lfs diff=lfs merge=lfs -text
 
-#Special files
+# Special files
 Assets/StreamingAssets/SQLiteDB/trajectoriesDB filter=lfs diff=lfs merge=lfs -text
+ScriptsAndTools/TestFiles/TrafficGenTest/LiveTest/map.trips.xml filter=lfs diff=lfs merge=lfs -text
+ScriptsAndTools/TestFiles/TrafficGenTest/FCDTest/fcdtest.fcd filter=lfs diff=lfs merge=lfs -text
