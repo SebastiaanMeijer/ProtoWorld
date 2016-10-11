@@ -1,3 +1,42 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8f4faac9b051fe0788e518588266f670c7969034013dcd51936837205c30d4d9
-size 3325
+<?xml version="1.0" encoding="Windows-1252"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <stations>
+    <station stationId="0" x="-5552.18164" y="0" z="6060.77734" name="64_first" />
+    <station stationId="1" x="-5359.615" y="0" z="2663.959" name="64_last" />
+    <station stationId="2" x="-5391.002" y="0" z="2384.586" name="64_r_first" />
+    <station stationId="3" x="-5561.088" y="0" z="6051.6543" name="40_first" />
+    <station stationId="4" x="-5455.05273" y="0" z="3021.70313" name="40_last" />
+    <station stationId="5" x="-6295.30273" y="0" z="6437.242" name="495_first" />
+    <station stationId="6" x="-6690.18945" y="0" z="4073.67383" name="495_last_490_first" />
+    <station stationId="7" x="-6743.631" y="0" z="3032.49023" name="490_last" />
+    <station stationId="8" x="-6699.0957" y="0" z="2877.57422" name="490_r_first" />
+    <station stationId="9" x="-6680.43164" y="0" z="4075.02344" name="490_r_last_495_r_first" />
+    <station stationId="10" x="-6290.635" y="0" z="6351.96875" name="495_r_last" />
+    <station stationId="11" x="-2541.10742" y="0" z="4745.455" name="280_first" />
+    <station stationId="12" x="-5361.31445" y="0" z="3138.38477" name="280_last" />
+    <station stationId="13" x="-2658.17383" y="0" z="4668.27539" name="280_r_last" />
+    <station stationId="14" x="-2667.50586" y="0" z="4501.0625" name="23_first" />
+    <station stationId="15" x="-564.972656" y="0" z="4141.496" name="23_last" />
+    <station stationId="16" x="-2619.1543" y="0" z="4508.59961" name="23_r_last" />
+    <station stationId="17" x="-2404.5332" y="0" z="3309.166" name="170_first" />
+    <station stationId="18" x="-615.8711" y="0" z="3700.70117" name="170_last" />
+    <station stationId="19" x="-578.1211" y="0" z="3735.04688" name="170_r_first" />
+    <station stationId="20" x="-2346.42383" y="0" z="3380.873" name="170_r_last" />
+  </stations>
+  <transportlines>
+    <line transportId="0" category="Bus" name="64" stationIds="0,1" travelingTimes="1" />
+    <line transportId="1" category="Bus" name="64_r" stationIds="2,0" travelingTimes="1" />
+    <line transportId="2" category="Bus" name="40" stationIds="3,4" travelingTimes="1" />
+    <line transportId="3" category="Bus" name="40_r" stationIds="4,3" travelingTimes="1" />
+    <line transportId="4" category="Bus" name="490" stationIds="6,7" travelingTimes="1" />
+    <line transportId="5" category="Bus" name="490_r" stationIds="8,9" travelingTimes="1" />
+    <line transportId="6" category="Bus" name="495" stationIds="5,6" travelingTimes="1" />
+    <line transportId="7" category="Bus" name="495_r" stationIds="9,10" travelingTimes="1" />
+    <line transportId="8" category="Bus" name="280" stationIds="11,12" travelingTimes="1" />
+    <line transportId="9" category="Bus" name="280_r" stationIds="12,13" travelingTimes="1" />
+    <line transportId="10" category="Bus" name="23" stationIds="14,15" travelingTimes="1" />
+    <line transportId="11" category="Bus" name="23_r" stationIds="15,16" travelingTimes="1" />
+    <line transportId="12" category="Bus" name="170" stationIds="17,18" travelingTimes="1" />
+    <line transportId="13" category="Bus" name="170_r" stationIds="19,20" travelingTimes="1" />
+  </transportlines>
+</root>

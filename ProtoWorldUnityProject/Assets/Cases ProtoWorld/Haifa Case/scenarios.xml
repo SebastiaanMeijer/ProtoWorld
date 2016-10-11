@@ -1,3 +1,71 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:46bec51c32bebb8703dec040e5e93b34d907c102178af3a051c8df55fd9102fa
-size 2010
+<?xml version="1.0"?>
+<decision_tree>
+  <scenarios>
+    <scenario id="1" name="scen 1" >
+      <event id="1" time="0.0">
+        <simulation>
+          C:\Users\admgaming\Desktop\FZP2FCD\scenario1\scenario1_.pws.meta
+        </simulation>
+      </event>
+      <event id="2" time="5.0">
+        <inform>Oh no, an accident.</inform>
+      </event>
+      <question id="1" time="10.0" text="2 or 3?">
+        <choice>
+          <execScen>2</execScen>
+        </choice>
+        <choice>
+          <execScen>3</execScen>
+        </choice>
+      </question>
+    </scenario>
+    <scenario id="2" name="scen 2">
+      <event id="1" time="0.0">
+        <simulation>
+          C:\Users\admgaming\Desktop\FZP2FCD\scenario2\scenario_.pws.meta
+        </simulation>
+      </event>
+      <question id="1" time="20.0" text="1 or 3?">
+        <choice>
+          <execScen>1</execScen>
+        </choice>
+        <choice>
+          <execScen>3</execScen>
+        </choice>
+      </question>
+    </scenario>
+    <scenario id="3" name="scen 3">
+      <event id="1" time="0.0">
+        <simulation>
+          C:\Users\admgaming\Desktop\FZP2FCD\scenario3\scenario1_.pws.meta
+        </simulation>
+      </event>
+      <event id="2" time="5.0">
+        <inform>Oh no, an accident.</inform>
+      </event>
+      <event id="3" time="5.0">
+        <inform>Oh no, rain.</inform>
+        <weather>rain</weather>
+      </event>
+      <event id="4" time="6.0">
+        <inform>Oh no, an accident.</inform>
+      </event>
+      <event id="5" time="6.0">
+        <inform>Oh no, an accident.</inform>
+      </event>
+      <question id="1" time="30.0" text="1 or 2?">
+        <choice>
+          <execScen>1</execScen>
+        </choice>
+        <choice>
+          <execScen>2</execScen>
+        </choice>
+        <choice>
+          <execEvent>2</execEvent>
+          <execEvent>3</execEvent>
+        </choice>
+      </question>
+    </scenario>
+  </scenarios>
+
+</decision_tree>

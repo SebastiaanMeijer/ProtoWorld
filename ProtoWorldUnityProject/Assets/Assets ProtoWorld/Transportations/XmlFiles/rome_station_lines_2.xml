@@ -1,3 +1,67 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3961e41fd4d501a5ca47879433aaa51d75751b90abf44cfcea24eecb5f6d08c1
-size 5279
+<?xml version="1.0" encoding="Windows-1252"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <stations>
+    <station stationId="0" x="-3704.2" y="0" z="6895" name="San Giovanni" />
+    <station stationId="1" x="-5437" y="0" z="6158.3" name="Termini" />
+    <station stationId="2" x="-6051.9" y="0" z="4702.5" name="Spagna" />
+    <station stationId="3" x="-6385.9" y="0" z="2609.1" name="Ottaviano" />
+    <station stationId="4" x="-6452.5" y="0" z="8617.3" name="Roma Tiburtina Metro" />
+    <station stationId="5" x="-4409.6" y="0" z="5400.3" name="Colosseo" />
+    <station stationId="6" x="-2675" y="0" z="4634.4" name="Piramide Metro" />
+    <station stationId="7" x="-6552.9" y="0" z="8721.3" name="Roma Tiburtina Train" />
+    <station stationId="8" x="-2378.7" y="0" z="4792.4" name="Ostiense Train" />
+    <station stationId="9" x="-2338.2" y="0" z="3281.5" name="Trastevere" />
+    <station stationId="10" x="-4965.6" y="0" z="2325.8" name="San Pietro" />
+    <station stationId="11" x="-2658.3" y="0" z="4559.3" name="Porta San Paolo" />
+    <station stationId="12" x="-544.2" y="0" z="4273.9" name="Basilica San Paolo Train" />
+    <station stationId="13" x="-6659" y="0" z="3312.8" name="Lepanto" />
+    <station stationId="14" x="-6213.8" y="0" z="1747.5" name="Cipro" />
+    <station stationId="15" x="-5408.5" y="0" z="2486.7" name="Largo Di Porta Cavalleggeri- Fornac" />
+    <station stationId="16" x="-5419.3" y="0" z="3028" name="Lungotevere In Sassia- Santo Spirito" />
+    <station stationId="17" x="-6725.2" y="0" z="2945.7" name="Milizie- Distretto Militare" />
+    <station stationId="18" x="-6700.1" y="0" z="4050.4" name="Flaminio Bus" />
+    <station stationId="19" x="-6300.4" y="0" z="6424.3" name="Croce Rossa" />
+    <station stationId="20" x="-5414.4" y="0" z="3159.2" name="Lungotevere fiorentini-paoli" />
+    <station stationId="21" x="-603.5" y="0" z="3702.1" name="Marconi- Edison" />
+    <station stationId="22" x="-6772" y="0" z="4147.5" name="Flaminio Metro" />
+    <station stationId="23" x="-5560.7" y="0" z="6084.5" name="Termini Bus" />
+    <station stationId="24" x="-2531.7" y="0" z="4724.7" name="Piramide Bus" />
+    <station stationId="25" x="-2633.2" y="0" z="4480.9" name="Ostiense Bus" />
+    <station stationId="26" x="-560.9" y="0" z="4139.4" name="Basilica San Paolo Bus" />
+    
+  </stations>
+  
+  <transportlines>
+    <line transportId="0" category="Metro" name="A" stationIds="0,1,2,22,13,3,14" travelingTimes="4,3,2,2,2,2" />
+    <line transportId="1" category="Metro" name="B" stationIds="4,1,5,6,12" travelingTimes="6,2,4,4" />
+    <line transportId="2" category="Train" name="1" stationIds="7,1" travelingTimes="10" />
+    <line transportId="3" category="Train" name="2" stationIds="7,8,9,10" travelingTimes="16,4,5" />
+    <line transportId="4" category="Train" name="3" stationIds="11,12" travelingTimes="3" />
+    <line transportId="5" category="Walk" name="1" stationIds="4,7" travelingTimes="1" />
+    <line transportId="6" category="Walk" name="2" stationIds="8,24" travelingTimes="3" />
+    <line transportId="7" category="Walk" name="3" stationIds="6,11" travelingTimes="1" />
+    <line transportId="8" category="Walk" name="4" stationIds="25,11" travelingTimes="1" />
+    <line transportId="9" category="Bus" name="64" stationIds="23,15" travelingTimes="30" />
+    <line transportId="10" category="Bus" name="40" stationIds="23,16" travelingTimes="26" />
+    <line transportId="11" category="Bus" name="490" stationIds="17,18" travelingTimes="8" />
+    <line transportId="12" category="Bus" name="495" stationIds="18,19" travelingTimes="17" />
+    <line transportId="13" category="Bus" name="280" stationIds="24,20" travelingTimes="19" />
+    <line transportId="14" category="Bus" name="23" stationIds="26,25" travelingTimes="9" />
+    <line transportId="15" category="Bus" name="170" stationIds="9,21" travelingTimes="9" />
+    <line transportId="16" category="Walk" name="5" stationIds="18,22" travelingTimes="2" />
+    <line transportId="17" category="Walk" name="6" stationIds="1,23" travelingTimes="2" />
+    <line transportId="18" category="Walk" name="7" stationIds="6,24" travelingTimes="2" />
+    <line transportId="19" category="Walk" name="8" stationIds="12,26" travelingTimes="1" />
+    <line transportId="20" category="Walk" name="9" stationIds="21,26" travelingTimes="6" />
+    <line transportId="21" category="Walk" name="10" stationIds="16,20" travelingTimes="6" />
+    <line transportId="22" category="Walk" name="11" stationIds="3,17" travelingTimes="7" />
+    <line transportId="23" category="Walk" name="12" stationIds="13,17" travelingTimes="6" />
+    
+    <!--<line transportId="24" category="Walk" name="13" stationIds="3,15" travelingTimes="15" />
+    <line transportId="25" category="Walk" name="14" stationIds="3,16" travelingTimes="17" />
+    <line transportId="26" category="Walk" name="15" stationIds="3,20" travelingTimes="17" />
+    <line transportId="27" category="Walk" name="16" stationIds="19,23" travelingTimes="14" />
+    <line transportId="28" category="Walk" name="17" stationIds="15,16" travelingTimes="8" />-->
+
+  </transportlines>
+</root>

@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:acf48a665142d7092dc44b71ab536da2208d6e1e7c23c7307da73d9aeafce7f0
-size 1753
+<?xml version="1.0" encoding="Windows-1252"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <stations />
+  <transportlines>
+    <line transportId="0" category="Metro" name="A" stationIds="0,1,2,18,13,3,14" travelingTimes="4,3,2,2,2,2" />
+    <line transportId="1" category="Metro" name="B" stationIds="4,1,5,6,12" travelingTimes="6,2,4,4" />
+    <line transportId="2" category="Train" name="1" stationIds="7,1" travelingTimes="10" />
+    <line transportId="3" category="Train" name="2" stationIds="7,8,9,10" travelingTimes="16,4,5" />
+    <line transportId="4" category="Train" name="3" stationIds="11,12" travelingTimes="3" />
+    <line transportId="5" category="Walk" name="1" stationIds="4,7" travelingTimes="1" />
+    <line transportId="6" category="Walk" name="2" stationIds="6,8" travelingTimes="5" />
+    <line transportId="7" category="Walk" name="3" stationIds="6,11" travelingTimes="4" />
+    <line transportId="8" category="Walk" name="4" stationIds="8,11" travelingTimes="4" />
+    <line transportId="9" category="Bus" name="64" stationIds="2,15" travelingTimes="30" />
+    <line transportId="10" category="Bus" name="40" stationIds="2,16" travelingTimes="26" />
+    <line transportId="11" category="Bus" name="490" stationIds="17,18" travelingTimes="8" />
+    <line transportId="12" category="Bus" name="495" stationIds="18,19" travelingTimes="17" />
+    <line transportId="13" category="Bus" name="280" stationIds="6,20" travelingTimes="19" />
+    <line transportId="14" category="Bus" name="23" stationIds="12,8" travelingTimes="9" />
+    <line transportId="15" category="Bus" name="170" stationIds="9,21" travelingTimes="9" />
+  </transportlines>
+</root>
