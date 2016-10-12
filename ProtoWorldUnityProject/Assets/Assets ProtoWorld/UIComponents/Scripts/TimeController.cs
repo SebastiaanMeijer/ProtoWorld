@@ -21,6 +21,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
  */
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 /// <summary>
@@ -81,6 +82,16 @@ public class TimeController : MonoBehaviour
     // Parameters to enable requested pauses/resumes
     private bool requestPause = false;
     private bool requestedPauseState = false;
+
+    // Parameters for the speed
+    public UnityEngine.UI.Text speedLabel;
+
+    public UnityEngine.UI.RawImage playPauseIcon;
+
+    // Icons
+    public Texture icon_play;
+    public Texture icon_pause;
+
 
     /// <summary>
     /// Awakes the script.
@@ -193,7 +204,9 @@ public class TimeController : MonoBehaviour
             timerText.text += " [" + Mathf.FloorToInt(gameTime) + "]";
 
         // Show the velocity factor in the textbox
-        timerText.text += " (x" + timeVelocity.ToString() + ")";
+        //timerText.text += " (x" + timeVelocity.ToString() + ")";
+
+        speedLabel.text = timeVelocity.ToString();
 
         //text.text = "Time Velocity: x" + timeVelocity.ToString() + "\n Current Time: " + string.Format("{0:0000}", Time.time);
 
@@ -304,7 +317,8 @@ public class TimeController : MonoBehaviour
                 log.Info(string.Format("{0}:{1}:{2}:{3}", logSeriesId, "action", 0, "game paused"));
 
             if (pauseButtonLabel != null)
-                pauseButtonLabel.text = "Resume";
+                playPauseIcon.texture = icon_play;
+                //pauseButtonLabel.text = "Resume";
         }
         else
         {
@@ -314,7 +328,8 @@ public class TimeController : MonoBehaviour
                 log.Info(string.Format("{0}:{1}:{2}:{3}", logSeriesId, "action", 0, "game resumed"));
 
             if (pauseButtonLabel != null)
-                pauseButtonLabel.text = "Pause";
+                playPauseIcon.texture = icon_pause;
+                //pauseButtonLabel.text = "Pause";
         }
     }
 
