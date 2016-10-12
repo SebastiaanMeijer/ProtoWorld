@@ -41,7 +41,6 @@ public class goToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	public void OnBeginDrag(PointerEventData eventData)
 	{
 		dragging = true;
-		Debug.LogError ("Dragging");
 		//Store the first x and y position of the mouse, this is to check if the user will drag the object or just click on it
 		StartMouseX = Input.mousePosition.x;
 		StartMouseY = Input.mousePosition.y;
@@ -65,7 +64,6 @@ public class goToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		if (clicked == true)
 		if (StartMouseX == Input.mousePosition.x || StartMouseY == Input.mousePosition.y) {
 			clicked = false;
-			Debug.LogError ("CLICKED");
 
 		}
 
