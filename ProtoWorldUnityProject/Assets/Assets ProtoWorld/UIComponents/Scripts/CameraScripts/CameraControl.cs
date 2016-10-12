@@ -465,6 +465,7 @@ public class CameraControl : MonoBehaviour
         }
 
 		//ScrollbarMMV.GetComponent<ZoomScrollbarMMV> ().height = targetCameraPosition.y;
+		if(ScrollbarMMV != null)
 		ScrollbarMMV.GetComponent<ZoomScrollbarMMV> ().zoomedInOut(targetCameraPosition.y);
 
     }
