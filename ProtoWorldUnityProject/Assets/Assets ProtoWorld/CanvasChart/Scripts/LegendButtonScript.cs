@@ -23,7 +23,7 @@ public class LegendButtonScript : MonoBehaviour
 
     void Update()
     {
-        if (controller.seriesHidden.Contains(text.text))
+        if (controller.isSeriesHidden(text.text))
         {
             Color orgColor = image.color;
             orgColor.a = hiddenAlpha;
@@ -34,7 +34,10 @@ public class LegendButtonScript : MonoBehaviour
 
     public void ToggleVisibility()
     {
-        if (controller.seriesHidden.Contains(text.text)) controller.seriesHidden.Remove(text.text);
-        else controller.seriesHidden.Add(text.text);
+        //Debug.Log("Toggled visibility for " + text.text);
+        if (controller.isSeriesHidden(text.text))
+            controller.seriesHidden.Remove(text.text);
+        else
+            controller.seriesHidden.Add(text.text);
     }
 }
