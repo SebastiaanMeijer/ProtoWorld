@@ -44,7 +44,7 @@ public class Visualizer : MonoBehaviour {
 				
 				changeVisualizationRenderer (previousLevel,objectRendersLvl[i]);
 				changeVisualizationActive (previousLevel,objectScalesLvl[i]);
-				changeVisualizationScale (previousLevel,objectSelfLvl[i]);
+				//changeVisualizationScale (previousLevel,objectSelfLvl[i]);
 			}
 
 
@@ -61,7 +61,7 @@ public class Visualizer : MonoBehaviour {
 			for (int i = 0; objectRenders.Length > i; i++) {
 				changeVisualizationRenderer (-1, objectRendersLvl [i]);
 				changeVisualizationActive (-1, objectScalesLvl [i]);
-				changeVisualizationScale (-1, objectSelfLvl [i]);
+				//changeVisualizationScale (-1, objectSelfLvl [i]);
 
 			}
 			activatedMicroMacro = false;
@@ -73,7 +73,7 @@ public class Visualizer : MonoBehaviour {
 
 				changeVisualizationRenderer (previousLevel,objectRendersLvl[i]);
 				changeVisualizationActive (previousLevel,objectScalesLvl[i]);
-				changeVisualizationScale (previousLevel,objectSelfLvl[i]);
+				//changeVisualizationScale (previousLevel,objectSelfLvl[i]);
 			}
 
 		}
@@ -92,8 +92,7 @@ public void changeVisualizationRenderer(int levelNumber, int arrayNumber){
 						r.enabled = true;
 				}
 		}
-
-			Debug.LogError(LayerMask.NameToLayer("Pedestrian"));
+				
 			cameraObject.GetComponent<Camera> ().cullingMask |= 1 << LayerMask.NameToLayer("Pedestrian");
 
 			for (int i = 0; i < objectRenders.Length; i++) {
@@ -104,10 +103,7 @@ public void changeVisualizationRenderer(int levelNumber, int arrayNumber){
 
 					Renderer[] rs = objectRenders [i].GetComponentsInChildren<Renderer> ();
 					if (objectRendersLvl [i] > levelNumber && objectRendersLvl [i] >= 0) {
-						Debug.LogError (" Now disable " + objectRenders [i].name);
 						var newMask = cameraObject.GetComponent<Camera> ().cullingMask | (1 << objectRenders [i].gameObject.layer);
-						Debug.LogError (cameraObject.GetComponent<Camera> ().cullingMask);
-						Debug.LogError ((1 << objectRenders [i].gameObject.layer));
 						cameraObject.GetComponent<Camera> ().cullingMask =  newMask;
 
 						foreach (Renderer r in rs) {
@@ -182,19 +178,21 @@ public void changeVisualizationRenderer(int levelNumber, int arrayNumber){
 	public void changeVisualizationScale(int levelNumber, int arrayNumber){
 		if (activatedMicroMacro) {
 			for (int i = 0; i < objectScales.Length; i++) {
+				if (objectSelf [i] != null) {
 				GameObject rs1 = objectSelf [i];
-				if (rs1 != null) {
-					if (objectScalesLvl [i] > levelNumber && objectSelfLvl [i] >= 0) {
+				Debug.LogError (rs1);
+
+					if (objectScalesLvl [i] > levelNumber && objectScalesLvl [i] >= 0) {
 						objectScales [i].transform.localScale = new Vector3 (1, 1, 1);
 						objectScalesA [i] = true;
-					} else if(objectScalesLvl [i] < levelNumber && objectSelfLvl [i] >= 0){
+					} else if(objectScalesLvl [i] < levelNumber && objectScalesLvl [i] >= 0){
 
 						objectScales [i].transform.localScale = new Vector3 (1, 0, 1);
 						objectScalesA [i] = false;
-					} else if (objectScalesLvl [i] > -levelNumber && objectSelfLvl [i] < 0) {
+					} else if (objectScalesLvl [i] > -levelNumber && objectScalesLvl [i] < 0) {
 						objectScales [i].transform.localScale = new Vector3 (1, 1, 1);
 						objectScalesA [i] = true;
-					} else if(objectScalesLvl [i] < -levelNumber && objectSelfLvl [i] < 0){
+					} else if(objectScalesLvl [i] < -levelNumber && objectScalesLvl [i] < 0){
 
 						objectScales [i].transform.localScale = new Vector3 (1, 0, 1);
 						objectScalesA [i] = false;

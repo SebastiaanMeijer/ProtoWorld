@@ -23,6 +23,19 @@ public class ChangeCameraFeed : MonoBehaviour {
 		cameraFeed3Text = GameObject.Find("CameraFeed3Text").GetComponent<Text> ();
 		FeedCamerasObject = GameObject.Find ("FeedCameras");
 	}
+
+	void Start(){
+		FeedCamerasObject.transform.GetChild (i).GetComponent<Camera> ().enabled = true;
+		FeedCamerasObject.transform.GetChild (i).GetComponent<Camera> ().targetTexture = CameraRender1;
+		cameraFeed1Text.text = FeedCamerasObject.transform.GetChild (i).name;
+		FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().enabled = true;
+		FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().targetTexture = CameraRender2;
+		cameraFeed2Text.text = FeedCamerasObject.transform.GetChild (i+1).name;
+		FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().enabled = true;
+		FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().targetTexture = CameraRender3;
+		cameraFeed3Text.text = FeedCamerasObject.transform.GetChild (i+2).name;
+
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,13 +49,19 @@ public class ChangeCameraFeed : MonoBehaviour {
 
 		if (i +3 < FeedCamerasObject.transform.childCount) {
 			FeedCamerasObject.transform.GetChild (i).GetComponent<Camera> ().targetTexture = null;
+			FeedCamerasObject.transform.GetChild (i).GetComponent<Camera> ().enabled = false;
 			FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().targetTexture = null;
+			FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().enabled = false;
 			FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().targetTexture = null;
+			FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().enabled = false;
 			i = i + 1;
+			FeedCamerasObject.transform.GetChild (i).GetComponent<Camera> ().enabled = true;
 			FeedCamerasObject.transform.GetChild (i).GetComponent<Camera> ().targetTexture = CameraRender1;
 			cameraFeed1Text.text = FeedCamerasObject.transform.GetChild (i).name;
+			FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().enabled = true;
 			FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().targetTexture = CameraRender2;
 			cameraFeed2Text.text = FeedCamerasObject.transform.GetChild (i+1).name;
+			FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().enabled = true;
 			FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().targetTexture = CameraRender3;
 			cameraFeed3Text.text = FeedCamerasObject.transform.GetChild (i+2).name;
 		}
@@ -51,6 +70,7 @@ public class ChangeCameraFeed : MonoBehaviour {
 	public void previousCameraFeed(){
 
 		if (i > 0) {
+			/*
 			FeedCamerasObject.transform.GetChild (i).GetComponent<Camera> ().targetTexture = null;
 			FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().targetTexture = null;
 			FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().targetTexture = null;
@@ -59,6 +79,23 @@ public class ChangeCameraFeed : MonoBehaviour {
 			cameraFeed1Text.text = FeedCamerasObject.transform.GetChild (i).name;
 			FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().targetTexture = CameraRender2;
 			cameraFeed2Text.text = FeedCamerasObject.transform.GetChild (i+1).name;
+			FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().targetTexture = CameraRender3;
+			cameraFeed3Text.text = FeedCamerasObject.transform.GetChild (i+2).name;
+			*/
+			FeedCamerasObject.transform.GetChild (i).GetComponent<Camera> ().targetTexture = null;
+			FeedCamerasObject.transform.GetChild (i).GetComponent<Camera> ().enabled = false;
+			FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().targetTexture = null;
+			FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().enabled = false;
+			FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().targetTexture = null;
+			FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().enabled = false;
+			i = i - 1;
+			FeedCamerasObject.transform.GetChild (i).GetComponent<Camera> ().enabled = true;
+			FeedCamerasObject.transform.GetChild (i).GetComponent<Camera> ().targetTexture = CameraRender1;
+			cameraFeed1Text.text = FeedCamerasObject.transform.GetChild (i).name;
+			FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().enabled = true;
+			FeedCamerasObject.transform.GetChild (i + 1).GetComponent<Camera> ().targetTexture = CameraRender2;
+			cameraFeed2Text.text = FeedCamerasObject.transform.GetChild (i+1).name;
+			FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().enabled = true;
 			FeedCamerasObject.transform.GetChild (i + 2).GetComponent<Camera> ().targetTexture = CameraRender3;
 			cameraFeed3Text.text = FeedCamerasObject.transform.GetChild (i+2).name;
 		}
