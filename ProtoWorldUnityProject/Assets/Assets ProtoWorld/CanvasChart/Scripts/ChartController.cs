@@ -48,7 +48,7 @@ public class ChartController : MonoBehaviour
     /// <summary>
     /// The name, appears in the toolbar.
     /// </summary>
-    public string name;
+    new public string name;
 
     /// <summary>
     /// Whether this is a streaming chart or a static chart. 
@@ -109,7 +109,7 @@ public class ChartController : MonoBehaviour
     /// <summary>
     /// Colors for the different series.
     /// </summary>
-    public Color32[] seriesColors = new Color32[] {Color.blue, Color.green, Color.red, Color.magenta, Color.black};
+    public Color32[] seriesColors = new Color32[] {Color.blue, Color.green, Color.red, Color.magenta, Color.yellow, Color.cyan, Color.white, Color.black, Color.grey};
 
     /// <summary>
     /// Names for the different series.
@@ -363,9 +363,10 @@ public class ChartController : MonoBehaviour
     void InitMaterials()
     {
         materials = new Material[seriesColors.Length];
+        Shader s = Shader.Find("UI/Default");
         for (int i = 0; i < seriesColors.Length; i++)
         {
-            materials[i] = new Material(Shader.Find("UI/Default"));
+            materials[i] = new Material(s);
             materials[i].color = seriesColors[i];
         }
     }
@@ -454,6 +455,11 @@ public class ChartController : MonoBehaviour
     /// <param name="name"></param>
     public void SetSeriesName(int seriesIndex, string name)
     {
+        if (name == null || name == "")
+        {
+            Debug.LogWarning("Series with empty name being created for " + name + " (" + chartType + ")");
+            return;
+        }
         if (seriesIndex >= seriesNames.Length)
         {
             var names = new string[seriesIndex + 1];
@@ -636,5 +642,15 @@ public class ChartController : MonoBehaviour
     public float GetTotalMinTime()
     {
         return DataContainer.GetTotalMinTime();
+    }
+
+    public bool isSeriesHidden(String kpi_name)
+    {
+        return seriesHidden.Contains(kpi_name);
+    }
+
+    public bool isSeriesHidden(int index)
+    {
+        return isSeriesHidden(seriesNames[index]);
     }
 }

@@ -53,6 +53,20 @@ public static class ChartUtils
         return lines;
     }
 
+    public static Vector3[] CreateLineFromData(List<TimedData> list, RectTransform rectTransform, Rect bounds)
+    {
+        Vector3[] lines = new Vector3[list.Count];
+
+        float xScale = rectTransform.rect.width / (bounds.xMax - bounds.xMin);
+        float yScale = rectTransform.rect.height / (bounds.yMax - bounds.yMin);
+
+        int lineIdx = 0;
+        for (int i = 0; i < list.Count - 1; i++)
+        {
+            lines[lineIdx++] = new Vector3((list[i].time - bounds.xMin) * xScale, (list[i].GetData() - bounds.yMin) * yScale);
+        }
+        return lines;
+    }
 
     public static LinesForMesh CreateLinesFromData(List<TimedData> list, RectTransform rectTransform)
     {
@@ -154,6 +168,25 @@ public static class ChartUtils
         mesh.uv = uvs;
         mesh.triangles = trias;
         return mesh;
+    }
+
+    public static Mesh GenerateStackedLineMesh(Vector3[] points, Vector3[] basis)
+    {
+        if ((points.Length % 2) != 0)
+        {
+            return null;
+        }
+
+        Vector2[] outlinePoints = new Vector2[points.Length + basis.Length];
+        for (int i = 0; i < points.Length; i++)
+        {
+            outlinePoints[i] = new Vector2(points[i].x - points[0].x, points[i].y);
+        }
+        for (int i = 0; i < basis.Length; i++)
+        {
+            outlinePoints[points.Length + i] = basis[basis.Length - i - 1];
+        }
+        return CreateMeshFromPoints(outlinePoints);
     }
 
     public static String NameGenerator(string name, int index)
