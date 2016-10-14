@@ -1,4 +1,6 @@
-﻿// Alan Zucconi
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+// Alan Zucconi
 // www.alanzucconi.com
 Shader "Hidden/Heatmap" {
 		Properties{
@@ -25,7 +27,7 @@ Shader "Hidden/Heatmap" {
 		vertOutput vert(vertInput input) {
 			vertOutput o;
 			o.pos = mul(UNITY_MATRIX_MVP, input.pos);
-			o.worldPos = mul(_Object2World, input.pos).xyz;
+			o.worldPos = mul(unity_ObjectToWorld, input.pos).xyz;
 			return o;
 		}
 

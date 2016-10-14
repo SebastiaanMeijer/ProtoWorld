@@ -23,6 +23,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 /// <summary>
 /// Class that defines a destination entry for Flash Pedestrians (composed of a transform, 
@@ -94,4 +95,9 @@ public class FlashPedestriansDestination : MonoBehaviour, LogObject
 		flashDestinationScript.initializeDestination();
 		flashDestinationScript.enabled = true;
 	}
+
+    public int getPriorityLevel()
+    {
+        return 1;
+    }
 }

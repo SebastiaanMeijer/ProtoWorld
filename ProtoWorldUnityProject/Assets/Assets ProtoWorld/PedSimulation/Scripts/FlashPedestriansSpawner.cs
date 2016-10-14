@@ -12,19 +12,20 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
- * 
- * FLASH PEDESTRIAN SIMULATOR
- * FlashPedestriansSpawner.cs
- * Miguel Ramos Carretero
- * 
- */
+/*
+* 
+* FLASH PEDESTRIAN SIMULATOR
+* FlashPedestriansSpawner.cs
+* Miguel Ramos Carretero
+* 
+*/
 
 using UnityEngine;
 using System.Collections;
 using GaPSLabsUnity.StateMachine;
 using System.Collections.Generic;
 using System.Threading;
+using System;
 
 /// <summary>
 /// Implementation of the behaviour of a spawner for Flash Pedestrians.
@@ -369,6 +370,11 @@ public class FlashPedestriansSpawner : MonoBehaviour, LogObject
 		flashSpawnerScript.initializeSpawner();
 		flashSpawnerScript.enabled = true;
 	}
+
+    public int getPriorityLevel()
+    {
+        return 1;
+    }
 }
 
 
