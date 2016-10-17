@@ -31,3 +31,4 @@
 Assets/StreamingAssets/SQLiteDB/trajectoriesDB filter=lfs diff=lfs merge=lfs -text
 ScriptsAndTools/TestFiles/TrafficGenTest/LiveTest/map.trips.xml filter=lfs diff=lfs merge=lfs -text
 ScriptsAndTools/TestFiles/TrafficGenTest/FCDTest/fcdtest.fcd filter=lfs diff=lfs merge=lfs -text
+Assets/Miscelanea/Tests/DelftTest/Delft/NavMesh.asset filter=lfs diff=lfs merge=lfs -text
