@@ -341,24 +341,38 @@ public class RoutingController : MonoBehaviour
             return null;
 
         var itineraries = new List<Itinerary>(GetItineraries(start, end));
-        switch (preference)
-        {
-            case TravelPreference.none:
-                break;
-            case TravelPreference.transit:
-                itineraries.Sort((x, y) => x.Transits.Count.CompareTo(y.Transits.Count));
-                break;
-            default:
-            case TravelPreference.time:
-                itineraries.Sort((x, y) => x.GetTotalTravelTime().CompareTo(y.GetTotalTravelTime()));
-                break;
-        }
-        if (itineraries.Count < 1)
-        {
-            //Debug.LogFormat("No itinery between {0}, {1}", start, end);
-            return null;
-        }
-        return itineraries[0];
+
+		if (itineraries.Count < 1)
+			return null;
+
+		Itinerary bestItinerary = itineraries[0];
+
+		// Perform a simple search to improve performance, as this is called a lot during spawning events.
+		for (int index = 1; index < itineraries.Count; index++)
+		{
+			Itinerary itinerary = itineraries[index];
+
+			switch (preference)
+			{
+				case TravelPreference.none:
+					break;
+				case TravelPreference.transit:
+					if (itinerary.Transits.Count < bestItinerary.Transits.Count)
+					{
+						bestItinerary = itinerary;
+					}
+					break;
+				default:
+				case TravelPreference.time:
+					if (itinerary.GetTotalTravelTime() < bestItinerary.GetTotalTravelTime())
+					{
+						bestItinerary = itinerary;
+					}
+					break;
+			}
+		}
+
+		return bestItinerary;
     }
 
     /// <summary>

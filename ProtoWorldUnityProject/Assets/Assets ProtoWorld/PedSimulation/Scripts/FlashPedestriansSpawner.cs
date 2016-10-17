@@ -132,13 +132,17 @@ public class FlashPedestriansSpawner : MonoBehaviour, LogObject
     /// </summary>
     public static int nextIdForPedestrian = 0;
 
+	private Heatmap heatMap;
+
     /// <summary>
     /// Awakes the script.
     /// </summary>
     void Awake()
     {
         initializeSpawner();
-    }
+
+		heatMap = FindObjectOfType<Heatmap>();
+	}
 
     public void initializeSpawner()
     {
@@ -282,8 +286,12 @@ public class FlashPedestriansSpawner : MonoBehaviour, LogObject
         controller.routing = new FlashPedestriansRouting(destination, itinerary);
         controller.flashInformer = flashInformer;
 
-        // Subscribe pedestrian to the itinerary informer
-        flashInformer.SubscribePedestrian(controller);
+		// Provide these from our cached version to improve performance, as this is called a lot during spawning events.
+		controller.globalParam = pedGlobalParameters;
+		controller.heatMap = heatMap;
+
+		// Subscribe pedestrian to the itinerary informer
+		flashInformer.SubscribePedestrian(controller);
 
         newAgent.name = "flashPedestrian_" + this.name + "_" + "_" + controller.uniqueId;
 

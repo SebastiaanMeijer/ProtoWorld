@@ -69,7 +69,8 @@ public class FlashPedestriansController : TravelerController
 
 	private int stopIndex;
 
-	private FlashPedestriansGlobalParameters globalParam;
+	[HideInInspector]
+	public FlashPedestriansGlobalParameters globalParam;
 
 	public Material materialForRumourCaught;
 
@@ -83,6 +84,7 @@ public class FlashPedestriansController : TravelerController
 
 	private bool isPause = false;
 
+	[HideInInspector]
 	public Heatmap heatMap;
 
 	/// <summary>
@@ -90,12 +92,12 @@ public class FlashPedestriansController : TravelerController
 	/// </summary>
 	void Awake()
 	{
-		globalParam = FindObjectOfType<FlashPedestriansGlobalParameters>();
+		// The global parameters and the heat map are supplied by FlashPedestriansSpawner after
+		// spawning to improve performance, as this is called a lot during spawning events.
+
 		navAgent = gameObject.GetComponent<NavMeshAgent>();
 		FSM = gameObject.GetComponent<Animator>();
 		balloons = transform.Find("Balloons");
-
-		heatMap = FindObjectOfType<Heatmap>();
 	}
 
 	/// <summary>
@@ -521,9 +523,12 @@ public class FlashPedestriansController : TravelerController
 		if (bike != null)
 			bike.gameObject.SetActive(false);
 
-		// Atomic operations for the KPI properties
-		Interlocked.Increment(ref globalParam.numberOfPedestrianReachingDestination);
-		Interlocked.Decrement(ref globalParam.numberOfPedestriansOnScenario);
+		if(globalParam != null)
+		{
+			// Atomic operations for the KPI properties
+			Interlocked.Increment(ref globalParam.numberOfPedestrianReachingDestination);
+			Interlocked.Decrement(ref globalParam.numberOfPedestriansOnScenario);
+		}
 
 		this.gameObject.SetActive(false);
 	}
