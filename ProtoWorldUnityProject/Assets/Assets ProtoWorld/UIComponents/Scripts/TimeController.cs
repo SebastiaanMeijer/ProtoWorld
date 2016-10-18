@@ -206,7 +206,7 @@ public class TimeController : MonoBehaviour
         // Show the velocity factor in the textbox
         //timerText.text += " (x" + timeVelocity.ToString() + ")";
 
-        speedLabel.text = timeVelocity.ToString();
+        if(speedLabel != null)        speedLabel.text = timeVelocity.ToString();
 
         //text.text = "Time Velocity: x" + timeVelocity.ToString() + "\n Current Time: " + string.Format("{0:0000}", Time.time);
 
