@@ -118,7 +118,7 @@ public class TrafficIntegrationInspectorEditor : Editor
                 break;
 
             case TrafficIntegrationController.TypeOfIntegration.MatsimDatabase:
-                EditorGUILayout.PropertyField(pathMatSimXMLFile_prop, new GUIContent("Path of MatSim XML File"));
+                //EditorGUILayout.PropertyField(pathMatSimXMLFile_prop, new GUIContent("Path of MatSim XML File"));
                 EditorGUILayout.PropertyField(useConfigFile_prop);
                 EditorGUILayout.PropertyField(useFrustumForUpdate_prop);
                 EditorGUILayout.PropertyField(useCoordinateConversion_prop);

@@ -44,12 +44,18 @@
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\ReferenceAssemblies\v2.0\Microsoft.VisualStudio.DebuggerVisualizers.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Security">
       <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\PostgreSQL\Output\Mono.Security.dll</HintPath>
+=======
+    <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Mono.Security.dll</HintPath>
+>>>>>>> ad8854b3ef18b3986f19cc47901fa464daf581ee
     </Reference>
     <Reference Include="Npgsql">
       <HintPath>..\..\..\..\..\Desktop\Notable Software\OSM Sharp\Source\Core\Releases\v3.1\Data\PostgreSQL\Output\Npgsql.dll</HintPath>
