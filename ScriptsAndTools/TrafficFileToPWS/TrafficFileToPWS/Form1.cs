@@ -147,6 +147,7 @@ namespace TrafficFileToPWS
                 // Create a new background worker
                 BackgroundWorker bgWorker = new BackgroundWorker();
                 bgWorker.WorkerReportsProgress = true;
+				bgWorker.WorkerSupportsCancellation = true;
 
                 // Check the format of the file
                 string extension = Path.GetExtension(pathChoosenFile);
