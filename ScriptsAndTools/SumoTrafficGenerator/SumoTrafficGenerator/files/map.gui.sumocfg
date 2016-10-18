@@ -18,5 +18,9 @@
 		<pedestrian.striping.stripe-width value="0.65" type="FLOAT"/>
 		<pedestrian.striping.dawdling value="0.2" type="FLOAT"/>
     </processing>
+	
+	<options>
+		<ignore-route-errors value="true" type="BOOL"/>
+	</options>
 
 </configuration>

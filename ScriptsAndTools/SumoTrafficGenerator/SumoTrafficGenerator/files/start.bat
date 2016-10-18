@@ -1,6 +1,6 @@
 :loop
 
-sumo -c map.local.sumocfg --ignore-route-errors
+sumo -c map.local.sumocfg
 
 @goto loop
 
