@@ -184,7 +184,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, LogObject
     {
         if (maxNumberOfPedestriansToSpawn > 0 || spawnPedestriansInInfiniteLoop)
         {
-            InvokeRepeating("SpawnGroupOfPedestrians", 1.0f + Random.Range(1.0f, 4.0f) + spawningDelayAtStart, spawningFrequencyInSeconds);
+            InvokeRepeating("SpawnGroupOfPedestrians", 1.0f + UnityEngine.Random.Range(1.0f, 4.0f) + spawningDelayAtStart, spawningFrequencyInSeconds);
         }
     }
 
@@ -197,12 +197,12 @@ public class FlashPedestriansSpawner : MonoBehaviour, LogObject
         if (!pedGlobalParameters.flashPedestriansPaused)
         {
             // Create a new pedestrian profile
-            FlashPedestriansProfile profile = new FlashPedestriansProfile(pedGlobalParameters.averageSpeed + Random.Range(-0.5f, 0.5f),
-                true /*future use*/, true /*future use*/, Random.Range(0.0f, 1.0f), false /*future use*/, Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), pedGlobalParameters.sumoCarAwarenessEnabled, TravelPreference.time);
+            FlashPedestriansProfile profile = new FlashPedestriansProfile(pedGlobalParameters.averageSpeed + UnityEngine.Random.Range(-0.5f, 0.5f),
+                true /*future use*/, true /*future use*/, UnityEngine.Random.Range(0.0f, 1.0f), false /*future use*/, UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f), pedGlobalParameters.sumoCarAwarenessEnabled, TravelPreference.time);
             //Find a destination
             FlashPedestriansDestination destination = null;
             float[] priorityPercentages = getPrioritiesOfAllDestinations();
-            float rand = Random.Range(0.0f, 0.99f);
+            float rand = UnityEngine.Random.Range(0.0f, 0.99f);
             for (int i = 0; i < priorityPercentages.Length; i++)
             {
                 if (rand < priorityPercentages[i])
@@ -219,7 +219,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, LogObject
 
             //Find a new random spawning point inside the radious defined
             Vector3 spawningPoint = this.transform.position
-                + new Vector3(Random.Range(-spawningArea, spawningArea), 0.0f, Random.Range(-spawningArea, spawningArea));
+                + new Vector3(UnityEngine.Random.Range(-spawningArea, spawningArea), 0.0f, UnityEngine.Random.Range(-spawningArea, spawningArea));
 
             //Move the spawning point to the closest point in the walkable navmesh (is this an expensive operation?)
             //NavMeshHit hit;
@@ -230,7 +230,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, LogObject
             Itinerary itinerary = flashInformer.FindBestItinerary(spawningPoint, destination, stationsNearThisSpawner, profile.travelPreference);
 
             //Calculate number of pedestrians to spawn in this iteration
-            int pedToSpawn = Random.Range(minPedestriansPerSpawningIteration, maxPedestriansPerSpawningIteration);
+            int pedToSpawn = UnityEngine.Random.Range(minPedestriansPerSpawningIteration, maxPedestriansPerSpawningIteration);
 
             //Spawn pedestrians
             for (int i = 0; i < pedToSpawn; i++)
@@ -257,7 +257,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, LogObject
     {
         GameObject newAgent;
 
-        spawningPoint += new Vector3(Random.Range(-1.0f, 1.0f), 0.0f, Random.Range(-1.0f, 1.0f));
+        spawningPoint += new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0.0f, UnityEngine.Random.Range(-1.0f, 1.0f));
 
         if (pedestrianCache.Count > 0)
         {
