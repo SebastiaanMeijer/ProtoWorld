@@ -18,7 +18,7 @@ using System.IO;
 
 public class TrafficIntegrationMenu : MonoBehaviour
 {
-    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advance/Sumo/Read Sumo (.xml)")]
+    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advanced/Sumo/Read Sumo (.xml)")]
     public static void ReadSumo()
     {
         var trafficDB = FindObjectOfType<TrafficIntegrationData>();
@@ -48,7 +48,7 @@ public class TrafficIntegrationMenu : MonoBehaviour
         }
     }
 
-    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advance/Sumo/Write Sumo (.xml)")]
+    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advanced/Sumo/Write Sumo (.xml)")]
     public static void WriteSumo()
     {
         var trafficDB = FindObjectOfType<TrafficIntegrationData>();
@@ -65,7 +65,7 @@ public class TrafficIntegrationMenu : MonoBehaviour
 
 
 
-    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advance/Vissim/Read Vissim (.fzp)")]
+    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advanced/Vissim/Read Vissim (.fzp)")]
     public static void ReadVissim()
     {
         var trafficDB = FindObjectOfType<TrafficIntegrationData>();
@@ -95,7 +95,7 @@ public class TrafficIntegrationMenu : MonoBehaviour
     }
 
 
-    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advance/Matsim/Read Matsim (Database)")]
+    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advanced/Matsim/Read Matsim (Database)")]
     public static void ReadMatSim()
     {
         var trafficDB = FindObjectOfType<TrafficIntegrationData>();
@@ -141,7 +141,7 @@ public class TrafficIntegrationMenu : MonoBehaviour
         }
     }
 
-    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advance/Matsim/Read Input files")]
+    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advanced/Matsim/Read Input Files")]
     public static void ReadMatSimFiles()
     {
         ClearMatSimLinks();
@@ -192,7 +192,7 @@ public class TrafficIntegrationMenu : MonoBehaviour
         }
     }
 
-    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advance/Matsim/Clear Network")]
+    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advanced/Matsim/Clear Network")]
     public static void ClearMatSimLinks()
     {
         var parameters = FindObjectOfType<MatSimParameters>();
@@ -205,7 +205,7 @@ public class TrafficIntegrationMenu : MonoBehaviour
         }
     }
 
-    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advance/ProtoWorld Sims/Read meta(pws.meta)")]
+    [MenuItem("ProtoWorld Editor/Traffic Integration Module/Advanced/ProtoWorld Sims/Read Meta (pws.meta)")]
     public static void ReadPws()
     {
         var trafficDB = FindObjectOfType<TrafficIntegrationData>();

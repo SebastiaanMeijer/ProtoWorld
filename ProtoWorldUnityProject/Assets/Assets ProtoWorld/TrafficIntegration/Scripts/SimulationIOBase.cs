@@ -102,7 +102,7 @@ public abstract class SimulationIOBase
 
         // Wait for traffDB reset in Unity-thread.
         Debug.Log("Waiting for trafficDB.");
-        trafficDB.timeStepResetEvent.WaitOne(2000);
+        trafficDB.timeStepResetEvent.WaitOne();
         Debug.Log("Waiting is over, trafficDB is ready.");
 
         timeSteps = new HashSet<float>();

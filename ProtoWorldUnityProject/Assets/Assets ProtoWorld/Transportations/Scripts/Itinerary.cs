@@ -31,6 +31,8 @@ public class Itinerary
 
     public List<StageInfo> StageInfos { get; set; }
 
+	private float totalTravelTime;
+
     /// <summary>
     /// Constructor.
     /// </summary>
@@ -38,7 +40,9 @@ public class Itinerary
     public Itinerary(List<StationController> stations)
     {
         WayPoints = stations;
-    }
+
+		totalTravelTime = -1;
+	}
 
     /// <summary>
     /// Get the total travel time of the route.
@@ -46,15 +50,22 @@ public class Itinerary
     /// <returns></returns>
     public float GetTotalTravelTime()
     {
-        float totalTime = 0;
-		if (StageInfos != null) {
-			foreach (var info in StageInfos)
+		// Cache the total travel time to improve performance, as this is called a lot during spawning events.
+		if (totalTravelTime < 0)
+		{
+			totalTravelTime = 0;
+
+			if (StageInfos != null)
 			{
-				totalTime += info.TravelTime;
+				foreach (var info in StageInfos)
+				{
+					totalTravelTime += info.TravelTime;
+				}
 			}
 		}
-        return totalTime;
-    }
+
+		return totalTravelTime;
+	}
 
     /// <summary>
     /// Get the station at the index-position of the WayPoint array.
