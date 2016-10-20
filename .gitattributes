@@ -28,6 +28,12 @@
 *.bmp filter=lfs diff=lfs merge=lfs -text
 
 # Special files
-Assets/StreamingAssets/SQLiteDB/trajectoriesDB filter=lfs diff=lfs merge=lfs -text
+ProtoWorldUnityProject/Assets/StreamingAssets/SQLiteDB/trajectoriesDB filter=lfs diff=lfs merge=lfs -text
 ScriptsAndTools/TestFiles/TrafficGenTest/LiveTest/map.trips.xml filter=lfs diff=lfs merge=lfs -text
 ScriptsAndTools/TestFiles/TrafficGenTest/FCDTest/fcdtest.fcd filter=lfs diff=lfs merge=lfs -text
+
+# TU Delft Scene
+ProtoWorldUnityProject/Assets/Miscelanea/Tests/DelftTest/Delft/NavMesh.asset filter=lfs diff=lfs merge=lfs -text
+ScriptsAndTools/TestFiles/DelftTest/FCD/tudelft.fcd filter=lfs diff=lfs merge=lfs -text
+ScriptsAndTools/TestFiles/DelftTest/PWS/*.pws filter=lfs diff=lfs merge=lfs -text
+ScriptsAndTools/TestFiles/DelftTest/Sumo/*.xml filter=lfs diff=lfs merge=lfs -text

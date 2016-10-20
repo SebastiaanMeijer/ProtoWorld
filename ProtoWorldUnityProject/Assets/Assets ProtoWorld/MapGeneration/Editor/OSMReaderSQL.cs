@@ -86,7 +86,7 @@ public class OSMReaderSQL : Editor
         //BakeNavigation();
     }
 
-    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Generate water areas")]
+    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Generate water areas")]
     static public void CreateWaterAreas()
     {
         var go = GameObject.Find("AramGISBoundaries");
@@ -98,7 +98,7 @@ public class OSMReaderSQL : Editor
         //AddBusStopLogic();
     }
 
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Clean map", false, 3)]
+    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Clean Map", false, 3)]
     static void CleanScene()
     {
         var gos = GameObject.FindGameObjectsWithTag("Line");
@@ -132,7 +132,7 @@ public class OSMReaderSQL : Editor
         }
     }
 
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Generate roads with filter")]
+    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Generate Roads with Filter")]
     static void Create2_4()
     {
         GenerateOSMRoadsWithFilterWindow window = (GenerateOSMRoadsWithFilterWindow)EditorWindow.GetWindow(typeof(GenerateOSMRoadsWithFilterWindow), true, "Road generation with filters");

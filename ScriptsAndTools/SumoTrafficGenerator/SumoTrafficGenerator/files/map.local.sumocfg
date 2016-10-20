@@ -27,5 +27,9 @@
 	<traciserver>
 		<remote-port value="3456" type="INT"/>
 	</traciserver>
+	
+	<options>
+		<ignore-route-errors value="true" type="BOOL"/>
+	</options>
 
 </configuration>

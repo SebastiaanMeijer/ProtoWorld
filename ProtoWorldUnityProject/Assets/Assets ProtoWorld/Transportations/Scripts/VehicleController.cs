@@ -47,7 +47,8 @@ public class VehicleController : MonoBehaviour
 
     TextMesh[] texts;
 
-    protected TimeController timeController;
+	[HideInInspector]
+    public TimeController timeController;
 
     //Delay of the previous leg
     public float delay = 0;
@@ -68,6 +69,8 @@ public class VehicleController : MonoBehaviour
     }
 
     public List<DisembarkStats> disembarkStats = new List<DisembarkStats>();
+
+	private static Material gameObjectMaterial;
 
     public static GameObject CreateGameObject(LineController line, LineDirection direction)
     {
@@ -102,8 +105,16 @@ public class VehicleController : MonoBehaviour
         renderer.receiveShadows = false;
         renderer.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
         renderer.useLightProbes = false;
-        renderer.material = new Material(Shader.Find("Standard"));
-        renderer.material.color = Color.yellow;
+
+		// Cache the material to improve performance, as this is called a lot during spawning events.
+		if(gameObjectMaterial == null)
+		{
+			gameObjectMaterial = new Material(Shader.Find("Standard"));
+			gameObjectMaterial.color = Color.yellow;
+		}
+
+		renderer.material = gameObjectMaterial;
+
         return obj;
     }
 
@@ -144,17 +155,15 @@ public class VehicleController : MonoBehaviour
     }
 
     void Awake()
-    {
-        timeController = GameObject.FindObjectOfType<TimeController>();
-        if (timeController == null)
-            Debug.LogError("No timeController found!");
+	{
+		// The time controller is supplied by SpawnerLinecontroller after spawning to improve
+		// performance, as this is called a lot during spawning events.
+	}
 
-    }
-
-    /// <summary>
-    /// Initiate the list for disembarkers, statistics and reset timer.
-    /// </summary>
-    public virtual void Start()
+	/// <summary>
+	/// Initiate the list for disembarkers, statistics and reset timer.
+	/// </summary>
+	public virtual void Start()
     {
         //Debug.Log(name + ": veh start called.");
         InitLists();

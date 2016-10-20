@@ -18,7 +18,7 @@ using System.Collections;
 
 public class ScenarioControllerEditor : MonoBehaviour 
 {
-    [MenuItem("ProtoWorld Editor/Decision Tree Module/Advance/Scenarios/Read Tree (.xml)")]
+    [MenuItem("ProtoWorld Editor/Decision Tree Module/Advanced/Scenarios/Read Tree (.xml)")]
     public static void ReadTree()
     {
         var path = EditorUtility.OpenFilePanel("Load Tree Data", "", "xml");

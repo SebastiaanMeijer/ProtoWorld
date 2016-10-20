@@ -33,7 +33,7 @@ public class PrepareForCombining : Editor
     /// MENU ITEMS FOR OPTIMIZING ELEMENTS 
     /// -----------------------------------------------------------------------
 
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Group Close Buildings")]
+    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Group Close Buildings")]
     public static void PrepareForCombiningBuildings()
     {
         TurnBuildingCollidersOff();
@@ -42,7 +42,7 @@ public class PrepareForCombining : Editor
         TurnBuildingCollidersOn();
     }
 
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Group Close Roads")]
+    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Group Close Roads")]
     public static void PrepareForCombiningRoads()
     {
         TurnRoadCollidersOff();
@@ -54,7 +54,7 @@ public class PrepareForCombining : Editor
     /// <summary>
     /// Turns off the colliders for objects with tag "Building".
     /// </summary>
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Turn Colliders off (Buildings)")]
+    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Turn Colliders Off (Buildings)")]
     public static void TurnBuildingCollidersOff()
     {
         var go = GameObject.FindGameObjectsWithTag("Building");
@@ -70,7 +70,7 @@ public class PrepareForCombining : Editor
     /// <summary>
     /// Turns on the colliders for objects with tag "Building".
     /// </summary>
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Turn Colliders on (Buildings)")]
+    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Turn Colliders On (Buildings)")]
     public static void TurnBuildingCollidersOn()
     {
         var go = GameObject.FindGameObjectsWithTag("Building");
@@ -86,7 +86,7 @@ public class PrepareForCombining : Editor
     /// <summary>
     /// Turns off the colliders for objects with tag "Line".
     /// </summary>
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Turn Colliders off (Roads)")]
+    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Turn Colliders Off (Roads)")]
     public static void TurnRoadCollidersOff()
     {
         var go = GameObject.FindGameObjectsWithTag("Line");
@@ -103,7 +103,7 @@ public class PrepareForCombining : Editor
     /// <summary>
     /// Turns on the colliders for objects with tags "Line".
     /// </summary>
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Turn Colliders on (Roads)")]
+    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Turn Colliders On (Roads)")]
     public static void TurnRoadCollidersOn()
     {
         var go = GameObject.FindGameObjectsWithTag("Line");
@@ -119,7 +119,7 @@ public class PrepareForCombining : Editor
     /// <summary>
     /// Removes all the colliders of the objects with Building tag. Note that without the colliders, users will not be able to click on the buildings to get more information.
     /// </summary>
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Remove Building Colliders")]
+    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Remove Building Colliders")]
     static void RemoveBuildingsColliders()
     {
         var go2 = GameObject.FindGameObjectsWithTag("Building");
@@ -138,7 +138,7 @@ public class PrepareForCombining : Editor
     /// <summary>
     /// Removes all the colliders of the objects with Line tag. Note that without the colliders, pedestrians in SiPS will not be able to interact with the roads.
     /// </summary>
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Remove Road Colliders")]
+    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Remove Road Colliders")]
     static void RemoveRoadsColliders()
     {
         var go2 = GameObject.FindGameObjectsWithTag("Line");
@@ -158,7 +158,7 @@ public class PrepareForCombining : Editor
     /// MENU ITEMS DEPRECATED
     /// -----------------------------------------------------------------------
 
-    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Convert colliders to triggers")]
+    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Convert colliders to triggers")]
     static void ConvertLinesToColliderAsTrigger()
     {
         var go2 = GameObject.FindGameObjectsWithTag("Line");
@@ -182,13 +182,13 @@ public class PrepareForCombining : Editor
         EditorUtility.ClearProgressBar();
     }
 
-    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Change Selected object height")]
+    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Change Selected object height")]
     static void DecreaseHeight()
     {
         Selection.activeTransform.position = Selection.activeTransform.position + new Vector3(0, -0.3f, 0);
     }
 
-    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Show vertices #&v")]
+    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Show vertices #&v")]
     static void ShowVertices()
     {
         if (Selection.activeTransform.childCount == 0)
@@ -211,7 +211,7 @@ public class PrepareForCombining : Editor
         }
     }
 
-    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Convert Building colliders to triggers")]
+    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Convert Building colliders to triggers")]
     static void ConvertBuildingsToColliderAsTrigger()
     {
         var go2 = GameObject.FindGameObjectsWithTag("Building");
@@ -226,7 +226,7 @@ public class PrepareForCombining : Editor
         EditorUtility.ClearProgressBar();
     }
 
-    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advance/Combine Close Roads")]
+    //[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Advanced/Combine Close Roads")]
     static void PrepareForRoadCombine()
     {
         TurnRoadCollidersOff();
