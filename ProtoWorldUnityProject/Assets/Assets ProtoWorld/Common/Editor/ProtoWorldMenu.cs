@@ -42,8 +42,12 @@ public class ProtoWorldMenu : MonoBehaviour
     static string kpiChartName = "KPIChart";
     static string loggerAssemblyName = "LoggerAssembly";
     static string vvisName = "VVisDataSQLiteModule";
+	static string cameraFeedModuleName = "CameraFeedModule";
+	static string issuesModuleName = "IssuesModule";
+	static string heatMapModuleName = "HeatMapModule";
+	static string microMacroVisualisationModuleName = "MicroMacroVisualisationModule";
 
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Add Essentials", false, 0)]
+	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Add Essentials", false, 0)]
     static void AddEssentialsModuleToScene()
     {
         DestroyImmediate(GameObject.Find("Main Camera"));
@@ -569,9 +573,109 @@ public class ProtoWorldMenu : MonoBehaviour
         {
             GameObject.DestroyImmediate(go[i]);
         }
-    }
+	}
 
-    public static GameObject AddModuleIfNotExist(string moduleName)
+	[MenuItem("ProtoWorld Editor/Camera Feed Module/Add Camera Feed Module", false, 8)]
+	static void AddCameraFeedModule() {
+		AddModuleIfNotExist(cameraFeedModuleName);
+	}
+
+	[MenuItem("ProtoWorld Editor/Camera Feed Module/Remove Module", false, 8)]
+	static void ClearCameraFeedModule() {
+		var option = EditorUtility.DisplayDialogComplex(
+	"Camera Feed Module",
+	"Do you want to remove " + cameraFeedModuleName,
+	"Clear",
+	"Do not clear",
+	"Cancel");
+
+		switch(option) {
+			case 0:
+				DestroyImmediate(GameObject.Find(cameraFeedModuleName));
+				Debug.Log("The module is removed.");
+				return;
+			default:
+				Debug.Log("User cancelled the operation.");
+				return;
+		}
+	}
+
+	[MenuItem("ProtoWorld Editor/Issues Module/Add Issues Module", false, 8)]
+	static void AddIssuesModule() {
+		AddModuleIfNotExist(issuesModuleName);
+	}
+
+	[MenuItem("ProtoWorld Editor/Issues Module/Remove Module", false, 8)]
+	static void ClearIssuesModule() {
+		var option = EditorUtility.DisplayDialogComplex(
+	"Issues Module",
+	"Do you want to remove " + issuesModuleName,
+	"Clear",
+	"Do not clear",
+	"Cancel");
+
+		switch(option) {
+			case 0:
+				DestroyImmediate(GameObject.Find(issuesModuleName));
+				Debug.Log("The module is removed.");
+				return;
+			default:
+				Debug.Log("User cancelled the operation.");
+				return;
+		}
+	}
+
+	[MenuItem("ProtoWorld Editor/Heatmap Module/Add Heatmap Module", false, 8)]
+	static void AddHeatMapModule() {
+		AddModuleIfNotExist(heatMapModuleName);
+	}
+
+	[MenuItem("ProtoWorld Editor/Heatmap Module/Remove Module", false, 8)]
+	static void ClearHeatMapModule() {
+		var option = EditorUtility.DisplayDialogComplex(
+	"Heatmap Module",
+	"Do you want to remove " + heatMapModuleName,
+	"Clear",
+	"Do not clear",
+	"Cancel");
+
+		switch(option) {
+			case 0:
+				DestroyImmediate(GameObject.Find(heatMapModuleName));
+				Debug.Log("The module is removed.");
+				return;
+			default:
+				Debug.Log("User cancelled the operation.");
+				return;
+		}
+	}
+
+	[MenuItem("ProtoWorld Editor/Micro Macro Visualisation Module/Add Micro Macro Visualisation Module", false, 8)]
+	static void AddMicroMacroVisualisationModule() {
+		AddModuleIfNotExist(microMacroVisualisationModuleName);
+	}
+
+	[MenuItem("ProtoWorld Editor/Micro Macro Visualisation Module/Remove Module", false, 8)]
+	static void ClearMicroMacroVisualisationModule() {
+		var option = EditorUtility.DisplayDialogComplex(
+	"Micro Macro Visualisation Module",
+	"Do you want to remove " + microMacroVisualisationModuleName,
+	"Clear",
+	"Do not clear",
+	"Cancel");
+
+		switch(option) {
+			case 0:
+				DestroyImmediate(GameObject.Find(microMacroVisualisationModuleName));
+				Debug.Log("The module is removed.");
+				return;
+			default:
+				Debug.Log("User cancelled the operation.");
+				return;
+		}
+	}
+
+	public static GameObject AddModuleIfNotExist(string moduleName)
     {
         var go = GameObject.Find(moduleName);
         if (go == null)
