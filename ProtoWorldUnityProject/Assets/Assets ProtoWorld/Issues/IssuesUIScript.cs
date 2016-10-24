@@ -14,6 +14,10 @@ public class IssuesUIScript: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 	public bool showing;
 
+	public static bool issueButtonClicked = false;
+	public static bool solveAnIssue = false;
+	public static bool goToIssue = false;
+
 	// Use this for initialization
 	void Awake () {
 		
@@ -38,6 +42,20 @@ public class IssuesUIScript: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			this.transform.localPosition = new Vector3 (this.transform.localPosition.x, myYPos + 1000, this.transform.localPosition.z);
 		}
 	}
+
+
+	public void SolveIssue(){
+		issueButtonClicked = true;
+		solveAnIssue = true;
+
+	}
+
+	public void GoToIssue(){
+		issueButtonClicked = true;
+		goToIssue = true;
+
+	}
+
 
 	void OnMouseDown(){
 
