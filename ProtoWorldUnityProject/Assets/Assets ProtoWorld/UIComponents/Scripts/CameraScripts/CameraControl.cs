@@ -191,12 +191,52 @@ public class CameraControl : MonoBehaviour
                 gameObject.transform.RotateAround(gameObject.transform.right, posChange.y * 0.005f);
         }
 
-        #endregion MouseRightButton
+		#endregion MouseRightButton
 
-        #region ScrollWheel
+		#region MouseMiddleButton
 
-        // Controls the height of the camera
-        if (!dragging)
+		// Middle mouse button dragging. This code is a simple addition for development purposes.
+		// It assumes dragging is done along the Y = 0 plane, and overrides the interpolation done
+		// later in this method.
+		if(Input.GetMouseButton(2)) {
+			Camera camera = GetComponent<Camera>();
+
+			// Update the mouse positions with their third dimensional value.
+			oldMousePosition.z = camera.nearClipPlane;
+			mouseScreenPosition.z = camera.nearClipPlane;
+
+			Vector3 cameraPosition = gameObject.transform.position;
+
+			// Find the previously clicked/dragged point on the Y = 0 plane.
+			Vector3 position = camera.ScreenToWorldPoint(oldMousePosition);
+			Vector3 direction = position - cameraPosition;
+			float time = cameraPosition.y / -direction.y;
+
+			Vector3 previousGrabPoint = cameraPosition + direction * time;
+
+			// Find the currently clicked/dragged point on the Y = 0 plane.
+			position = camera.ScreenToWorldPoint(mouseScreenPosition);
+			direction = position - cameraPosition;
+			time = cameraPosition.y / -direction.y;
+
+			Vector3 currentGrabPoint = cameraPosition + direction * time;
+
+			// Calculate the movement of the point.
+			Vector3 dragVector = currentGrabPoint - previousGrabPoint;
+
+			// Move the camera in the opposite direction.
+			targetCameraPosition = cameraPosition - dragVector;
+
+			// Apply this movement immediately, since we use the camera position as input.
+			gameObject.transform.position = targetCameraPosition;
+		}
+
+		#endregion MouseMiddleButton
+
+		#region ScrollWheel
+
+		// Controls the height of the camera
+		if (!dragging)
             UpdateCameraHeight(Input.GetAxis("Mouse ScrollWheel"));
 
         #endregion ScrollWheel
@@ -324,8 +364,8 @@ public class CameraControl : MonoBehaviour
             }
         }
 
-        // Interpolates to the target point
-        gameObject.transform.position = gameObject.transform.position + (targetCameraPosition - gameObject.transform.position) * 0.2f;
+		// Interpolates to the target point
+		gameObject.transform.position = gameObject.transform.position + (targetCameraPosition - gameObject.transform.position) * 0.2f;
 
 
         // If there is a block, update the time until unblock
