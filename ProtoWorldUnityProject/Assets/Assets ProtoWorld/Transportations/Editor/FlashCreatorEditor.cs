@@ -325,8 +325,8 @@ public class FlashCreatorEditor : Editor
 		//    //EditorUtility.DisplayDialog("GameObject added...", moduleName + "was added to the scene", "OK");
 		//}
 
-		// Make sure pedestrians will be added to their own layer so the micro/macro visualisation works.
-		GameObject.Find("SpawnerPoints").layer = LayerMask.NameToLayer("Pedestrian");
+		// Add the module to the pedestrian layer so the micro/macro visualisation works simply by selecting this module.
+		GameObject.Find(moduleName).layer = LayerMask.NameToLayer("Pedestrian");
 	}
 }
 
