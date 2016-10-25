@@ -99,7 +99,6 @@ artifacts/
 *.pdb
 *.pgc
 *.pgd
-*.rsp
 *.sbr
 *.tlb
 *.tli
