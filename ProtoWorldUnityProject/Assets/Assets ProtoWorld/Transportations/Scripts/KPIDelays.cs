@@ -29,8 +29,10 @@ public class KPIDelays : MonoBehaviour
         float tmpBusDelay = 0;
         float tmpMetroDelay = 0;
 
-        foreach (Transform transLine in transLines){
-        foreach(Transform item in transLine){
+        foreach (Transform transLine in transLines)
+		{
+            foreach (Transform item in transLine)
+			{
                 VehicleController vc = item.GetComponent<VehicleController>();
                 if (transLine.name.StartsWith("Tram_"))
                     tmpTramDelay += vc.delay;
