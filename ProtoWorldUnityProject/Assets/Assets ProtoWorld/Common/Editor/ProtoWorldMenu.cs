@@ -684,7 +684,8 @@ public class ProtoWorldMenu : MonoBehaviour
             if (go == null)
                 Debug.Log("There is no " + moduleName);
         }
-        PrefabUtility.DisconnectPrefabInstance(go);
+		// TODO Currently disabled to speed up development.
+        //PrefabUtility.DisconnectPrefabInstance(go);
         // NB: Do not set activeGameObject = go, otherwise all the CreatorEditors will not work.
         return go;
     }
