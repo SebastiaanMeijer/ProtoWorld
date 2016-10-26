@@ -78,6 +78,8 @@ public class Utilities : MonoBehaviour {
 		GameObject group = GameObject.Find(name);
 
 		if(group.layer == LayerMask.NameToLayer("Default")) {
+			Debug.Log("Assigning missing layer \"" + layer + "\" to group \"" + group.name + "\"...");
+
 			group.layer = LayerMask.NameToLayer(layer);
 		}
 
@@ -91,6 +93,8 @@ public class Utilities : MonoBehaviour {
 			GameObject gameObject = gameObjects[index];
 
 			if(gameObject.layer == LayerMask.NameToLayer("Default")) {
+				Debug.Log("Assigning missing layer \"" + layer + "\" to " + singularName + " \"" + gameObject.name + "\"...");
+
 				gameObject.layer = LayerMask.NameToLayer(layer);
 			}
 		}
