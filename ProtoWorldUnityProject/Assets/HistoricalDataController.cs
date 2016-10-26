@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class HistoricalDataController : MonoBehaviour
 {
@@ -39,6 +40,8 @@ public class HistoricalDataController : MonoBehaviour
 
     private List<float> gametimeEntries;
 
+    private CameraControl camera;
+
     // Use this for initialization
     void Start()
     {
@@ -60,11 +63,17 @@ public class HistoricalDataController : MonoBehaviour
         TimestampScrollView = GameObject.Find("TimestampScrollView").GetComponent<ScrollRect>();
 
         loadFileBrowser.SetActive(false);
+
+        camera = GameObject.Find("Main Camera").GetComponent<CameraControl>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Lock the camera on mouseover!
+        if (!EventSystem.current.IsPointerOverGameObject()) camera.enabled = true;
+        else camera.enabled = false;
+
     }
 		
 	public void activateAllObjects()
