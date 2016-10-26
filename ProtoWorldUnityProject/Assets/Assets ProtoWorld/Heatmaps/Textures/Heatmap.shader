@@ -1,4 +1,6 @@
-﻿// Alan Zucconi
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+// Alan Zucconi
 // www.alanzucconi.com
 Shader "Hidden/Heatmap" {
 		Properties{
