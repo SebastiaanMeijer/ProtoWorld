@@ -58,11 +58,11 @@ public class HistoricalDataController : MonoBehaviour
         logDirectory = new DirectoryInfo(Application.dataPath + "/log/");
         if (!logDirectory.Exists) logDirectory.Create();
 
-        FileScrollView = GameObject.Find("FileScrollView").GetComponent<ScrollRect>();
-        loadFileBrowser = GameObject.Find("LoadFileBrowser");
-        TimestampScrollView = GameObject.Find("TimestampScrollView").GetComponent<ScrollRect>();
+        //FileScrollView = GameObject.Find("FileScrollView").GetComponent<ScrollRect>();
+        //loadFileBrowser = GameObject.Find("LoadFileBrowser");
+        //TimestampScrollView = GameObject.Find("TimestampScrollView").GetComponent<ScrollRect>();
 
-        loadFileBrowser.SetActive(false);
+        //loadFileBrowser.SetActive(false);
 
         camera = GameObject.Find("Main Camera").GetComponent<CameraControl>();
     }
