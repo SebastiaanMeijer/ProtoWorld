@@ -10,7 +10,7 @@ sysinfo.txt
 
 *.csv
 
-ProjectSettings/
+#ProjectSettings/
 
  
 # =============== #
