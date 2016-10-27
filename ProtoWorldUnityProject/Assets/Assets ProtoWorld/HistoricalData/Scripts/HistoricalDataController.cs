@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
 using System;
 using System.Xml;
 using System.Xml.Linq;
@@ -14,12 +13,9 @@ public class HistoricalDataController : MonoBehaviour
 {
     public int logInterval = 3;
 
-    private DirectoryInfo logDirectory;
-    private ScrollRect FileScrollView;
-    private ScrollRect TimestampScrollView;
 
-    public GameObject logFileButtonPrefab;
     public GameObject loadFileBrowser;
+    public DirectoryInfo logDirectory;
 
     private string savedLogFilePath;
     private string loadedLogFilePath;
@@ -58,11 +54,6 @@ public class HistoricalDataController : MonoBehaviour
         logDirectory = new DirectoryInfo(Application.dataPath + "/log/");
         if (!logDirectory.Exists) logDirectory.Create();
 
-        //FileScrollView = GameObject.Find("FileScrollView").GetComponent<ScrollRect>();
-        //loadFileBrowser = GameObject.Find("LoadFileBrowser");
-        //TimestampScrollView = GameObject.Find("TimestampScrollView").GetComponent<ScrollRect>();
-
-        //loadFileBrowser.SetActive(false);
 
         camera = GameObject.Find("Main Camera").GetComponent<CameraControl>();
     }
@@ -126,32 +117,10 @@ public class HistoricalDataController : MonoBehaviour
 
     public void loadLogDirectory()
     {
-
+        FileBrowserController controller = loadFileBrowser.GetComponent<FileBrowserController>();
+        controller.loadLogDirectory();
         loadFileBrowser.SetActive(true);
         timeController.PauseGame(true);
-
-        foreach (GameObject item in FileScrollView.content)
-        {
-            GameObject.Destroy(item);
-        }
-
-        FileInfo[] filesInfo = logDirectory.GetFiles();
-        foreach(FileInfo fileInfo in filesInfo)
-        {
-            if (fileInfo.Name.EndsWith(".xml"))
-            {
-                //Add file to the fileScrollView
-                GameObject fileButton = Instantiate(logFileButtonPrefab) as GameObject;
-                fileButtonController btn = fileButton.GetComponent<fileButtonController>();
-                btn.path = fileInfo.FullName;
-                fileButton.transform.SetParent(FileScrollView.content.transform);
-
-                Text text = fileButton.GetComponentInChildren<Text>();
-                text.text = fileInfo.Name;
-                //Debug.Log("File found: " + fileInfo);
-            }
-        }
-
     }
 
 	public void createTimeStampList(){
