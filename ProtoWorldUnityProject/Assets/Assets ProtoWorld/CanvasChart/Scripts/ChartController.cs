@@ -212,6 +212,9 @@ public class ChartController : MonoBehaviour
 
         eventIndicatorView = GetComponentInChildren<EventIndicatorController>();
         valueIndicatorView = GetComponentInChildren<ValueIndicatorController>();
+
+		// TODO Dirteh hack!
+		transform.Find("Toolbar/ChartTitleText").GetComponent<Text>().text = name;
     }
 
     /// <summary>
