@@ -61,9 +61,6 @@ public class HistoricalDataController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Lock the camera on mouseover!
-        if (!EventSystem.current.IsPointerOverGameObject()) camera.enabled = true;
-        else camera.enabled = false;
 
     }
 		

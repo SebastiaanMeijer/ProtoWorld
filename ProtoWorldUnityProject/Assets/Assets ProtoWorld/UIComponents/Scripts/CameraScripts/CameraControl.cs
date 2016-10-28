@@ -24,6 +24,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// A class for control the camera with an aerial view.
@@ -136,60 +137,60 @@ public class CameraControl : MonoBehaviour
             requestToTargetPoint = false;
         }
 
-        #endregion FocusTargetPoint
+		#endregion FocusTargetPoint
 
-        #region MouseLeftButton
+		#region MouseLeftButton
+		
+		Vector3 oldMouseAt = mouseWorldPosition;
+		Vector3 oldMousePosition = mouseScreenPosition;
+		CollectMouseInfo();
 
-        Vector3 oldMouseAt = mouseWorldPosition;
-        Vector3 oldMousePosition = mouseScreenPosition;
-        CollectMouseInfo();
+		if(Input.GetMouseButton(0))
+		{
+			if (!dragging)
+			{
+				dragging = true;
+				initMouseRay = mouseRay;
+				initMouseWorldPosition = mouseWorldPosition;
+				initCameraPos = gameObject.transform.position;
 
-        if (Input.GetMouseButton(0))
-        {
-            if (!dragging)
-            {
-                dragging = true;
-                initMouseRay = mouseRay;
-                initMouseWorldPosition = mouseWorldPosition;
-                initCameraPos = gameObject.transform.position;
+				RaycastHit downRayHit = new RaycastHit();
+				Physics.Raycast(new Ray(initCameraPos, Vector3.down), out downRayHit, 10000f, 1 << 9); // 9 is the ground layer
+				straightDownFromInit = downRayHit.point;
 
-                RaycastHit downRayHit = new RaycastHit();
-                Physics.Raycast(new Ray(initCameraPos, Vector3.down), out downRayHit, 10000f, 1 << 9); // 9 is the ground layer
-                straightDownFromInit = downRayHit.point;
+				asIfHitPoint = straightDownFromInit + (initMouseWorldPosition - initCameraPos);
+			}
 
-                asIfHitPoint = straightDownFromInit + (initMouseWorldPosition - initCameraPos);
-            }
+			//for camera fixed on a terrain trasposed straight up
+			RaycastHit rayHit = new RaycastHit();
+			Debug.DrawRay(asIfHitPoint, -mouseRay.direction * 100, Color.red);
+			bool success = Physics.Raycast(new Ray(asIfHitPoint, -mouseRay.direction), out rayHit, 10000f, 1 << 9); // 9 is the ground layer
 
-            //for camera fixed on a terrain trasposed straight up
-            RaycastHit rayHit = new RaycastHit();
-            Debug.DrawRay(asIfHitPoint, -mouseRay.direction * 100, Color.red);
-            bool success = Physics.Raycast(new Ray(asIfHitPoint, -mouseRay.direction), out rayHit, 10000f, 1 << 9); // 9 is the ground layer
+			if (success)
+			{
+				Vector3 movedGroundPoint = rayHit.point;
+				targetCameraPosition = movedGroundPoint + (initCameraPos - straightDownFromInit);
+			}
+		}
+		else
+		{
+			dragging = false;
+		}
 
-            if (success)
-            {
-                Vector3 movedGroundPoint = rayHit.point;
-                targetCameraPosition = movedGroundPoint + (initCameraPos - straightDownFromInit);
-            }
-        }
-        else
-        {
-            dragging = false;
-        }
+		#endregion MouseLeftButton
 
-        #endregion MouseLeftButton
+		#region MouseRightButton
 
-        #region MouseRightButton
+		if (Input.GetMouseButton(1) && allowRotation)
+		{
+			Vector3 posChange = (oldMousePosition - Input.mousePosition);
+			Vector3 oldRot = gameObject.transform.rotation.eulerAngles;
 
-        if (Input.GetMouseButton(1) && allowRotation)
-        {
-            Vector3 posChange = (oldMousePosition - Input.mousePosition);
-            Vector3 oldRot = gameObject.transform.rotation.eulerAngles;
+			gameObject.transform.RotateAround(Vector3.up, posChange.x * -0.005f);
 
-            gameObject.transform.RotateAround(Vector3.up, posChange.x * -0.005f);
-
-            if (!restrictMouseRotationToAxisY)
-                gameObject.transform.RotateAround(gameObject.transform.right, posChange.y * 0.005f);
-        }
+			if (!restrictMouseRotationToAxisY)
+				gameObject.transform.RotateAround(gameObject.transform.right, posChange.y * 0.005f);
+		}
 
 		#endregion MouseRightButton
 
@@ -232,16 +233,20 @@ public class CameraControl : MonoBehaviour
 		}
 
 		#endregion MouseMiddleButton
+		
+		// Prevent the camera from accepting scroll input while interacting with a scrollable user interface.
+		if (!EventSystem.current.IsPointerOverGameObject())
+		{
+			#region ScrollWheel
 
-		#region ScrollWheel
+			// Controls the height of the camera
+			if (!dragging)
+				UpdateCameraHeight(Input.GetAxis("Mouse ScrollWheel"));
 
-		// Controls the height of the camera
-		if (!dragging)
-            UpdateCameraHeight(Input.GetAxis("Mouse ScrollWheel"));
+			#endregion ScrollWheel
+		}
 
-        #endregion ScrollWheel
-
-        #region ArrowKeys
+		#region ArrowKeys
 
         CollectMouseInfo();
 
@@ -332,7 +337,6 @@ public class CameraControl : MonoBehaviour
         #endregion Normalize
 
         #region Others
-
 
         if (targetCameraPosition.z < maxRight && targetCameraPosition.z > maxLeft && targetCameraPosition.x > maxUp && targetCameraPosition.x < maxDown)
         {
