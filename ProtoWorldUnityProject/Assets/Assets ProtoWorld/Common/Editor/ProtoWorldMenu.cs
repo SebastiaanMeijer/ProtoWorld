@@ -706,7 +706,8 @@ public class ProtoWorldMenu : MonoBehaviour
                 {
                     var prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
                     instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-                    PrefabUtility.DisconnectPrefabInstance(instance);
+					// TODO Currently disabled to speed up development.
+					//PrefabUtility.DisconnectPrefabInstance(instance);
                     Undo.RegisterCreatedObjectUndo(instance, "Prefab instantiated...");
                     Debug.Log(prefabName + " was added to the scene.");
                     foundPrefab = true;
