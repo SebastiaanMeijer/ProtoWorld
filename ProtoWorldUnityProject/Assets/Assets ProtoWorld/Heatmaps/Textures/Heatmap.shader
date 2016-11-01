@@ -1,63 +1,68 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-
-// Alan Zucconi
-// www.alanzucconi.com
+﻿﻿// Original by Alan Zucconi (www.alanzucconi.com). Edited to make it work with Unity 5.4 and DirectX 9.
 Shader "Hidden/Heatmap" {
-		Properties{
-			_HeatTex("Texture", 2D) = "white" {}
-		}
-			SubShader{
-			Tags{ "Queue" = "Transparent" }
-			Blend SrcAlpha OneMinusSrcAlpha // Alpha blend
-
-			Pass{
+	Properties {
+		_HeatTex("Texture", 2D) = "white" {}
+	}
+	SubShader {
+		Tags { "Queue" = "Transparent" }
+		Blend SrcAlpha OneMinusSrcAlpha
+		Pass {
 			CGPROGRAM
-#pragma vertex vert             
-#pragma fragment frag
+				// Only supports Windows builds.
+				#if SHADER_API_D3D11_9X
+					#define MAXIMUM_NUMBER_OF_POINTS 13
+				#elif SHADER_API_D3D9
+					#define MAXIMUM_NUMBER_OF_POINTS 87
+				#else
+					#define MAXIMUM_NUMBER_OF_POINTS 1023
+				#endif
+				
+				#pragma vertex vert             
+				#pragma fragment frag
+				
+				struct vertInput {
+					float4 pos : POSITION;
+				};
+				
+				struct vertOutput {
+					float4 pos : POSITION;
+					fixed3 worldPos : TEXCOORD1;
+				};
 
-		struct vertInput {
-			float4 pos : POSITION;
-		};
+				vertOutput vert(vertInput input) {
+					vertOutput o;
+					o.pos = mul(UNITY_MATRIX_MVP, input.pos);
+					o.worldPos = mul(unity_ObjectToWorld, input.pos).xyz;
+					return o;
+				}
 
-		struct vertOutput {
-			float4 pos : POSITION;
-			fixed3 worldPos : TEXCOORD1;
-		};
+				uniform int _Points_Length = 0;
+				uniform float3 _Points[MAXIMUM_NUMBER_OF_POINTS];		// (x, y, z) = position
+				uniform float2 _Properties[MAXIMUM_NUMBER_OF_POINTS];	// x = radius, y = intensity
 
-		vertOutput vert(vertInput input) {
-			vertOutput o;
-			o.pos = mul(UNITY_MATRIX_MVP, input.pos);
-			o.worldPos = mul(unity_ObjectToWorld, input.pos).xyz;
-			return o;
-		}
+				sampler2D _HeatTex;
 
-		uniform int _Points_Length = 0;
-		uniform float3 _Points[1000];		// (x, y, z) = position
-		uniform float2 _Properties[1000];	// x = radius, y = intensity
+				half4 frag(vertOutput output) : COLOR {
+					// Loops over all the points.
+					half h = 0;
+					for(int i = 0; i < MAXIMUM_NUMBER_OF_POINTS && i < _Points_Length; i++) {
+						// Calculates the contribution of each point.
+						half di = distance(output.worldPos, _Points[i].xyz);
 
-		sampler2D _HeatTex;
+						half ri = _Properties[i].x;
+						half hi = 1 - saturate(di / ri);
 
-		half4 frag(vertOutput output) : COLOR{
-			// Loops over all the points
-			half h = 0;
-		for (int i = 0; i < _Points_Length; i++)
-		{
-			// Calculates the contribution of each point
-			half di = distance(output.worldPos, _Points[i].xyz);
+						h += hi * _Properties[i].y;
+					}
 
-			half ri = _Properties[i].x;
-			half hi = 1 - saturate(di / ri);
+					// Converts (0-1) according to the heat texture.
+					h = saturate(h);
+					half4 color = tex2D(_HeatTex, fixed2(h, 0.5));
 
-			h += hi * _Properties[i].y;
-		}
-
-		// Converts (0-1) according to the heat texture
-		h = saturate(h);
-		half4 color = tex2D(_HeatTex, fixed2(h, 0.5));
-		return color;
-		}
+					return color;
+				}
 			ENDCG
 		}
-		}
-			Fallback "Diffuse"
 	}
+	Fallback "Diffuse"
+}
