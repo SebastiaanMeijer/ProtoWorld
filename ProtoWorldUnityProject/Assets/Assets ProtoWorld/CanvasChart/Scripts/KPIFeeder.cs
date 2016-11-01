@@ -171,7 +171,7 @@ public class KPIFeeder : MonoBehaviour
     {
         for (int i = 0; i < kpiColors.Count; i++)
         {
-            controller.SetSeriesColor(i, kpiColors[i]);
+            kpiColors[i] = controller.seriesColors[i]; //controller.SetSeriesColor(i, kpiColors[i]);
         }
     }
 
