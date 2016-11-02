@@ -88,7 +88,7 @@ public class ChartController : MonoBehaviour
     /// Set the preferred maximum Y-value.
     /// This value will increase if maxYCanOnlyIncrease is set to true.
     /// </summary>
-    public float preferredMaxYValue = 100;
+    public float preferredMaxYValue = 10;
 
     /// <summary>
     /// In streaming chart:
@@ -230,6 +230,16 @@ public class ChartController : MonoBehaviour
 
 		// TODO Dirteh hack!
 		transform.Find("Toolbar/ChartTitleText").GetComponent<Text>().text = name;
+        //automatically select the correct chart type
+        Dropdown dropdown = transform.Find("Toolbar/ChartType/Dropdown").GetComponent<Dropdown>();
+        for (int i = 0; i < dropdown.options.Count; i++)
+        {
+            if (dropdown.options[i].text == chartType.ToString())
+            {
+                dropdown.value = i;
+                break;
+            }
+        }
     }
 
     /// <summary>
@@ -548,7 +558,7 @@ public class ChartController : MonoBehaviour
             if (dataCollection.Count < 1)
                 continue;
 
-            int idx = Mathf.RoundToInt((dataCollection.Count - 1)*relativePosition);
+            int idx = Mathf.RoundToInt((dataCollection.Count - 1) * relativePosition);
 
             //Debug.Log("i: " + i + " count: " + dataCollection.Count);
             //Debug.Log("rel: " + relativePosition + " idx: " + idx);
@@ -573,7 +583,7 @@ public class ChartController : MonoBehaviour
         for (int i = 0; i < SeriesCount; i++)
         {
             var dataCollection = DataContainer.GetTimedDataCollection(i);
-            int idx = Mathf.RoundToInt((dataCollection.Count - 1)*relativePosition);
+            int idx = Mathf.RoundToInt((dataCollection.Count - 1) * relativePosition);
             //Debug.Log("list count: " + list.Count + " idx: " + idx);
             values[i] = dataCollection[idx].GetData();
             valueTime = dataCollection[idx].time;
