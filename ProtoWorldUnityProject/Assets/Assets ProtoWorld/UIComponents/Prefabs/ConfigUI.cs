@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class ConfigUI : MonoBehaviour
 {
 
-    private bool active = false;
+    private bool active = true;
     public List<GameObject> gameObjects;
 
 	// Use this for initialization
