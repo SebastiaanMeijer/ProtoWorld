@@ -60,10 +60,9 @@ public static class ChartUtils
         float xScale = rectTransform.rect.width / (bounds.xMax - bounds.xMin);
         float yScale = rectTransform.rect.height / (bounds.yMax - bounds.yMin);
 
-        int lineIdx = 0;
-        for (int i = 0; i < list.Count - 1; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            lines[lineIdx++] = new Vector3((list[i].time - bounds.xMin) * xScale, (list[i].GetData() - bounds.yMin) * yScale);
+            lines[i] = new Vector3((list[i].time - bounds.xMin) * xScale, (list[i].GetData() - bounds.yMin) * yScale);
         }
         return lines;
     }
@@ -172,11 +171,6 @@ public static class ChartUtils
 
     public static Mesh GenerateStackedLineMesh(Vector3[] points, Vector3[] basis)
     {
-        if ((points.Length % 2) != 0)
-        {
-            return null;
-        }
-
         Vector2[] outlinePoints = new Vector2[points.Length + basis.Length];
         for (int i = 0; i < points.Length; i++)
         {
@@ -241,12 +235,13 @@ public static class ChartUtils
 
     public static Mesh CreateMeshFromPoints(Vector2[] points)
     {
-        int[] indices = Triangulate(new List<Vector2>(points));
+        List<Vector2> lessPoints = removeDuplicates(points);
+        int[] indices = Triangulate(lessPoints);
 
-        Vector3[] vertices = new Vector3[points.Length];
+        Vector3[] vertices = new Vector3[lessPoints.Count];
         for (int i = 0; i < vertices.Length; i++)
         {
-            vertices[i] = new Vector3(points[i].x, points[i].y, 0);
+            vertices[i] = new Vector3(lessPoints[i].x, lessPoints[i].y, 0);
         }
 
         //create mesh
@@ -261,6 +256,20 @@ public static class ChartUtils
         return mesh;
     }
 
+    private static List<Vector2> removeDuplicates(Vector2[] points)
+    {
+        List<Vector2> lessPoints = new List<Vector2>();
+        if(points.Length > 0)
+            lessPoints.Add(points[0]);
+        for (int i = 1; i < points.Length; i++)
+        {
+            if (points[i] != lessPoints[lessPoints.Count - 1])
+                lessPoints.Add(points[i]);
+        }
+        return lessPoints;
+    }
+
+    // source: http://wiki.unity3d.com/index.php?title=Triangulator
     private static int[] Triangulate(List<Vector2> m_points)
     {
         List<int> indices = new List<int>();

@@ -247,9 +247,9 @@ public class ChartViewController : MonoBehaviour
         //define the baseline
         Vector3[] oldlines = new Vector3[2];
         oldlines[0] = new Vector3(0, 0, 0);
-        oldlines[0] = new Vector3(bounds.width, 0, 0);
-        
-        for (int idx = 0; idx < controller.SeriesCount; idx++)
+        oldlines[1] = new Vector3(chartHolder.rect.width, 0, 0);
+
+        for (int idx = controller.SeriesCount - 1; idx >= 0; idx--)
         {
             string name = ChartUtils.NameGenerator(chartChildString, idx);
             GameObject obj = chartHolder.Find(name).gameObject;
@@ -262,8 +262,8 @@ public class ChartViewController : MonoBehaviour
 
             List<TimedData> dataCollection = controller.DataContainer.GetTimedDataCollection(idx);
 
-            Vector3[] lines = ChartUtils.CreateLinesFromData(dataCollection, chartHolder, bounds);
-            //Vector3[] lines = ChartUtils.CreateLineFromData(dataCollection, chartHolder, bounds);
+            //Vector3[] lines = ChartUtils.CreateLinesFromData(dataCollection, chartHolder, bounds);
+            Vector3[] lines = ChartUtils.CreateLineFromData(dataCollection, chartHolder, bounds);
             if (baselines.Length == 0)
             {
                 baselines = lines;
@@ -274,17 +274,18 @@ public class ChartViewController : MonoBehaviour
                 {
                     baselines[i] += new Vector3(0, lines[i].y, 0);
                 }
-                lines = baselines;
+                lines = (Vector3[]) baselines.Clone();
             }
-            Mesh lineMesh = ChartUtils.GenerateLineMesh(lines, 1);
-            //Debug.Log("Stacked | " + toString(lines));
+            //Mesh lineMesh = ChartUtils.GenerateLineMesh(lines, 1);
+            Debug.Log("Stacked "+idx+" | " + toString(lines));
+            Debug.Log("Stacked old "+idx+" | " + toString(oldlines));
             //"(" + x.x + "," + x.y + "), "
-            //Mesh lineMesh = ChartUtils.GenerateStackedLineMesh(lines, oldlines);
+            Mesh lineMesh = ChartUtils.GenerateStackedLineMesh(lines, oldlines);
 
             renderer.SetMaterial(controller.materials[idx], null);
             renderer.SetMesh(lineMesh);
 
-            oldlines = lines;
+            oldlines = (Vector3[]) lines.Clone();
         }
     }
 

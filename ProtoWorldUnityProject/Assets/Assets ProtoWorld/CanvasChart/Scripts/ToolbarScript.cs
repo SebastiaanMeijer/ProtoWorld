@@ -17,6 +17,8 @@ public class ToolbarScript : MonoBehaviour {
 
     public void ChangeChartType(int id)
     {
+        if (controller == null)
+            return;
         switch (id)
         {
             case 0:
