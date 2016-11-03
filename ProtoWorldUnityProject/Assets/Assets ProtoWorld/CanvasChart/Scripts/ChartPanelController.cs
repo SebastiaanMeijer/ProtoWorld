@@ -15,7 +15,8 @@ public class ChartPanelController : MonoBehaviour
 
 	    foreach (Transform kpichart in transform)
 	    {
-	        charts.Add(kpichart.GetComponent<ChartController>());
+	        ChartController controller = kpichart.GetComponent<ChartController>();
+	        if (controller != null) charts.Add(controller);
 	    }
 
 	}
@@ -23,27 +24,28 @@ public class ChartPanelController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
 	    Vector3 origin = transform.position;
-
 	    int height = 0;
 
         foreach (ChartController chart in charts)
         {
             Vector3 pos = origin;
-            pos.y = origin.y - height;
+            pos.y -= height;
 	        chart.transform.position = pos;
 
-            //ContentPanel is active! 
-	        if (chart.contentPanel.active)
-	        {
-	            height += 200;
-	        }
-	        else
-	        {
-	            height += 25;
-	        }
+	        if (chart.contentPanel.active) height += 200;
+	        else height += 25;
 	    }
 
 	}
+
+    public void setAll(bool val)
+    {
+        foreach (ChartController controller in charts)
+        {
+            ToolbarScript scrtipt = controller.gameObject.transform.FindChild("Toolbar").GetComponent<ToolbarScript>();
+            scrtipt.ToggleVisibility(val);
+            //controller.contentPanel.SetActive(val);
+        }  
+    }
 }
