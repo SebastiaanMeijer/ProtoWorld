@@ -49,7 +49,8 @@ public class HistoricalDataController : MonoBehaviour
         logFileRootElement = new XElement("LogData");
         logFile.Add(logFileRootElement);
 
-        StartCoroutine(processLogData());
+		// TODO Disabled to improve performance for now.
+        //StartCoroutine(processLogData());
 
         logDirectory = new DirectoryInfo(Application.dataPath + "/log/");
         if (!logDirectory.Exists) logDirectory.Create();
