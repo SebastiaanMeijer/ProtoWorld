@@ -342,18 +342,21 @@ public class PrepareForCombining : Editor
 					combinations[i].CombinedMeshTag = "Combined" + ObjectGroup;
 					combinations[i].SendMessage("Start");
 
+					// TODO Disabled since it doesn't work. The combiner doesn't run and finish
+					// before this code is called. For now we can use the post generation utility.
+
 					// Set the layer to the layer the first matching child is in, which is likely
 					// to be the layer all the children are in, since their materials are the same.
-					GameObject combinedChild = GameObject.Find(combinations[i].CombinedMeshName);
-					for(int index = 0; index < combinations[i].transform.childCount; index++) {
-						GameObject child = combinations[i].transform.GetChild(index).gameObject;
-						if(child.tag != combinations[i].CombinedMeshTag) {
-							if(child.GetComponent<Renderer>().sharedMaterial.name == combinedChild.GetComponent<Renderer>().sharedMaterial.name) {
-								combinedChild.layer = child.layer;
-								break;
-							}
-						}
-					}
+					//GameObject combinedChild = GameObject.Find(combinations[i].CombinedMeshName);
+					//for(int index = 0; index < combinations[i].transform.childCount; index++) {
+					//	GameObject child = combinations[i].transform.GetChild(index).gameObject;
+					//	if(child.tag != combinations[i].CombinedMeshTag) {
+					//		if(child.GetComponent<Renderer>().sharedMaterial.name == combinedChild.GetComponent<Renderer>().sharedMaterial.name) {
+					//			combinedChild.layer = child.layer;
+					//			break;
+					//		}
+					//	}
+					//}
 				}
                 else break;
             }
