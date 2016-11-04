@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Npgsql, Version=2.1.1.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
@@ -41,8 +45,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Zlib.Portable">
-      <HintPath>..\OsmParserTestApplication\bin\x86\Debug\Zlib.Portable.dll</HintPath>
+    <Reference Include="Zlib.Portable, Version=1.9.1.9000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Zlib.Portable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -57,10 +62,6 @@
     <ProjectReference Include="..\AramOSMParser\AramOSMParser.csproj">
       <Project>{a6b1ccfe-2094-4b1e-80ff-f1a6e3613bc0}</Project>
       <Name>AramOSMParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Npgsql\Npgsql.csproj">
-      <Project>{9d13b739-62b1-4190-b386-7a9547304eb3}</Project>
-      <Name>Npgsql</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

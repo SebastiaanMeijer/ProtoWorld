@@ -127,25 +127,16 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Mono.Security.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-<<<<<<< HEAD
-  <ItemGroup Condition=" '$(Configuration)' == 'Debug-net40' Or '$(Configuration)' == 'Release-net40' Or '$(Configuration)' == 'Debug-net45' Or '$(Configuration)' == 'Release-net45' ">
-    <Reference Include="Mono.Security">
-      <HintPath>..\lib\Mono.Security\4.0\Mono.Security.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)' == 'Debug-net20' Or '$(Configuration)' == 'Release-net20' Or '$(Configuration)' == 'Debug-net35' Or '$(Configuration)' == 'Release-net35' ">
-    <Reference Include="Mono.Security">
-      <HintPath>..\lib\Mono.Security\2.0\Mono.Security.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-=======
->>>>>>> ad8854b3ef18b3986f19cc47901fa464daf581ee
   <ItemGroup>
     <Compile Include="NpgsqlTypes\ArrayHandling.cs" />
     <Compile Include="NpgsqlTypes\BitString.cs" />
