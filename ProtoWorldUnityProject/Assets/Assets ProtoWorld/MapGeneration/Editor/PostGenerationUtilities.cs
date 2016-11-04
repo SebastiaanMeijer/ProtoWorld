@@ -23,7 +23,7 @@ public class Utilities : Editor {
 		List<GameObject> gameObjectsWithVerticesWithNonFiniteValues = new List<GameObject>();
 
 		for(int gameObjectIndex = 0; gameObjectIndex < gameObjects.Length; gameObjectIndex++) {
-			if(EditorUtility.DisplayCancelableProgressBar("Removing " + pluralName + " with vertices with non-finite values...", "", gameObjectIndex / (float) gameObjects.Length)) {
+			if(EditorUtility.DisplayCancelableProgressBar("Retrieving " + pluralName + " with vertices with non-finite values...", "", gameObjectIndex / (float) gameObjects.Length)) {
 				return;
 			}
 
@@ -45,7 +45,15 @@ public class Utilities : Editor {
 			}
 		}
 
+		EditorUtility.ClearProgressBar();
+
+		float gameObjectsWithVerticesWithNonFiniteValuesCount = gameObjectsWithVerticesWithNonFiniteValues.Count;
+
 		while(gameObjectsWithVerticesWithNonFiniteValues.Count > 0) {
+			if(EditorUtility.DisplayCancelableProgressBar("Removing " + pluralName + " with vertices with non-finite values...", "", (gameObjectsWithVerticesWithNonFiniteValuesCount - gameObjectsWithVerticesWithNonFiniteValues.Count) / gameObjectsWithVerticesWithNonFiniteValuesCount)) {
+				return;
+			}
+
 			GameObject gameObject = gameObjectsWithVerticesWithNonFiniteValues[0];
 
 			gameObjectsWithVerticesWithNonFiniteValues.RemoveAt(0);
@@ -170,7 +178,7 @@ public class Utilities : Editor {
 		List<GameObject> emptyGameObjects = new List<GameObject>();
 
 		for(int gameObjectIndex = 0; gameObjectIndex < gameObjects.Length; gameObjectIndex++) {
-			if(EditorUtility.DisplayCancelableProgressBar("Removing empty " + pluralName + "...", "", gameObjectIndex / (float) gameObjects.Length)) {
+			if(EditorUtility.DisplayCancelableProgressBar("Retrieving empty " + pluralName + "...", "", gameObjectIndex / (float) gameObjects.Length)) {
 				return;
 			}
 
@@ -184,7 +192,15 @@ public class Utilities : Editor {
 			}
 		}
 
+		EditorUtility.ClearProgressBar();
+
+		float emptyGameObjectsCount = emptyGameObjects.Count;
+
 		while(emptyGameObjects.Count > 0) {
+			if(EditorUtility.DisplayCancelableProgressBar("Removing empty " + pluralName + "...", "", (emptyGameObjectsCount - emptyGameObjects.Count) / emptyGameObjectsCount)) {
+				return;
+			}
+
 			GameObject gameObject = emptyGameObjects[0];
 
 			emptyGameObjects.RemoveAt(0);
