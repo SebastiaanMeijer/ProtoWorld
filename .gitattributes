@@ -37,5 +37,7 @@ ProtoWorldUnityProject/Assets/Miscelanea/Tests/DelftTest/Delft/NavMesh.asset fil
 ScriptsAndTools/TestFiles/DelftTest/FCD/tudelft.fcd filter=lfs diff=lfs merge=lfs -text
 ScriptsAndTools/TestFiles/DelftTest/PWS/*.pws filter=lfs diff=lfs merge=lfs -text
 ScriptsAndTools/TestFiles/DelftTest/Sumo/*.xml filter=lfs diff=lfs merge=lfs -text
+
+# Rome Scene
 ProtoWorldUnityProject/Assets/Cases[[:space:]]ProtoWorld/Rome[[:space:]]Case/Rome[[:space:]]Case[[:space:]]v2.0/NavMesh.asset filter=lfs diff=lfs merge=lfs -text
 ScriptsAndTools/SumoFiles/Rome/*.xml filter=lfs diff=lfs merge=lfs -text
