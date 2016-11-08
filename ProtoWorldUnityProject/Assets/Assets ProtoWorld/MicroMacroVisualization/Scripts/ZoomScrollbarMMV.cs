@@ -50,6 +50,7 @@ public class ZoomScrollbarMMV : MonoBehaviour {
 	public void sliderChanged(){
 
 		value = scrollbar.value;
+		Camera.main.GetComponent<CameraControl> ().targetCameraPosition = new Vector3 (Camera.main.transform.position.x, value*maxHeight, Camera.main.transform.position.z);
 
 	}
 
