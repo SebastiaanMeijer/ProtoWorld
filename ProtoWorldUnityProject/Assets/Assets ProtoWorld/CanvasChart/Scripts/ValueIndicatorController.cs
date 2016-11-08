@@ -12,12 +12,12 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
- * 
- * KPI MODULE
- * Johnson Ho
- * 
- */
+/*
+* 
+* KPI MODULE
+* Johnson Ho
+* 
+*/
 
 using UnityEngine;
 using System.Collections;
@@ -67,8 +67,8 @@ public class ValueIndicatorController : MonoBehaviour
         {
             case UIChartTypes.Bar:
             case UIChartTypes.Pie:
-                SetActive(false);
-                break;
+                //SetActive(false);
+                //break;
             case UIChartTypes.Line:
             case UIChartTypes.StackedArea:
                 SetActive(true);

@@ -36,7 +36,9 @@ public class FlashPedestriansProfile
     public bool carAwareness;
     public TravelPreference travelPreference;
 
-    public FlashPedestriansProfile(float speed, bool englishSpeaker, bool italianSpeaker, float chanceOfSubscription, bool willingToChangeDestination, float chanceOfTakingABike, float chanceOfBelievingRumours, bool carAwareness, TravelPreference preference)
+    public FlashPedestriansProfile(float speed, bool englishSpeaker, bool italianSpeaker, 
+        float chanceOfSubscription, bool willingToChangeDestination, float chanceOfTakingABike, 
+        float chanceOfBelievingRumours, bool carAwareness, TravelPreference preference = TravelPreference.time)
     {
         this.speed = speed;
         this.englishSpeaker = englishSpeaker;

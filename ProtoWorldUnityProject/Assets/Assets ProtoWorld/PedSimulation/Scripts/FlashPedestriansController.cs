@@ -46,6 +46,8 @@ public class FlashPedestriansController : TravelerController
     [HideInInspector]
     public FlashPedestriansInformer flashInformer;
 
+    public bool tellMeWhatYouAreDoing = false;
+
     private Animator FSM;
 
     private bool goingToDestination = false;
@@ -82,6 +84,8 @@ public class FlashPedestriansController : TravelerController
     private FlashPedestriansGlobalParameters.WeatherConditions currentWeather;
 
     private bool isPause = false;
+
+    private bool rethinkDestination = false;
 
     /// <summary>
     /// Awake method.
@@ -120,6 +124,9 @@ public class FlashPedestriansController : TravelerController
     /// </summary>
     void Update()
     {
+        if (tellMeWhatYouAreDoing && routing != null && routing.itinerary != null)
+            Debug.Log("My route: " + routing.itinerary.Print());
+
         // Check if the flash pedestrian is paused
         if (globalParam != null)
         {
@@ -141,24 +148,39 @@ public class FlashPedestriansController : TravelerController
 
         if (!isPause)
         {
+            //If the rethink destination flad is active, consider changing destination
+            //if (rethinkDestination)
+            //{
+            //    RethinkDestination();
+            //    rethinkDestination = false;
+            //}
 
             // Check the weather and update pedestrian behaviour accordingly
             if (currentWeather != flashInformer.globalParam.currentWeatherCondition)
             {
-                ChangePedestrianBehaviourOnWeather(flashInformer.globalParam.currentWeatherCondition);
+                if (tellMeWhatYouAreDoing)
+                    Debug.Log("Changing behaviour according to the weather");
+
+                    ChangePedestrianBehaviourOnWeather(flashInformer.globalParam.currentWeatherCondition);
             }
 
             // If going to station, check if pedestrian has arrived to station
             if (goingToStation && Vector3.Distance(this.transform.position, nextPoint.position) < 4.0f)
             {
+                if (tellMeWhatYouAreDoing)
+                    Debug.Log("Arrived at station");
+
                 // Arrives at the station
                 goingToStation = false;
                 FSM.SetBool("OnStation", true);
             }
 
             // If going to destination, check if pedestrian has arrived to destination
-            if (goingToDestination && Vector3.Distance(this.transform.position, routing.destinationPoint.transform.position) < 4.0f)
+            if (goingToDestination && Vector3.Distance(this.transform.position, routing.GetDestinationTransform().position) < 4.0f)
             {
+                if (tellMeWhatYouAreDoing)
+                    Debug.Log("Arrived at destination");
+
                 // Arrives at the destination
                 goingToDestination = false;
                 FSM.SetBool("OnDestination", true);
@@ -167,6 +189,9 @@ public class FlashPedestriansController : TravelerController
             // If going to take a bike, check if pedestrian has arrived to bike station
             if (takingABike && Vector3.Distance(this.transform.position, targetedBikeStation.transform.position) < 4.0f)
             {
+                if (tellMeWhatYouAreDoing)
+                    Debug.Log("Arrived to bike station");
+
                 // Arrives at the bike station
                 takingABike = false;
                 FSM.SetBool("OnBikeStation", true);
@@ -175,13 +200,19 @@ public class FlashPedestriansController : TravelerController
             // If going to take a bike an arrived and there is no bike station there, bike station has moved
             if (takingABike && (navAgent.remainingDistance < 3.0f || navAgent.isPathStale))
             {
+                if (tellMeWhatYouAreDoing)
+                    Debug.Log("Moving to new point of the bike station");
+
                 navAgent.ResetPath();
                 navAgent.SetDestination(targetedBikeStation.transform.position);
             }
 
             // If going to destination biking, check if pedestrian has arrived to destination
-            if (goingBikingToDestination && Vector3.Distance(this.transform.position, routing.destinationPoint.transform.position) < 4.0f)
+            if (goingBikingToDestination && Vector3.Distance(this.transform.position, routing.GetDestinationTransform().position) < 4.0f)
             {
+                if (tellMeWhatYouAreDoing)
+                    Debug.Log("Arrived at destination biking");
+
                 // Arrives at the destination
                 goingBikingToDestination = false;
                 FSM.SetBool("OnDestination", true);
@@ -219,6 +250,9 @@ public class FlashPedestriansController : TravelerController
 
                     if (targetedBikeStation != null && targetedBikeStation.capacityNumber > 0)
                     {
+                        if (tellMeWhatYouAreDoing)
+                            Debug.Log("Going to bike station");
+
                         navAgent.enabled = false;
                         GoToBikeStation();
                     }
@@ -267,7 +301,7 @@ public class FlashPedestriansController : TravelerController
             bike.gameObject.SetActive(true);
 
         navAgent.ResetPath();
-        navAgent.SetDestination(routing.destinationPoint.transform.position);
+        navAgent.SetDestination(routing.GetDestinationTransform().position);
 
         UpdateInfoBalloon();
     }
@@ -305,7 +339,7 @@ public class FlashPedestriansController : TravelerController
         }
         else
         {
-            navAgent.SetDestination(routing.destinationPoint.transform.position);
+            navAgent.SetDestination(routing.GetDestinationTransform().position);
             goingToDestination = true;
         }
 
@@ -326,6 +360,9 @@ public class FlashPedestriansController : TravelerController
     /// </summary>
     internal void ArrivedWalkingAtStation()
     {
+        if (tellMeWhatYouAreDoing)
+            Debug.Log("Arrived at: " + routing.GetStationAt(stopIndex).stationName);
+
         ArrivedAt(routing.GetStationAt(stopIndex));
     }
 
@@ -338,9 +375,15 @@ public class FlashPedestriansController : TravelerController
         // Update the current stop where the pedestrian is
         stopIndex = routing.GetIndexFrom(station);
 
+        if (tellMeWhatYouAreDoing)
+            Debug.Log("Current stop index " + stopIndex);
+
         // Check if the itinerary is still valid in the routing
         if (station.outOfService || stopIndex == -1 || !routing.itinerary.IsValid(stopIndex))
         {
+            if (tellMeWhatYouAreDoing)
+                Debug.Log("Redoing route from station " + station.stationName);
+
             RedoRouteFromStation(station);
             if (embarked)
                 Disembark(station);
@@ -350,8 +393,14 @@ public class FlashPedestriansController : TravelerController
             //Get the information of the next part of the route
             var info = routing.GetRouteInfoFrom(station);
 
+            if (tellMeWhatYouAreDoing)
+                Debug.Log("Route info " + info.ToString());
+
             if (info == null || info.Category == LineCategory.Walk)
             {
+                if (tellMeWhatYouAreDoing)
+                    Debug.Log("Walking from this point");
+
                 // The pedestrian will walk from this point
                 FSM.SetBool("OnStation", false);
                 if (embarked)
@@ -359,6 +408,9 @@ public class FlashPedestriansController : TravelerController
             }
             else
             {
+                if (tellMeWhatYouAreDoing)
+                    Debug.Log("Queuing traveller");
+
                 // The pedestrian will take the commute from this point
                 station.QueueTraveler(this);
             }
@@ -388,12 +440,12 @@ public class FlashPedestriansController : TravelerController
         ResetStopIndex();
 
         if (stationsNearby != null)
-            routing = new FlashPedestriansRouting(routing.destinationPoint,
-                flashInformer.FindBestItinerary(this.transform.position, routing.destinationPoint, stationsNearby, profile.travelPreference));
+            routing = new FlashPedestriansRouting(routing.destination,
+                flashInformer.FindBestItinerary(this.transform.position, routing.destination, stationsNearby, profile.travelPreference, routing.destinationIndex), routing.destinationIndex);
         else
             //In this case, the pedestrian will find the nearby stations from its point
-            routing = new FlashPedestriansRouting(routing.destinationPoint,
-                flashInformer.FindBestItinerary(this.transform.position, routing.destinationPoint, StationsNearCurrentPosition(), profile.travelPreference));
+            routing = new FlashPedestriansRouting(routing.destination,
+                flashInformer.FindBestItinerary(this.transform.position, routing.destination, StationsNearCurrentPosition(), profile.travelPreference, routing.destinationIndex), routing.destinationIndex);
 
         if (routing != null)
             if (routing.itinerary != null)
@@ -493,8 +545,8 @@ public class FlashPedestriansController : TravelerController
             bike.gameObject.SetActive(false);
 
         // Atomic operations for the KPI properties
-        Interlocked.Increment(ref globalParam.numberOfPedestrianReachingDestination);
-        Interlocked.Decrement(ref globalParam.numberOfPedestriansOnScenario);
+        Interlocked.Add(ref globalParam.numberOfPedestrianReachingDestination, globalParam.numberOfPedestriansPerAgent);
+        Interlocked.Add(ref globalParam.numberOfPedestriansOnScenario, -globalParam.numberOfPedestriansPerAgent);
 
         this.gameObject.SetActive(false);
     }
@@ -510,7 +562,7 @@ public class FlashPedestriansController : TravelerController
         if (goingToStation)
         {
             // Find a better itinerary
-            Itinerary newItinerary = flashInformer.FindBestItinerary(this.transform.position, routing.destinationPoint, StationsNearCurrentPosition(), profile.travelPreference);
+            Itinerary newItinerary = flashInformer.FindBestItinerary(this.transform.position, routing.destination, StationsNearCurrentPosition(), profile.travelPreference, routing.destinationIndex);
 
             if (!routing.itinerary.Equals(newItinerary))
             {
@@ -525,7 +577,7 @@ public class FlashPedestriansController : TravelerController
 
                 navAgent.enabled = false;
                 ResetStopIndex();
-                routing = new FlashPedestriansRouting(routing.destinationPoint, newItinerary);
+                routing = new FlashPedestriansRouting(routing.destination, newItinerary, routing.destinationIndex);
                 itineraryChanged = true;
                 WalkToNextPoint();
 
@@ -586,7 +638,7 @@ public class FlashPedestriansController : TravelerController
             goingToStation = false;
             navAgent.enabled = false;
             ResetStopIndex();
-            routing = new FlashPedestriansRouting(routing.destinationPoint, rumour.Item2);
+            routing = new FlashPedestriansRouting(routing.destination, rumour.Item2, routing.destinationIndex);
             WalkToNextPoint();
 
             //Change in visualization (for testing purposes)
@@ -712,5 +764,13 @@ public class FlashPedestriansController : TravelerController
         }
 
         currentWeather = newWeatherCondition;
+    }
+
+    /// <summary>
+    /// Rethinks the destination according to the priorities.
+    /// </summary>
+    private void RethinkDestination()
+    {
+        //TODO
     }
 }

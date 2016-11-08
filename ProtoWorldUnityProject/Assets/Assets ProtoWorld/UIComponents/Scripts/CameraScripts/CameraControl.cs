@@ -86,6 +86,7 @@ public class CameraControl : MonoBehaviour
     private float timeToUnblock = 0;
 
     private Vector3 keyBoardControlToMove = Vector3.zero;
+    private int numberOfBlockingRequests = 0;
 
     /// <summary>
     /// Initializes the camera control logic
@@ -323,7 +324,10 @@ public class CameraControl : MonoBehaviour
         {
             timeToUnblock -= Time.deltaTime;
             if (timeToUnblock <= 0)
+            {
+                numberOfBlockingRequests = 0;
                 blockControls = false;
+            }
         }
 
         #endregion Others
@@ -414,6 +418,8 @@ public class CameraControl : MonoBehaviour
     /// <param name="indefinite">If true, the block will be indefinite.</param>
     public void BlockPlayerControls(float seconds, bool indefinite = false)
     {
+        numberOfBlockingRequests++;
+
         blockControls = true;
 
         if (indefinite)
@@ -427,8 +433,14 @@ public class CameraControl : MonoBehaviour
     /// </summary>
     public void UnblockPlayerControls()
     {
-        blockControls = false;
-        timeToUnblock = 0f;
+        if (numberOfBlockingRequests > 0)
+            numberOfBlockingRequests--;
+
+        if (numberOfBlockingRequests == 0)
+        {
+            blockControls = false;
+            timeToUnblock = 0f;
+        }
     }
 
     /// <summary>

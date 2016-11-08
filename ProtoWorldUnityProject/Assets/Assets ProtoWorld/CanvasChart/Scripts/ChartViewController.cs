@@ -43,6 +43,16 @@ public class ChartViewController : MonoBehaviour
     private static string chartChildString = "chartRenderer";
 
     /// <summary>
+    /// Time controller of the game.
+    /// </summary>
+    private TimeController timeCtrl;
+
+    void Awake()
+    {
+        timeCtrl = FindObjectOfType<TimeController>();
+    }
+
+    /// <summary>
     /// Init important references.
     /// </summary>
     void Start()
@@ -56,29 +66,32 @@ public class ChartViewController : MonoBehaviour
     /// </summary>
     void LateUpdate()
     {
-        // Make sure that there are enough child gameobject to draw the charts.
-        CheckRendererCount();
-
-        // Make sure that there are enough materials for the charts.
-        if (controller.SeriesCount > controller.materials.Length)
-            return;
-        
-        // Draw chart.
-        switch (controller.chartType)
+        if (!timeCtrl.IsPaused())
         {
-            case UIChartTypes.Bar:
-                DrawBarChart();
-                break;
-            case UIChartTypes.Pie:
-                break;
-            case UIChartTypes.StackedArea:
-                break;
-            case UIChartTypes.Line:
-                DrawLineChart();
-                break;
-            default:
-                //Debug.Log("Please choose a ChartType.");
-                break;
+            // Make sure that there are enough child gameobject to draw the charts.
+            CheckRendererCount();
+
+            // Make sure that there are enough materials for the charts.
+            if (controller.SeriesCount > controller.materials.Length)
+                return;
+
+            // Draw chart.
+            switch (controller.chartType)
+            {
+                case UIChartTypes.Bar:
+                    DrawBarChart();
+                    break;
+                case UIChartTypes.Pie:
+                    break;
+                case UIChartTypes.StackedArea:
+                    break;
+                case UIChartTypes.Line:
+                    DrawLineChart();
+                    break;
+                default:
+                    //Debug.Log("Please choose a ChartType.");
+                    break;
+            }
         }
     }
 

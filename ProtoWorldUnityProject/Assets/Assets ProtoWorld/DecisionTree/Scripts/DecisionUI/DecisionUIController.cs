@@ -101,7 +101,7 @@ public class DecisionUIController : MonoBehaviour
         // Pause the game until the question is answer
         if (timeController != null)
         {
-            timeController.PauseGame(true);
+            timeController.RequestPauseGame();
             timeController.BlockPauseButton(true);
         }
 
@@ -150,7 +150,7 @@ public class DecisionUIController : MonoBehaviour
         // Resume the game
         if (timeController != null)
         {
-            timeController.PauseGame(false);
+            timeController.RequestResumeGame();
             timeController.BlockPauseButton(false);
         }
     }
@@ -175,7 +175,7 @@ public class DecisionUIController : MonoBehaviour
 
             // Resume the game
             if (timeController != null)
-                timeController.PauseGame(false);
+                timeController.RequestResumeGame();
 
             // Load the first scenario
             scenarioController.LoadFirstScenario();

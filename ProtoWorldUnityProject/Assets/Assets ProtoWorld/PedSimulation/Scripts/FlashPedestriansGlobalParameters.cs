@@ -12,13 +12,13 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
- * 
- * FLASH PEDESTRIAN SIMULATOR
- * FlashPedestriansGlobalParameters.cs
- * Miguel Ramos Carretero
- * 
- */
+/*
+* 
+* FLASH PEDESTRIAN SIMULATOR
+* FlashPedestriansGlobalParameters.cs
+* Miguel Ramos Carretero
+* 
+*/
 
 using UnityEngine;
 using System.Collections;
@@ -45,6 +45,12 @@ public class FlashPedestriansGlobalParameters : MonoBehaviour
     /// </summary>
     [Range(0.0f, 1.0f)]
     public float percOfPedSubscribed = 0.5f;
+
+    /// <summary>
+    /// Percentage of pedestrians willing to take transport. 
+    /// </summary>
+    [Range(0.0f, 1.0f)]
+    public float percOfPedWillingToTakeTransport = 0.5f;
 
     /// <summary>
     /// Percentage of pedestrians willing to change destination. 
@@ -116,16 +122,7 @@ public class FlashPedestriansGlobalParameters : MonoBehaviour
     /// <summary>
     /// The game object that defines a Flash Pedestrian agent. 
     /// </summary>
-    public GameObject pedestrianObject;
-
-    /// <summary>
-    /// Tune the navigation Mesh at start.
-    /// </summary>
-    void Start()
-    {
-        NavMesh.avoidancePredictionTime = 0.1f;
-        NavMesh.pathfindingIterationsPerFrame = 1000;
-    }
+    public GameObject[] pedestrianObject;
 
     /// <summary>
     /// Property for playing/pausing the pedestrian simulation in game
@@ -141,4 +138,13 @@ public class FlashPedestriansGlobalParameters : MonoBehaviour
     /// Property for KPIs: Shows the number of pedestrians that have reached their destination.
     /// </summary>
     public int numberOfPedestrianReachingDestination = 0;
+
+    /// <summary>
+    /// Tune the navigation Mesh at start.
+    /// </summary>
+    void Start()
+    {
+        NavMesh.avoidancePredictionTime = 0.01f;
+        NavMesh.pathfindingIterationsPerFrame = 5000;
+    }
 }

@@ -47,11 +47,17 @@ public class TrafficIntegrationSpawner : MonoBehaviour
     [HideInInspector]
     public bool smoothPaths = false;
 
+    public bool visualizeTrafficHeatmap = false;
+
     public GameObject[] graphicCar;
     public GameObject graphicBus;
     public GameObject graphicAltBus;
+	public GameObject ferryModel;
+	public GameObject tramModel;
+	public GameObject trainModel;
+	public GameObject pendeltagModel;
 
-    private bool brakingActive = true;
+	private bool brakingActive = true;
     private int timeToBrakeInSeconds = 1;
     private float driversPatienceInSeconds = 3.0f;
     private float angleOfView = 90.0f;
@@ -75,11 +81,15 @@ public class TrafficIntegrationSpawner : MonoBehaviour
 
     private TimeController timeContr;
 
+    private HeatmapLayer.HeatmapController heatmapCtrl;
+
     /// <summary>
     /// Awakes the script.
     /// </summary>
     void Awake()
     {
+        heatmapCtrl = FindObjectOfType<HeatmapLayer.HeatmapController>();
+
         trafficContr = FindObjectOfType<TrafficIntegrationController>();
         timeContr = FindObjectOfType<TimeController>();
 
@@ -92,6 +102,7 @@ public class TrafficIntegrationSpawner : MonoBehaviour
             timeToBrakeInSeconds = trafficContr.timeToBrakeInSeconds;
             driversPatienceInSeconds = trafficContr.driversPatientInSeconds;
             angleOfView = trafficContr.driversAngleOfView;
+            visualizeTrafficHeatmap = trafficContr.visualizeTrafficInHeatmap;
         }
     }
 
@@ -216,7 +227,10 @@ public class TrafficIntegrationSpawner : MonoBehaviour
                 Vector3 vehPosition = new Vector3(v3.x, 0.0f, v3.z);
 
                 GameObject vehObject;
-                if (v.type.ToUpperInvariant().Contains("BUS"))
+
+                var vehType = v.type.ToUpperInvariant();
+
+				if (vehType.Contains("BUS") && graphicBus != null)
                 {
                     if (v.id.Contains("dz_repl")) // for Driebergen-Zeist case
                         vehObject = (GameObject)Instantiate(graphicAltBus, vehPosition, Quaternion.identity);
@@ -226,10 +240,16 @@ public class TrafficIntegrationSpawner : MonoBehaviour
                     if (routingContr != null)
                         routingContr.HandleBusObjectsFromSumo(vehObject, v.id);
                 }
-                else
-                {
+				else if (vehType.Contains("FERRY") && ferryModel != null)
+					vehObject = (GameObject)Instantiate(ferryModel, vehPosition, Quaternion.identity);
+				else if (vehType.Contains("TRAM") && tramModel != null)
+					vehObject = (GameObject)Instantiate(tramModel, vehPosition, Quaternion.identity);
+				else if (vehType.Contains("TRAIN") && trainModel != null)
+					vehObject = (GameObject)Instantiate(trainModel, vehPosition, Quaternion.identity);
+				else if (vehType.Contains("PENDELTAG") && pendeltagModel != null)
+					vehObject = (GameObject)Instantiate(pendeltagModel, vehPosition, Quaternion.identity);
+				else
                     vehObject = (GameObject)Instantiate(graphicCar[Random.Range(0, graphicCar.Length)], vehPosition, Quaternion.identity);
-                }
 
                 vehObject.transform.parent = this.transform;
                 vehObject.name = v.id;
@@ -240,6 +260,10 @@ public class TrafficIntegrationSpawner : MonoBehaviour
                 vc.driversPatienceInSeconds = driversPatienceInSeconds;
                 vc.angleOfView = angleOfView;
                 vehControllers.Add(v.id, vc);
+
+                // Track the vehicle in the heatmap
+                if (visualizeTrafficHeatmap && heatmapCtrl != null)
+                    heatmapCtrl.TrackNewElement(vehObject);
             }
         }
     }

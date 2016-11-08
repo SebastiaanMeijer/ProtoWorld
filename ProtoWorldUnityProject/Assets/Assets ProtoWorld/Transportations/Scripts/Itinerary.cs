@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum TravelPreference { none, time, transit, frequency, preferTrain, preferBus, preferMetro }
+public enum TravelPreference { none, time, transit, frequency, preferTrain, preferBus, preferMetro, noPublicTransport }
 
 public class Itinerary 
 {
@@ -218,5 +218,23 @@ public class Itinerary
         return true;
     }
 
+    /// <summary>
+    /// Print the itinerary information.
+    /// </summary>
+    /// <returns>Itinerary info.</returns>
+    internal string Print()
+    {
+        string info = "";
+
+        if (WayPoints == null || WayPoints.Count == 0)
+            return "Not Commuting";
+        else
+        {
+            foreach (var L in WayPoints)
+                info += L.stationName + "-";
+
+            return info;
+        } 
+    }
 }
 

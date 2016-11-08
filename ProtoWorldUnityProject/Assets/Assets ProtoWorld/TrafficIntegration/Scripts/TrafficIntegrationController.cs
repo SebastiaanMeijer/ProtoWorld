@@ -78,6 +78,9 @@ public class TrafficIntegrationController : MonoBehaviour
     // Properties for playing/pausing the traffic simulation in game
     public bool simulationPaused = false;
 
+    //Property for the heatmap layer
+    public bool visualizeTrafficInHeatmap = false;
+
     /// <summary>
     /// Awakes the script and reads the configuration file (if any).
     /// </summary>

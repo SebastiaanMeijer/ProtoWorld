@@ -41,7 +41,7 @@ public class MatsimIO : SimulationIOBase
     public override void Read(string connectionString)
     {
         string vehTable = "event_position";
-        currentReadingStep = 0;
+        currentReadingStep = 3600*5;
 
         try
         {
@@ -65,6 +65,7 @@ public class MatsimIO : SimulationIOBase
             {
                 var veh_id = dbReader["veh_id"].ToString();
                 var time = dbReader["eventtime"].ToString();
+				var type = dbReader["veh_type"].ToString();
                 var x = dbReader["x"].ToString();
                 var y = dbReader["y"].ToString();
                 var ang = dbReader["deg"].ToString();
@@ -74,7 +75,7 @@ public class MatsimIO : SimulationIOBase
                 //Debug.Log(str);
 
                 TryAddTimeStep(float.Parse(time));
-                InsertVehicle(veh_id, x, y, "default", ang);
+                InsertVehicle(veh_id, x, y, type, ang);
             }
             if (!dbReader.IsClosed)
             {

@@ -48,7 +48,7 @@ public abstract class SimulationIOBase
 
     protected float startTimeStep, progress, totalSteps;
 
-    protected int currentReadingStep, readingChunkForMatsim = 200;
+    protected int currentReadingStep, readingChunkForMatsim = 500;
 
     /// <summary>
     /// Show status of reading simulation, only called from menu item.

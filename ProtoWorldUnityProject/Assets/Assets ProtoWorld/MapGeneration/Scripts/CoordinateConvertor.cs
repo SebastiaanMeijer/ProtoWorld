@@ -55,6 +55,17 @@ public static class CoordinateConvertor
     public static bool isInitialized = false;
     
     /// <summary>
+    /// Initializes the convertor.
+    /// </summary>
+    public static void Initialize()
+    {
+        ServiceGapslabsClient client = ServicePropertiesClass.GetGapslabsService(ServicePropertiesClass.ServiceUri);
+        var go = GameObject.Find("AramGISBoundaries");
+        var mapboundaries = go.GetComponent<MapBoundaries>();
+        Initialize(client, mapboundaries);
+    }
+
+    /// <summary>
     /// Initializes the convertor using the WCF service and the mapboundaries object.
     /// </summary>
     /// <param name="client">The GaPSLabs WCF webservice</param>

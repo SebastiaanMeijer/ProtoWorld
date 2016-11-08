@@ -12,13 +12,13 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
- * 
- * TIME CONTROLLER
- * TimeController.cs
- * Miguel Ramos Carretero
- * 
- */
+/*
+* 
+* TIME CONTROLLER
+* TimeController.cs
+* Miguel Ramos Carretero
+* 
+*/
 
 using UnityEngine;
 using System.Collections;
@@ -35,7 +35,7 @@ public class TimeController : MonoBehaviour
 
     private bool gamePaused = false;
 
-    [Range(0, 10)]
+    [Range(0, 50)]
     public int maxSpeedFactor = 3;
 
     private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -43,7 +43,7 @@ public class TimeController : MonoBehaviour
     private LoggerAssembly loggerAssembly;
 
     [HideInInspector]
-    [Range(1.0f, 10.0f)]
+    [Range(1.0f, 50.0f)]
     public float timeVelocity = 1.0f;
 
     // Parameters related to the time controller
@@ -73,6 +73,7 @@ public class TimeController : MonoBehaviour
     private bool isLoadingSplashOn = false;
     private bool isLoadingTime = false;
     private bool isMaxValueSetInSlider = false;
+    private int numberOfShowingLoadingIconRequests = 0;
 
     // Parameters to handle the time slider
     private bool usingTimeSlider = false;
@@ -81,6 +82,7 @@ public class TimeController : MonoBehaviour
     // Parameters to enable requested pauses/resumes
     private bool requestPause = false;
     private bool requestedPauseState = false;
+    private int numberOfPauseRequested = 0;
 
     /// <summary>
     /// Awakes the script.
@@ -185,6 +187,9 @@ public class TimeController : MonoBehaviour
                 loadingSplash.GetComponent<UnityEngine.UI.Image>().raycastTarget = true;
 
                 isLoadingSplashOn = true;
+
+                timeVelocity = maxSpeedFactor;
+
             }
             else if (!isLoadingTime && isLoadingSplashOn)
             {
@@ -195,6 +200,8 @@ public class TimeController : MonoBehaviour
                 loadingSplash.GetComponent<UnityEngine.UI.Image>().raycastTarget = false;
 
                 isLoadingSplashOn = false;
+
+                timeVelocity = 1;
             }
         }
 
@@ -262,7 +269,7 @@ public class TimeController : MonoBehaviour
     /// Requests a pause/unpause of the game.
     /// </summary>
     /// <param name="pause">True if the game should be paused.</param>
-    public void PauseGame(bool pause)
+    private void PauseGame(bool pause)
     {
         if (tic != null)
             tic.simulationPaused = pause;
@@ -307,8 +314,13 @@ public class TimeController : MonoBehaviour
     /// </summary>
     public void RequestPauseGame()
     {
-        requestPause = true;
-        requestedPauseState = true;
+        numberOfPauseRequested++;
+
+        if (!IsPaused())
+        {
+            requestPause = true;
+            requestedPauseState = true;
+        }
     }
 
     /// <summary>
@@ -316,8 +328,14 @@ public class TimeController : MonoBehaviour
     /// </summary>
     public void RequestResumeGame()
     {
-        requestPause = true;
-        requestedPauseState = false;
+        if (numberOfPauseRequested > 0)
+            numberOfPauseRequested--;
+
+        if (numberOfPauseRequested == 0)
+        {
+            requestPause = true;
+            requestedPauseState = false;
+        }
     }
 
     /// <summary>
@@ -356,7 +374,19 @@ public class TimeController : MonoBehaviour
     /// <param name="show">True if the splash icon should be shown.</param>
     public void ShowLoadingIcon(bool show)
     {
-        isLoadingTime = show;
+        if (show)
+        {
+            isLoadingTime = show;
+            numberOfShowingLoadingIconRequests++;
+        }
+        else
+        {
+            if (numberOfShowingLoadingIconRequests > 0)
+                numberOfShowingLoadingIconRequests--;
+
+            if (numberOfShowingLoadingIconRequests == 0)
+                isLoadingTime = show;
+        }
     }
 
     /// <summary>

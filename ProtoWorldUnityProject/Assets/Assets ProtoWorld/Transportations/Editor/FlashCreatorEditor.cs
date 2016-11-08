@@ -182,11 +182,11 @@ public class FlashCreatorEditor : Editor
                         int propLimit = 0;
                         if (path.Contains("Destination"))
                         {
-                            propLimit = 3;
+                            propLimit = 20;
                         }
                         else if (path.Contains("Spawner"))
                         {
-                            propLimit = 5;
+                            propLimit = 20;
                         }
 
                         while (m_Property.NextVisible(true) && propCounter < propLimit)

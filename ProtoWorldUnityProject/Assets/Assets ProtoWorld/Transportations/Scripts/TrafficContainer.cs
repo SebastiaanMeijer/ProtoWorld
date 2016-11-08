@@ -12,7 +12,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Xml;
 using System.Xml.Serialization;
@@ -72,12 +72,24 @@ public class BaseStation
     [XmlAttribute("z")]
     public float z;
 
+    [XmlAttribute("lat")]
+    public float lat = 0;
+
+    [XmlAttribute("lon")]
+    public float lon = 0;
+
     [XmlAttribute("name")]
     public string name;
 
     public Vector3 GetPoint()
     {
-        return new Vector3(x, y, z);
+        if (lat != 0 || lon != 0)
+        {
+            CoordinateConvertor.Initialize();
+            return CoordinateConvertor.LatLonToVector3(lat, lon);
+        }
+        else
+            return new Vector3(x, y, z);
     }
 }
 
@@ -101,6 +113,17 @@ public class BaseLine
     public int[] GetStationIds()
     {
         var splits = stationIds.Split(',');
+        var ids = new int[splits.Length];
+        for (int i = 0; i < splits.Length; i++)
+        {
+            ids[i] = int.Parse(splits[i]);
+        }
+        return ids;
+    }
+
+    public int[] GetTravelingTimes()
+    {
+        var splits = travelingTimes.Split(',');
         var ids = new int[splits.Length];
         for (int i = 0; i < splits.Length; i++)
         {

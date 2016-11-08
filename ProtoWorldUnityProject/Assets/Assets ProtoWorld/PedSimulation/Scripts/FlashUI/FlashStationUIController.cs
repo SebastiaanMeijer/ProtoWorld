@@ -190,7 +190,7 @@ public class FlashStationUIController : MonoBehaviour
     {
         GetComponent<FadingElementUI>().fadeOutCanvas();
         CloseConfirmationWindow(true); //In case it was open
-        MoveStationUIUp();
+        Invoke("MoveStationUIUp", 1.0f);
     }
 
     private void MoveStationUIUp()

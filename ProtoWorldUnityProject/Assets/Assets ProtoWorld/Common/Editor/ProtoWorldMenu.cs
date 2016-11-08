@@ -42,6 +42,7 @@ public class ProtoWorldMenu : MonoBehaviour
     static string kpiChartName = "KPIChart";
     static string loggerAssemblyName = "LoggerAssembly";
     static string vvisName = "VVisDataSQLiteModule";
+    static string heatmapName = "HeatmapModule";
 
     [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Add Essentials", false, 0)]
     static void AddEssentialsModuleToScene()
@@ -367,7 +368,7 @@ public class ProtoWorldMenu : MonoBehaviour
         }
     }
 
-    [MenuItem("ProtoWorld Editor/Public Transport Module/Add or Edit Station", false, 1)]
+    [MenuItem("ProtoWorld Editor/Public Transport Module/Add or Edit Station", false, 3)]
     static void EditStation()
     {
         AddModuleIfNotExist(transModuleName);
@@ -377,7 +378,7 @@ public class ProtoWorldMenu : MonoBehaviour
         Selection.activeGameObject = creator.gameObject;
     }
 
-    [MenuItem("ProtoWorld Editor/Public Transport Module/Add or Edit Line", false, 1)]
+    [MenuItem("ProtoWorld Editor/Public Transport Module/Add or Edit Line", false, 3)]
     static void EditLine()
     {
         AddModuleIfNotExist(transModuleName);
@@ -387,7 +388,7 @@ public class ProtoWorldMenu : MonoBehaviour
         Selection.activeGameObject = creator.gameObject;
     }
 
-    [MenuItem("ProtoWorld Editor/Public Transport Module/Remove Module", false, 1)]
+    [MenuItem("ProtoWorld Editor/Public Transport Module/Remove Module", false, 3)]
     static void ClearTransportation()
     {
         var option = EditorUtility.DisplayDialogComplex(
@@ -409,6 +410,35 @@ public class ProtoWorldMenu : MonoBehaviour
         }
     }
 
+    [MenuItem("ProtoWorld Editor/Heatmap Module/Add Heatmap Module", false, 6)]
+    public static GameObject AddHeatmapModule()
+    {
+        return AddModuleIfNotExist(heatmapName);
+    }
+
+    [MenuItem("ProtoWorld Editor/Heatmap Module/Remove Module", false, 6)]
+    static void ClearHeatmapModule()
+    {
+        var option = EditorUtility.DisplayDialogComplex(
+    "Heatmap Module",
+    "Do you want to remove " + heatmapName,
+    "Clear",
+    "Do not clear",
+    "Cancel");
+
+        switch (option)
+        {
+            case 0:
+                DestroyImmediate(GameObject.Find(heatmapName));
+                Debug.Log("The module is removed.");
+                return;
+            default:
+                Debug.Log("User cancelled the operation.");
+                return;
+        }
+    }
+
+    [MenuItem("ProtoWorld Editor/Public Transport Module/Advance/Load public transport from file")]
     static void LoadStationsAndLines()
     {
         AddModuleIfNotExist(transModuleName);
@@ -450,7 +480,7 @@ public class ProtoWorldMenu : MonoBehaviour
             foreach (var id in line.GetStationIds())
             {
                 var station = idLookUp[id];
-                lineCreator.AddStationToNewLine(station);
+                lineCreator.AddStationToNewLine(station, line);
             }
             lineCreator.CreateNewLine();
         }
@@ -461,21 +491,8 @@ public class ProtoWorldMenu : MonoBehaviour
         EditorUtility.DisplayDialog("Loading Finished", stationStats + "\n" + lineStats, "OK");
     }
 
-    static void LoadSumoData()
-    {
-        AddModuleIfNotExist(transModuleName);
-        var path = EditorUtility.OpenFilePanel("Load Sumo Data", "Assets/Transportations", "");
 
-        if (path.Length == 0)
-        {
-            EditorUtility.DisplayDialog("Loading Cancelled", "No file was provided", "OK");
-            return;
-        }
-        //Remove ModuleAll();
-        SumoContainer.LoadSumoCFG(path);
-
-    }
-
+    [MenuItem("ProtoWorld Editor/Public Transport Module/Advance/Save public transport to file")]
     static void SaveStationsAndLines()
     {
         var sgos = GameObject.FindGameObjectsWithTag("TransStation");
@@ -502,15 +519,20 @@ public class ProtoWorldMenu : MonoBehaviour
         List<BaseStation> stations = new List<BaseStation>();
         foreach (var go in sgos)
         {
+            CoordinateConvertor.Initialize();
+            float[] latLon = CoordinateConvertor.Vector3ToLatLon(go.transform.position);
+
             var sc = go.GetComponent<StationController>();
             var bs = new BaseStation
             {
                 id = int.Parse(sc.name),
+                lat = latLon[0],
+                lon = latLon[1],
                 x = go.transform.position.x,
                 y = go.transform.position.y,
                 z = go.transform.position.z,
                 name = sc.stationName,
-            };
+        };
             stations.Add(bs);
         }
 
@@ -529,6 +551,21 @@ public class ProtoWorldMenu : MonoBehaviour
         string stationStats = string.Format("{0} stations saved.", container.stations.Count);
         string lineStats = string.Format("{0} lines saved.", container.lines.Count);
         EditorUtility.DisplayDialog("Saving Finished", stationStats + "\n" + lineStats + "\n to: " + path, "OK");
+    }
+
+    static void LoadSumoData()
+    {
+        AddModuleIfNotExist(transModuleName);
+        var path = EditorUtility.OpenFilePanel("Load Sumo Data", "Assets/Transportations", "");
+
+        if (path.Length == 0)
+        {
+            EditorUtility.DisplayDialog("Loading Cancelled", "No file was provided", "OK");
+            return;
+        }
+        //Remove ModuleAll();
+        SumoContainer.LoadSumoCFG(path);
+
     }
 
     static void ClearAll()

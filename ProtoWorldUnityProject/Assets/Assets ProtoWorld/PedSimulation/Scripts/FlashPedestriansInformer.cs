@@ -137,21 +137,26 @@ public class FlashPedestriansInformer : MonoBehaviour
     /// <param name="destination">Final destination of the pedestrian.</param>
     /// <param name="stationsNearby">Stations nearby considered by the pedestrian.</param>
     /// <param name="travelPreference">Travel preferences of the pedestrian.</param>
+    /// <param name="destIndex">Index of the destination point within the destination object.</param>
     /// <returns>An Itinerary object with the best itinerary for the pedestrian (empty itinerary if anything better than walking has been found).</returns>
-    public Itinerary FindBestItinerary(Vector3 startingPoint, FlashPedestriansDestination destination, StationController[] stationsNearby, TravelPreference travelPreference)
+    public Itinerary FindBestItinerary(Vector3 startingPoint, FlashPedestriansDestination destination, StationController[] stationsNearby, TravelPreference travelPreference, int destIndex = 0)
     {
         Itinerary bestItineraryFound = new Itinerary(new List<StationController>());
 
+        // Return an empty itinerary if no public transport is the travel preference
+        if (travelPreference == TravelPreference.noPublicTransport)
+            return bestItineraryFound;
+
         // The default travel time taken into account is the possibility of walking all the way
-        float bestTravelTime = Vector3.Distance(startingPoint, destination.transform.position) * secondsPerMeter;
+        float bestTravelTime = Vector3.Distance(startingPoint, destination.destinationTransform[destIndex].position) * secondsPerMeter;
 
         for (int i = 0; i < stationsNearby.Length; i++)
         {
-            for (int j = 0; j < destination.stationsNearThisDestination.Length; j++)
+            for (int j = 0; j < destination.stationsNearThisDestination[destIndex].Length; j++)
             {
                 Itinerary nextItinerary = routingController.GetItinerary(
                      stationsNearby[i],
-                     destination.stationsNearThisDestination[j].GetComponent<StationController>(),
+                     destination.stationsNearThisDestination[destIndex][j].GetComponent<StationController>(),
                      travelPreference);
 
                 if (nextItinerary != null)

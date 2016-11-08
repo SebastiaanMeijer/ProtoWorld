@@ -48,7 +48,8 @@ public class TrafficIntegrationInspectorEditor : Editor
         pathVissimFZPFile_prop,
         pathMatSimXMLFile_prop,
         pathPWSimMetaFile_prop,
-        simulationPaused_prop;
+        simulationPaused_prop,
+        visualizeHeatmap_prop;
 
     /// <summary>
     /// Setup the SerializedProperties
@@ -73,7 +74,7 @@ public class TrafficIntegrationInspectorEditor : Editor
         pathMatSimXMLFile_prop = serializedObject.FindProperty("pathMatSimXMLFile");
         pathPWSimMetaFile_prop = serializedObject.FindProperty("pathPWSimMetaFile");
         simulationPaused_prop = serializedObject.FindProperty("simulationPaused");
-
+        visualizeHeatmap_prop = serializedObject.FindProperty("visualizeTrafficInHeatmap");
     }
 
     public override void OnInspectorGUI()
@@ -99,6 +100,7 @@ public class TrafficIntegrationInspectorEditor : Editor
                 EditorGUILayout.PropertyField(useFrustumForUpdate_prop);
                 EditorGUILayout.PropertyField(useCoordinateConversion_prop);
                 EditorGUILayout.PropertyField(timeStepVelocityInMs_prop);
+                EditorGUILayout.PropertyField(visualizeHeatmap_prop);
                 break;
 
             case TrafficIntegrationController.TypeOfIntegration.SumoFCDFile:
@@ -107,6 +109,7 @@ public class TrafficIntegrationInspectorEditor : Editor
                 EditorGUILayout.PropertyField(useFrustumForUpdate_prop);
                 EditorGUILayout.PropertyField(useCoordinateConversion_prop);
                 EditorGUILayout.PropertyField(timeStepVelocityInMs_prop);
+                EditorGUILayout.PropertyField(visualizeHeatmap_prop);
                 break;
 
             case TrafficIntegrationController.TypeOfIntegration.VissimFZPFile:
@@ -115,6 +118,7 @@ public class TrafficIntegrationInspectorEditor : Editor
                 EditorGUILayout.PropertyField(useFrustumForUpdate_prop);
                 EditorGUILayout.PropertyField(useCoordinateConversion_prop);
                 EditorGUILayout.PropertyField(timeStepVelocityInMs_prop);
+                EditorGUILayout.PropertyField(visualizeHeatmap_prop);
                 break;
 
             case TrafficIntegrationController.TypeOfIntegration.MatsimDatabase:
@@ -123,6 +127,7 @@ public class TrafficIntegrationInspectorEditor : Editor
                 EditorGUILayout.PropertyField(useFrustumForUpdate_prop);
                 EditorGUILayout.PropertyField(useCoordinateConversion_prop);
                 EditorGUILayout.PropertyField(timeStepVelocityInMs_prop);
+                EditorGUILayout.PropertyField(visualizeHeatmap_prop);
                 break;
 
             case TrafficIntegrationController.TypeOfIntegration.PWSimPWSFile:
@@ -132,6 +137,7 @@ public class TrafficIntegrationInspectorEditor : Editor
                 EditorGUILayout.PropertyField(useCoordinateConversion_prop);
                 EditorGUILayout.PropertyField(timeStepVelocityInMs_prop);
                 //EditorGUILayout.PropertyField(simulationPaused_prop);
+                EditorGUILayout.PropertyField(visualizeHeatmap_prop);
                 break;
 
             case TrafficIntegrationController.TypeOfIntegration.DecisionTreeIntegration:
@@ -139,6 +145,7 @@ public class TrafficIntegrationInspectorEditor : Editor
                 EditorGUILayout.PropertyField(useCoordinateConversion_prop);
                 EditorGUILayout.PropertyField(timeStepVelocityInMs_prop);
                 //EditorGUILayout.PropertyField(simulationPaused_prop);
+                EditorGUILayout.PropertyField(visualizeHeatmap_prop);
                 break;
         }
 

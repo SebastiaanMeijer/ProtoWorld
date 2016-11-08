@@ -44,7 +44,7 @@ public class FlashOnDestinationBehaviour : StateMachineBehaviour
 
         // Recycle the pedestrian object
         var pedestrian = animator.GetComponent<FlashPedestriansController>();
-        var destination = pedestrian.routing.destinationPoint.destinationName;
+        var destination = pedestrian.routing.destination.destinationName;
         log.Info(string.Format("{0}:{1}:{2}:{3}", logSeriesId, "string", 0, destination));
 
         pedestrian.Recycle();
