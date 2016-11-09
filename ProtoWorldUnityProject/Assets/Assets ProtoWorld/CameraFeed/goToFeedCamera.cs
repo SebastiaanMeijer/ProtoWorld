@@ -12,6 +12,7 @@ public class goToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	public float StartMouseY;
 
 	public bool clicked = false;
+	public bool clickedCameraIcon = false;
 	public bool dragging = false;
 
 	public GameObject FeedCamerasObject;
@@ -32,8 +33,12 @@ public class goToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void LateUpdate () {
+		if (clickedCameraIcon) {
+			Camera.main.GetComponent<CameraControl> ().targetCameraPosition = FeedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.position;
+			Camera.main.transform.rotation = FeedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.rotation;
+			clickedCameraIcon = false;
+		}
 	}
 		
 
@@ -69,6 +74,29 @@ public class goToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 		dragging = false;
 	}
+
+	void OnMouseDown()
+	{
+		clickedCameraIcon = true;
+		StartMouseX = Input.mousePosition.x;
+		StartMouseY = Input.mousePosition.y;
+	}
+	void OnMouseUp()
+	{
+		clickedCameraIcon = true;
+		if (clickedCameraIcon == true)
+		if (StartMouseX == Input.mousePosition.x && StartMouseY == Input.mousePosition.y) {
+			//cameraControlScript.targetCameraPosition = GetComponentInParent<Transform>().transform.position;
+			//Camera.main.transform.rotation = GetComponentInParent <Transform>().transform.rotation;
+
+			//Camera.main.GetComponent<CameraControl>().targetCameraPosition = FeedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.position;
+			//cameraControlScript.targetCameraPosition = new Vector3(1000,200,1000);
+
+			//Camera.main.transform.rotation = FeedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.rotation;
+
+		}
+	}
+
 
 
 }

@@ -76,14 +76,14 @@ public class Heatmap : MonoBehaviour {
 	/// Change intensity when slider is moved
 	/// </summary>
 	public static void changeParameterIntensityHM(float intensity) {
-		Heatmap.HMIntensity = intensity / 50;
+		Heatmap.HMIntensity = intensity / 80;
 	}
 
 	/// <summary>
 	/// Change radius when slider is moved
 	/// </summary>
 	public static void changeParameterRadiusHM(float radius) {
-		Heatmap.HMRadius = radius / 3;
+		Heatmap.HMRadius = radius;
 	}
 
 	/// <summary>
