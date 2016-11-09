@@ -345,25 +345,25 @@ public class CameraControl : MonoBehaviour
         }
         else
         {
-            Debug.Log("OUTSIDE OF BOUNDARY");
+            //Debug.Log("OUTSIDE OF BOUNDARY");
             if (targetCameraPosition.z > maxRight)
             {
-                Debug.Log("MAXRIGHT");
+                //Debug.Log("MAXRIGHT");
                 targetCameraPosition.z = maxRight - 5;
             }
             if (targetCameraPosition.z < maxLeft)
             {
-                Debug.Log("MAXLEFT");
+                //Debug.Log("MAXLEFT");
                 targetCameraPosition.z = maxLeft + 5;
             }
             if (targetCameraPosition.x < maxUp)
             {
-                Debug.Log("MAXUP");
+                //Debug.Log("MAXUP");
                 targetCameraPosition.x = maxUp + 5;
             }
             if (targetCameraPosition.x > maxDown)
             {
-                Debug.Log("MAXDOWN");
+                //Debug.Log("MAXDOWN");
                 targetCameraPosition.x = maxDown - 5;
             }
         }

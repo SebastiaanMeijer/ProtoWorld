@@ -43,8 +43,8 @@ public class ChartPanelController : MonoBehaviour
     {
         foreach (ChartController controller in charts)
         {
-            ToolbarScript scrtipt = controller.gameObject.transform.FindChild("Toolbar").GetComponent<ToolbarScript>();
-            scrtipt.ToggleVisibility(val);
+            ToolbarScript script = controller.gameObject.transform.FindChild("Toolbar").GetComponent<ToolbarScript>();
+            script.ToggleVisibility(val);
             //controller.contentPanel.SetActive(val);
         }  
     }
