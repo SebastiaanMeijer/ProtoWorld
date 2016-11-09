@@ -40,7 +40,8 @@ public class FadingElementUI : MonoBehaviour
     void Start()
     {
         canvasGroup = this.GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0.0f;
+    	canvasGroup.alpha = 0.0f;
+		this.gameObject.GetComponent<CanvasGroup> ().blocksRaycasts = false;
     }
 
     /// <summary>
