@@ -3,13 +3,12 @@ using System.Collections;
 
 public class KPIDelays : MonoBehaviour
 {
-
     public float TramDelay;
     public float BusDelay;
     public float TrainDelay;
     public float MetroDelay;
 
-    public Transform transLines;     
+    public Transform transLines;
 
 	// Use this for initialization
 	void Start () {
@@ -53,5 +52,4 @@ public class KPIDelays : MonoBehaviour
         TrainDelay = tmpTrainDelay;
         MetroDelay = tmpMetroDelay;
     }
-
 }

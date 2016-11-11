@@ -26,7 +26,6 @@ public class KPITransfersOfTransport : MonoBehaviour
     private int current_metro = 0;
     public int deltaMetro = 0;
 
-
     // Use this for initialization
     void Start()
     {
@@ -71,6 +70,5 @@ public class KPITransfersOfTransport : MonoBehaviour
             deltaMetro = passenger_data.metroPassengers - current_metro;
             current_metro = passenger_data.metroPassengers;
         }
-
     }
 }

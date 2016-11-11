@@ -3,38 +3,60 @@ using System.Collections;
 
 public class KPIDeltaDelaysPerType : MonoBehaviour
 {
-    public int deltaBusDelay = 0;
-    public int deltaCarDelay = 0;
-    public int deltaTramDelay = 0;
+    public float deltaBusDelay = 0;
+    public float deltaCarDelay = 0;
+    public float deltaTramDelay = 0;
+    public float deltaTrainDelay = 0;
+    public float deltaMetroDelay = 0;
 
     private KPIDelays delays;
+    private Transform transLines;
+
+    private float oldBusDelay = 0;
+    private float oldTramDelay = 0;
+    private float oldTrainDelay = 0;
+    private float oldMetroDelay = 0;
+
+    private float timeout = 0;
 
     // Use this for initialization
     void Start()
     {
         delays = transform.GetComponent<KPIDelays>();
+        if (delays != null && delays.transLines != null)
+            transLines = delays.transLines;
+        else
+            transLines = GameObject.Find("TransLines").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        deltaBusDelay = getBusDeltaDelay();
-        deltaCarDelay = getCarDeltaDelay();
-        deltaTramDelay = getTramDeltaDelay();
+        //run only once per second, otherwise the delays are not noticable
+        timeout += Time.deltaTime;
+        if (timeout >= 1)
+        {
+            deltaCarDelay = getCarDeltaDelay();
+            getPublicTransportDeltaDelay();
+            timeout--;
+        }
     }
 
-    private int getTramDeltaDelay()
+    private float getCarDeltaDelay()
     {
         return 0;
     }
 
-    private int getCarDeltaDelay()
+    private void getPublicTransportDeltaDelay()
     {
-        return 0;
-    }
+        deltaBusDelay = delays.BusDelay - oldBusDelay;
+        deltaTramDelay = delays.TramDelay - oldTramDelay;
+        deltaTrainDelay = delays.TrainDelay - oldTrainDelay;
+        deltaMetroDelay = delays.MetroDelay - oldMetroDelay;
 
-    private int getBusDeltaDelay()
-    {
-        return 0;
+        oldBusDelay = delays.BusDelay;
+        oldTramDelay = delays.TramDelay;
+        oldTrainDelay = delays.TrainDelay;
+        oldMetroDelay = delays.MetroDelay;
     }
 }

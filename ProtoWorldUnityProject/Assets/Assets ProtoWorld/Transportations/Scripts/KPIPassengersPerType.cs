@@ -41,20 +41,23 @@ public class KPIPassengersPerType : MonoBehaviour
 
         foreach (Transform transLine in transLines)
         {
-            foreach (Transform item in transLine)
+            if (transLine.gameObject.activeSelf)
             {
-                VehicleController vc = item.GetComponent<VehicleController>();
-                if (transLine.name.StartsWith("Tram_"))
-                    tmpTram += vc.headCount;
-
-                if (transLine.name.StartsWith("Train_"))
-                    tmpTrain += vc.headCount;
-
-                if (transLine.name.StartsWith("Bus_"))
-                    tmpBus += vc.headCount;
-
-                if (transLine.name.StartsWith("Metro_"))
-                    tmpMetro += vc.headCount;
+                foreach (Transform item in transLine)
+                {
+                    if (item.gameObject.activeSelf)
+                    {
+                        VehicleController vc = item.GetComponent<VehicleController>();
+                        if (transLine.name.StartsWith("Tram_"))
+                            tmpTram += vc.headCount;
+                        else if (transLine.name.StartsWith("Train_"))
+                            tmpTrain += vc.headCount;
+                        else if (transLine.name.StartsWith("Bus_"))
+                            tmpBus += vc.headCount;
+                        else if (transLine.name.StartsWith("Metro_"))
+                            tmpMetro += vc.headCount;
+                    }
+                }
             }
         }
 
@@ -76,7 +79,8 @@ public class KPIPassengersPerType : MonoBehaviour
                     if (carriage.gameObject.activeSelf)
                     {
                         VehicleController vc = carriage.GetComponent<VehicleController>();
-                        if (vc != null) buscount += vc.headCount;
+                        if (vc != null)
+                            buscount += vc.headCount;
                     }
                 }
             }
