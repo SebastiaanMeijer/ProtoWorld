@@ -87,32 +87,21 @@ public class HistoricalDataController : MonoBehaviour
 		{
 			timeStamp = new XElement("TimeStamp");
 			timeStamp.Add(new XAttribute("timestamp", timeController.gameTime));
-			foreach (LogObject logObject in InterfaceHelper.FindObjects<LogObject>())
+			foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
 			{
-				processObjectLogData (new XElement (logObject.getLogData().Keys.First()), logObject.getLogData());
+				timeStamp.Add(processObjectLogData (loggable.getLogData()));
 			}
 			logFileRootElement.Add(timeStamp);
 			yield return new WaitForSeconds(logInterval);
 		}
 	}
 
-	void processObjectLogData(XElement parent, Dictionary<string, Dictionary<string, string>> logData)
-	{
-		foreach (string key in logData.Keys)
-		{
-			if (key.Equals(parent.Name.ToString())) {
-				foreach (string dataKey in logData[key].Keys) {
-					parent.Add (new XElement (dataKey, logData [key] [dataKey]));
-				}
-			} else {
-				XElement categoryElement = new XElement (key);
-				parent.Add (categoryElement);
-				foreach (string catagoryDataKey in logData[key].Keys) {
-					categoryElement.Add (new XElement (catagoryDataKey, logData[key][catagoryDataKey]));
-				}
-			}
+	XElement processObjectLogData(NTree<KeyValuePair<string,string>> logData){
+		XElement element = new XElement (logData.data.Key, logData.data.Value);
+		foreach (NTree<KeyValuePair<string,string>> child in logData.getChildren()) {
+			element.Add(processObjectLogData (child));
 		}
-		timeStamp.Add(parent);
+		return element;
 	}
 
 	public void SaveHistoricalData()
@@ -180,38 +169,37 @@ public class HistoricalDataController : MonoBehaviour
 
 	public void recreateLogDataFromTimeStamp(string timeStamp){
 		removeActiveData ();
+
+		IList<Loggable> loggables = InterfaceHelper.FindObjects<Loggable> ();
 		List<string> recreatedTags = new List<string> ();
-        for (int i = 1; i <= priorityLevels; i++) {
-            foreach (LogObject logObject in InterfaceHelper.FindObjects<LogObject>()) {
-                if (logObject.getPriorityLevel() == i) {
-                    if (!recreatedTags.Contains(((MonoBehaviour)logObject).gameObject.tag)) {
-                        recreatedTags.Add(((MonoBehaviour)logObject).gameObject.tag);
-                        foreach (XElement loggedObject in historicalTimeStamps[timeStamp].Descendants(((MonoBehaviour)logObject).gameObject.tag)) {
-                            Dictionary<string, Dictionary<string, string>> logData = new Dictionary<string, Dictionary<string, string>>();
-                            logData.Add(((MonoBehaviour)logObject).gameObject.tag, new Dictionary<string, string>());
-                            print(((MonoBehaviour)logObject).gameObject.tag);
-                            foreach (XElement dataItem in loggedObject.Descendants()) {
-                                if (!dataItem.HasElements) {
-                                    logData[((MonoBehaviour)logObject).gameObject.tag].Add(dataItem.Name.ToString(), dataItem.Value);
-                                } else {
-                                    logData.Add(dataItem.Name.ToString(), new Dictionary<string, string>());
-                                    foreach (XElement dataItemChild in dataItem.Descendants()) {
-                                        logData[dataItem.Name.ToString()].Add(dataItemChild.Name.ToString(), dataItemChild.Value);
-                                    }
-                                }
-                            }
-                            logObject.rebuildFromLog(logData);
-                        }
-                    }
-                }
-            }
-        }
+
+		for (int priority = 1; priority <= priorityLevels; priority++) {
+			foreach (Loggable loggable in loggables) {
+				string currentObjectName = ((MonoBehaviour)loggable).gameObject.tag;
+				if (!recreatedTags.Contains (currentObjectName) && loggable.getPriorityLevel() == priority) {
+					recreatedTags.Add(currentObjectName);
+					foreach (XElement loggedObject in historicalTimeStamps[timeStamp].Descendants(currentObjectName)) {
+						loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
+					}
+				}
+			}
+		}
+	}
+
+	NTree<KeyValuePair<string,string>> rebuildObjectLogData(XElement element){
+		KeyValuePair<string,string> data = new KeyValuePair<string, string> (element.Name.ToString (), element.Value);
+		NTree< KeyValuePair<string,string> > logData = new NTree< KeyValuePair<string,string> > (data);
+		foreach (XElement child in element.Descendants()) {
+			logData.AddChild(rebuildObjectLogData(child));
+		}
+		return logData;
 	}
 
 	public void removeActiveData(){
-		foreach (LogObject logObject in InterfaceHelper.FindObjects<LogObject>())
+		foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
 		{
-			Destroy (((MonoBehaviour)logObject).gameObject);
+			LoggableManager.unsubscribe (loggable);
+			Destroy (((MonoBehaviour)loggable).gameObject);
 		}
 	}
 }

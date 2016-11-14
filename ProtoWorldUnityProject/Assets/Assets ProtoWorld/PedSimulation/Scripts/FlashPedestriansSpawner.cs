@@ -30,7 +30,7 @@ using System;
 /// <summary>
 /// Implementation of the behaviour of a spawner for Flash Pedestrians.
 /// </summary>
-public class FlashPedestriansSpawner : MonoBehaviour, LogObject
+public class FlashPedestriansSpawner : MonoBehaviour, Loggable
 {
     /// <summary>
     /// Maximum number of pedestrians that the object will spawn. 
@@ -143,6 +143,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, LogObject
         initializeSpawner();
 
 		heatMap = FindObjectOfType<Heatmap>();
+		LoggableManager.subscribe((Loggable)this);
 	}
 
     public void initializeSpawner()
@@ -331,47 +332,45 @@ public class FlashPedestriansSpawner : MonoBehaviour, LogObject
 
         return priorities;
     }
-	public Dictionary<string, Dictionary<string, string>> getLogData(){
-		Dictionary<string, Dictionary<string, string>>logData = new Dictionary<string,Dictionary<string,string>> ();
-		logData.Add (gameObject.tag, new Dictionary<string,string> ());
-		logData [tag].Add("PositionX", transform.position.x.ToString());
-		logData [tag].Add("PositionY", transform.position.y.ToString());
-		logData [tag].Add("PositionZ", transform.position.z.ToString());
-		logData [tag].Add("MaxNumberOfPedestriansToSpawn", maxNumberOfPedestriansToSpawn.ToString());
-		logData [tag].Add("SpawnPedestriansInInfiteLoop", spawnPedestriansInInfiniteLoop.ToString());
-		logData [tag].Add("MinPedestriansPerSpawningIteration", minPedestriansPerSpawningIteration.ToString());
-		logData [tag].Add("MaxPedestriansPerSpawningIteration", maxPedestriansPerSpawningIteration.ToString());
-		logData [tag].Add("PedestrianSpawnFrequencyInSeconds", spawningFrequencyInSeconds.ToString());
-		logData [tag].Add("SpawningArea", spawningArea.ToString());
-		logData [tag].Add("RadiousToCheckStations", radiousToCheckStations.ToString());
-		logData [tag].Add("SpawningDelayAtStart", spawningDelayAtStart.ToString());
-		logData [tag].Add("InitialNumberOfPedestriansInCache", initialNumberOfPedestriansInCache.ToString());
-		logData [tag].Add("NumberOfPedestriansGenerated", numberOfPedestriansGenerated.ToString());
-		logData [tag].Add("NumberOfPedestriansOnDestination", numberOfPedestriansOnDestination.ToString());
+	public NTree<KeyValuePair<string,string>> getLogData(){
+		NTree<KeyValuePair<string,string>> logData = new NTree<KeyValuePair<string, string>> (new KeyValuePair<string, string>(tag,null));
+		logData.AddChild(new KeyValuePair<string, string>("PositionX",transform.position.x.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("PositionY",transform.position.y.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("PositionZ",transform.position.z.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("MaxNumberOfPedestriansToSpawn", maxNumberOfPedestriansToSpawn.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("SpawnPedestriansInInfiteLoop",spawnPedestriansInInfiniteLoop.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("MinPedestriansPerSpawningIteration",minPedestriansPerSpawningIteration.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("MaxPedestriansPerSpawningIteration",maxPedestriansPerSpawningIteration.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("PedestrianSpawnFrequencyInSeconds",spawningFrequencyInSeconds.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("SpawningArea",spawningArea.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("RadiousToCheckStations",radiousToCheckStations.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("SpawningDelayAtStart",spawningDelayAtStart.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("InitialNumberOfPedestriansInCache",initialNumberOfPedestriansInCache.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("NumberOfPedestriansGenerated",numberOfPedestriansGenerated.ToString()));
+		logData.AddChild(new KeyValuePair<string, string>("NumberOfPedestriansOnDestination",numberOfPedestriansOnDestination.ToString()));
 		return logData;
 	}
 
-	public void rebuildFromLog(Dictionary<string, Dictionary<string, string>> logData){
+	public void rebuildFromLog(NTree<KeyValuePair<string,string>> logData){
 		GameObject flashSpawnerObject = GameObject.Instantiate(gameObject) as GameObject;
 		FlashPedestriansSpawner flashSpawnerScript = flashSpawnerObject.GetComponent<FlashPedestriansSpawner>();
 		Vector3 position = new Vector3();
-
-		position.x = float.Parse(logData [tag]["PositionX"]);
-		position.y = float.Parse(logData [tag]["PositionY"]);
-		position.z = float.Parse(logData [tag]["PositionZ"]);
+		position.x = float.Parse(logData.GetChild(1).data.Value);
+		position.y = float.Parse(logData.GetChild(2).data.Value);
+		position.z = float.Parse(logData.GetChild(3).data.Value);
 		flashSpawnerObject.transform.position = position;
 		flashSpawnerScript.transform.position = position;
-		flashSpawnerScript.maxNumberOfPedestriansToSpawn = int.Parse(logData [tag]["MaxNumberOfPedestriansToSpawn"]);
-		flashSpawnerScript.spawnPedestriansInInfiniteLoop = bool.Parse(logData [tag]["SpawnPedestriansInInfiteLoop"]);
-		flashSpawnerScript.minPedestriansPerSpawningIteration = int.Parse(logData [tag]["MinPedestriansPerSpawningIteration"]);
-		flashSpawnerScript.maxPedestriansPerSpawningIteration = int.Parse(logData [tag]["MaxPedestriansPerSpawningIteration"]);
-		flashSpawnerScript.spawningFrequencyInSeconds = float.Parse(logData [tag]["PedestrianSpawnFrequencyInSeconds"]);
-		flashSpawnerScript.spawningArea = float.Parse(logData [tag]["SpawningArea"]);
-		flashSpawnerScript.radiousToCheckStations = float.Parse(logData [tag]["RadiousToCheckStations"]);
-		flashSpawnerScript.spawningDelayAtStart = float.Parse(logData [tag]["SpawningDelayAtStart"]);
-		flashSpawnerScript.initialNumberOfPedestriansInCache = int.Parse(logData [tag]["InitialNumberOfPedestriansInCache"]);
-		flashSpawnerScript.numberOfPedestriansGenerated = int.Parse(logData [tag]["NumberOfPedestriansGenerated"]);
-		flashSpawnerScript.numberOfPedestriansOnDestination = int.Parse(logData [tag]["NumberOfPedestriansOnDestination"]);
+		flashSpawnerScript.maxNumberOfPedestriansToSpawn = int.Parse(logData.GetChild(4).data.Value);
+		flashSpawnerScript.spawnPedestriansInInfiniteLoop = bool.Parse(logData.GetChild(5).data.Value);
+		flashSpawnerScript.minPedestriansPerSpawningIteration = int.Parse(logData.GetChild(6).data.Value);
+		flashSpawnerScript.maxPedestriansPerSpawningIteration = int.Parse(logData.GetChild(7).data.Value);
+		flashSpawnerScript.spawningFrequencyInSeconds = float.Parse(logData.GetChild(8).data.Value);
+		flashSpawnerScript.spawningArea = float.Parse(logData.GetChild(9).data.Value);
+		flashSpawnerScript.radiousToCheckStations = float.Parse(logData.GetChild(10).data.Value);
+		flashSpawnerScript.spawningDelayAtStart = float.Parse(logData.GetChild(11).data.Value);
+		flashSpawnerScript.initialNumberOfPedestriansInCache = int.Parse(logData.GetChild(12).data.Value);
+		flashSpawnerScript.numberOfPedestriansGenerated = int.Parse(logData.GetChild(13).data.Value);
+		flashSpawnerScript.numberOfPedestriansOnDestination = int.Parse(logData.GetChild(14).data.Value);
 		flashSpawnerObject.name = "FlashSpawner";
 		flashSpawnerObject.transform.parent = GameObject.Find("SpawnerPoints").transform;
 
