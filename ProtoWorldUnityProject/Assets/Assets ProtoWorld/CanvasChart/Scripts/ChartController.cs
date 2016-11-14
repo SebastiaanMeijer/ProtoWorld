@@ -230,6 +230,7 @@ public class ChartController : MonoBehaviour
 
 		// TODO Dirteh hack!
 		transform.Find("Toolbar/ChartTitleText").GetComponent<Text>().text = name;
+
         //automatically select the correct chart type
         Dropdown dropdown = transform.Find("Toolbar/ChartType/Dropdown").GetComponent<Dropdown>();
         for (int i = 0; i < dropdown.options.Count; i++)
