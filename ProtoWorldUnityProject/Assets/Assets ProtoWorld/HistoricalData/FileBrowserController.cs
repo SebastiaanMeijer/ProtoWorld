@@ -132,7 +132,6 @@ public class FileBrowserController : MonoBehaviour {
     {
         Debug.Log("Loading timestamp" + selected_timestamp + " from " + selected_file);
         controller.recreateLog(selected_file, selected_timestamp);
-        //controller.recreateLogDataFromTimeStamp(selected_timestamp);
     }
 
     public void SaveLog()

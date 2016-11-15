@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+public enum LogPriorities { Default, High, Critical};
+
 public interface Loggable{
-	NTree<KeyValuePair<string,string>> getLogData();
-	void rebuildFromLog(NTree<KeyValuePair<string,string>> logData);
-	int getPriorityLevel();
+	LogDataTree getLogData();
+	void rebuildFromLog(LogDataTree logData);
+	LogPriorities getPriorityLevel();
 }

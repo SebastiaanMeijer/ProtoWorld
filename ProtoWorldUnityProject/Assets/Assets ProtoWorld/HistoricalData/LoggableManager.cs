@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
+
 public static class LoggableManager {
 
 	private static List<Loggable> subscribedObjects  = new List<Loggable> ();
@@ -12,7 +14,6 @@ public static class LoggableManager {
 		lock (subscribedObjects) {
 			LoggableManager.subscribedObjects.Add (loggable);
 		}
-
 	}
 
 	public static void unsubscribe(Loggable loggable){
