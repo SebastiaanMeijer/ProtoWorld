@@ -36,14 +36,16 @@ public class ProtoWorldMenu : MonoBehaviour
     static string transModuleName = "TransportationModule";
     static string ddModuleName = "DragAndDropModule";
     static string kpiModuleName = "KPIModule";
+    static string kpiChartName = "KPIChart";
     static string sumoComModuleName = "SumoComFullModule";
     static string traffIntegModuleName = "TrafficIntegrationModule";
     static string decisionTreeModuleName = "DecisionTreeModule";
-    static string kpiChartName = "KPIChart";
     static string loggerAssemblyName = "LoggerAssembly";
     static string vvisName = "VVisDataSQLiteModule";
 	static string cameraFeedModuleName = "CameraFeedModule";
+	static string feedCameraName = "FeedCamera";
 	static string issuesModuleName = "IssuesModule";
+	static string issueName = "Issue";
 	static string heatMapModuleName = "HeatMapModule";
 	static string microMacroVisualisationModuleName = "MicroMacroVisualisationModule";
 
@@ -247,7 +249,7 @@ public class ProtoWorldMenu : MonoBehaviour
     static void ClearDragAndDrop()
     {
         var option = EditorUtility.DisplayDialogComplex(
-            "Drag and Drop",
+            "Drag and Drop Module",
             "Do you want to remove " + ddModuleName,
             "Clear",
             "Do not clear",
@@ -270,14 +272,23 @@ public class ProtoWorldMenu : MonoBehaviour
     {
         AddModuleIfNotExist(kpiModuleName);
 
-        var parent = GameObject.Find("KPICanvas");
+        var parent = GameObject.Find("KPICanvas/ChartPanel");
         if (parent != null)
         {
+			// Find the insertion height before inserting the chart.
+			float y = 0;
+			for(int index = 0; index < parent.transform.childCount; index++) {
+				var child = parent.transform.GetChild(index);
+				if(child.gameObject.name == "KPIChart") {
+					y -= child.GetComponent<RectTransform>().sizeDelta.y;
+				}
+			}
+
             var chart = AddPrefabToScene(kpiChartName);
             chart.transform.SetParent(parent.transform);
             var rectTrans = chart.transform as RectTransform;
-            // Move the chart to position 0,0,0.
-            rectTrans.localPosition = Vector3.zero;
+            // Move the chart to the next position in the chart panel.
+			rectTrans.localPosition = new Vector3(0, y, 0);
             // If the module is newly added, the scale somehow became 0,0,0 (?!)
             rectTrans.localScale = Vector3.one;
 
@@ -297,7 +308,7 @@ public class ProtoWorldMenu : MonoBehaviour
     static void ClearKPIModule()
     {
         var option = EditorUtility.DisplayDialogComplex(
-            "Drag and Drop",
+            "KPI Module",
             "Do you want to remove " + kpiModuleName,
             "Clear",
             "Do not clear",
@@ -575,9 +586,18 @@ public class ProtoWorldMenu : MonoBehaviour
         }
 	}
 
-	[MenuItem("ProtoWorld Editor/Camera Feed Module/Add Camera Feed Module", false, 8)]
+	[MenuItem("ProtoWorld Editor/Camera Feed Module/Add Camera Feed", false, 8)]
 	static void AddCameraFeedModule() {
 		AddModuleIfNotExist(cameraFeedModuleName);
+
+        var parent = GameObject.Find("CameraFeedModule/FeedCameras");
+        if (parent != null)
+        {
+			var feedCamera = AddPrefabToScene(feedCameraName);
+            feedCamera.transform.SetParent(parent.transform);
+
+            Selection.activeGameObject = feedCamera;
+        }
 	}
 
 	[MenuItem("ProtoWorld Editor/Camera Feed Module/Remove Module", false, 8)]
@@ -600,9 +620,18 @@ public class ProtoWorldMenu : MonoBehaviour
 		}
 	}
 
-	[MenuItem("ProtoWorld Editor/Issues Module/Add Issues Module", false, 8)]
+	[MenuItem("ProtoWorld Editor/Issues Module/Add Issue", false, 8)]
 	static void AddIssuesModule() {
 		AddModuleIfNotExist(issuesModuleName);
+
+        var parent = GameObject.Find("IssuesModule/Issues");
+        if (parent != null)
+        {
+			var issue = AddPrefabToScene(issueName);
+            issue.transform.SetParent(parent.transform);
+
+            Selection.activeGameObject = issue;
+        }
 	}
 
 	[MenuItem("ProtoWorld Editor/Issues Module/Remove Module", false, 8)]
