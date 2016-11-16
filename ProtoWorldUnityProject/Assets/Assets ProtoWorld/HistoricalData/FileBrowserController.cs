@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Xml.Linq;
 using System.Linq;
+using System.IO;
 
 public class FileBrowserController : MonoBehaviour {
 
     private HistoricalDataController controller;
     private TimeController timecontroller;
+    public GameObject logFileButtonPrefab;
 
     private ScrollRect FileScrollView;
     private ScrollRect TimestampScrollView;
@@ -72,6 +74,30 @@ public class FileBrowserController : MonoBehaviour {
         }
 
 	}
+
+    public void loadLogDirectory()
+    {
+
+        foreach (GameObject item in FileScrollView.content)
+        {
+            GameObject.Destroy(item);
+        }
+        FileInfo[] filesInfo = controller.logDirectory.GetFiles();
+        foreach (FileInfo fileInfo in filesInfo)
+        {
+            if (fileInfo.Name.EndsWith(".xml"))
+            {
+                //Add file to the fileScrollView
+                GameObject fileButton = Instantiate(logFileButtonPrefab) as GameObject;
+                fileButtonController btn = fileButton.GetComponent<fileButtonController>();
+                btn.path = fileInfo.FullName;
+                fileButton.transform.SetParent(FileScrollView.content.transform);
+                Text text = fileButton.GetComponentInChildren<Text>();
+                text.text = fileInfo.Name;
+                //Debug.Log("File found: " + fileInfo);
+            }
+        }
+    }
 
     internal void showFileInBrowser(string path)
     {

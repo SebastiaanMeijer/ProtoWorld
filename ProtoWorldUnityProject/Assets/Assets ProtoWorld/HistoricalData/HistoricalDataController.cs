@@ -25,7 +25,7 @@ public class HistoricalDataController : MonoBehaviour
 {
     public int logIntervalSeconds = 3;
 
-    private DirectoryInfo logDirectory;
+    public DirectoryInfo logDirectory;
     private ScrollRect FileScrollView;
     private ScrollRect TimestampScrollView;
 
@@ -119,8 +119,16 @@ public class HistoricalDataController : MonoBehaviour
 		logFile.Save(logDirectory + "/" + logFileName + ".xml");
 		timeController.PauseGame(false);
 	}
-		
-	public void recreateLog(string file, string timestamp)
+
+    public void loadLogDirectory()
+    {
+        FileBrowserController controller = loadFileBrowser.GetComponent<FileBrowserController>();
+        controller.loadLogDirectory();
+        loadFileBrowser.SetActive(true);
+        timeController.PauseGame(true);
+    }
+
+    public void recreateLog(string file, string timestamp)
 	{
 		XElement timeStampElement =
 			(from element in XDocument.Load(file).Root.Descendants("TimeStamp")
