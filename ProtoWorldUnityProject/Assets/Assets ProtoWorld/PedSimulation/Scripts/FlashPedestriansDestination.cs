@@ -29,8 +29,9 @@ using System;
 /// Class that defines a destination entry for Flash Pedestrians (composed of a transform, 
 /// a float priority and a array of colliders representing the stations nearby). 
 /// </summary>
-public class FlashPedestriansDestination : MonoBehaviour, LogObject
+public class FlashPedestriansDestination : MonoBehaviour, Loggable
 {
+
     public string destinationName;
 
     public bool hideInUI = false;
@@ -50,6 +51,7 @@ public class FlashPedestriansDestination : MonoBehaviour, LogObject
     void Awake()
     {
         initializeDestination();
+		LoggableManager.subscribe((Loggable)this);
     }
 
     public void initializeDestination()
@@ -65,29 +67,28 @@ public class FlashPedestriansDestination : MonoBehaviour, LogObject
         //+ " stations nearby");
     }
 
-	public Dictionary<string, Dictionary<string, string>> getLogData(){
-		Dictionary<string, Dictionary<string, string>>logData = new Dictionary<string,Dictionary<string,string>> ();
-		logData.Add (tag, new Dictionary<string,string> ());
-		logData [tag].Add("Name", destinationName);
-		logData [tag].Add("PositionX", destinationTransform.position.x.ToString());
-		logData [tag].Add("PositionY", destinationTransform.position.y.ToString());
-		logData [tag].Add("PositionZ", destinationTransform.position.z.ToString());
-		logData [tag].Add("CheckRadius", radiousToCheckStations.ToString());
-		logData [tag].Add("Priority", destinationPriority.ToString());
+	public LogDataTree getLogData(){
+		LogDataTree logData = new LogDataTree (tag,null);
+		logData.AddChild(new LogDataTree("Name",destinationName));
+		logData.AddChild(new LogDataTree("PositionX",destinationTransform.position.x.ToString()));
+		logData.AddChild(new LogDataTree("PositionY",destinationTransform.position.y.ToString()));
+		logData.AddChild(new LogDataTree("PositionZ",destinationTransform.position.z.ToString()));
+		logData.AddChild(new LogDataTree("CheckRadius",radiousToCheckStations.ToString()));
+		logData.AddChild(new LogDataTree("Priority",destinationPriority.ToString()));
 		return logData;
 	}
 
-	public void rebuildFromLog(Dictionary<string, Dictionary<string, string>> logData){
+	public void rebuildFromLog(LogDataTree logData){
 		GameObject flashDestinationObject = GameObject.Instantiate(gameObject) as GameObject;
 		FlashPedestriansDestination flashDestinationScript = flashDestinationObject.GetComponent<FlashPedestriansDestination>();
 		Vector3 position = new Vector3();
 
-		position.x = float.Parse(logData [tag]["PositionX"]);
-		position.y = float.Parse(logData [tag]["PositionY"]);
-		position.z = float.Parse(logData [tag]["PositionZ"]);
-		flashDestinationScript.destinationName = logData [tag]["Name"];
-		flashDestinationScript.radiousToCheckStations = float.Parse(logData [tag]["CheckRadius"]);
-		flashDestinationScript.destinationPriority = float.Parse(logData [tag]["Priority"]);
+		flashDestinationScript.destinationName = logData.GetChild ("Name").Value;
+		position.x = float.Parse(logData.GetChild("PositionX").Value);
+		position.y = float.Parse(logData.GetChild("PositionY").Value);
+		position.z = float.Parse(logData.GetChild("PositionZ").Value);
+		flashDestinationScript.radiousToCheckStations = float.Parse(logData.GetChild("CheckRadius").Value);
+		flashDestinationScript.destinationPriority = float.Parse(logData.GetChild("Priority").Value);
 		flashDestinationObject.transform.parent = GameObject.Find("DestinationPoints").transform;
 		flashDestinationObject.name = "FlashDestination";
 		flashDestinationScript.destinationTransform.position = position;
@@ -96,8 +97,8 @@ public class FlashPedestriansDestination : MonoBehaviour, LogObject
 		flashDestinationScript.enabled = true;
 	}
 
-    public int getPriorityLevel()
-    {
-        return 1;
-    }
+	public  LogPriorities getPriorityLevel()
+	{
+		return LogPriorities.High;
+	}
 }
