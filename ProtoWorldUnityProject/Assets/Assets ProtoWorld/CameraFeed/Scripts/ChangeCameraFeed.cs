@@ -20,7 +20,7 @@ public class ChangeCameraFeed : MonoBehaviour {
 	public Text cameraFeed3Text;
 
 	[HideInInspector]
-	public int i = 0;
+	public int i;
 	
 	void Awake() {
 		cameraFeed1Text = GameObject.Find("CameraFeed1Text").GetComponent<Text>();
@@ -30,67 +30,73 @@ public class ChangeCameraFeed : MonoBehaviour {
 	}
 
 	void Start() {
-		// Enable these.
-		feedCamerasObject.transform.GetChild(i).GetComponent<Camera>().enabled = true;
-		feedCamerasObject.transform.GetChild(i).GetComponent<Camera>().targetTexture = cameraRender1;
-		feedCamerasObject.transform.GetChild(i + 1).GetComponent<Camera>().enabled = true;
-		feedCamerasObject.transform.GetChild(i + 1).GetComponent<Camera>().targetTexture = cameraRender2;
-		feedCamerasObject.transform.GetChild(i + 2).GetComponent<Camera>().enabled = true;
-		feedCamerasObject.transform.GetChild(i + 2).GetComponent<Camera>().targetTexture = cameraRender3;
+		i = 0;
 
-		// Disable these.
-		feedCamerasObject.transform.GetChild(i + 3).GetComponent<Camera>().enabled = false;
-		feedCamerasObject.transform.GetChild(i + 3).GetComponent<Camera>().targetTexture = null;
-		feedCamerasObject.transform.GetChild(i + 4).GetComponent<Camera>().enabled = false;
-		feedCamerasObject.transform.GetChild(i + 4).GetComponent<Camera>().targetTexture = null;
-		feedCamerasObject.transform.GetChild(i + 5).GetComponent<Camera>().enabled = false;
-		feedCamerasObject.transform.GetChild(i + 5).GetComponent<Camera>().targetTexture = null;
-
-		// Rename these.
-		cameraFeed1Text.text = feedCamerasObject.transform.GetChild(i).gameObject.GetComponent<FeedCamera>().name;
-		cameraFeed2Text.text = feedCamerasObject.transform.GetChild(i + 1).gameObject.GetComponent<FeedCamera>().name;
-		cameraFeed3Text.text = feedCamerasObject.transform.GetChild(i + 2).gameObject.GetComponent<FeedCamera>().name;
+		setFeedCamerasEnabled(i);
 	}
 	
+
 	public void nextCameraFeed() {
-		if(i + 3 < feedCamerasObject.transform.childCount) {
-			feedCamerasObject.transform.GetChild(i).GetComponent<Camera>().targetTexture = null;
-			feedCamerasObject.transform.GetChild(i).GetComponent<Camera>().enabled = false;
-			feedCamerasObject.transform.GetChild(i + 1).GetComponent<Camera>().targetTexture = null;
-			feedCamerasObject.transform.GetChild(i + 1).GetComponent<Camera>().enabled = false;
-			feedCamerasObject.transform.GetChild(i + 2).GetComponent<Camera>().targetTexture = null;
-			feedCamerasObject.transform.GetChild(i + 2).GetComponent<Camera>().enabled = false;
-			i = i + 1;
-			feedCamerasObject.transform.GetChild(i).GetComponent<Camera>().enabled = true;
-			feedCamerasObject.transform.GetChild(i).GetComponent<Camera>().targetTexture = cameraRender1;
-			cameraFeed1Text.text = feedCamerasObject.transform.GetChild(i).gameObject.GetComponent<FeedCamera>().name;
-			feedCamerasObject.transform.GetChild(i + 1).GetComponent<Camera>().enabled = true;
-			feedCamerasObject.transform.GetChild(i + 1).GetComponent<Camera>().targetTexture = cameraRender2;
-			cameraFeed2Text.text = feedCamerasObject.transform.GetChild(i + 1).gameObject.GetComponent<FeedCamera>().name;
-			feedCamerasObject.transform.GetChild(i + 2).GetComponent<Camera>().enabled = true;
-			feedCamerasObject.transform.GetChild(i + 2).GetComponent<Camera>().targetTexture = cameraRender3;
-			cameraFeed3Text.text = feedCamerasObject.transform.GetChild(i + 2).gameObject.GetComponent<FeedCamera>().name;
+		if(i + 3 < getFeedCameraCount()) {
+			i += 1;
+
+			setFeedCamerasEnabled(i);
 		}
 	}
 
 	public void previousCameraFeed() {
 		if(i > 0) {
-			feedCamerasObject.transform.GetChild(i).GetComponent<Camera>().targetTexture = null;
-			feedCamerasObject.transform.GetChild(i).GetComponent<Camera>().enabled = false;
-			feedCamerasObject.transform.GetChild(i + 1).GetComponent<Camera>().targetTexture = null;
-			feedCamerasObject.transform.GetChild(i + 1).GetComponent<Camera>().enabled = false;
-			feedCamerasObject.transform.GetChild(i + 2).GetComponent<Camera>().targetTexture = null;
-			feedCamerasObject.transform.GetChild(i + 2).GetComponent<Camera>().enabled = false;
 			i = i - 1;
-			feedCamerasObject.transform.GetChild(i).GetComponent<Camera>().enabled = true;
-			feedCamerasObject.transform.GetChild(i).GetComponent<Camera>().targetTexture = cameraRender1;
-			cameraFeed1Text.text = feedCamerasObject.transform.GetChild(i).gameObject.GetComponent<FeedCamera>().name;
-			feedCamerasObject.transform.GetChild(i + 1).GetComponent<Camera>().enabled = true;
-			feedCamerasObject.transform.GetChild(i + 1).GetComponent<Camera>().targetTexture = cameraRender2;
-			cameraFeed2Text.text = feedCamerasObject.transform.GetChild(i + 1).gameObject.GetComponent<FeedCamera>().name;
-			feedCamerasObject.transform.GetChild(i + 2).GetComponent<Camera>().enabled = true;
-			feedCamerasObject.transform.GetChild(i + 2).GetComponent<Camera>().targetTexture = cameraRender3;
-			cameraFeed3Text.text = feedCamerasObject.transform.GetChild(i + 2).gameObject.GetComponent<FeedCamera>().name;
+
+			setFeedCamerasEnabled(i);
+		}
+	}
+
+
+	private int getFeedCameraCount() {
+		int cameraCount = 0;
+
+		for(int index = 0; index < feedCamerasObject.transform.childCount; index++) {
+			Camera feedCamera = feedCamerasObject.transform.GetChild(index).gameObject.GetComponent<Camera>();
+
+			if(feedCamera != null) {
+				cameraCount += 1;
+			}
+		}
+
+		return cameraCount;
+	}
+
+	private void setFeedCamerasEnabled(int startIndex) {
+		// Enable the first three feed cameras (from the starting position) and disable the rest.
+		int cameraIndex = -startIndex;
+		
+		for(int index = 0; index < feedCamerasObject.transform.childCount; index++) {
+			Camera feedCamera = feedCamerasObject.transform.GetChild(index).gameObject.GetComponent<Camera>();
+
+			if(feedCamera != null) {
+				if(cameraIndex == 0) {
+					feedCamera.enabled = true;
+					feedCamera.targetTexture = cameraRender1;
+					cameraFeed1Text.text = feedCamera.gameObject.GetComponent<FeedCamera>().name;
+				}
+				else if(cameraIndex == 1) {
+					feedCamera.enabled = true;
+					feedCamera.targetTexture = cameraRender2;
+					cameraFeed2Text.text = feedCamera.gameObject.GetComponent<FeedCamera>().name;
+				}
+				else if(cameraIndex == 2) {
+					feedCamera.enabled = true;
+					feedCamera.targetTexture = cameraRender3;
+					cameraFeed3Text.text = feedCamera.gameObject.GetComponent<FeedCamera>().name;
+				}
+				else {
+					feedCamera.enabled = false;
+					feedCamera.targetTexture = null;
+				}
+
+				cameraIndex += 1;
+			}
 		}
 	}
 }
