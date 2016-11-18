@@ -95,7 +95,7 @@ public class FlashPedestriansDestination : MonoBehaviour, Loggable
 
 		flashDestinationScript.initializeDestination();
 		flashDestinationScript.enabled = true;
-	}
+    }
 
 	public  LogPriorities getPriorityLevel()
 	{

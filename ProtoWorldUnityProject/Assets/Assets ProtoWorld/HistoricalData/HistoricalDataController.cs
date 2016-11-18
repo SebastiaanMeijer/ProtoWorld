@@ -25,6 +25,8 @@ public class HistoricalDataController : MonoBehaviour
 {
     public int logIntervalSeconds = 3;
 
+    public List<GameObject> loggables;
+
     public DirectoryInfo logDirectory;
     private ScrollRect FileScrollView;
     private ScrollRect TimestampScrollView;
@@ -47,6 +49,8 @@ public class HistoricalDataController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+        loggables = getLoggables();
         timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
 		GameObject flashPedestriansModule = GameObject.Find("FlashPedestriansModule");
         globalParameters = flashPedestriansModule.GetComponent<FlashPedestriansGlobalParameters>();
@@ -58,7 +62,40 @@ public class HistoricalDataController : MonoBehaviour
 		StartCoroutine(logToXML());
     }
 
-	void initiateLogFile(){
+    List<GameObject> getLoggables()
+    {
+        List<GameObject> loggableObjects = new List<GameObject>();
+        List<Loggable> loggableObjects2 = new List<Loggable>();
+        GameObject[] gameObjects = Resources.LoadAll<GameObject>("");
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            HistoricalDataController.GetInterfaces<Loggable>(out loggableObjects2, gameObjects[i]);
+                //if (gameObjects[i].GetComponent<Loggable>() != null)
+                //{
+                //print(gameObjects[i].tag);
+                //    loggableObjects.Add(gameObjects[i]);
+                //    break;
+                //}
+        }
+        print(loggableObjects2.Count());
+        return loggableObjects;
+    }
+
+    public static void GetInterfaces<T>(out List<T> resultList, GameObject objectToSearch) where T : class
+    {
+        MonoBehaviour[] list = objectToSearch.GetComponents<MonoBehaviour>();
+        resultList = new List<T>();
+        foreach (MonoBehaviour mb in list)
+        {
+            if (mb is T)
+            {
+                //found one
+                resultList.Add((T)((System.Object)mb));
+            }
+        }
+    }
+
+    void initiateLogFile(){
 		//Create XML document for logging data with root element "LogData" 
 		logFile = new XDocument();
 		logFile.Add(new XElement("LogData"));
@@ -84,7 +121,6 @@ public class HistoricalDataController : MonoBehaviour
         //Lock the camera on mouseover!
         if (!EventSystem.current.IsPointerOverGameObject()) camera.enabled = true;
         else camera.enabled = false;
-
     }
 
 	public IEnumerator logToXML()
@@ -130,15 +166,19 @@ public class HistoricalDataController : MonoBehaviour
 
     public void recreateLog(string file, string timestamp)
 	{
-		XElement timeStampElement =
-			(from element in XDocument.Load(file).Root.Descendants("TimeStamp")
-			where element.Value.Equals(timestamp)
-			select element).FirstOrDefault();
+        //print((from element in XDocument.Load(file).Root.Descendants("TimeStamp") where element.FirstAttribute.Value.Equals(timestamp) select element).FirstOrDefault());
+        XElement timeStampElement =
+            (from element in XDocument.Load(file).Root.Descendants("TimeStamp")
+             where element.FirstAttribute.Value.Equals(timestamp)
+             select element).FirstOrDefault();
+            //(from element in XDocument.Load(file).Root.Descendants("TimeStamp")
+            //where element.Value.Equals(timestamp)
+            //select element).FirstOrDefault();
 
-		removeActiveData ();
-		recreateObjects(timeStampElement);
+        removeActiveData ();
+        recreateObjects(timeStampElement);
 
-		loadFileBrowser.SetActive(false);
+        loadFileBrowser.SetActive(false);
 		timeController.PauseGame(false);
 	}
 
@@ -146,14 +186,15 @@ public class HistoricalDataController : MonoBehaviour
 	private void recreateObjects(XElement timestampElement){
 		//Get all objects which have the loggable interface with a unique tag
 		List<Loggable> loggables = InterfaceHelper.FindObjects<Loggable> ().Distinct(new DistinctLoggableComparer()).ToList();
-
 		foreach (LogPriorities priority in Enum.GetValues(typeof(LogPriorities))) {
-			foreach (Loggable loggable in loggables.FindAll (item => item.getPriorityLevel () == priority)) {
-				foreach (XElement loggedObject in timestampElement.Descendants(((MonoBehaviour)loggable).tag)) {
-					loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
-				}
-			}
-		}
+            foreach (Loggable loggable in loggables.FindAll(item => item.getPriorityLevel() == priority))
+            {
+                foreach (XElement loggedObject in timestampElement.Descendants(((MonoBehaviour)loggable).tag))
+                {
+                    loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
+                }
+            }
+        }
 	}
 
 	//Recursively transforms the XML data of a loggable to a LogDataTree

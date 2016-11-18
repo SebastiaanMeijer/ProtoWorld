@@ -25,10 +25,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System;
 
-public class FlashPedestriansController : TravelerController
+public class FlashPedestriansController : TravelerController, Loggable
 {
 	public int uniqueId;
+
+    public int spawnerId;
 
 	public FlashPedestriansProfile profile;
 
@@ -92,13 +95,16 @@ public class FlashPedestriansController : TravelerController
 	/// </summary>
 	void Awake()
 	{
-		// The global parameters and the heat map are supplied by FlashPedestriansSpawner after
-		// spawning to improve performance, as this is called a lot during spawning events.
+        initializePedestrian();
+        LoggableManager.subscribe((Loggable)this);
+    }
 
-		navAgent = gameObject.GetComponent<NavMeshAgent>();
-		FSM = gameObject.GetComponent<Animator>();
-		balloons = transform.Find("Balloons");
-	}
+    public void initializePedestrian()
+    {
+        navAgent = gameObject.GetComponent<NavMeshAgent>();
+        FSM = gameObject.GetComponent<Animator>();
+        balloons = transform.Find("Balloons");
+    }
 
 	/// <summary>
 	/// Start method.
@@ -107,7 +113,7 @@ public class FlashPedestriansController : TravelerController
 	{
 		ResetStopIndex();
 		navAgent.speed = profile.speed;
-		navAgent.radius = 0.75f + Random.Range(-0.25f, 0.25f); //Randomize "personal space"
+		navAgent.radius = 0.75f + UnityEngine.Random.Range(-0.25f, 0.25f); //Randomize "personal space"
 
 		if (routing != null)
 		if (routing.itinerary != null)
@@ -747,4 +753,117 @@ public class FlashPedestriansController : TravelerController
 
 		currentWeather = newWeatherCondition;
 	}
+
+    public LogDataTree getLogData()
+    {
+        LogDataTree logData = new LogDataTree(tag, null);
+        logData.AddChild(new LogDataTree("ID", uniqueId.ToString()));
+        logData.AddChild(new LogDataTree("SpawnerID", spawnerId.ToString()));
+        logData.AddChild(new LogDataTree("PositionX", transform.position.x.ToString()));
+        logData.AddChild(new LogDataTree("PositionY", transform.position.y.ToString()));
+        logData.AddChild(new LogDataTree("PositionZ", transform.position.z.ToString()));
+        logData.AddChild(new LogDataTree("RadiousToCheckStations", radiousToCheckStations.ToString()));
+        logData.AddChild(new LogDataTree("GoingToDestination", goingToDestination.ToString()));
+        logData.AddChild(new LogDataTree("GoingToStation", goingToStation.ToString()));
+        logData.AddChild(new LogDataTree("TakingABike", takingABike.ToString()));
+        logData.AddChild(new LogDataTree("GoingBikingToDestination", goingBikingToDestination.ToString()));
+        logData.AddChild(new LogDataTree("CarAwarenessTimer", carAwarenessTimer.ToString()));
+        logData.AddChild(new LogDataTree("CarAwarenessFrequency", carAwarenessFrequency.ToString()));
+        logData.AddChild(new LogDataTree("BikeAwarenessTimer", bikeAwarenessTimer.ToString()));
+        logData.AddChild(new LogDataTree("BikeAwarenessFrequency", bikeAwarenessFrequency.ToString()));
+        logData.AddChild(new LogDataTree("RoadMask", roadMask.ToString()));
+        logData.AddChild(new LogDataTree("Embarked", embarked.ToString()));
+        logData.AddChild(new LogDataTree("StopIndex", stopIndex.ToString()));
+        logData.AddChild(new LogDataTree("VisualizeRumoursCaught", visualizeRumoursCaught.ToString()));
+        logData.AddChild(new LogDataTree("BalloonsEnabled", balloonsEnabled.ToString()));
+        logData.AddChild(new LogDataTree("IsPause", isPause.ToString()));
+        if (profile != null)
+        {
+            LogDataTree profileData = new LogDataTree("Profile", null);
+            profileData.AddChild(new LogDataTree("CarAwareness",profile.carAwareness.ToString()));
+            profileData.AddChild(new LogDataTree("ChanceOfBelievingRumours", profile.chanceOfBelievingRumours.ToString()));
+            profileData.AddChild(new LogDataTree("ChanceOfSubscription", profile.chanceOfSubscription.ToString()));
+            profileData.AddChild(new LogDataTree("ChanceOfTakingABike", profile.chanceOfTakingABike.ToString()));
+            profileData.AddChild(new LogDataTree("EnglishSpeaker", profile.englishSpeaker.ToString()));
+            profileData.AddChild(new LogDataTree("ItalianSpeaker", profile.italianSpeaker.ToString()));
+            profileData.AddChild(new LogDataTree("Speed", profile.speed.ToString()));
+            profileData.AddChild(new LogDataTree("WeatherFactorOnTakingBikes", profile.weatherFactorOnTakingBikes.ToString()));
+            profileData.AddChild(new LogDataTree("WillingToChangeDestination", profile.willingToChangeDestination.ToString()));
+            profileData.AddChild(new LogDataTree("TravelPreference", profile.travelPreference.ToString()));
+            logData.AddChild(profileData);
+        }
+        if (nextPoint != null)
+        {
+            logData.AddChild(new LogDataTree("NextPointPositionX", nextPoint.transform.position.x.ToString()));
+            logData.AddChild(new LogDataTree("NextPointPositionY", nextPoint.transform.position.y.ToString()));
+            logData.AddChild(new LogDataTree("NextPointPositionZ", nextPoint.transform.position.z.ToString()));
+        }
+        return logData;
+    }
+
+    public void rebuildFromLog(LogDataTree logData)
+    {
+        GameObject flashPedestrianObject = GameObject.Instantiate(gameObject) as GameObject;
+        FlashPedestriansController flashPedestrianScript = flashPedestrianObject.GetComponent<FlashPedestriansController>();
+        Vector3 position = new Vector3();
+        flashPedestrianScript.uniqueId = int.Parse(logData.GetChild("ID").Value);
+        flashPedestrianScript.spawnerId = int.Parse(logData.GetChild("SpawnerID").Value);
+
+        position.x = float.Parse(logData.GetChild("PositionX").Value);
+        position.y = float.Parse(logData.GetChild("PositionX").Value);
+        position.z = float.Parse(logData.GetChild("PositionX").Value);
+        flashPedestrianScript.transform.position = position;
+        flashPedestrianObject.transform.position = position;
+
+        flashPedestrianScript.radiousToCheckStations = float.Parse(logData.GetChild("RadiousToCheckStations").Value);
+        flashPedestrianScript.goingToDestination = bool.Parse(logData.GetChild("GoingToDestination").Value);
+        flashPedestrianScript.goingToStation = bool.Parse(logData.GetChild("GoingToStation").Value);
+        flashPedestrianScript.takingABike = bool.Parse(logData.GetChild("TakingABike").Value);
+        flashPedestrianScript.goingBikingToDestination = bool.Parse(logData.GetChild("GoingBikingToDestination").Value);
+
+        flashPedestrianScript.carAwarenessTimer = float.Parse(logData.GetChild("CarAwarenessTimer").Value);
+        flashPedestrianScript.carAwarenessFrequency = float.Parse(logData.GetChild("CarAwarenessFrequency").Value);
+        flashPedestrianScript.bikeAwarenessTimer = float.Parse(logData.GetChild("BikeAwarenessTimer").Value);
+        flashPedestrianScript.bikeAwarenessFrequency = float.Parse(logData.GetChild("BikeAwarenessFrequency").Value);
+
+        flashPedestrianScript.roadMask = int.Parse(logData.GetChild("RoadMask").Value);
+        flashPedestrianScript.embarked = bool.Parse(logData.GetChild("Embarked").Value);
+        flashPedestrianScript.stopIndex = int.Parse(logData.GetChild("StopIndex").Value);
+        flashPedestrianScript.visualizeRumoursCaught = bool.Parse(logData.GetChild("VisualizeRumoursCaught").Value);
+        flashPedestrianScript.balloonsEnabled = bool.Parse(logData.GetChild("BalloonsEnabled").Value);
+        flashPedestrianScript.isPause = bool.Parse(logData.GetChild("IsPause").Value);
+
+        if (logData.containsKey("Profile"))
+        {
+            LogDataTree profileData = logData.GetChild("Profile");
+            flashPedestrianScript.profile.carAwareness = bool.Parse(profileData.GetChild("CarAwareness").Value);
+            flashPedestrianScript.profile.chanceOfBelievingRumours = float.Parse(profileData.GetChild("ChanceOfBelievingRumours").Value);
+            flashPedestrianScript.profile.chanceOfSubscription = float.Parse(profileData.GetChild("ChanceOfSubscription").Value);
+            flashPedestrianScript.profile.chanceOfTakingABike = float.Parse(profileData.GetChild("ChanceOfTakingABike").Value);
+            flashPedestrianScript.profile.englishSpeaker = bool.Parse(profileData.GetChild("EnglishSpeaker").Value);
+            flashPedestrianScript.profile.italianSpeaker = bool.Parse(profileData.GetChild("ItalianSpeaker").Value);
+            flashPedestrianScript.profile.speed = float.Parse(profileData.GetChild("Speed").Value);
+            flashPedestrianScript.profile.weatherFactorOnTakingBikes = float.Parse(profileData.GetChild("WeatherFactorOnTakingBikes").Value);
+            flashPedestrianScript.profile.willingToChangeDestination = bool.Parse(profileData.GetChild("WillingToChangeDestination").Value);
+            flashPedestrianScript.profile.travelPreference = (TravelPreference)Enum.Parse(typeof(TravelPreference), profileData.GetChild("TravelPreference").Value.ToString());
+        }
+        if (logData.containsKey("NextPointX"))
+        {
+            Vector3 nextPoint = new Vector3();
+
+            nextPoint.x = float.Parse(logData.GetChild("NextPointX").Value);
+            nextPoint.y = float.Parse(logData.GetChild("NextPointY").Value);
+            nextPoint.z = float.Parse(logData.GetChild("NextPointZ").Value);
+
+            GameObject tempNextPoint = new GameObject();
+            tempNextPoint.transform.position = nextPoint;
+
+            flashPedestrianScript.nextPoint = tempNextPoint.transform;
+        }
+    }
+
+    public LogPriorities getPriorityLevel()
+    {
+        return LogPriorities.Default;
+    }
 }

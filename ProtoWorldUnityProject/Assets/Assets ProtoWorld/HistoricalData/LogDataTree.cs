@@ -15,6 +15,25 @@ public class LogDataTree
 		children = new LinkedList<LogDataTree>();
 	}
 
+    public bool containsKey(string key)
+    {
+        if (this.Key.Equals(key))
+        {
+            return true;
+        }
+        else
+        {
+            foreach(LogDataTree child in children)
+            {
+                if (child.Key.Equals(key))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
 	public LogDataTree AddChild(LogDataTree child)
 	{
 		children.AddLast (child);

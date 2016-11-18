@@ -38,6 +38,8 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
     [Range(0, 10000)]
     public int maxNumberOfPedestriansToSpawn = 1;
 
+    public int id;
+
     /// <summary>
     /// If true, pedestrians will be spawned in an infinite loop. 
     /// </summary>
@@ -150,6 +152,8 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
     {
         // Get the global parameters of Flash Pedestrians
         pedGlobalParameters = GameObject.Find("FlashPedestriansModule").GetComponent<FlashPedestriansGlobalParameters>();
+        id = FlashPedestriansGlobalParameters.nextSpawnerId;
+        FlashPedestriansGlobalParameters.nextSpawnerId++;
         // Fill the cache with pedestrians
         for (int i = 0; i < initialNumberOfPedestriansInCache; i++)
         {
@@ -284,6 +288,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
         FlashPedestriansController controller = newAgent.GetComponent<FlashPedestriansController>();
 
         controller.uniqueId = nextIdForPedestrian++;
+        controller.spawnerId = id;
         controller.profile = profile;
         controller.routing = new FlashPedestriansRouting(destination, itinerary);
         controller.flashInformer = flashInformer;
@@ -334,7 +339,8 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
     }
 	public LogDataTree getLogData(){
 		LogDataTree logData = new LogDataTree (tag,null);
-		logData.AddChild(new LogDataTree("PositionX",transform.position.x.ToString()));
+        logData.AddChild(new LogDataTree("ID", id.ToString()));
+        logData.AddChild(new LogDataTree("PositionX",transform.position.x.ToString()));
 		logData.AddChild(new LogDataTree("PositionY",transform.position.y.ToString()));
 		logData.AddChild(new LogDataTree("PositionZ",transform.position.z.ToString()));
 		logData.AddChild(new LogDataTree("MaxNumberOfPedestriansToSpawn", maxNumberOfPedestriansToSpawn.ToString()));
@@ -373,7 +379,6 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
 		flashSpawnerScript.numberOfPedestriansOnDestination = int.Parse(logData.GetChild("NumberOfPedestriansOnDestination").Value);
 		flashSpawnerObject.name = "FlashSpawner";
 		flashSpawnerObject.transform.parent = GameObject.Find("SpawnerPoints").transform;
-
 		flashSpawnerScript.initializeSpawner();
 		flashSpawnerScript.enabled = true;
 	}

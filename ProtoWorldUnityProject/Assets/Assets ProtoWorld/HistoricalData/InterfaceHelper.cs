@@ -103,6 +103,11 @@ public static class InterfaceHelper
         return res;
     }
 
+    public static IList<T> FindObjectsInList<T>() where T : class
+    {
+        return null;
+    }
+
     public static IList<T> FindObjects<T>(bool firstOnly = false) where T : class
     {
         var resList = new List<T>();
