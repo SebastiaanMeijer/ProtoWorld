@@ -49,8 +49,9 @@ public class ZoomScrollbarMMV : MonoBehaviour {
 
 	public void sliderChanged(){
 		value = scrollbar.value;
-		Camera.main.GetComponent<CameraControl> ().targetCameraPosition = new Vector3 (Camera.main.transform.position.x, value*maxHeight, Camera.main.transform.position.z);
 
+		CameraControl camera = Camera.main.GetComponent<CameraControl>();
+		camera.targetCameraPosition = new Vector3 (camera.targetCameraPosition.x, value * maxHeight, camera.targetCameraPosition.z);
 	}
 
 	public void zoomedInOut(float heightOfCamera){
@@ -62,7 +63,6 @@ public class ZoomScrollbarMMV : MonoBehaviour {
 			for (int i = 0; i < stagesHeights.Length; i++) {
 				if (value * maxHeight > stagesHeights [i]) {
 					level = i;
-					ZoomScrollbarMMV.level = level;
 
 					handleText.text = "" + stagesHeights [i];
 
@@ -91,7 +91,6 @@ public class ZoomScrollbarMMV : MonoBehaviour {
 			for (int i = 0; i < stagesHeights.Length; i++) {
 				if (value * maxHeight > stagesHeights [i]) {
 					level = i;
-					ZoomScrollbarMMV.level = level;
 
 					handleText.text = "" + displayText [i];
 
