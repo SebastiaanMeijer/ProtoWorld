@@ -381,6 +381,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
 		flashSpawnerObject.transform.parent = GameObject.Find("SpawnerPoints").transform;
 		flashSpawnerScript.initializeSpawner();
 		flashSpawnerScript.enabled = true;
+        print("TEST");
 	}
 
 	public  LogPriorities getPriorityLevel()

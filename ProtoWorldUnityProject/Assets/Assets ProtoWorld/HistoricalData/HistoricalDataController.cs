@@ -25,8 +25,6 @@ public class HistoricalDataController : MonoBehaviour
 {
     public int logIntervalSeconds = 3;
 
-    public List<GameObject> loggables;
-
     public DirectoryInfo logDirectory;
     private ScrollRect FileScrollView;
     private ScrollRect TimestampScrollView;
@@ -49,8 +47,7 @@ public class HistoricalDataController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-        loggables = getLoggables();
+        getLoggables();
         timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
 		GameObject flashPedestriansModule = GameObject.Find("FlashPedestriansModule");
         globalParameters = flashPedestriansModule.GetComponent<FlashPedestriansGlobalParameters>();
@@ -62,37 +59,17 @@ public class HistoricalDataController : MonoBehaviour
 		StartCoroutine(logToXML());
     }
 
-    List<GameObject> getLoggables()
+    //TODO: Optimize! THIS IS A HORSETHING!!!//
+    List<Loggable> getLoggables()
     {
         List<GameObject> loggableObjects = new List<GameObject>();
-        List<Loggable> loggableObjects2 = new List<Loggable>();
-        GameObject[] gameObjects = Resources.LoadAll<GameObject>("");
-        for (int i = 0; i < gameObjects.Length; i++)
+        loggableObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)).Cast<GameObject>().Where(g => g.tag == "Loggable").Where(g => g.activeSelf).ToList();
+        List<Loggable> loggables = new List<Loggable>();
+        foreach (GameObject loggable in  loggableObjects)
         {
-            HistoricalDataController.GetInterfaces<Loggable>(out loggableObjects2, gameObjects[i]);
-                //if (gameObjects[i].GetComponent<Loggable>() != null)
-                //{
-                //print(gameObjects[i].tag);
-                //    loggableObjects.Add(gameObjects[i]);
-                //    break;
-                //}
+            loggables.Add(loggable.GetComponent<Loggable>());
         }
-        print(loggableObjects2.Count());
-        return loggableObjects;
-    }
-
-    public static void GetInterfaces<T>(out List<T> resultList, GameObject objectToSearch) where T : class
-    {
-        MonoBehaviour[] list = objectToSearch.GetComponents<MonoBehaviour>();
-        resultList = new List<T>();
-        foreach (MonoBehaviour mb in list)
-        {
-            if (mb is T)
-            {
-                //found one
-                resultList.Add((T)((System.Object)mb));
-            }
-        }
+        return loggables;
     }
 
     void initiateLogFile(){
@@ -184,9 +161,10 @@ public class HistoricalDataController : MonoBehaviour
 
 	//Recreates the logged loggables in order of priority
 	private void recreateObjects(XElement timestampElement){
-		//Get all objects which have the loggable interface with a unique tag
-		List<Loggable> loggables = InterfaceHelper.FindObjects<Loggable> ().Distinct(new DistinctLoggableComparer()).ToList();
-		foreach (LogPriorities priority in Enum.GetValues(typeof(LogPriorities))) {
+        //Get all objects which have the loggable interface with a unique tag
+        //List<Loggable> loggables = InterfaceHelper.FindObjects<Loggable>().Distinct(new DistinctLoggableComparer()).ToList();
+        List<Loggable> loggables = getLoggables();
+        foreach (LogPriorities priority in Enum.GetValues(typeof(LogPriorities))) {
             foreach (Loggable loggable in loggables.FindAll(item => item.getPriorityLevel() == priority))
             {
                 foreach (XElement loggedObject in timestampElement.Descendants(((MonoBehaviour)loggable).tag))
