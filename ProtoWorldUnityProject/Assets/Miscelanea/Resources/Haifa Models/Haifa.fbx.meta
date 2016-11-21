@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 3241dea5b1a9eae489743d5bd80ff345
-timeCreated: 1478541136
+guid: e8fe4e4a40db19348b76e9707535e512
+timeCreated: 1479391851
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Tiber
+    4300000: Haifa
   materials:
     importMaterials: 0
     materialName: 0
