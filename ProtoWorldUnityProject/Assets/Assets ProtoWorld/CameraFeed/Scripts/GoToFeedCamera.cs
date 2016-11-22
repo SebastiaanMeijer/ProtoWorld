@@ -4,9 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class goToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler{
-
-
+public class GoToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler{
 	//these floats are needed to determine whether the player is just clicking the object or if he's gonna drag it
 	public float StartMouseX;
 	public float StartMouseY;
@@ -15,14 +13,13 @@ public class goToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	public bool clickedCameraIcon = false;
 	public bool dragging = false;
 
-	public GameObject FeedCamerasObject;
+	public GameObject feedCamerasObject;
 	public CameraControl cameraControlScript;
 
 
 	// Use this for initialization
 	void Awake () {
-
-		FeedCamerasObject = GameObject.Find ("FeedCameras");
+		feedCamerasObject = GameObject.Find ("FeedCameras");
 		cameraControlScript = Camera.main.GetComponent<CameraControl>();
 	}
 
@@ -35,8 +32,8 @@ public class goToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	// Update is called once per frame
 	void LateUpdate () {
 		if (clickedCameraIcon) {
-			Camera.main.GetComponent<CameraControl> ().targetCameraPosition = FeedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.position;
-			Camera.main.transform.rotation = FeedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.rotation;
+			Camera.main.GetComponent<CameraControl> ().targetCameraPosition = this.transform.parent.position;
+			Camera.main.transform.rotation = this.transform.parent.rotation;
 			clickedCameraIcon = false;
 		}
 	}
@@ -50,12 +47,15 @@ public class goToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		StartMouseX = Input.mousePosition.x;
 		StartMouseY = Input.mousePosition.y;
 	}
+
 	public void OnClick(){
 		if (dragging != true) {
+			GameObject feedCamera = getFeedCameraForName(this.GetComponentInChildren<Text>().text);
 
-			cameraControlScript.targetCameraPosition = FeedCamerasObject.transform.FindChild (this.GetComponentInChildren<Text> ().text).transform.position;
-			Camera.main.transform.rotation = FeedCamerasObject.transform.FindChild (this.GetComponentInChildren<Text> ().text).transform.rotation;
-
+			if(feedCamera != null) {
+				cameraControlScript.targetCameraPosition = feedCamera.transform.position;
+				Camera.main.transform.rotation = feedCamera.transform.rotation;
+			}
 		}
 	}
 
@@ -81,6 +81,7 @@ public class goToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		StartMouseX = Input.mousePosition.x;
 		StartMouseY = Input.mousePosition.y;
 	}
+
 	void OnMouseUp()
 	{
 		clickedCameraIcon = true;
@@ -89,14 +90,23 @@ public class goToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			//cameraControlScript.targetCameraPosition = GetComponentInParent<Transform>().transform.position;
 			//Camera.main.transform.rotation = GetComponentInParent <Transform>().transform.rotation;
 
-			//Camera.main.GetComponent<CameraControl>().targetCameraPosition = FeedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.position;
+			//Camera.main.GetComponent<CameraControl>().targetCameraPosition = feedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.position;
 			//cameraControlScript.targetCameraPosition = new Vector3(1000,200,1000);
 
-			//Camera.main.transform.rotation = FeedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.rotation;
+			//Camera.main.transform.rotation = feedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.rotation;
 
 		}
 	}
 
 
+	private GameObject getFeedCameraForName(string name) {
+		for(int index = 0; index < feedCamerasObject.transform.childCount; index++) {
+			GameObject child = feedCamerasObject.transform.GetChild(index).gameObject;
+			if(child.GetComponent<FeedCamera>().name == name) {
+				return child;
+			}
+		}
 
+		return null;
+	}
 }

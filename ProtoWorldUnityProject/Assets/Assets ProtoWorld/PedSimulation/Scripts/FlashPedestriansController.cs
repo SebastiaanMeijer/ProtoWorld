@@ -84,8 +84,12 @@ public class FlashPedestriansController : TravelerController
 
 	private bool isPause = false;
 
+	public Heatmap heatMap1;
+	public Transform heatMap2;
+
 	[HideInInspector]
 	public Heatmap heatMap;
+
 
 	/// <summary>
 	/// Awake method.
@@ -98,6 +102,8 @@ public class FlashPedestriansController : TravelerController
 		navAgent = gameObject.GetComponent<NavMeshAgent>();
 		FSM = gameObject.GetComponent<Animator>();
 		balloons = transform.Find("Balloons");
+	//	heatMap = GameObject.Find("HeatMapPedestrians").GetComponent<Heatmap>();
+
 	}
 
 	/// <summary>
@@ -121,9 +127,11 @@ public class FlashPedestriansController : TravelerController
 		currentWeather = FlashPedestriansGlobalParameters.WeatherConditions.DefaultWeather;
 
 		//Needed to put info about object into heatmaps array
-		if(heatMap != null)
+		if (heatMap != null) {
+			if(50 > Random.Range(0,100)){
 			heatMap.putInArray (this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform);
-
+				}
+		}
 
 		Renderer rsp = GetComponentInParent<Renderer> ();
 		//Deactivate render if zoomed out

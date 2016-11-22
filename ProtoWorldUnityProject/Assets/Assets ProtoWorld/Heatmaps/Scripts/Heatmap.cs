@@ -114,12 +114,9 @@ public class Heatmap : MonoBehaviour {
 	/// </summary>
 	public void activateDeactivateHM() {
 		activatedHM = true;
-		if(activeHeatMaps == true) {
-			activeHeatMaps = false;
-		}
-		else if(activeHeatMaps == false) {
-			activeHeatMaps = true;
-		}
+
+		activeHeatMaps = !activeHeatMaps;
+
 	}
 
 	/// <summary>
