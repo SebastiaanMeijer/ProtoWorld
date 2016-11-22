@@ -17,7 +17,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
  * GAPSLABS EXTENDED EDITOR
  * Aram Azhari
  * 
- * Reviewed by Miguel Ramos Carretero
+ * Reviewed by Miguel Ramos Carretero, Berend Wouda
  * 
  */
 

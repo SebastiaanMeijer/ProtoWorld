@@ -1,5 +1,25 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿/* 
+
+This file is part of ProtoWorld. 
+	
+ProtoWorld is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along with this library. If not, see <http://www.gnu.org/licenses/>.
+
+Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, Johnson Ho and Sebastiaan Meijer. 
+
+*/
+
+/*
+ * Camera Feed Module
+ * 
+ * Furkan Sonmez
+ * Berend Wouda
+ */
+
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ChangeCameraFeed : MonoBehaviour {
@@ -7,21 +27,14 @@ public class ChangeCameraFeed : MonoBehaviour {
 	public RenderTexture cameraRender2;
 	public RenderTexture cameraRender3;
 
-	[HideInInspector]
-	public GameObject feedCamerasObject;
+	private GameObject feedCamerasObject;
 
-	[HideInInspector]
-	public Text cameraFeed1Text;
+	private Text cameraFeed1Text;
+	private Text cameraFeed2Text;
+	private Text cameraFeed3Text;
 
-	[HideInInspector]
-	public Text cameraFeed2Text;
+	private int i;
 
-	[HideInInspector]
-	public Text cameraFeed3Text;
-
-	[HideInInspector]
-	public int i;
-	
 	void Awake() {
 		cameraFeed1Text = GameObject.Find("CameraFeed1Text").GetComponent<Text>();
 		cameraFeed2Text = GameObject.Find("CameraFeed2Text").GetComponent<Text>();
@@ -34,7 +47,7 @@ public class ChangeCameraFeed : MonoBehaviour {
 
 		setFeedCamerasEnabled(i);
 	}
-	
+
 
 	public void nextCameraFeed() {
 		if(i + 3 < getFeedCameraCount()) {
@@ -70,7 +83,7 @@ public class ChangeCameraFeed : MonoBehaviour {
 	private void setFeedCamerasEnabled(int startIndex) {
 		// Enable the first three feed cameras (from the starting position) and disable the rest.
 		int cameraIndex = -startIndex;
-		
+
 		for(int index = 0; index < feedCamerasObject.transform.childCount; index++) {
 			Camera feedCamera = feedCamerasObject.transform.GetChild(index).gameObject.GetComponent<Camera>();
 
