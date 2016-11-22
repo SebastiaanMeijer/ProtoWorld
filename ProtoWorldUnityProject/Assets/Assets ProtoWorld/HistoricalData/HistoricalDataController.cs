@@ -63,12 +63,14 @@ public class HistoricalDataController : MonoBehaviour
     List<Loggable> getLoggables()
     {
         List<GameObject> loggableObjects = new List<GameObject>();
-        loggableObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)).Cast<GameObject>().Where(g => g.tag == "Loggable").Where(g => g.activeSelf).ToList();
+        loggableObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)).Cast<GameObject>().Where(g => g.tag == "Loggable").ToList();
         List<Loggable> loggables = new List<Loggable>();
         foreach (GameObject loggable in  loggableObjects)
         {
+            print(loggable.ToString());
             loggables.Add(loggable.GetComponent<Loggable>());
         }
+        //print(loggables.Count);
         return loggables;
     }
 
