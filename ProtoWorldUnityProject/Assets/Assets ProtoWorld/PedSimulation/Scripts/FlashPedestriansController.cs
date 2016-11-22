@@ -836,16 +836,18 @@ public class FlashPedestriansController : TravelerController, Loggable
         if (logData.containsKey("Profile"))
         {
             LogDataTree profileData = logData.GetChild("Profile");
-            flashPedestrianScript.profile.carAwareness = bool.Parse(profileData.GetChild("CarAwareness").Value);
-            flashPedestrianScript.profile.chanceOfBelievingRumours = float.Parse(profileData.GetChild("ChanceOfBelievingRumours").Value);
-            flashPedestrianScript.profile.chanceOfSubscription = float.Parse(profileData.GetChild("ChanceOfSubscription").Value);
-            flashPedestrianScript.profile.chanceOfTakingABike = float.Parse(profileData.GetChild("ChanceOfTakingABike").Value);
-            flashPedestrianScript.profile.englishSpeaker = bool.Parse(profileData.GetChild("EnglishSpeaker").Value);
-            flashPedestrianScript.profile.italianSpeaker = bool.Parse(profileData.GetChild("ItalianSpeaker").Value);
-            flashPedestrianScript.profile.speed = float.Parse(profileData.GetChild("Speed").Value);
-            flashPedestrianScript.profile.weatherFactorOnTakingBikes = float.Parse(profileData.GetChild("WeatherFactorOnTakingBikes").Value);
-            flashPedestrianScript.profile.willingToChangeDestination = bool.Parse(profileData.GetChild("WillingToChangeDestination").Value);
-            flashPedestrianScript.profile.travelPreference = (TravelPreference)Enum.Parse(typeof(TravelPreference), profileData.GetChild("TravelPreference").Value.ToString());
+            bool carAwareness = bool.Parse(profileData.GetChild("CarAwareness").Value);
+            float chanceOfBelievingRumours = float.Parse(profileData.GetChild("ChanceOfBelievingRumours").Value);
+            float chanceOfSubscription = float.Parse(profileData.GetChild("ChanceOfSubscription").Value);
+            float chanceOfTakingABike = float.Parse(profileData.GetChild("ChanceOfTakingABike").Value);
+            bool englishSpeaker = bool.Parse(profileData.GetChild("EnglishSpeaker").Value);
+            bool italianSpeaker = bool.Parse(profileData.GetChild("ItalianSpeaker").Value);
+            float speed = float.Parse(profileData.GetChild("Speed").Value);
+            float weatherFactorOnTakingBikes = float.Parse(profileData.GetChild("WeatherFactorOnTakingBikes").Value);
+            bool willingToChangeDestination = bool.Parse(profileData.GetChild("WillingToChangeDestination").Value);
+            TravelPreference travelPreference = (TravelPreference)Enum.Parse(typeof(TravelPreference), profileData.GetChild("TravelPreference").Value.ToString());
+            flashPedestrianScript.profile = new FlashPedestriansProfile(speed, englishSpeaker, italianSpeaker, chanceOfBelievingRumours,
+                willingToChangeDestination, chanceOfTakingABike, chanceOfBelievingRumours, carAwareness, travelPreference);
         }
         if (logData.containsKey("NextPointX"))
         {

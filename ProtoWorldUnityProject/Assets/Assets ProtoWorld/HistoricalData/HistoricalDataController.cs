@@ -164,8 +164,8 @@ public class HistoricalDataController : MonoBehaviour
 	//Recreates the logged loggables in order of priority
 	private void recreateObjects(XElement timestampElement){
         //Get all objects which have the loggable interface with a unique tag
-        //List<Loggable> loggables = InterfaceHelper.FindObjects<Loggable>().Distinct(new DistinctLoggableComparer()).ToList();
-        List<Loggable> loggables = getLoggables();
+        List<Loggable> loggables = InterfaceHelper.FindObjectsInResources<Loggable>().Distinct(new DistinctLoggableComparer()).ToList();
+        //List<Loggable> loggables = getLoggables();
         foreach (LogPriorities priority in Enum.GetValues(typeof(LogPriorities))) {
             foreach (Loggable loggable in loggables.FindAll(item => item.getPriorityLevel() == priority))
             {
