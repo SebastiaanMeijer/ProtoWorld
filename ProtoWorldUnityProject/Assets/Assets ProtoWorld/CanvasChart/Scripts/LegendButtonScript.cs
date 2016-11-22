@@ -22,7 +22,7 @@ public class LegendButtonScript : MonoBehaviour
 
         //larger button should show more info
         RectTransform rt = GetComponent<RectTransform>();
-        if (rt.sizeDelta.y < 25)
+        if (rt.sizeDelta.y < 30)
             text.verticalOverflow = VerticalWrapMode.Truncate;
         else
             text.verticalOverflow = VerticalWrapMode.Overflow;
