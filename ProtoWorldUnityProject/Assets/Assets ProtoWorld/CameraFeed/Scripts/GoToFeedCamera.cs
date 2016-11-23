@@ -1,55 +1,66 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿/* 
+
+This file is part of ProtoWorld. 
+	
+ProtoWorld is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along with this library. If not, see <http://www.gnu.org/licenses/>.
+
+Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, Johnson Ho and Sebastiaan Meijer. 
+
+*/
+
+/*
+ * Camera Feed Module
+ * 
+ * Furkan Sonmez
+ * Berend Wouda
+ */
+
+using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class GoToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler{
-	//these floats are needed to determine whether the player is just clicking the object or if he's gonna drag it
-	public float StartMouseX;
-	public float StartMouseY;
+public class GoToFeedCamera : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
+	// These floats are needed to determine whether the player is just clicking the object or if he's gonna drag it.
+	private float StartMouseX;
+	private float StartMouseY;
 
-	public bool clicked = false;
-	public bool clickedCameraIcon = false;
-	public bool dragging = false;
+	private bool clicked = false;
+	private bool clickedCameraIcon = false;
+	private bool dragging = false;
 
-	public GameObject feedCamerasObject;
-	public CameraControl cameraControlScript;
+	private GameObject feedCamerasObject;
+	private CameraControl cameraControlScript;
 
-
-	// Use this for initialization
-	void Awake () {
-		feedCamerasObject = GameObject.Find ("FeedCameras");
+	
+	void Awake() {
+		feedCamerasObject = GameObject.Find("FeedCameras");
 		cameraControlScript = Camera.main.GetComponent<CameraControl>();
 	}
 
-
-	// Use this for initialization
-	void Start () {
 	
-	}
-	
-	// Update is called once per frame
-	void LateUpdate () {
-		if (clickedCameraIcon) {
-			Camera.main.GetComponent<CameraControl> ().targetCameraPosition = this.transform.parent.position;
+	void LateUpdate() {
+		if(clickedCameraIcon) {
+			Camera.main.GetComponent<CameraControl>().targetCameraPosition = this.transform.parent.position;
 			Camera.main.transform.rotation = this.transform.parent.rotation;
 			clickedCameraIcon = false;
 		}
 	}
-		
 
-	// this happens as soon as you click on the image and start dragging. So Immediately after this the object that has been instantiated will be dragged.
-	public void OnBeginDrag(PointerEventData eventData)
-	{
+
+	// This happens as soon as you click on the image and start dragging. So immediately after this the object that has been instantiated will be dragged.
+	public void OnBeginDrag(PointerEventData eventData) {
 		dragging = true;
-		//Store the first x and y position of the mouse, this is to check if the user will drag the object or just click on it
+		// Store the first x and y position of the mouse, this is to check if the user will drag the object or just click on it.
 		StartMouseX = Input.mousePosition.x;
 		StartMouseY = Input.mousePosition.y;
 	}
 
-	public void OnClick(){
-		if (dragging != true) {
+	public void OnClick() {
+		if(dragging != true) {
 			GameObject feedCamera = getFeedCameraForName(this.GetComponentInChildren<Text>().text);
 
 			if(feedCamera != null) {
@@ -59,43 +70,38 @@ public class GoToFeedCamera: MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		}
 	}
 
-	public void OnDrag(PointerEventData eventData)
-	{
+	public void OnDrag(PointerEventData eventData) {
 
 	}
 
-	public void OnEndDrag(PointerEventData eventData)
-	{
-		if (clicked == true)
-		if (StartMouseX == Input.mousePosition.x || StartMouseY == Input.mousePosition.y) {
-			clicked = false;
+	public void OnEndDrag(PointerEventData eventData) {
+		if(clicked == true)
+			if(StartMouseX == Input.mousePosition.x || StartMouseY == Input.mousePosition.y) {
+				clicked = false;
 
-		}
+			}
 
 		dragging = false;
 	}
 
-	void OnMouseDown()
-	{
+	void OnMouseDown() {
 		clickedCameraIcon = true;
 		StartMouseX = Input.mousePosition.x;
 		StartMouseY = Input.mousePosition.y;
 	}
 
-	void OnMouseUp()
-	{
+	void OnMouseUp() {
 		clickedCameraIcon = true;
-		if (clickedCameraIcon == true)
-		if (StartMouseX == Input.mousePosition.x && StartMouseY == Input.mousePosition.y) {
-			//cameraControlScript.targetCameraPosition = GetComponentInParent<Transform>().transform.position;
-			//Camera.main.transform.rotation = GetComponentInParent <Transform>().transform.rotation;
+		if(clickedCameraIcon == true)
+			if(StartMouseX == Input.mousePosition.x && StartMouseY == Input.mousePosition.y) {
+				//cameraControlScript.targetCameraPosition = GetComponentInParent<Transform>().transform.position;
+				//Camera.main.transform.rotation = GetComponentInParent <Transform>().transform.rotation;
 
-			//Camera.main.GetComponent<CameraControl>().targetCameraPosition = feedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.position;
-			//cameraControlScript.targetCameraPosition = new Vector3(1000,200,1000);
+				//Camera.main.GetComponent<CameraControl>().targetCameraPosition = feedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.position;
+				//cameraControlScript.targetCameraPosition = new Vector3(1000,200,1000);
 
-			//Camera.main.transform.rotation = feedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.rotation;
-
-		}
+				//Camera.main.transform.rotation = feedCamerasObject.transform.FindChild (this.GetComponentInParent<Camera> ().gameObject.name).transform.rotation;
+			}
 	}
 
 

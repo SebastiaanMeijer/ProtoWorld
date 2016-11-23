@@ -62,7 +62,7 @@ public class ValuePanelController : MonoBehaviour
         {
             string name = ChartUtils.NameGenerator(valueChildString, i);
             GameObject obj = valuePanel.Find(name).gameObject;
-            colorBlock.disabledColor = controller.seriesColors[i];
+            colorBlock.disabledColor = controller.GetSeriesColor(i);
             obj.GetComponent<Button>().colors = colorBlock;
 
             float value = controller.values[i];
