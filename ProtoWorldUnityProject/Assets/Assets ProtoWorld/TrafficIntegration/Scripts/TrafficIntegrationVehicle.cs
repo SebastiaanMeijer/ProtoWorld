@@ -58,6 +58,9 @@ public class TrafficIntegrationVehicle : MonoBehaviour
     private float brakingCountdown = 0.0f;
     private float currentAngle = float.MaxValue;
 
+	[HideInInspector]
+	public Heatmap heatMap;
+
     /// <summary>
     /// Initializes the fields when the script starts. 
     /// </summary>
@@ -73,7 +76,13 @@ public class TrafficIntegrationVehicle : MonoBehaviour
         fractionCovered = 1.0f;
         startTime = -1.0f;
         speed = 1.5f;
-    }
+    
+		if (heatMap != null) {
+			if(50 > Random.Range(0,100)){
+				heatMap.putInArray (this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform, 2);
+			}
+		}
+	}
 
     /// <summary>
     /// Updates smoothly the position of the vehicle and controls the braking in case there 

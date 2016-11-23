@@ -13,11 +13,13 @@ public class Heatmap : MonoBehaviour {
 	public float[] radiuses;
 	public float[] intensities;
 	public Transform[] pedestrians;
+	public Transform[] traffic;
 
 	public Material material;
 
 	public int count = 5000;
 	public int counted = 0;
+	public int counted1 = 0;
 	public static float HMIntensity = 0.1f;
 	public static float HMRadius = 0.1f;
 	public float maxRadius = 20f;
@@ -28,6 +30,8 @@ public class Heatmap : MonoBehaviour {
 	public static bool activeHeatMaps = true;
 	public static bool activatedHM = false;
 	public bool zoomedIn;
+
+	public int heatmapNumber = 1;
 
 	public IEnumerator refreshCoroutine;
 
@@ -61,14 +65,26 @@ public class Heatmap : MonoBehaviour {
 	/// <summary>
 	/// Put the following information about the pedestrian into the array of the heatmap method
 	/// </summary>
-	public void putInArray(float posX, float posY, float posZ, Transform AnObject) {
-		if(counted > count - 1) {
-			counted = 0;
+	public void putInArray(float posX, float posY, float posZ, Transform AnObject, int ObjectID) {
+
+		switch(ObjectID){
+		case 1:
+			if(counted > count - 1) {
+				counted = 0;
+			}
+			pedestrians [counted] = AnObject;
+			counted = counted + 1;
+			break;
+		case 2:
+			if(counted1 > count - 1) {
+				counted1 = 0;
+			}
+			traffic [counted1] = AnObject;
+			counted1 = counted1 + 1;
+			break;
 		}
 
-		pedestrians[counted] = AnObject;
 
-		counted = counted + 1;
 	}
 
 
@@ -119,6 +135,20 @@ public class Heatmap : MonoBehaviour {
 
 	}
 
+	public void nextHeatmap(){
+
+		heatmapNumber = heatmapNumber + 1;
+		if (heatmapNumber > 2)
+			heatmapNumber = 1;
+		Debug.Log (heatmapNumber);
+
+		for(int i = 0; i < count; i++) {
+			positions[i] = new Vector3(0, -1000, 0);
+			properties[i] = new Vector2(HMRadius, HMIntensity);
+		}
+
+	}
+
 	/// <summary>
 	/// Refresh the heatmap every refreshTime seconds
 	/// </summary>
@@ -128,13 +158,40 @@ public class Heatmap : MonoBehaviour {
 			transform.position = new Vector3(transform.position.x, heightHM, transform.position.z);
 			if(cameraObject.targetCameraPosition.y > minCameraHeight) {
 				zoomedIn = false;
-				for(int i = 0; i < counted; i++) {
-					positions[i] = new Vector3(pedestrians[i].transform.position.x, heightHM, pedestrians[i].transform.position.z);
-					if(pedestrians[i].gameObject.activeSelf == false) {
-						positions[i] = new Vector3(0, -1000, 0);
+
+					switch (heatmapNumber) {
+				case 1:
+					for (int i = 0; i < counted; i++) {
+						positions [i] = new Vector3 (pedestrians [i].transform.position.x, heightHM, pedestrians [i].transform.position.z);
+						if(pedestrians[i].gameObject.activeSelf == false) {
+							positions[i] = new Vector3(0, -1000, 0);
+						}
+						properties [i] = new Vector2 (HMRadius, HMIntensity);
+
 					}
-					properties[i] = new Vector2(HMRadius, HMIntensity);
-				}
+						break;
+				case 2:
+					for (int i = 0; i < counted1; i++) {
+						positions [i] = new Vector3 (traffic [i].transform.position.x, heightHM, traffic [i].transform.position.z);
+						if(traffic[i].gameObject.activeSelf == false) {
+							positions[i] = new Vector3(0, -1000, 0);
+						}
+						properties [i] = new Vector2 (HMRadius, HMIntensity);
+					}
+						break;
+					}
+					/*
+					switch (heatmapNumber) {
+					case 1:
+						properties [i] = new Vector2 (HMRadius, HMIntensity);
+						break;
+					case 2:
+						properties [i] = new Vector2 (HMRadius, HMIntensity * pedestrians [i].GetComponent<FlashPedestriansController> ().speed);
+						break;
+					}
+					*/
+
+					
 				material.SetVectorArray("_Points", positions);
 				material.SetVectorArray("_Properties", properties);
 			}
