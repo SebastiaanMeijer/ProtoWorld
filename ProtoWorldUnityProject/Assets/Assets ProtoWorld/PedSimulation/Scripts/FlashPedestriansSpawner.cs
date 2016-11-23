@@ -255,11 +255,13 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
         {
             newAgent = (GameObject)pedestrianCache.Dequeue();
             newAgent.transform.position = pedestrianInformation.transform.position;
+            //print(newAgent.transform.position);
         }
         else
         {
             newAgent = Instantiate(pedGlobalParameters.pedestrianObject, pedestrianInformation.transform.position, Quaternion.identity) as GameObject;
             newAgent.transform.SetParent(this.transform, true);
+            //print(newAgent.transform.position);
         }
 
         if (pedGlobalParameters.rumoursEnabled || pedGlobalParameters.bikesEnabled)
@@ -277,7 +279,8 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
 
         FlashPedestriansController controller = newAgent.GetComponent<FlashPedestriansController>();
 
-        controller.uniqueId = nextIdForPedestrian++;
+        controller.uniqueId = pedestrianInformation.uniqueId;
+        nextIdForPedestrian = controller.uniqueId;
         controller.spawnerId = id;
         controller.profile = pedestrianInformation.profile;
         controller.routing = new FlashPedestriansRouting(pedestrianInformation.routing.destinationPoint, itinerary);
@@ -335,7 +338,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
 
         FlashPedestriansController controller = newAgent.GetComponent<FlashPedestriansController>();
 
-        controller.uniqueId = nextIdForPedestrian++;
+        controller.uniqueId = Interlocked.Increment(ref nextIdForPedestrian);
         controller.spawnerId = id;
         controller.profile = profile;
         controller.routing = new FlashPedestriansRouting(destination, itinerary);
@@ -433,12 +436,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
 
     void OnDestroy()
     {
-        //remove all child pedestrians//
-        //FlashPedestriansController[] clonePedestrains = transform.GetComponentsInChildren<FlashPedestriansController>(true);
-        //for (int i = 0; i < clonePedestrains.Length; i++)
-        //{
-        //    Destroy(clonePedestrains[i]);
-        //}
+        pedestrianCache.Clear();
     }
 
 	public  LogPriorities getPriorityLevel()

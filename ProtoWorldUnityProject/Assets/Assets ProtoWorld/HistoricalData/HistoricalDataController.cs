@@ -184,15 +184,11 @@ public class HistoricalDataController : MonoBehaviour
 	}
 
 	private void removeActiveData(){
-        //remove clones//
-        foreach (GameObject clone in GameObject.FindGameObjectsWithTag("Pedestrian"))
-        {
-            if (true)
-            {
-
-            }
-        }
-		foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
+        FlashPedestriansSpawner.nextIdForPedestrian = 0;
+        FlashPedestriansInformer flashInformer = FindObjectOfType<FlashPedestriansInformer>();
+        flashInformer.accumPedestrians = 0;
+        flashInformer.activePedestrians = new Dictionary<int, FlashPedestriansController>();
+        foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
 		{
 			LoggableManager.unsubscribe (loggable);
 			Destroy (((MonoBehaviour)loggable).gameObject);
