@@ -31,7 +31,6 @@ using System;
 /// </summary>
 public class FlashPedestriansDestination : MonoBehaviour, Loggable
 {
-
     public string destinationName;
 
     public bool hideInUI = false;

@@ -777,6 +777,11 @@ public class FlashPedestriansController : TravelerController, Loggable
         logData.AddChild(new LogDataTree("VisualizeRumoursCaught", visualizeRumoursCaught.ToString()));
         logData.AddChild(new LogDataTree("BalloonsEnabled", balloonsEnabled.ToString()));
         logData.AddChild(new LogDataTree("IsPause", isPause.ToString()));
+
+        LogDataTree routingData = new LogDataTree("Routing", null);
+        routingData.AddChild(new LogDataTree("DestinationName", routing.destinationPoint.destinationName));
+        logData.AddChild(routingData);
+
         if (profile != null)
         {
             LogDataTree profileData = new LogDataTree("Profile", null);
@@ -861,6 +866,30 @@ public class FlashPedestriansController : TravelerController, Loggable
             tempNextPoint.transform.position = nextPoint;
 
             flashPedestrianScript.nextPoint = tempNextPoint.transform;
+        }
+        //GET THE DESTINATION//
+        foreach (GameObject flashDestinationObject in GameObject.FindGameObjectsWithTag("PedestrianDestination"))
+        {
+            foreach (FlashPedestriansDestination flashDestinationScript in flashDestinationObject.GetComponents<FlashPedestriansDestination>())
+            {
+                if (flashDestinationScript.destinationName == logData.GetChild("Routing").GetChild("DestinationName").Value)
+                {
+                    flashPedestrianScript.routing = new FlashPedestriansRouting(flashDestinationScript, new Itinerary(null));
+                    break;
+                }
+            }
+        }
+        //GET THE ORIGINAL SPAWNER//
+        foreach (GameObject flashSpawnerObject in GameObject.FindGameObjectsWithTag("PedestrianSpawner"))
+        {
+            foreach (FlashPedestriansSpawner flashSpawnerScript in flashSpawnerObject.GetComponents<FlashPedestriansSpawner>())
+            {
+                if (flashSpawnerScript.id == flashPedestrianScript.spawnerId)
+                {
+                    //flashSpawnerScript.SpawnPedestrianFromLog(flashPedestrianScript);
+                    break;
+                }
+            }
         }
     }
 

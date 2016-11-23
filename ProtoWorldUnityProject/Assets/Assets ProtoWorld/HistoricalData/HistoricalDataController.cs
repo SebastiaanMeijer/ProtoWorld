@@ -150,9 +150,6 @@ public class HistoricalDataController : MonoBehaviour
             (from element in XDocument.Load(file).Root.Descendants("TimeStamp")
              where element.FirstAttribute.Value.Equals(timestamp)
              select element).FirstOrDefault();
-            //(from element in XDocument.Load(file).Root.Descendants("TimeStamp")
-            //where element.Value.Equals(timestamp)
-            //select element).FirstOrDefault();
 
         removeActiveData ();
         recreateObjects(timeStampElement);
@@ -187,6 +184,14 @@ public class HistoricalDataController : MonoBehaviour
 	}
 
 	private void removeActiveData(){
+        //remove clones//
+        foreach (GameObject clone in GameObject.FindGameObjectsWithTag("Pedestrian"))
+        {
+            if (true)
+            {
+
+            }
+        }
 		foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
 		{
 			LoggableManager.unsubscribe (loggable);

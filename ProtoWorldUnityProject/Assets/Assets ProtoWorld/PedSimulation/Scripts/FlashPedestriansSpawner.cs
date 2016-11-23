@@ -150,6 +150,8 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
 
     public void initializeSpawner()
     {
+        //reset cache
+        pedestrianCache = new Queue();
         // Get the global parameters of Flash Pedestrians
         pedGlobalParameters = GameObject.Find("FlashPedestriansModule").GetComponent<FlashPedestriansGlobalParameters>();
         id = FlashPedestriansGlobalParameters.nextSpawnerId;
@@ -245,13 +247,59 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
         }
     }
 
-	public void SpawnPedestrianFromLog(Vector3 spawningPoint, FlashPedestriansProfile profile, FlashPedestriansDestination destination){
-		//Find the best itinerary using the travel preferences in the pedestrian profile.
-		Itinerary itinerary = flashInformer.FindBestItinerary(spawningPoint, destination, stationsNearThisSpawner, profile.travelPreference);
-        SpawnPedestrian(spawningPoint, profile, destination, itinerary);
-		//TODO: recreate destination
+    public void SpawnPedestrianFromLog(FlashPedestriansController pedestrianInformation)
+    {
+        GameObject newAgent;
 
-	}
+        if (pedestrianCache.Count > 0)
+        {
+            newAgent = (GameObject)pedestrianCache.Dequeue();
+            newAgent.transform.position = pedestrianInformation.transform.position;
+        }
+        else
+        {
+            newAgent = Instantiate(pedGlobalParameters.pedestrianObject, pedestrianInformation.transform.position, Quaternion.identity) as GameObject;
+            newAgent.transform.SetParent(this.transform, true);
+        }
+
+        if (pedGlobalParameters.rumoursEnabled || pedGlobalParameters.bikesEnabled)
+        {
+            BoxCollider col = newAgent.GetComponent<BoxCollider>();
+
+            if (col != null)
+                col.enabled = true;
+            else
+                newAgent.AddComponent<BoxCollider>();
+        }
+
+        Itinerary itinerary = flashInformer.FindBestItinerary(pedestrianInformation.transform.position, pedestrianInformation.routing.destinationPoint, 
+            stationsNearThisSpawner, pedestrianInformation.profile.travelPreference);
+
+        FlashPedestriansController controller = newAgent.GetComponent<FlashPedestriansController>();
+
+        controller.uniqueId = nextIdForPedestrian++;
+        controller.spawnerId = id;
+        controller.profile = pedestrianInformation.profile;
+        controller.routing = new FlashPedestriansRouting(pedestrianInformation.routing.destinationPoint, itinerary);
+        controller.flashInformer = flashInformer;
+
+        // Provide these from our cached version to improve performance, as this is called a lot during spawning events.
+        controller.globalParam = pedGlobalParameters;
+        controller.heatMap = heatMap;
+
+        // Subscribe pedestrian to the itinerary informer
+        flashInformer.SubscribePedestrian(controller);
+
+        newAgent.name = "flashPedestrian_" + this.name + "_" + "_" + controller.uniqueId;
+
+        newAgent.SetActive(true);
+
+        // Atomic increment of the KPI property
+        Interlocked.Increment(ref pedGlobalParameters.numberOfPedestriansOnScenario);
+
+        if (++numberOfPedestriansGenerated >= maxNumberOfPedestriansToSpawn && !spawnPedestriansInInfiniteLoop)
+            CancelInvoke();
+    }
 
     /// <summary>
     /// Spawns a Flash Pedestrian given its profile and its routing objects. 
@@ -382,6 +430,16 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
 		flashSpawnerScript.initializeSpawner();
 		flashSpawnerScript.enabled = true;
 	}
+
+    void OnDestroy()
+    {
+        //remove all child pedestrians//
+        //FlashPedestriansController[] clonePedestrains = transform.GetComponentsInChildren<FlashPedestriansController>(true);
+        //for (int i = 0; i < clonePedestrains.Length; i++)
+        //{
+        //    Destroy(clonePedestrains[i]);
+        //}
+    }
 
 	public  LogPriorities getPriorityLevel()
     {
