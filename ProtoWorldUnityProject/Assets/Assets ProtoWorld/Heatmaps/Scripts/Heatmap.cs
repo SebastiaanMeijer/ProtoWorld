@@ -1,39 +1,58 @@
-﻿// Heatmap by Alan Zucconi www.alanzucconi.com
-// Furkan Sonmez
-// Berend Wouda
+﻿/* 
+
+This file is part of ProtoWorld. 
+	
+ProtoWorld is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along with this library. If not, see <http://www.gnu.org/licenses/>.
+
+Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, Johnson Ho and Sebastiaan Meijer. 
+
+*/
+
+/*
+ * Heatmap Module
+ * 
+ * Furkan Sonmez
+ * Berend Wouda
+ * 
+ * Contains elements of a tutorial by Alan Zucconi (www.alanzucconi.com).
+ */
 
 using UnityEngine;
 using System.Collections;
 
 public class Heatmap : MonoBehaviour {
-	public CameraControl cameraObject;
+	private CameraControl cameraObject;
 
-	public Vector4[] positions;
-	public Vector4[] properties;
-	public float[] radiuses;
-	public float[] intensities;
-	public Transform[] pedestrians;
-	public Transform[] traffic;
+	private Vector4[] positions;
+	private Vector4[] properties;
+	private float[] radiuses;
+	private float[] intensities;
+	private Transform[] pedestrians;
+	private Transform[] traffic;
 
 	public Material material;
 
 	public int count = 5000;
-	public int counted = 0;
-	public int counted1 = 0;
-	public static float HMIntensity = 0.1f;
-	public static float HMRadius = 0.1f;
+	private int counted = 0;
+	private int counted1 = 0;
+	private static float HMIntensity = 0.1f;
+	private static float HMRadius = 0.1f;
 	public float maxRadius = 20f;
 	public float refreshTime = 2f;
 	public int minCameraHeight = 100;
 	public float heightHM;
 
-	public static bool activeHeatMaps = true;
-	public static bool activatedHM = false;
-	public bool zoomedIn;
+	private static bool activeHeatMaps = true;
+	private static bool activatedHM = false;
+	private bool zoomedIn;
 
-	public int heatmapNumber = 1;
+	private int heatmapNumber = 1;
 
-	public IEnumerator refreshCoroutine;
+	private IEnumerator refreshCoroutine;
 
 
 	/// <summary>
@@ -62,45 +81,44 @@ public class Heatmap : MonoBehaviour {
 		StartCoroutine(refreshCoroutine);
 	}
 
+
 	/// <summary>
-	/// Put the following information about the pedestrian into the array of the heatmap method
+	/// Put the following information about the pedestrian into the array of the heatmap method.
 	/// </summary>
 	public void putInArray(float posX, float posY, float posZ, Transform AnObject, int ObjectID) {
-
-		switch(ObjectID){
-		case 1:
-			if(counted > count - 1) {
-				counted = 0;
-			}
-			pedestrians [counted] = AnObject;
-			counted = counted + 1;
-			break;
-		case 2:
-			if(counted1 > count - 1) {
-				counted1 = 0;
-			}
-			traffic [counted1] = AnObject;
-			counted1 = counted1 + 1;
-			break;
+		switch(ObjectID) {
+			case 1:
+				if(counted > count - 1) {
+					counted = 0;
+				}
+				pedestrians[counted] = AnObject;
+				counted = counted + 1;
+				break;
+			case 2:
+				if(counted1 > count - 1) {
+					counted1 = 0;
+				}
+				traffic[counted1] = AnObject;
+				counted1 = counted1 + 1;
+				break;
 		}
-
-
 	}
 
 
 	/// <summary>
-	/// Change intensity when slider is moved
+	/// Change intensity when slider is moved.
 	/// </summary>
 	public static void changeParameterIntensityHM(float intensity) {
 		Heatmap.HMIntensity = intensity / 80;
 	}
 
 	/// <summary>
-	/// Change radius when slider is moved
+	/// Change radius when slider is moved.
 	/// </summary>
 	public static void changeParameterRadiusHM(float radius) {
 		Heatmap.HMRadius = radius;
 	}
+
 
 	/// <summary>
 	/// Update method.
@@ -126,31 +144,28 @@ public class Heatmap : MonoBehaviour {
 
 
 	/// <summary>
-	/// Activate or deactivate the heatmap when button is pressed
+	/// Activate or deactivate the heatmap when button is pressed.
 	/// </summary>
 	public void activateDeactivateHM() {
 		activatedHM = true;
 
 		activeHeatMaps = !activeHeatMaps;
-
 	}
 
-	public void nextHeatmap(){
-
+	public void nextHeatmap() {
 		heatmapNumber = heatmapNumber + 1;
-		if (heatmapNumber > 2)
+		if(heatmapNumber > 2)
 			heatmapNumber = 1;
-		Debug.Log (heatmapNumber);
+		Debug.Log(heatmapNumber);
 
 		for(int i = 0; i < count; i++) {
 			positions[i] = new Vector3(0, -1000, 0);
 			properties[i] = new Vector2(HMRadius, HMIntensity);
 		}
-
 	}
 
 	/// <summary>
-	/// Refresh the heatmap every refreshTime seconds
+	/// Refresh the heatmap every refreshTime seconds.
 	/// </summary>
 	public IEnumerator heatmapRefresh() {
 		yield return new WaitForSeconds(refreshTime);
@@ -159,39 +174,38 @@ public class Heatmap : MonoBehaviour {
 			if(cameraObject.targetCameraPosition.y > minCameraHeight) {
 				zoomedIn = false;
 
-					switch (heatmapNumber) {
-				case 1:
-					for (int i = 0; i < counted; i++) {
-						positions [i] = new Vector3 (pedestrians [i].transform.position.x, heightHM, pedestrians [i].transform.position.z);
-						if(pedestrians[i].gameObject.activeSelf == false) {
-							positions[i] = new Vector3(0, -1000, 0);
-						}
-						properties [i] = new Vector2 (HMRadius, HMIntensity);
-
-					}
-						break;
-				case 2:
-					for (int i = 0; i < counted1; i++) {
-						positions [i] = new Vector3 (traffic [i].transform.position.x, heightHM, traffic [i].transform.position.z);
-						if(traffic[i].gameObject.activeSelf == false) {
-							positions[i] = new Vector3(0, -1000, 0);
-						}
-						properties [i] = new Vector2 (HMRadius, HMIntensity);
-					}
-						break;
-					}
-					/*
-					switch (heatmapNumber) {
+				switch(heatmapNumber) {
 					case 1:
-						properties [i] = new Vector2 (HMRadius, HMIntensity);
+						for(int i = 0; i < counted; i++) {
+							positions[i] = new Vector3(pedestrians[i].transform.position.x, heightHM, pedestrians[i].transform.position.z);
+							if(pedestrians[i].gameObject.activeSelf == false) {
+								positions[i] = new Vector3(0, -1000, 0);
+							}
+							properties[i] = new Vector2(HMRadius, HMIntensity);
+
+						}
 						break;
 					case 2:
-						properties [i] = new Vector2 (HMRadius, HMIntensity * pedestrians [i].GetComponent<FlashPedestriansController> ().speed);
+						for(int i = 0; i < counted1; i++) {
+							positions[i] = new Vector3(traffic[i].transform.position.x, heightHM, traffic[i].transform.position.z);
+							if(traffic[i].gameObject.activeSelf == false) {
+								positions[i] = new Vector3(0, -1000, 0);
+							}
+							properties[i] = new Vector2(HMRadius, HMIntensity);
+						}
 						break;
-					}
-					*/
+				}
+				/*
+				switch (heatmapNumber) {
+				case 1:
+					properties [i] = new Vector2 (HMRadius, HMIntensity);
+					break;
+				case 2:
+					properties [i] = new Vector2 (HMRadius, HMIntensity * pedestrians [i].GetComponent<FlashPedestriansController> ().speed);
+					break;
+				}
+				*/
 
-					
 				material.SetVectorArray("_Points", positions);
 				material.SetVectorArray("_Properties", properties);
 			}
@@ -210,7 +224,7 @@ public class Heatmap : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Reset the heatmap after the game ends
+	/// Reset the heatmap after the game ends.
 	/// </summary>
 	public void OnDestroy() {
 		for(int i = 0; i < count; i++) {
