@@ -815,8 +815,8 @@ public class FlashPedestriansController : TravelerController, Loggable
         flashPedestrianScript.spawnerId = int.Parse(logData.GetChild("SpawnerID").Value);
 
         position.x = float.Parse(logData.GetChild("PositionX").Value);
-        position.y = float.Parse(logData.GetChild("PositionX").Value);
-        position.z = float.Parse(logData.GetChild("PositionX").Value);
+        position.y = float.Parse(logData.GetChild("PositionY").Value);
+        position.z = float.Parse(logData.GetChild("PositionZ").Value);
         flashPedestrianScript.transform.position = position;
         flashPedestrianObject.transform.position = position;
 
