@@ -50,7 +50,7 @@ public class Heatmap : MonoBehaviour {
 	private static bool activatedHM = false;
 	private bool zoomedIn;
 
-	private int heatmapNumber = 1;
+	public static int heatmapNumber = 1;
 
 	private IEnumerator refreshCoroutine;
 
