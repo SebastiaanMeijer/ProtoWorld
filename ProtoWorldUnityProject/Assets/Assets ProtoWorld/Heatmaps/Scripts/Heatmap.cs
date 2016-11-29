@@ -80,6 +80,7 @@ public class Heatmap : MonoBehaviour {
 
 		pedestrians = new Transform[count];
 		traffic = new Transform[count];
+		metro = new Transform[count];
 
 		resetPoints();
 
