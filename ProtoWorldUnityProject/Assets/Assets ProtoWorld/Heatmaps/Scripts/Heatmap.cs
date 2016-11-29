@@ -33,6 +33,7 @@ public class Heatmap : MonoBehaviour {
 	private float[] intensities;
 	private Transform[] pedestrians;
 	private Transform[] traffic;
+	public Transform[] Transport;
 
 	public Material material;
 
