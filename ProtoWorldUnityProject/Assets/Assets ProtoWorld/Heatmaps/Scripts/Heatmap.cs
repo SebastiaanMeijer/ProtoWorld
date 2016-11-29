@@ -31,6 +31,7 @@ public class Heatmap : MonoBehaviour {
 
 	private Transform[] pedestrians;
 	private Transform[] traffic;
+	public Transform[] Transport;
 
 	public Material material;
 
@@ -57,7 +58,7 @@ public class Heatmap : MonoBehaviour {
 
 	private bool zoomedIn;
 
-	private int heatmapNumber = 1;
+	public static int heatmapNumber = 1;
 
 	private IEnumerator refreshCoroutine;
 

@@ -48,7 +48,7 @@ public class ChartController : MonoBehaviour
     /// <summary>
     /// The name, appears in the toolbar.
     /// </summary>
-    new public string name;
+    public string name;
 
     /// <summary>
     /// Whether this is a streaming chart or a static chart. 
