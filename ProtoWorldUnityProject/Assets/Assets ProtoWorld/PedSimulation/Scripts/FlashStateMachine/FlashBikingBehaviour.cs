@@ -36,10 +36,23 @@ public class FlashBikingBehaviour : StateMachineBehaviour
         {
             fpc.targetedBikeStation.PickBike();
             fpc.GoBikingToDestination();
+
+            GameObject TransportationModule = GameObject.Find("TransportationModule");
+            KPIPassengersPerType kpipassengers = TransportationModule.GetComponent<KPIPassengersPerType>();
+            kpipassengers.bicyclePassengersDecentralized++;
         }
         else
         {
             fpc.BikeStationIsEmpty();
         }
 	}
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateExit(animator, stateInfo, layerIndex);
+        
+        GameObject TransportationModule = GameObject.Find("TransportationModule");
+        KPIPassengersPerType kpipassengers = TransportationModule.GetComponent<KPIPassengersPerType>();
+        kpipassengers.bicyclePassengersDecentralized--;
+    }
 }

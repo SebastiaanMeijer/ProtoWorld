@@ -7,6 +7,7 @@ public class KPIDelays : MonoBehaviour
     public float BusDelay;
     public float TrainDelay;
     public float MetroDelay;
+    public float CarDelay = 0;
 
     public Transform transLines;
 

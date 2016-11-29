@@ -528,8 +528,16 @@ public class FlashPedestriansController : TravelerController
 		flashInformer.UnsuscribePedestrian(this);
 
 		Transform bike = this.transform.FindChild("bike");
-		if (bike != null)
-			bike.gameObject.SetActive(false);
+        if (bike != null)
+        {
+            bike.gameObject.SetActive(false);
+            FSM.SetBool("OnDestination", true);
+            FSM.SetBool("OnBiking", false);
+            //remove cyclist from total
+            /*GameObject TransportationModule = GameObject.Find("TransportationModule");
+            KPIPassengersPerType kpipassengers = TransportationModule.GetComponent<KPIPassengersPerType>();
+            kpipassengers.bicyclePassengersDecentralized--;*/
+        }
 
 		if(globalParam != null)
 		{

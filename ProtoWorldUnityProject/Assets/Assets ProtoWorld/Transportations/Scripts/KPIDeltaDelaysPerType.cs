@@ -13,6 +13,7 @@ public class KPIDeltaDelaysPerType : MonoBehaviour
     private Transform transLines;
 
     private float oldBusDelay = 0;
+    private float oldCarDelay = 0;
     private float oldTramDelay = 0;
     private float oldTrainDelay = 0;
     private float oldMetroDelay = 0;
@@ -36,15 +37,16 @@ public class KPIDeltaDelaysPerType : MonoBehaviour
         timeout += Time.deltaTime;
         if (timeout >= 1)
         {
-            deltaCarDelay = getCarDeltaDelay();
+            getCarDeltaDelay();
             getPublicTransportDeltaDelay();
             timeout--;
         }
     }
 
-    private float getCarDeltaDelay()
+    private void getCarDeltaDelay()
     {
-        return 0;
+        deltaCarDelay = delays.CarDelay - oldCarDelay;
+        oldCarDelay = delays.CarDelay;
     }
 
     private void getPublicTransportDeltaDelay()
