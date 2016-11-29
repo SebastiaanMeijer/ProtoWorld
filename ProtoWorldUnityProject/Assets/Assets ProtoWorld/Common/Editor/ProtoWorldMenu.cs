@@ -48,6 +48,7 @@ public class ProtoWorldMenu : MonoBehaviour
 	static string issueName = "Issue";
 	static string heatMapModuleName = "HeatMapModule";
 	static string microMacroVisualisationModuleName = "MicroMacroVisualisationModule";
+	static string historicalDataModuleName = "HistoricalDataModule";
 
 	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Add Essentials", false, 0)]
     static void AddEssentialsModuleToScene()
@@ -696,6 +697,31 @@ public class ProtoWorldMenu : MonoBehaviour
 		switch(option) {
 			case 0:
 				DestroyImmediate(GameObject.Find(microMacroVisualisationModuleName));
+				Debug.Log("The module is removed.");
+				return;
+			default:
+				Debug.Log("User cancelled the operation.");
+				return;
+		}
+	}
+
+	[MenuItem("ProtoWorld Editor/Historical Data Module/Add Historical Data Module", false, 8)]
+	static void AddHistoricalDataModule() {
+		AddModuleIfNotExist(historicalDataModuleName);
+	}
+
+	[MenuItem("ProtoWorld Editor/Historical Data Module/Remove Module", false, 8)]
+	static void ClearHistoricalDataModule() {
+		var option = EditorUtility.DisplayDialogComplex(
+	"Historical Data Module",
+	"Do you want to remove " + historicalDataModuleName,
+	"Clear",
+	"Do not clear",
+	"Cancel");
+
+		switch(option) {
+			case 0:
+				DestroyImmediate(GameObject.Find(historicalDataModuleName));
 				Debug.Log("The module is removed.");
 				return;
 			default:
