@@ -886,6 +886,7 @@ public class FlashPedestriansController : TravelerController, Loggable
             {
                 if (flashSpawnerScript.id == flashPedestrianScript.spawnerId)
                 {
+                    flashPedestrianObject.transform.SetParent(flashSpawnerObject.transform);
                     flashSpawnerScript.SpawnPedestrianFromLog(flashPedestrianScript);
                     break;
                 }
