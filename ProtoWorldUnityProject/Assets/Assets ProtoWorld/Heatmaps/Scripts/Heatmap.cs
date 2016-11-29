@@ -13,13 +13,13 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 */
 
 /*
- * Heatmap Module
- * 
- * Furkan Sonmez
- * Berend Wouda
- * 
- * Contains elements of a tutorial by Alan Zucconi (www.alanzucconi.com).
- */
+* Heatmap Module
+* 
+* Furkan Sonmez
+* Berend Wouda
+* 
+* Contains elements of a tutorial by Alan Zucconi (www.alanzucconi.com).
+*/
 
 using UnityEngine;
 using System.Collections;
@@ -33,13 +33,14 @@ public class Heatmap : MonoBehaviour {
 	private float[] intensities;
 	private Transform[] pedestrians;
 	private Transform[] traffic;
-	public Transform[] Transport;
+	public Transform[] metro;
 
 	public Material material;
 
 	public int count = 5000;
 	private int counted = 0;
 	private int counted1 = 0;
+	private int counted2 = 0;
 	private static float HMIntensity = 0.1f;
 	private static float HMRadius = 0.1f;
 	public float maxRadius = 20f;
@@ -88,20 +89,27 @@ public class Heatmap : MonoBehaviour {
 	/// </summary>
 	public void putInArray(float posX, float posY, float posZ, Transform AnObject, int ObjectID) {
 		switch(ObjectID) {
-			case 1:
-				if(counted > count - 1) {
-					counted = 0;
-				}
-				pedestrians[counted] = AnObject;
-				counted = counted + 1;
-				break;
-			case 2:
-				if(counted1 > count - 1) {
-					counted1 = 0;
-				}
-				traffic[counted1] = AnObject;
-				counted1 = counted1 + 1;
-				break;
+		case 1:
+			if(counted > count - 1) {
+				counted = 0;
+			}
+			pedestrians[counted] = AnObject;
+			counted = counted + 1;
+			break;
+		case 2:
+			if(counted1 > count - 1) {
+				counted1 = 0;
+			}
+			traffic[counted1] = AnObject;
+			counted1 = counted1 + 1;
+			break;
+		case 3:
+			if(counted2 > count - 1) {
+				counted2 = 0;
+			}
+			metro[counted2] = AnObject;
+			counted2 = counted2 + 1;
+			break;
 		}
 	}
 
@@ -155,7 +163,7 @@ public class Heatmap : MonoBehaviour {
 
 	public void nextHeatmap() {
 		heatmapNumber = heatmapNumber + 1;
-		if(heatmapNumber > 2)
+		if(heatmapNumber > 3)
 			heatmapNumber = 1;
 		Debug.Log(heatmapNumber);
 
@@ -176,26 +184,36 @@ public class Heatmap : MonoBehaviour {
 				zoomedIn = false;
 
 				switch(heatmapNumber) {
-					case 1:
-						for(int i = 0; i < counted; i++) {
-							positions[i] = new Vector3(pedestrians[i].transform.position.x, heightHM, pedestrians[i].transform.position.z);
-							if(pedestrians[i].gameObject.activeSelf == false) {
-								positions[i] = new Vector3(0, -1000, 0);
-							}
-							properties[i] = new Vector2(HMRadius, HMIntensity);
+				case 1:
+					for(int i = 0; i < counted; i++) {
+						positions[i] = new Vector3(pedestrians[i].transform.position.x, heightHM, pedestrians[i].transform.position.z);
+						if(pedestrians[i].gameObject.activeSelf == false) {
+							positions[i] = new Vector3(0, -1000, 0);
+						}
+						properties[i] = new Vector2(HMRadius, HMIntensity);
 
+					}
+					break;
+				case 2:
+					for(int i = 0; i < counted1; i++) {
+						positions[i] = new Vector3(traffic[i].transform.position.x, heightHM, traffic[i].transform.position.z);
+						if(traffic[i].gameObject.activeSelf == false) {
+							positions[i] = new Vector3(0, -1000, 0);
 						}
-						break;
-					case 2:
-						for(int i = 0; i < counted1; i++) {
-							positions[i] = new Vector3(traffic[i].transform.position.x, heightHM, traffic[i].transform.position.z);
-							if(traffic[i].gameObject.activeSelf == false) {
-								positions[i] = new Vector3(0, -1000, 0);
-							}
-							properties[i] = new Vector2(HMRadius, HMIntensity);
+						properties[i] = new Vector2(HMRadius, HMIntensity);
+					}
+					break;
+				case 3:
+					for(int i = 0; i < counted2; i++) {
+						positions[i] = new Vector3(metro[i].transform.position.x, heightHM, metro[i].transform.position.z);
+						if(metro[i].gameObject.activeSelf == false) {
+							positions[i] = new Vector3(0, -1000, 0);
 						}
-						break;
+						properties[i] = new Vector2(HMRadius, HMIntensity * (metro [i].GetComponent<VehicleController> ().delay));
+					}
+					break;
 				}
+
 				/*
 				switch (heatmapNumber) {
 				case 1:
@@ -203,6 +221,9 @@ public class Heatmap : MonoBehaviour {
 					break;
 				case 2:
 					properties [i] = new Vector2 (HMRadius, HMIntensity * pedestrians [i].GetComponent<FlashPedestriansController> ().speed);
+					break;
+				case 3:
+					properties [i] = new Vector2 (HMRadius, HMIntensity * metro [i].GetComponent<FlashPedestriansController> ().speed);
 					break;
 				}
 				*/
