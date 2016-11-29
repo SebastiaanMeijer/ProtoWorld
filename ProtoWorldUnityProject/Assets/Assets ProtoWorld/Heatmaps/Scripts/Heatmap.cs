@@ -31,14 +31,15 @@ public class Heatmap : MonoBehaviour {
 
 	private Transform[] pedestrians;
 	private Transform[] traffic;
-	public Transform[] Transport;
+	private Transform[] metro;
 
 	public Material material;
 
 	public int count = 1000;
 	private int pedestriansCounted = 0;
 	private int trafficCounted = 0;
-	
+	private int metroCounted = 0;
+
 	public float refreshTime = 2;
 	public int minCameraHeight = 100;
 	public float heightHM;
@@ -106,6 +107,13 @@ public class Heatmap : MonoBehaviour {
 				traffic[trafficCounted] = AnObject;
 				trafficCounted = trafficCounted + 1;
 				break;
+			case 3:
+				if(metroCounted > count - 1) {
+					metroCounted = 0;
+				}
+				metro[metroCounted] = AnObject;
+				metroCounted = metroCounted + 1;
+				break;
 		}
 	}
 
@@ -153,11 +161,10 @@ public class Heatmap : MonoBehaviour {
 
 	public void nextHeatmap() {
 		heatmapNumber = heatmapNumber + 1;
-		if(heatmapNumber > 2) {
+
+		if(heatmapNumber > 3) {
 			heatmapNumber = 1;
 		}
-
-		Debug.Log(heatmapNumber);
 
 		resetPoints();
 	}
@@ -167,7 +174,7 @@ public class Heatmap : MonoBehaviour {
 	/// </summary>
 	public IEnumerator heatmapRefresh() {
 		yield return new WaitForSeconds(refreshTime);
-		
+
 		// Convert the radius to a factor depending on the scale and the size of the grid:
 		// - "radiusMultiplier" is a user set value to allow for adjusting the radius in advance without influencing the UI slider.
 		// - "transform.localScale.x" is the scale of the grid. Make sure it is uniformly scaled!!!
@@ -187,23 +194,15 @@ public class Heatmap : MonoBehaviour {
 					case 2:
 						updatePointsFromTraffic();
 						break;
+					case 3:
+						updatePointsFromMetro();
+						break;
 				}
-				/*
-				switch (heatmapNumber) {
-				case 1:
-					properties [i] = new Vector2 (HMRadius, HMIntensity);
-					break;
-				case 2:
-					properties [i] = new Vector2 (HMRadius, HMIntensity * pedestrians [i].GetComponent<FlashPedestriansController> ().speed);
-					break;
-				}
-				*/
 			}
 			else if(zoomedIn == false) {
 				resetPoints();
 				zoomedIn = true;
 			}
-
 		}
 		StartCoroutine(heatmapRefresh());
 	}
@@ -230,8 +229,20 @@ public class Heatmap : MonoBehaviour {
 
 	private void updatePointsFromTraffic() {
 		for(int i = 0; i < trafficCounted; i++) {
-			if(pedestrians[i].gameObject.activeSelf) {
+			if(traffic[i].gameObject.activeSelf) {
 				points[i] = new Vector4(traffic[i].transform.position.x, heightHM, traffic[i].transform.position.z, intensity);
+			}
+			else {
+				points[i] = new Vector4(0, 0, 0, 0);
+			}
+		}
+		updateShader();
+	}
+
+	private void updatePointsFromMetro() {
+		for(int i = 0; i < metroCounted; i++) {
+			if(metro[i].gameObject.activeSelf) {
+				points[i] = new Vector4(metro[i].transform.position.x, heightHM, metro[i].transform.position.z, intensity * metro[i].GetComponent<VehicleController>().delay);
 			}
 			else {
 				points[i] = new Vector4(0, 0, 0, 0);
