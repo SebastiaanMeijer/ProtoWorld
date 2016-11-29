@@ -874,6 +874,7 @@ public class FlashPedestriansController : TravelerController, Loggable
             {
                 if (flashDestinationScript.destinationName == logData.GetChild("Routing").GetChild("DestinationName").Value)
                 {
+                    //flashPedestrianScript.routing = new FlashPedestriansRouting(flashDestinationScript, new Itinerary(null));
                     flashPedestrianScript.routing = new FlashPedestriansRouting(flashDestinationScript, new Itinerary(null));
                     break;
                 }
@@ -887,6 +888,10 @@ public class FlashPedestriansController : TravelerController, Loggable
                 if (flashSpawnerScript.id == flashPedestrianScript.spawnerId)
                 {
                     flashPedestrianObject.transform.SetParent(flashSpawnerObject.transform);
+                    flashPedestrianScript.itinerary = flashSpawnerScript.flashInformer.FindBestItinerary(flashPedestrianObject.transform.position,
+                        flashPedestrianScript.routing.destinationPoint, null, flashPedestrianScript.profile.travelPreference
+                        );
+                    flashPedestrianScript.routing.itinerary = flashPedestrianScript.itinerary;
                     flashSpawnerScript.SpawnPedestrianFromLog(flashPedestrianScript);
                     break;
                 }

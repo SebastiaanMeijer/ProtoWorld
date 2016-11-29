@@ -123,7 +123,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
     /// <summary>
     /// Itinerary informer that handles the commuting of pedestrians.
     /// </summary>
-    private FlashPedestriansInformer flashInformer;
+    public FlashPedestriansInformer flashInformer;
 
     /// <summary>
     /// Destination entries where pedestrians can go. 
