@@ -42,7 +42,7 @@ public class Heatmap : MonoBehaviour {
 	public int minCameraHeight = 100;
 	public float heightHM;
 
-	public float radiusPremultiplier = 1.0f;
+	public float radiusMultiplier = 1.0f;
 
 	private float radius;
 	private float intensity;
@@ -168,10 +168,10 @@ public class Heatmap : MonoBehaviour {
 		yield return new WaitForSeconds(refreshTime);
 		
 		// Convert the radius to a factor depending on the scale and the size of the grid:
-		// - "radiusPremultiplier" is a user set value to allow for adjusting the radius in advance.
+		// - "radiusMultiplier" is a user set value to allow for adjusting the radius in advance without influencing the UI slider.
 		// - "transform.localScale.x" is the scale of the grid. Make sure it is uniformly scaled!!!
-		// - "0.5 ^ gridSubdivisions / cos(30)" is double the distance from the center point to a vertex of a triangle in the grid.
-		radius = radius = HMRadius * radiusPremultiplier * transform.localScale.x * Mathf.Pow(0.5f, gridSubdivisions) / Mathf.Cos(30.0f * Mathf.Deg2Rad);
+		// - "0.5 * (0.5 ^ gridSubdivisions) / cos(30)" is the distance from the center point to a vertex of a triangle in the grid. This ensures that all data points influence at least one vertex by default.
+		radius = radius = HMRadius * radiusMultiplier * transform.localScale.x * 0.5f * Mathf.Pow(0.5f, gridSubdivisions) / Mathf.Cos(30.0f * Mathf.Deg2Rad);
 		intensity = HMIntensity;
 
 		if(activeHeatMaps) {
