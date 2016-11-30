@@ -19,13 +19,6 @@ public class LegendButtonScript : MonoBehaviour
             controller = transform.parent.parent.GetComponent<ChartController>();
         text = GetComponentInChildren<Text>();
         image = GetComponent<Image>();
-
-        //larger button should show more info
-        RectTransform rt = GetComponent<RectTransform>();
-        if (rt.sizeDelta.y < 30)
-            text.verticalOverflow = VerticalWrapMode.Truncate;
-        else
-            text.verticalOverflow = VerticalWrapMode.Overflow;
     }
 
     void Update()
@@ -37,6 +30,12 @@ public class LegendButtonScript : MonoBehaviour
             image.color = orgColor;
         }
 
+        //larger button should show more info
+        RectTransform rt = GetComponent<RectTransform>();
+        if (rt.sizeDelta.y < 30)
+            text.verticalOverflow = VerticalWrapMode.Truncate;
+        else
+            text.verticalOverflow = VerticalWrapMode.Overflow;
     }
 
     public void ToggleVisibility()
