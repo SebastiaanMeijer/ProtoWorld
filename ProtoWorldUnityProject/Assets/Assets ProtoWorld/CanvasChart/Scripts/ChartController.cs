@@ -109,21 +109,20 @@ public class ChartController : MonoBehaviour
     /// <summary>
     /// Colors for the different series.
     /// </summary>
-    //public Color32[] seriesColors = new Color32[5];// = new Color32[] {Color.blue, Color.green, Color.red, Color.magenta, Color.yellow, Color.cyan, Color.white, Color.black, Color.grey};
     public Color32[] seriesColors = new Color32[]
     {
-        new Color(166, 206, 227), //#A6CEE3
-        new Color(178, 223, 138), //#B2DF8A
-        new Color(251, 154, 153), //#FB9A99
-        new Color(253, 191, 111), //#FDBF6F
-        new Color(202, 178, 214), //#CAB2D6
-        new Color(225, 255, 153), //#E1FF99
-        new Color( 31, 120, 180), //#1F78B4
-        new Color( 51, 160,  44), //#33A02C
-        new Color(227,  26, 227), //#E31AE3
-        new Color(255, 127,   0), //#FF7F00
-        new Color(106,  61, 154), //#6A3D9A
-        new Color(177,  89, 204)  //#B159CC
+        new Color32(166, 206, 227, 255), // #A6CEE3
+        new Color32(178, 223, 138, 255), // #B2DF8A
+        new Color32(251, 154, 153, 255), // #FB9A99
+        new Color32(253, 191, 111, 255), // #FDBF6F
+        new Color32(202, 178, 214, 255), // #CAB2D6
+        new Color32(225, 255, 153, 255), // #E1FF99
+        new Color32( 31, 120, 180, 255), // #1F78B4
+        new Color32( 51, 160,  44, 255), // #33A02C
+        new Color32(227,  26, 227, 255), // #E31AE3
+        new Color32(255, 127,   0, 255), // #FF7F00
+        new Color32(106,  61, 154, 255), // #6A3D9A
+        new Color32(130, 147,  88, 255)  // #829358
     };
 
     /// <summary>

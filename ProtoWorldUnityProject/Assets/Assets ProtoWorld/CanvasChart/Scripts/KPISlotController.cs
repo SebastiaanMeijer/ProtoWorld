@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class KPISlotController : MonoBehaviour
 {
-
     public int slotid;
     public string activekpi;
 
@@ -17,8 +16,7 @@ public class KPISlotController : MonoBehaviour
     public Dropdown dropdown;
 
     private Text id_text;
-
-    // Use this for initialization
+	
 	void Start ()
 	{
 	    controller = GameObject.Find("ChartPanel").GetComponent<ChartPanelController>();
@@ -35,11 +33,11 @@ public class KPISlotController : MonoBehaviour
 
         controller.KpiSelect(this, old_kpi, new_kpi);
     }
-
-	// Update is called once per frame
+	
 	void Update ()
 	{
-	    id_text.text = slotid.ToString();
+		int slotNumber = slotid + 1;
+	    id_text.text = "Chart " + slotNumber.ToString();
 	}
 
     public void FillOptions(List<ChartController> charts)

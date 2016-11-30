@@ -16,9 +16,8 @@ public class ChartPanelController : MonoBehaviour
     public ChartController[] ordering;
 
     private Transform slotPanel;
-    public GameObject kpislot_prefab;
-
-	// Use this for initialization
+    public GameObject slotPrefab;
+	
 	void Start ()
 	{
 	    charts = new List<ChartController>();
@@ -32,10 +31,10 @@ public class ChartPanelController : MonoBehaviour
 
 	    var i = 0;
 
-	    //Create a kpislot object for each item in the ordering.
+	    // Create a kpislot object for each item in the ordering.
 	    foreach (ChartController chart in ordering)
 	    {
-	        GameObject kpi_obj = Instantiate(kpislot_prefab, transform.position, Quaternion.identity) as GameObject;
+	        GameObject kpi_obj = Instantiate(slotPrefab, transform.position, Quaternion.identity) as GameObject;
 	        KPISlotController kpislot = kpi_obj.GetComponent<KPISlotController>();
 
 	        kpislot.dropdown.options.Clear();
@@ -48,14 +47,15 @@ public class ChartPanelController : MonoBehaviour
 	        kpi_obj.name = "KPISlot " + kpislot.slotid;
 	    }
 
-
+		// Start with the slot panel disabled.
+		SlotPanelController scontroller = slotPanel.GetComponent<SlotPanelController>();
+        scontroller.active = false;
 	}
 
-
-	// Update is called once per frame
+	
 	void Update ()
 	{
-	    //Disable each chart that is not selected in the slots.
+	    // Disable each chart that is not selected in the slots.
 	    foreach (ChartController chart in charts)
 	    {
 	        if(!ordering.Contains(chart)) chart.gameObject.SetActive(false);
@@ -74,19 +74,16 @@ public class ChartPanelController : MonoBehaviour
 	        if (chart.contentPanel.activeSelf) height += 200;
 	        else height += 25;
 	    }
-
-
-
 	}
 
-    //Toggle the slotpanel
+    // Toggle the slotpanel
     public void ToggleSlotConfig()
     {
         SlotPanelController scontroller = slotPanel.GetComponent<SlotPanelController>();
         scontroller.active = !scontroller.active;
     }
 
-    //Mass assignment of the states of the contentpanels (on/off)
+    // Mass assignment of the states of the contentpanels (on/off)
     public void SetAll(bool val)
     {
         foreach (ChartController controller in charts)
@@ -98,21 +95,21 @@ public class ChartPanelController : MonoBehaviour
 
     public void KpiSelect(KPISlotController slotController, string oldkpi, string newkpi)
     {
-        //Grab the old/new chart controller.
+        // Grab the old/new chart controller.
         ChartController newChart = charts.FirstOrDefault(chart => chart.name.Equals(newkpi));
         ChartController oldChart = charts.FirstOrDefault(chart => chart.name.Equals(oldkpi));
 
-        //Reset the dropdown to the old item if the wanted chart is already in a alot
+        // Reset the dropdown to the old item if the wanted chart is already in a slot
         if (ordering.Contains(newChart))
         {
             slotController.SetDropdown();
         }
         else {
-            //Set the state of the previous contentPanel to the new one
+            // Set the state of the previous contentPanel to the new one
             bool was_active = oldChart.contentPanel.activeSelf;
             newChart.contentPanel.SetActive(was_active);
 
-            //Finally, set the new chart
+            // Finally, set the new chart
             slotController.active_chart = newChart;
             slotController.activekpi = newChart.name;
             ordering[slotController.slotid] = newChart;
