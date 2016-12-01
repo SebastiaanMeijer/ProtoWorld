@@ -441,7 +441,7 @@ public class FlashPedestriansController : TravelerController, Loggable
 	/// Finds the stations near the current position of the pedestrian.
 	/// </summary>
 	/// <returns>List of stations nearby.</returns>
-	private StationController[] StationsNearCurrentPosition()
+	public StationController[] StationsNearCurrentPosition()
 	{
 		// Get the stations that are around the spawner
 		Collider[] coll = Physics.OverlapSphere(this.transform.position, radiousToCheckStations, 1 << LayerMask.NameToLayer("Stations"));
@@ -886,10 +886,9 @@ public class FlashPedestriansController : TravelerController, Loggable
             {
                 if (flashSpawnerScript.id == flashPedestrianScript.spawnerId)
                 {
-                    StationController[] stationsNearby = StationsNearCurrentPosition();
-                    //flashPedestrianScript.RedoRouteFromCurrentPosition();
-                    flashSpawnerScript.flashInformer.FindBestItinerary(flashPedestrianObject.transform.position,
-                        flashPedestrianScript.routing.destinationPoint, stationsNearby, flashPedestrianScript.profile.travelPreference);
+                    //StationController[] stationsNearby = StationsNearCurrentPosition();
+                    //flashSpawnerScript.flashInformer.FindBestItinerary(flashPedestrianObject.transform.position,
+                    //    flashPedestrianScript.routing.destinationPoint, stationsNearby, flashPedestrianScript.profile.travelPreference);
                     flashPedestrianObject.transform.SetParent(flashSpawnerObject.transform);
                     flashSpawnerScript.SpawnPedestrianFromLog(flashPedestrianScript);
                     break;

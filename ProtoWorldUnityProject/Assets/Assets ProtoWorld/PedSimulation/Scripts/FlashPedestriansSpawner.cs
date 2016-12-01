@@ -275,7 +275,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
         }
 
         Itinerary itinerary = flashInformer.FindBestItinerary(pedestrianInformation.transform.position, pedestrianInformation.routing.destinationPoint, 
-            stationsNearThisSpawner, pedestrianInformation.profile.travelPreference);
+            pedestrianInformation.StationsNearCurrentPosition(), pedestrianInformation.profile.travelPreference);
 
         FlashPedestriansController controller = newAgent.GetComponent<FlashPedestriansController>();
 
