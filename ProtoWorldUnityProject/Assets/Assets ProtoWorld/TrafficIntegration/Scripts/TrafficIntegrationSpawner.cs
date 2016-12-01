@@ -75,11 +75,15 @@ public class TrafficIntegrationSpawner : MonoBehaviour
 
     private TimeController timeContr;
 
+	private Heatmap heatMap;
+
     /// <summary>
     /// Awakes the script.
     /// </summary>
     void Awake()
     {
+
+		heatMap = FindObjectOfType<Heatmap>();
         trafficContr = FindObjectOfType<TrafficIntegrationController>();
         timeContr = FindObjectOfType<TimeController>();
 
@@ -239,6 +243,7 @@ public class TrafficIntegrationSpawner : MonoBehaviour
                 vc.timeToBrakeInSeconds = timeToBrakeInSeconds;
                 vc.driversPatienceInSeconds = driversPatienceInSeconds;
                 vc.angleOfView = angleOfView;
+				vc.heatMap = heatMap;
                 vehControllers.Add(v.id, vc);
             }
         }

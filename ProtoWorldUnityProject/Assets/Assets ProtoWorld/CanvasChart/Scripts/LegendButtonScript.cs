@@ -30,6 +30,12 @@ public class LegendButtonScript : MonoBehaviour
             image.color = orgColor;
         }
 
+        //larger button should show more info
+        RectTransform rt = GetComponent<RectTransform>();
+        if (rt.sizeDelta.y < 30)
+            text.verticalOverflow = VerticalWrapMode.Truncate;
+        else
+            text.verticalOverflow = VerticalWrapMode.Overflow;
     }
 
     public void ToggleVisibility()

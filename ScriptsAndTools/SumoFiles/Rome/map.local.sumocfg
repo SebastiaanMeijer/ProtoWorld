@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.sf.net/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="map.net.xml"/>
+		<route-files value="map.rou.xml"/>
+    </input>
+
+    <time>
+        <begin value="0"/>
+        <end value="7200"/>
+    </time>
+
+    <processing>
+        <time-to-teleport value="60"/>
+		<pedestrian.model value="striping" type="STR"/>
+		<pedestrian.striping.stripe-width value="0.65" type="FLOAT"/>
+		<pedestrian.striping.dawdling value="0.2" type="FLOAT"/>
+    </processing>
+
+	<output>
+		<fcd-output value="127.0.0.1:3654" type="FILE"/>
+		<fcd-output.geo value="true" type="BOOL"/>
+	</output>
+
+	<traciserver>
+		<remote-port value="3456" type="INT"/>
+	</traciserver>
+	
+	<options>
+		<ignore-route-errors value="true" type="BOOL"/>
+	</options>
+
+</configuration>

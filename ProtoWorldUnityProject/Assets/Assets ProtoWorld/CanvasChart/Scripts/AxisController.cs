@@ -70,14 +70,23 @@ public class AxisController : MonoBehaviour
         switch (controller.chartType)
         {
             case UIChartTypes.Bar:
+                xMaxText.gameObject.SetActive(false);
+                xMinText.gameObject.SetActive(false);
+                yMaxText.gameObject.SetActive(true);
+                yMinText.gameObject.SetActive(true);
+                break;
             case UIChartTypes.Pie:
                 xMaxText.gameObject.SetActive(false);
                 xMinText.gameObject.SetActive(false);
+                yMaxText.gameObject.SetActive(false);
+                yMinText.gameObject.SetActive(false);
                 break;
             case UIChartTypes.Line:
             case UIChartTypes.StackedArea:
                 xMaxText.gameObject.SetActive(true);
                 xMinText.gameObject.SetActive(true);
+                yMaxText.gameObject.SetActive(true);
+                yMinText.gameObject.SetActive(true);
                 break;
         }
 

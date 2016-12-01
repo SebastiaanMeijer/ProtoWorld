@@ -94,7 +94,7 @@ public class KPIFeeder : MonoBehaviour
             }
             if (go == null)
             {
-                Debug.Log("Can't find KPI-gameObject?");
+                Debug.Log("Can't find KPI-gameObject? " + kpiStrings[i]);
                 continue;
             }
             var script = go.GetComponent(scriptName);
@@ -169,9 +169,12 @@ public class KPIFeeder : MonoBehaviour
 
     void SetSeriesColorsInChartController()
     {
+        while(kpiColors.Count < kpiStrings.Count) {
+            kpiColors.Add(controller.GetSeriesColor(kpiColors.Count));
+        }
         for (int i = 0; i < kpiColors.Count; i++)
         {
-            controller.SetSeriesColor(i, kpiColors[i]);
+            kpiColors[i] = controller.seriesColors[i]; //controller.SetSeriesColor(i, kpiColors[i]);
         }
     }
 
@@ -219,6 +222,4 @@ public class KPIFeeder : MonoBehaviour
         kpiColors.Clear();
         //kpiTypes.Clear();
     }
-
-
 }

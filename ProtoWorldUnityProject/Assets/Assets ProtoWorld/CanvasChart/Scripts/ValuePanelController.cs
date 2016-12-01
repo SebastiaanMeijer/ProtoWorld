@@ -51,18 +51,18 @@ public class ValuePanelController : MonoBehaviour
     {
         CheckValueCount();
         UpdateValues();
-
     }
 
     private void UpdateValues()
     {
-        var minmax = controller.GetMinMaxOfAll();
+        Rect minmax = controller.GetMinMaxOfAll();
 
-        for (int i = 0; i < controller.values.Length; i++)
+        float stackHeight = 0;
+        for (int i = controller.values.Length - 1; i >= 0; i--)
         {
             string name = ChartUtils.NameGenerator(valueChildString, i);
             GameObject obj = valuePanel.Find(name).gameObject;
-            colorBlock.disabledColor = controller.seriesColors[i];
+            colorBlock.disabledColor = controller.GetSeriesColor(i);
             obj.GetComponent<Button>().colors = colorBlock;
 
             float value = controller.values[i];
@@ -70,6 +70,12 @@ public class ValuePanelController : MonoBehaviour
 
             RectTransform rt = obj.transform as RectTransform;
             float yPos = (value - minmax.yMin) / (minmax.yMax - minmax.yMin) * valuePanel.rect.height;
+            if (controller.chartType == UIChartTypes.StackedArea)
+            {
+                float temp = yPos;
+                yPos += stackHeight;
+                stackHeight += temp;
+            }
             yPos = Mathf.Clamp(yPos, 0, valuePanel.rect.height - rt.rect.height);
             rt.localPosition = new Vector3(-5 , yPos);
         }
@@ -102,7 +108,4 @@ public class ValuePanelController : MonoBehaviour
             }
         }
     }
-
-
-
 }

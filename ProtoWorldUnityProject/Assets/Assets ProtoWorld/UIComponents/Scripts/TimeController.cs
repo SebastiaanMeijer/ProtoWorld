@@ -316,7 +316,7 @@ public class TimeController : MonoBehaviour
             if (loggerAssembly != null && loggerAssembly.logTimeController)
                 log.Info(string.Format("{0}:{1}:{2}:{3}", logSeriesId, "action", 0, "game paused"));
 
-            if (pauseButtonLabel != null)
+            if (pauseButtonLabel != null && icon_play != null)
                 playPauseIcon.texture = icon_play;
                 //pauseButtonLabel.text = "Resume";
         }
@@ -327,7 +327,7 @@ public class TimeController : MonoBehaviour
             if (loggerAssembly != null && loggerAssembly.logTimeController)
                 log.Info(string.Format("{0}:{1}:{2}:{3}", logSeriesId, "action", 0, "game resumed"));
 
-            if (pauseButtonLabel != null)
+            if (pauseButtonLabel != null && icon_pause != null)
                 playPauseIcon.texture = icon_pause;
                 //pauseButtonLabel.text = "Pause";
         }

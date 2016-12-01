@@ -11,7 +11,7 @@
 
 # Per person generated configuration
 ProtoWorldUnityProject/ProjectSettings/ProjectVersion.txt
-ProtoWorldUnityProject/ProjectSettings/ProjectSettings.asset
+#ProtoWorldUnityProject/ProjectSettings/ProjectSettings.asset
 ProtoWorldUnityProject/ProjectSettings/GraphicsSettings.asset
 
 # Per person custom scenes
@@ -99,7 +99,6 @@ artifacts/
 *.pdb
 *.pgc
 *.pgd
-*.rsp
 *.sbr
 *.tlb
 *.tli
