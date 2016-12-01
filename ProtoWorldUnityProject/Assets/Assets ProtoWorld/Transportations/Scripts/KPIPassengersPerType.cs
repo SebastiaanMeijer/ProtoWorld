@@ -9,9 +9,10 @@ public class KPIPassengersPerType : MonoBehaviour
     public int metroPassengers = 0;
     public int carPassengers = 0;
     public int bicyclePassengers = 0;
+    public int bicyclePassengersDecentralized = 0;
 
     private LineStatistics lineStatistics;
-    private Transform spawnerPoints, transLines, destinationPoints;
+    private Transform spawnerPoints, transLines, destinationPoints, trafficIntegration;
 
     // Use this for initialization
     void Start()
@@ -20,6 +21,7 @@ public class KPIPassengersPerType : MonoBehaviour
         spawnerPoints = GameObject.Find("SpawnerPoints").transform;
         transLines = GameObject.Find("TransLines").transform;
         destinationPoints = GameObject.Find("DestinationPoints").transform;
+        trafficIntegration = GameObject.Find("TrafficIntegrationData").transform;
 
         lineStatistics = GetComponentInChildren<LineStatistics>();
     }
@@ -41,20 +43,23 @@ public class KPIPassengersPerType : MonoBehaviour
 
         foreach (Transform transLine in transLines)
         {
-            foreach (Transform item in transLine)
+            if (transLine.gameObject.activeSelf)
             {
-                VehicleController vc = item.GetComponent<VehicleController>();
-                if (transLine.name.StartsWith("Tram_"))
-                    tmpTram += vc.headCount;
-
-                if (transLine.name.StartsWith("Train_"))
-                    tmpTrain += vc.headCount;
-
-                if (transLine.name.StartsWith("Bus_"))
-                    tmpBus += vc.headCount;
-
-                if (transLine.name.StartsWith("Metro_"))
-                    tmpMetro += vc.headCount;
+                foreach (Transform item in transLine)
+                {
+                    if (item.gameObject.activeSelf)
+                    {
+                        VehicleController vc = item.GetComponent<VehicleController>();
+                        if (transLine.name.StartsWith("Tram_"))
+                            tmpTram += vc.headCount;
+                        else if (transLine.name.StartsWith("Train_"))
+                            tmpTrain += vc.headCount;
+                        else if (transLine.name.StartsWith("Bus_"))
+                            tmpBus += vc.headCount;
+                        else if (transLine.name.StartsWith("Metro_"))
+                            tmpMetro += vc.headCount;
+                    }
+                }
             }
         }
 
@@ -76,7 +81,8 @@ public class KPIPassengersPerType : MonoBehaviour
                     if (carriage.gameObject.activeSelf)
                     {
                         VehicleController vc = carriage.GetComponent<VehicleController>();
-                        if (vc != null) buscount += vc.headCount;
+                        if (vc != null)
+                            buscount += vc.headCount;
                     }
                 }
             }
@@ -86,7 +92,16 @@ public class KPIPassengersPerType : MonoBehaviour
 
     private int getCarPassengers()
     {
-       return 0;
+        int carcount = 0;
+        foreach (Transform vehicle in trafficIntegration)
+        {
+            if (vehicle.gameObject.activeSelf)
+            {
+                if (vehicle.name.Substring(0, 3) == "veh")
+                    carcount++;
+            }
+        }
+        return carcount;
     }
 
     private int getMetroPassengers()

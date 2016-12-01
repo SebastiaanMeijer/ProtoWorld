@@ -23,124 +23,119 @@ public class FileBrowserController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        FileScrollView = GameObject.Find("FileScrollView").GetComponent<ScrollRect>();
-        TimestampScrollView = GameObject.Find("TimestampScrollView").GetComponent<ScrollRect>();
-        controller = GameObject.Find("HistoricalDataModule").GetComponent<HistoricalDataController>();
-        timecontroller = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
-        //        inputField = GameObject.Find("SaveInputField");
-        loadButton = GameObject.Find("LoadButton").GetComponent<Button>();
+		controller = GameObject.Find("HistoricalDataModule").GetComponent<HistoricalDataController>();
+		timecontroller = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (selected_timestamp == null) loadButton.interactable = false;
-        else loadButton.interactable = true;
+		if (selected_timestamp == null) loadButton.interactable = false;
+		else loadButton.interactable = true;
 
 
-        if (controller.loadFileBrowser.activeSelf)
-        {
-            //Highlight the selected file
-            foreach (Transform button in FileScrollView.content.transform)
-            {
-                Image btn_img = button.GetComponent<Image>();
-                Button btn = button.GetComponent<Button>();
-                fileButtonController btn_ctl = button.GetComponent<fileButtonController>();
+		if (controller.loadFileBrowser.activeSelf)
+		{
+			//Highlight the selected file
+			foreach (Transform button in FileScrollView.content.transform)
+			{
+				Image btn_img = button.GetComponent<Image>();
+				Button btn = button.GetComponent<Button>();
+				fileButtonController btn_ctl = button.GetComponent<fileButtonController>();
 
-                btn_img.color = btn.colors.normalColor;
-                if (selected_file.Equals(btn_ctl.path))
-                {
-                    btn_img.color = btn.colors.highlightedColor;
-                }
-            }
+				btn_img.color = btn.colors.normalColor;
+				if (selected_file.Equals(btn_ctl.path))
+				{
+					btn_img.color = btn.colors.highlightedColor;
+				}
+			}
 
 
-            //Highlight the selected timestamp
-            if(selected_timestamp != null)
-            {
-                foreach (Transform button in TimestampScrollView.content.transform)
-                {
-                    Image btn_img = button.GetComponent<Image>();
-                    Button btn = button.GetComponent<Button>();
-                    TimestampButtonController ctlr = button.GetComponent<TimestampButtonController>();
+			//Highlight the selected timestamp
+			if(selected_timestamp != null)
+			{
+				foreach (Transform button in TimestampScrollView.content.transform)
+				{
+					Image btn_img = button.GetComponent<Image>();
+					Button btn = button.GetComponent<Button>();
+					TimestampButtonController ctlr = button.GetComponent<TimestampButtonController>();
 
-                    btn_img.color = btn.colors.normalColor;
-                    if (selected_timestamp.Equals(ctlr.timestamp))
-                    {
-                        btn_img.color = btn.colors.highlightedColor;
-                    }
-                }
-            }
+					btn_img.color = btn.colors.normalColor;
+					if (selected_timestamp.Equals(ctlr.timestamp))
+					{
+						btn_img.color = btn.colors.highlightedColor;
+					}
+				}
+			}
 
-        }
+		}
 
 	}
 
-    public void loadLogDirectory()
-    {
+	public void loadLogDirectory()
+	{
 
-        foreach (GameObject item in FileScrollView.content)
-        {
-            GameObject.Destroy(item);
-        }
-        FileInfo[] filesInfo = controller.logDirectory.GetFiles();
-        foreach (FileInfo fileInfo in filesInfo)
-        {
-            if (fileInfo.Name.EndsWith(".xml"))
-            {
-                //Add file to the fileScrollView
-                GameObject fileButton = Instantiate(logFileButtonPrefab) as GameObject;
-                fileButtonController btn = fileButton.GetComponent<fileButtonController>();
-                btn.path = fileInfo.FullName;
-                fileButton.transform.SetParent(FileScrollView.content.transform);
-                Text text = fileButton.GetComponentInChildren<Text>();
-                text.text = fileInfo.Name;
-                //Debug.Log("File found: " + fileInfo);
-            }
-        }
-    }
+		foreach (GameObject item in FileScrollView.content)
+		{
+			GameObject.Destroy(item);
+		}
 
-    internal void showFileInBrowser(string path)
-    {
+		FileInfo[] filesInfo = controller.logDirectory.GetFiles();
+		foreach (FileInfo fileInfo in filesInfo)
+		{
+			if (fileInfo.Name.EndsWith(".xml"))
+			{
+				//Add file to the fileScrollView
+				GameObject fileButton = Instantiate(logFileButtonPrefab) as GameObject;
+				fileButtonController btn = fileButton.GetComponent<fileButtonController>();
+				btn.path = fileInfo.FullName;
+				fileButton.transform.SetParent(FileScrollView.content.transform);
+
+				Text text = fileButton.GetComponentInChildren<Text>();
+				text.text = fileInfo.Name;
+			}
+		}
+	}
+
+	internal void showFileInBrowser(string path)
+	{
+
+		selected_file = path;
+		selected_timestamp = null;
+
+		//Fetch all timestamps
+		XDocument logFile = XDocument.Load(path);
+		XElement logFileRootElement = logFile.Root;
+
+		Dictionary<string, XElement> historicalTimeStamps = new Dictionary<string, XElement>();
+
+		List<System.Xml.Linq.XElement> timeStampElements =
+			(from timeStampElement in logFileRootElement.Descendants("TimeStamp")
+				select timeStampElement).ToList();
 
 
-        selected_file = path;
-        selected_timestamp = null;
+		foreach (XElement timeStampElement in timeStampElements)
+		{
+			historicalTimeStamps.Add(timeStampElement.Attribute("timestamp").Value.ToString(), timeStampElement);
+		}
 
-        //Fetch all timestamps
-        XDocument logFile = XDocument.Load(path);
-        XElement logFileRootElement = logFile.Root;
+		foreach (Transform item in TimestampScrollView.content)
+		{
+			GameObject.Destroy(item.gameObject);
+		}
 
-        Dictionary<string, XElement> historicalTimeStamps = new Dictionary<string, XElement>();
+		foreach (KeyValuePair<string, System.Xml.Linq.XElement> timeStamp in historicalTimeStamps)
+			//Create timestamp button prefab
+		{
+			//Add file to the fileScrollView
+			GameObject fileButton = Instantiate(timestampButtonPrefab) as GameObject;
+			fileButton.transform.SetParent(TimestampScrollView.content.transform);
 
-        List<System.Xml.Linq.XElement> timeStampElements =
-            (from timeStampElement in logFileRootElement.Descendants("TimeStamp")
-             select timeStampElement).ToList();
-
-
-        foreach (XElement timeStampElement in timeStampElements)
-        {
-            //gametimeEntries.Add(float.Parse(timeStampElement.Attribute("timestamp").Value.ToString()));
-            historicalTimeStamps.Add(timeStampElement.Attribute("timestamp").Value.ToString(), timeStampElement);
-        }
-
-        foreach (Transform item in TimestampScrollView.content)
-        {
-            GameObject.Destroy(item.gameObject);
-        }
-
-        foreach (KeyValuePair<string, System.Xml.Linq.XElement> timeStamp in historicalTimeStamps)
-        //Create timestamp button prefab
-        {
-            //Add file to the fileScrollView
-            GameObject fileButton = Instantiate(timestampButtonPrefab) as GameObject;
-            fileButton.transform.SetParent(TimestampScrollView.content.transform);
-
-            Text btn = fileButton.GetComponentInChildren<Text>();
-            btn.text = timeStamp.Key.ToString();
-            TimestampButtonController ctl = fileButton.GetComponent<TimestampButtonController>();
-            ctl.timestamp = timeStamp.Key;
-        }
-    }
+			Text btn = fileButton.GetComponentInChildren<Text>();
+			btn.text = timeStamp.Key.ToString();
+			TimestampButtonController ctl = fileButton.GetComponent<TimestampButtonController>();
+			ctl.timestamp = timeStamp.Key;
+		}
+	}
 
     public void TogglePanel()
     {

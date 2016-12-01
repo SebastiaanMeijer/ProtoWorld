@@ -48,7 +48,7 @@ public class ChartController : MonoBehaviour
     /// <summary>
     /// The name, appears in the toolbar.
     /// </summary>
-    new public string name;
+    public string name;
 
     /// <summary>
     /// Whether this is a streaming chart or a static chart. 
@@ -88,7 +88,7 @@ public class ChartController : MonoBehaviour
     /// Set the preferred maximum Y-value.
     /// This value will increase if maxYCanOnlyIncrease is set to true.
     /// </summary>
-    public float preferredMaxYValue = 100;
+    public float preferredMaxYValue = 10;
 
     /// <summary>
     /// In streaming chart:
@@ -109,7 +109,21 @@ public class ChartController : MonoBehaviour
     /// <summary>
     /// Colors for the different series.
     /// </summary>
-    public Color32[] seriesColors = new Color32[] {Color.blue, Color.green, Color.red, Color.magenta, Color.yellow, Color.cyan, Color.white, Color.black, Color.grey};
+    public Color32[] seriesColors = new Color32[]
+    {
+        new Color32(166, 206, 227, 255), // #A6CEE3
+        new Color32(178, 223, 138, 255), // #B2DF8A
+        new Color32(251, 154, 153, 255), // #FB9A99
+        new Color32(253, 191, 111, 255), // #FDBF6F
+        new Color32(202, 178, 214, 255), // #CAB2D6
+        new Color32(225, 255, 153, 255), // #E1FF99
+        new Color32( 31, 120, 180, 255), // #1F78B4
+        new Color32( 51, 160,  44, 255), // #33A02C
+        new Color32(227,  26, 227, 255), // #E31AE3
+        new Color32(255, 127,   0, 255), // #FF7F00
+        new Color32(106,  61, 154, 255), // #6A3D9A
+        new Color32(130, 147,  88, 255)  // #829358
+    };
 
     /// <summary>
     /// Names for the different series.
@@ -212,6 +226,20 @@ public class ChartController : MonoBehaviour
 
         eventIndicatorView = GetComponentInChildren<EventIndicatorController>();
         valueIndicatorView = GetComponentInChildren<ValueIndicatorController>();
+
+		// TODO Dirteh hack!
+		transform.Find("Toolbar/ChartTitleText").GetComponent<Text>().text = name;
+
+        //automatically select the correct chart type
+        Dropdown dropdown = transform.Find("Toolbar/ChartType/Dropdown").GetComponent<Dropdown>();
+        for (int i = 0; i < dropdown.options.Count; i++)
+        {
+            if (dropdown.options[i].text == chartType.ToString())
+            {
+                dropdown.value = i;
+                break;
+            }
+        }
     }
 
     /// <summary>
@@ -337,6 +365,11 @@ public class ChartController : MonoBehaviour
             for (int i = 0; i < seriesColors.Length; i++)
             {
                 colors[i] = seriesColors[i];
+            }
+            //fill remaining empty slots
+            for (int i = seriesColors.Length; i < colors.Length; i++)
+            {
+                colors[i] = seriesColors[i % seriesColors.Length];
             }
             seriesColors = colors;
         }
@@ -530,7 +563,7 @@ public class ChartController : MonoBehaviour
             if (dataCollection.Count < 1)
                 continue;
 
-            int idx = Mathf.RoundToInt((dataCollection.Count - 1)*relativePosition);
+            int idx = Mathf.RoundToInt((dataCollection.Count - 1) * relativePosition);
 
             //Debug.Log("i: " + i + " count: " + dataCollection.Count);
             //Debug.Log("rel: " + relativePosition + " idx: " + idx);
@@ -555,7 +588,7 @@ public class ChartController : MonoBehaviour
         for (int i = 0; i < SeriesCount; i++)
         {
             var dataCollection = DataContainer.GetTimedDataCollection(i);
-            int idx = Mathf.RoundToInt((dataCollection.Count - 1)*relativePosition);
+            int idx = Mathf.RoundToInt((dataCollection.Count - 1) * relativePosition);
             //Debug.Log("list count: " + list.Count + " idx: " + idx);
             values[i] = dataCollection[idx].GetData();
             valueTime = dataCollection[idx].time;

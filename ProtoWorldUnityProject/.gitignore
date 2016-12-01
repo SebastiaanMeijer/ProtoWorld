@@ -10,7 +10,7 @@ sysinfo.txt
 
 *.csv
 
-ProjectSettings/
+#ProjectSettings/
 
  
 # =============== #
@@ -22,6 +22,10 @@ Assets/Cases ProtoWorld/*
 Assets/Cases ProtoWorld/*.meta
 Assets/Miscelanea/Legacy/SEStarIntegration/
 Assets/Miscelanea/Legacy/SEStarIntegration.meta
+
+Assets/log
+Assets/log/*
+Assets/log.meta
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #

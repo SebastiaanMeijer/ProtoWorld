@@ -87,8 +87,12 @@ public class FlashPedestriansController : TravelerController, Loggable
 
 	private bool isPause = false;
 
+	public Heatmap heatMap1;
+	public Transform heatMap2;
+
 	[HideInInspector]
 	public Heatmap heatMap;
+
 
 	/// <summary>
 	/// Awake method.
@@ -98,13 +102,14 @@ public class FlashPedestriansController : TravelerController, Loggable
         initializePedestrian();
         LoggableManager.subscribe((Loggable)this);
     }
-
+	
     public void initializePedestrian()
     {
-        navAgent = gameObject.GetComponent<NavMeshAgent>();
-        FSM = gameObject.GetComponent<Animator>();
-        balloons = transform.Find("Balloons");
-    }
+		navAgent = gameObject.GetComponent<NavMeshAgent>();
+		FSM = gameObject.GetComponent<Animator>();
+		balloons = transform.Find("Balloons");
+	//	heatMap = GameObject.Find("HeatMapPedestrians").GetComponent<Heatmap>();
+	}
 
 	/// <summary>
 	/// Start method.
@@ -127,9 +132,11 @@ public class FlashPedestriansController : TravelerController, Loggable
 		currentWeather = FlashPedestriansGlobalParameters.WeatherConditions.DefaultWeather;
 
 		//Needed to put info about object into heatmaps array
-		if(heatMap != null)
-			heatMap.putInArray (this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform);
-
+		if (heatMap != null) {
+			if(50 > Random.Range(0,100)){
+			heatMap.putInArray (this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform, 1);
+				}
+		}
 
 		Renderer rsp = GetComponentInParent<Renderer> ();
 		//Deactivate render if zoomed out
@@ -526,8 +533,16 @@ public class FlashPedestriansController : TravelerController, Loggable
 		flashInformer.UnsuscribePedestrian(this);
 
 		Transform bike = this.transform.FindChild("bike");
-		if (bike != null)
-			bike.gameObject.SetActive(false);
+        if (bike != null)
+        {
+            bike.gameObject.SetActive(false);
+            FSM.SetBool("OnDestination", true);
+            FSM.SetBool("OnBiking", false);
+            //remove cyclist from total
+            /*GameObject TransportationModule = GameObject.Find("TransportationModule");
+            KPIPassengersPerType kpipassengers = TransportationModule.GetComponent<KPIPassengersPerType>();
+            kpipassengers.bicyclePassengersDecentralized--;*/
+        }
 
 		if(globalParam != null)
 		{

@@ -17,7 +17,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
  * GAPSLABS EXTENDED EDITOR
  * Aram Azhari
  * 
- * Reviewed by Miguel Ramos Carretero
+ * Reviewed by Miguel Ramos Carretero, Berend Wouda
  * 
  */
 
@@ -144,7 +144,7 @@ public class PrepareForCombining : Editor
         var go2 = GameObject.FindGameObjectsWithTag("Line");
         for (int i = 0; i < go2.Length; i++)
         {
-            if (!EditorUtility.DisplayCancelableProgressBar("Removing Colliders - Buildings", "", i / (float)(go2.Length)))
+            if (!EditorUtility.DisplayCancelableProgressBar("Removing Colliders - Roads", "", i / (float)(go2.Length)))
             {
                 if (go2[i].GetComponent<Polygon>() != null)
                     DestroyImmediate(go2[i].GetComponent<Polygon>());
@@ -323,30 +323,41 @@ public class PrepareForCombining : Editor
         var mapProperties = aramGisObject.GetComponent<MapBoundaries>();
         var parentObject = GameObject.Find(ObjectGroup);
         CombineChildren[] combinations = null;
-        try
-        {
-            if (autoTurnOffColliders)
-            {
-                TurnRoadCollidersOff();
-                TurnBuildingCollidersOff();
-            }
+		try {
+			if(autoTurnOffColliders) {
+				TurnRoadCollidersOff();
+				TurnBuildingCollidersOff();
+			}
 
-            if (parentObject == null)
-            {
-                Debug.LogError("Why is " + ObjectGroup + " object null?");
-                return;
-            }
+			if(parentObject == null) {
+				Debug.LogError("Why is " + ObjectGroup + " object null?");
+				return;
+			}
 
-            combinations = parentObject.GetComponentsInChildren<CombineChildren>();
-            for (int i = 0; i < combinations.Length; i++)
-            {
-                if (!EditorUtility.DisplayCancelableProgressBar("MeshCombineUtility running... ", "Combining meshes of " + combinations[i].name, 100f * i / combinations.Length))
-                {
-                    combinations[i].generateTriangleStrips = false;
-                    combinations[i].CombinedMeshName = "Combined_" + childTag + "_mesh";
-                    combinations[i].CombinedMeshTag = "Combined" + ObjectGroup;
-                    combinations[i].SendMessage("Start");
-                }
+			combinations = parentObject.GetComponentsInChildren<CombineChildren>();
+			for(int i = 0; i < combinations.Length; i++) {
+				if(!EditorUtility.DisplayCancelableProgressBar("MeshCombineUtility running... ", "Combining meshes of " + combinations[i].name, 100f * i / combinations.Length)) {
+					combinations[i].generateTriangleStrips = false;
+					combinations[i].CombinedMeshName = "Combined_" + childTag + "_mesh";
+					combinations[i].CombinedMeshTag = "Combined" + ObjectGroup;
+					combinations[i].SendMessage("Start");
+
+					// TODO Disabled since it doesn't work. The combiner doesn't run and finish
+					// before this code is called. For now we can use the post generation utility.
+
+					// Set the layer to the layer the first matching child is in, which is likely
+					// to be the layer all the children are in, since their materials are the same.
+					//GameObject combinedChild = GameObject.Find(combinations[i].CombinedMeshName);
+					//for(int index = 0; index < combinations[i].transform.childCount; index++) {
+					//	GameObject child = combinations[i].transform.GetChild(index).gameObject;
+					//	if(child.tag != combinations[i].CombinedMeshTag) {
+					//		if(child.GetComponent<Renderer>().sharedMaterial.name == combinedChild.GetComponent<Renderer>().sharedMaterial.name) {
+					//			combinedChild.layer = child.layer;
+					//			break;
+					//		}
+					//	}
+					//}
+				}
                 else break;
             }
         }

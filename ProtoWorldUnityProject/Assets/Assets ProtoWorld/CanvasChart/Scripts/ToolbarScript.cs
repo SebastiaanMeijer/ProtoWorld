@@ -1,22 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ToolbarScript : MonoBehaviour {
 
     private ChartController controller;
 
+    // Icons
+    public Texture iconMaximize;
+    public Texture iconMinimize;
+    public RawImage img;
+
     void Start()
     {
         controller = GetComponentInParent<ChartController>();
+        img = transform.FindChild("MinimizeButton").FindChild("RawImage").GetComponent<RawImage>();
     }
 
     // Update is called once per frame
-    void Update () {
-	
-	}
+    void Update ()
+    {
+        img.texture = controller.contentPanel.activeSelf ? iconMinimize : iconMaximize;
+    }
 
     public void ChangeChartType(int id)
     {
+        if (controller == null)
+            return;
         switch (id)
         {
             case 0:
@@ -43,7 +53,11 @@ public class ToolbarScript : MonoBehaviour {
     public void ToggleVisibility()
     {
         controller.contentPanel.SetActive(!controller.contentPanel.activeSelf);
+        ClearRenderer();
+    }
 
+    private void ClearRenderer()
+    {
         //Clear the CanvasRenderer, else the axis/lines remain visible.
         Transform content = controller.transform.Find("Content");
         Transform chartView = content.Find("ChartView");
@@ -58,6 +72,12 @@ public class ToolbarScript : MonoBehaviour {
         Transform axisHolder = chartView.transform.Find("AxisHolder");
         CanvasRenderer renderer = axisHolder.gameObject.GetComponent<CanvasRenderer>();
         renderer.Clear();
+    }
+
+    public void ToggleVisibility(bool val)
+    {
+        controller.contentPanel.SetActive(val);
+        ClearRenderer();
     }
 
     public void ToggleLegend()

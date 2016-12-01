@@ -10,14 +10,12 @@ public class KPIAvgDelaysPerType : MonoBehaviour
     public float avgTrainDelay = 0;
     public float avgTramDelay = 0;
 
-
     private KPIDelays delays;
 
     //Alternative is an array with a finger
     private Dictionary<int, float> TramDelaysDict;
     private Dictionary<int, float> BusDelaysDict;
     private Dictionary<int, float> TrainDelaysDict;
-
 
     //Amount of seconds to take the average of.
     [SerializeField]
@@ -32,7 +30,6 @@ public class KPIAvgDelaysPerType : MonoBehaviour
         TramDelaysDict = new Dictionary<int, float>(timeunit);
         BusDelaysDict = new Dictionary<int, float>(timeunit);
         TrainDelaysDict = new Dictionary<int, float>(timeunit);
-
     }
 
     // Update is called once per frame
@@ -48,14 +45,14 @@ public class KPIAvgDelaysPerType : MonoBehaviour
         int time = (int)Time.time;
 
         //Add the average value if it isn't stored yet (for this second)
-        if (!dict.ContainsKey(time)) dict.Add(time, value);
+        if (!dict.ContainsKey(time))
+            dict.Add(time, value);
         
         //Remove all old (time - timeunit) values
         RemoveOld(dict);
         
         //Calculate the sum
         return CalculateSum(dict);
-
     }
 
     private float CalculateSum(Dictionary<int, float> dict)
@@ -67,9 +64,7 @@ public class KPIAvgDelaysPerType : MonoBehaviour
             count++;
             sum += entry.Value;
         }
-
         return sum / count;
-
     }
 
     private void RemoveOld(Dictionary<int, float> dict)
@@ -78,8 +73,12 @@ public class KPIAvgDelaysPerType : MonoBehaviour
         List<int> old_keys = new List<int>();
         foreach (KeyValuePair<int, float> entry in dict)
         {
-            if (entry.Key <= (time - timeunit)) old_keys.Add(entry.Key);
+            if (entry.Key <= (time - timeunit))
+                old_keys.Add(entry.Key);
         }
-        foreach (int key in old_keys) dict.Remove(key);
+        foreach (int key in old_keys)
+        {
+            dict.Remove(key);
+        }
     }
 }
