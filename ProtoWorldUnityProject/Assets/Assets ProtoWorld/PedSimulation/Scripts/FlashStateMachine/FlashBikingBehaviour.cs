@@ -31,7 +31,6 @@ public class FlashBikingBehaviour : StateMachineBehaviour
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) 
     {
         FlashPedestriansController fpc = animator.GetComponent<FlashPedestriansController>();
-
         if (fpc.targetedBikeStation.capacityNumber > 0)
         {
             fpc.targetedBikeStation.PickBike();
@@ -39,20 +38,11 @@ public class FlashBikingBehaviour : StateMachineBehaviour
 
             GameObject TransportationModule = GameObject.Find("TransportationModule");
             KPIPassengersPerType kpipassengers = TransportationModule.GetComponent<KPIPassengersPerType>();
-            kpipassengers.bicyclePassengersDecentralized++;
+            kpipassengers.bicyclePassengers++;
         }
         else
         {
             fpc.BikeStationIsEmpty();
         }
 	}
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        base.OnStateExit(animator, stateInfo, layerIndex);
-        
-        GameObject TransportationModule = GameObject.Find("TransportationModule");
-        KPIPassengersPerType kpipassengers = TransportationModule.GetComponent<KPIPassengersPerType>();
-        kpipassengers.bicyclePassengersDecentralized--;
-    }
 }

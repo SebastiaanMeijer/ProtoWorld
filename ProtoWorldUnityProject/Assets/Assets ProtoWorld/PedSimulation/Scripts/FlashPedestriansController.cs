@@ -150,10 +150,6 @@ public class FlashPedestriansController : TravelerController
 
 	}
 
-
-
-
-
 	/// <summary>
 	/// Update method.
 	/// </summary>
@@ -224,6 +220,7 @@ public class FlashPedestriansController : TravelerController
 				// Arrives at the destination
 				goingBikingToDestination = false;
 				FSM.SetBool("OnDestination", true);
+                FSM.SetBool("Biking", false);
 			}
 
 			// If car awareness is active and pedestrian is walking or cycling, check if it is on a road
@@ -530,13 +527,16 @@ public class FlashPedestriansController : TravelerController
 		Transform bike = this.transform.FindChild("bike");
         if (bike != null)
         {
+            if (bike.gameObject.activeSelf)
+            {
+                //remove cyclist from total
+                GameObject TransportationModule = GameObject.Find("TransportationModule");
+                KPIPassengersPerType kpipassengers = TransportationModule.GetComponent<KPIPassengersPerType>();
+                kpipassengers.bicyclePassengers--;
+            }
             bike.gameObject.SetActive(false);
             FSM.SetBool("OnDestination", true);
-            FSM.SetBool("OnBiking", false);
-            //remove cyclist from total
-            /*GameObject TransportationModule = GameObject.Find("TransportationModule");
-            KPIPassengersPerType kpipassengers = TransportationModule.GetComponent<KPIPassengersPerType>();
-            kpipassengers.bicyclePassengersDecentralized--;*/
+            FSM.SetBool("Biking", false);
         }
 
 		if(globalParam != null)
