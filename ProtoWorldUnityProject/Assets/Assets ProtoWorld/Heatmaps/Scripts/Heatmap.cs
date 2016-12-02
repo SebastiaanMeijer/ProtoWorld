@@ -84,6 +84,15 @@ public class Heatmap : MonoBehaviour {
 
 		resetPoints();
 
+		Texture2D texture = new Texture2D(1024, 1024, TextureFormat.ARGB32, false, false);
+		Color empty = new Color(0, 0, 0, 0);
+		Color[] data = new Color[1024 * 1024];
+		for(int index = 0; index < data.Length; index++) {
+			data[index] = empty;
+		}
+		texture.SetPixels(data);
+		texture.Apply();
+
 		refreshCoroutine = heatmapRefresh();
 		StartCoroutine(refreshCoroutine);
 	}

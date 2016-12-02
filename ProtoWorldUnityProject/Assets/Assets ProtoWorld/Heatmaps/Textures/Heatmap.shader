@@ -42,9 +42,11 @@ Shader "Hidden/Heatmap" {
 				#pragma vertex vert
 				#pragma fragment frag
 				
-				uniform int count = 0;
+				uniform uint count = 0;
 				uniform float4 points[MAXIMUM_NUMBER_OF_POINTS];
 				uniform float radius;
+
+				sampler2D data;
 
 				sampler2D _HeatTex;
 				
@@ -65,11 +67,16 @@ Shader "Hidden/Heatmap" {
 					float4 worldPosition = mul(unity_ObjectToWorld, input.position);
 
 					half h = 0;
-					for(int i = 0; i < MAXIMUM_NUMBER_OF_POINTS && i < count; i++) {
+					for(uint i = 0; i < MAXIMUM_NUMBER_OF_POINTS && i < count; i++) {
+						uint y = i / 1024;
+						uint x = i % 1024;
+
+						float4 value = tex2Dlod(data, fixed4(x, y, 0, 0));
+
 						// Calculates the contribution of each point.
-						half di = distance(worldPosition.xyz, points[i].xyz);
+						half di = distance(worldPosition.xyz, value.xyz);
 						half hi = 1 - saturate(di / radius);
-						h += hi * points[i].w;
+						h += hi * value.w;
 					}
 
 					output.intensity = saturate(h);
