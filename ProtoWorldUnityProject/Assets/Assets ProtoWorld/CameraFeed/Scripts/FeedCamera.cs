@@ -23,4 +23,14 @@ using UnityEngine;
 
 public class FeedCamera : MonoBehaviour {
 	public string name;
+
+    void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+
+    }
 }
