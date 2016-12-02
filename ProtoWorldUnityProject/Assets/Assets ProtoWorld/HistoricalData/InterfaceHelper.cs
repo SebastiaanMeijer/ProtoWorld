@@ -145,6 +145,46 @@ public static class InterfaceHelper
         return resList;
     }
 
+    public static IList<T> FindObjectsInResources<T>() where T : class
+    {
+        var resList = new List<T>();
+
+        var types = _interfaceToComponentMapping[typeof(T)];
+
+        if (null == types || types.Count <= 0)
+        {
+            Debug.LogError("No descendants found for type " + typeof(T));
+            return null;
+        }
+
+        foreach (var curType in types)
+        {
+            Object[] objects = Resources.FindObjectsOfTypeAll(curType);
+
+            if (null == objects || objects.Length <= 0)
+                continue;
+
+            var tList = new List<T>();
+
+            foreach (var curObj in objects)
+            {
+                var curObjAsT = curObj as T;
+
+                if (null == curObjAsT)
+                {
+                    Debug.LogError("Unable to cast '" + curObj.GetType() + "' to '" + typeof(T) + "'");
+                    continue;
+                }
+
+                tList.Add(curObjAsT);
+            }
+
+            resList.AddRange(tList);
+        }
+
+        return resList;
+    }
+
     public static T FindObject<T>() where T : class
     {
         var list = FindObjects<T>();

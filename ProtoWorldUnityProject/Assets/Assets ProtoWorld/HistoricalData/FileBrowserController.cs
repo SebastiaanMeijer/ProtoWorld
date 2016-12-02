@@ -7,12 +7,12 @@ using System.IO;
 
 public class FileBrowserController : MonoBehaviour {
 
-    private HistoricalDataController controller;
+    public HistoricalDataController controller;
     private TimeController timecontroller;
     public GameObject logFileButtonPrefab;
 
-    private ScrollRect FileScrollView;
-    private ScrollRect TimestampScrollView;
+    public ScrollRect FileScrollView;
+    public ScrollRect TimestampScrollView;
 
     public GameObject timestampButtonPrefab;
 
@@ -73,10 +73,18 @@ public class FileBrowserController : MonoBehaviour {
 
 	public void loadLogDirectory()
 	{
+		List<GameObject> gameObjects = new List<GameObject>();
 
-		foreach (GameObject item in FileScrollView.content)
+		foreach (Transform transform in FileScrollView.content)
 		{
-			GameObject.Destroy(item);
+			gameObjects.Add(transform.gameObject);
+		}
+
+		while(gameObjects.Count > 0) {
+			GameObject gameObject = gameObjects[0];
+			gameObjects.RemoveAt(0);
+			Destroy(gameObject);
+			gameObject = null;
 		}
 
 		FileInfo[] filesInfo = controller.logDirectory.GetFiles();

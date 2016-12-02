@@ -38,6 +38,8 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
     [Range(0, 10000)]
     public int maxNumberOfPedestriansToSpawn = 1;
 
+    public int id;
+
     /// <summary>
     /// If true, pedestrians will be spawned in an infinite loop. 
     /// </summary>
@@ -121,7 +123,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
     /// <summary>
     /// Itinerary informer that handles the commuting of pedestrians.
     /// </summary>
-    private FlashPedestriansInformer flashInformer;
+    public FlashPedestriansInformer flashInformer;
 
     /// <summary>
     /// Destination entries where pedestrians can go. 
@@ -148,8 +150,12 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
 
     public void initializeSpawner()
     {
+        //reset cache
+        pedestrianCache = new Queue();
         // Get the global parameters of Flash Pedestrians
         pedGlobalParameters = GameObject.Find("FlashPedestriansModule").GetComponent<FlashPedestriansGlobalParameters>();
+        id = FlashPedestriansGlobalParameters.nextSpawnerId;
+        FlashPedestriansGlobalParameters.nextSpawnerId++;
         // Fill the cache with pedestrians
         for (int i = 0; i < initialNumberOfPedestriansInCache; i++)
         {
@@ -241,13 +247,62 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
         }
     }
 
-	public void SpawnPedestrianFromLog(Vector3 spawningPoint, FlashPedestriansProfile profile, FlashPedestriansDestination destination){
-		//Find the best itinerary using the travel preferences in the pedestrian profile.
-		Itinerary itinerary = flashInformer.FindBestItinerary(spawningPoint, destination, stationsNearThisSpawner, profile.travelPreference);
-        SpawnPedestrian(spawningPoint, profile, destination, itinerary);
-		//TODO: recreate destination
+    public void SpawnPedestrianFromLog(FlashPedestriansController pedestrianInformation)
+    {
+        GameObject newAgent;
 
-	}
+        if (pedestrianCache.Count > 0)
+        {
+            newAgent = (GameObject)pedestrianCache.Dequeue();
+            newAgent.transform.position = pedestrianInformation.transform.position;
+            //print(newAgent.transform.position);
+        }
+        else
+        {
+            newAgent = Instantiate(pedGlobalParameters.pedestrianObject, pedestrianInformation.transform.position, Quaternion.identity) as GameObject;
+            newAgent.transform.SetParent(this.transform, true);
+            //print(newAgent.transform.position);
+        }
+
+        if (pedGlobalParameters.rumoursEnabled || pedGlobalParameters.bikesEnabled)
+        {
+            BoxCollider col = newAgent.GetComponent<BoxCollider>();
+
+            if (col != null)
+                col.enabled = true;
+            else
+                newAgent.AddComponent<BoxCollider>();
+        }
+
+        Itinerary itinerary = flashInformer.FindBestItinerary(pedestrianInformation.transform.position, pedestrianInformation.routing.destinationPoint, 
+            pedestrianInformation.StationsNearCurrentPosition(), pedestrianInformation.profile.travelPreference);
+
+        FlashPedestriansController controller = newAgent.GetComponent<FlashPedestriansController>();
+
+        controller.uniqueId = pedestrianInformation.uniqueId;
+        nextIdForPedestrian = controller.uniqueId;
+        controller.spawnerId = id;
+        controller.profile = pedestrianInformation.profile;
+        controller.routing = new FlashPedestriansRouting(pedestrianInformation.routing.destinationPoint, itinerary);
+        controller.flashInformer = flashInformer;
+
+        // Provide these from our cached version to improve performance, as this is called a lot during spawning events.
+        controller.globalParam = pedGlobalParameters;
+        controller.heatMap = heatMap;
+
+        // Subscribe pedestrian to the itinerary informer
+        flashInformer.SubscribePedestrian(controller);
+
+        newAgent.name = "flashPedestrian_" + this.name + "_" + "_" + controller.uniqueId;
+
+        newAgent.SetActive(true);
+
+        // Atomic increment of the KPI property
+        Interlocked.Increment(ref pedGlobalParameters.numberOfPedestriansOnScenario);
+
+        if (++numberOfPedestriansGenerated >= maxNumberOfPedestriansToSpawn && !spawnPedestriansInInfiniteLoop)
+            CancelInvoke();
+    }
 
     /// <summary>
     /// Spawns a Flash Pedestrian given its profile and its routing objects. 
@@ -283,7 +338,8 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
 
         FlashPedestriansController controller = newAgent.GetComponent<FlashPedestriansController>();
 
-        controller.uniqueId = nextIdForPedestrian++;
+        controller.uniqueId = Interlocked.Increment(ref nextIdForPedestrian);
+        controller.spawnerId = id;
         controller.profile = profile;
         controller.routing = new FlashPedestriansRouting(destination, itinerary);
         controller.flashInformer = flashInformer;
@@ -334,7 +390,8 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
     }
 	public LogDataTree getLogData(){
 		LogDataTree logData = new LogDataTree (tag,null);
-		logData.AddChild(new LogDataTree("PositionX",transform.position.x.ToString()));
+        logData.AddChild(new LogDataTree("ID", id.ToString()));
+        logData.AddChild(new LogDataTree("PositionX",transform.position.x.ToString()));
 		logData.AddChild(new LogDataTree("PositionY",transform.position.y.ToString()));
 		logData.AddChild(new LogDataTree("PositionZ",transform.position.z.ToString()));
 		logData.AddChild(new LogDataTree("MaxNumberOfPedestriansToSpawn", maxNumberOfPedestriansToSpawn.ToString()));
@@ -373,10 +430,14 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
 		flashSpawnerScript.numberOfPedestriansOnDestination = int.Parse(logData.GetChild("NumberOfPedestriansOnDestination").Value);
 		flashSpawnerObject.name = "FlashSpawner";
 		flashSpawnerObject.transform.parent = GameObject.Find("SpawnerPoints").transform;
-
 		flashSpawnerScript.initializeSpawner();
 		flashSpawnerScript.enabled = true;
 	}
+
+    void OnDestroy()
+    {
+        pedestrianCache.Clear();
+    }
 
 	public  LogPriorities getPriorityLevel()
     {

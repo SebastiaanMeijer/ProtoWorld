@@ -35,6 +35,8 @@ public class FlashPedestriansGlobalParameters : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float percOfItalianSpeakers = 0.5f;
 
+    public static int nextSpawnerId = 0;
+
     /// <summary>
     /// Percentage of English speakers. 
     /// </summary>

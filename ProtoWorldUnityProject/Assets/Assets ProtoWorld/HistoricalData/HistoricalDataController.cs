@@ -47,6 +47,7 @@ public class HistoricalDataController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        getLoggables();
         timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
 		GameObject flashPedestriansModule = GameObject.Find("FlashPedestriansModule");
         globalParameters = flashPedestriansModule.GetComponent<FlashPedestriansGlobalParameters>();
@@ -58,7 +59,22 @@ public class HistoricalDataController : MonoBehaviour
 		StartCoroutine(logToXML());
     }
 
-	void initiateLogFile(){
+    //TODO: Optimize! THIS IS A HORSETHING!!!//
+    List<Loggable> getLoggables()
+    {
+        List<GameObject> loggableObjects = new List<GameObject>();
+        loggableObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)).Cast<GameObject>().Where(g => g.tag == "Loggable").ToList();
+        List<Loggable> loggables = new List<Loggable>();
+        foreach (GameObject loggable in  loggableObjects)
+        {
+            print(loggable.ToString());
+            loggables.Add(loggable.GetComponent<Loggable>());
+        }
+        //print(loggables.Count);
+        return loggables;
+    }
+
+    void initiateLogFile(){
 		//Create XML document for logging data with root element "LogData" 
 		logFile = new XDocument();
 		logFile.Add(new XElement("LogData"));
@@ -84,7 +100,6 @@ public class HistoricalDataController : MonoBehaviour
         //Lock the camera on mouseover!
         if (!EventSystem.current.IsPointerOverGameObject()) camera.enabled = true;
         else camera.enabled = false;
-
     }
 
 	public IEnumerator logToXML()
@@ -130,30 +145,33 @@ public class HistoricalDataController : MonoBehaviour
 
     public void recreateLog(string file, string timestamp)
 	{
-		XElement timeStampElement =
-			(from element in XDocument.Load(file).Root.Descendants("TimeStamp")
-			where element.Value.Equals(timestamp)
-			select element).FirstOrDefault();
+        //print((from element in XDocument.Load(file).Root.Descendants("TimeStamp") where element.FirstAttribute.Value.Equals(timestamp) select element).FirstOrDefault());
+        XElement timeStampElement =
+            (from element in XDocument.Load(file).Root.Descendants("TimeStamp")
+             where element.FirstAttribute.Value.Equals(timestamp)
+             select element).FirstOrDefault();
 
-		removeActiveData ();
-		recreateObjects(timeStampElement);
+        removeActiveData ();
+        recreateObjects(timeStampElement);
 
-		loadFileBrowser.SetActive(false);
+        loadFileBrowser.SetActive(false);
 		timeController.PauseGame(false);
 	}
 
 	//Recreates the logged loggables in order of priority
 	private void recreateObjects(XElement timestampElement){
-		//Get all objects which have the loggable interface with a unique tag
-		List<Loggable> loggables = InterfaceHelper.FindObjects<Loggable> ().Distinct(new DistinctLoggableComparer()).ToList();
-
-		foreach (LogPriorities priority in Enum.GetValues(typeof(LogPriorities))) {
-			foreach (Loggable loggable in loggables.FindAll (item => item.getPriorityLevel () == priority)) {
-				foreach (XElement loggedObject in timestampElement.Descendants(((MonoBehaviour)loggable).tag)) {
-					loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
-				}
-			}
-		}
+        //Get all objects which have the loggable interface with a unique tag
+        List<Loggable> loggables = InterfaceHelper.FindObjectsInResources<Loggable>().Distinct(new DistinctLoggableComparer()).ToList();
+        //List<Loggable> loggables = getLoggables();
+        foreach (LogPriorities priority in Enum.GetValues(typeof(LogPriorities))) {
+            foreach (Loggable loggable in loggables.FindAll(item => item.getPriorityLevel() == priority))
+            {
+                foreach (XElement loggedObject in timestampElement.Descendants(((MonoBehaviour)loggable).tag))
+                {
+                    loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
+                }
+            }
+        }
 	}
 
 	//Recursively transforms the XML data of a loggable to a LogDataTree
@@ -166,7 +184,11 @@ public class HistoricalDataController : MonoBehaviour
 	}
 
 	private void removeActiveData(){
-		foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
+        FlashPedestriansSpawner.nextIdForPedestrian = 0;
+        FlashPedestriansInformer flashInformer = FindObjectOfType<FlashPedestriansInformer>();
+        flashInformer.accumPedestrians = 0;
+        flashInformer.activePedestrians = new Dictionary<int, FlashPedestriansController>();
+        foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
 		{
 			LoggableManager.unsubscribe (loggable);
 			Destroy (((MonoBehaviour)loggable).gameObject);
