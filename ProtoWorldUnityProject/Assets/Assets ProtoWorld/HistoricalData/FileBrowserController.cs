@@ -7,12 +7,12 @@ using System.IO;
 
 public class FileBrowserController : MonoBehaviour {
 
-    private HistoricalDataController controller;
+    public HistoricalDataController controller;
     private TimeController timecontroller;
     public GameObject logFileButtonPrefab;
 
-    private ScrollRect FileScrollView;
-    private ScrollRect TimestampScrollView;
+    public ScrollRect FileScrollView;
+    public ScrollRect TimestampScrollView;
 
     public GameObject timestampButtonPrefab;
 

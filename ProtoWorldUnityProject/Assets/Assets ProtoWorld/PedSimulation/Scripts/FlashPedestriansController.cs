@@ -133,7 +133,7 @@ public class FlashPedestriansController : TravelerController, Loggable
 
 		//Needed to put info about object into heatmaps array
 		if (heatMap != null) {
-			if(50 > Random.Range(0,100)){
+			if(50 > UnityEngine.Random.Range(0,100)){
 			heatMap.putInArray (this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform, 1);
 				}
 		}
