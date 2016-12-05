@@ -23,17 +23,21 @@ using UnityEngine.UI;
 
 public class ChangeButtonText : MonoBehaviour {
 	public Text ButtonText;
+	public Text TypeText;
 	public string[] buttonText;
+	public string[] typeText;
 
 	public void Awake(){
 
 		ButtonText = transform.parent.Find ("HeatmapTargetText").GetComponent<Text>();
+		TypeText = transform.parent.Find ("HeatmapTypeText").GetComponent<Text>();
 	}
 
-	public void nextButtonText() {
+	public void resetHMText() {
 		ButtonText.text = buttonText[Heatmap.heatmapNumber - 1];
+		TypeText.text = "Type: 1";
 	}
-	public void previousButtonText() {
-		ButtonText.text = buttonText[Heatmap.heatmapNumber - 1];
+	public void resetTypeText() {
+		TypeText.text = typeText[Heatmap.heatmapTypeNumber -1];
 	}
 }
