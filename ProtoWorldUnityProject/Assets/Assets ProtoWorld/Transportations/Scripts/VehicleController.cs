@@ -95,7 +95,6 @@ public class VehicleController : MonoBehaviour
 		GameObject obj = obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		obj.transform.localScale *= 0.6f;
 
-
 		if (line.category == LineCategory.Train)
 		{
 			var comp = line.gameObject.GetComponent<SpawnerLineController>();

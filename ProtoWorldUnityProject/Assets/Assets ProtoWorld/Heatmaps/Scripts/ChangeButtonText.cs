@@ -25,7 +25,15 @@ public class ChangeButtonText : MonoBehaviour {
 	public Text ButtonText;
 	public string[] buttonText;
 
-	public void changeButtonText() {
+	public void Awake(){
+
+		ButtonText = transform.parent.Find ("HeatmapTargetText").GetComponent<Text>();
+	}
+
+	public void nextButtonText() {
+		ButtonText.text = buttonText[Heatmap.heatmapNumber - 1];
+	}
+	public void previousButtonText() {
 		ButtonText.text = buttonText[Heatmap.heatmapNumber - 1];
 	}
 }
