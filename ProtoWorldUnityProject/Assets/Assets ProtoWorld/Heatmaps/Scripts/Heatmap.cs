@@ -47,7 +47,7 @@ public class Heatmap : MonoBehaviour {
 	public float radiusMultiplier = 1.0f;
 
 	private float radius;
-	private float intensity;
+	public float intensity = 10;
 
 	private static float HMIntensity = 0.1f;
 	private static float HMRadius = 0.1f;
@@ -216,7 +216,6 @@ public class Heatmap : MonoBehaviour {
 		// - "transform.localScale.x" is the scale of the grid. Make sure it is uniformly scaled!!!
 		// - "0.5 * (0.5 ^ gridSubdivisions) / cos(30)" is the distance from the center point to a vertex of a triangle in the grid. This ensures that all data points influence at least one vertex by default.
 		radius = radius = HMRadius * radiusMultiplier * transform.localScale.x * 0.5f * Mathf.Pow(0.5f, gridSubdivisions) / Mathf.Cos(30.0f * Mathf.Deg2Rad);
-		intensity = HMIntensity;
 
 		if(activeHeatMaps) {
 			transform.position = new Vector3(transform.position.x, heightHM, transform.position.z);
