@@ -58,7 +58,11 @@ public class VehicleController : MonoBehaviour
 	public float speed = 0;
 	private float current_distance = 0;
 	private float previous_distance = 0;
-
+	
+	/// <summary>
+	/// Note that the heatmap is initialized by the spawner to improve performance.
+	/// </summary>
+	[HideInInspector]
 	public Heatmap heatMap;
 
 	[System.Serializable]
@@ -71,18 +75,17 @@ public class VehicleController : MonoBehaviour
 		public int headcount;
 	}
 
-	public void Awake(){
-
-		StartCoroutine (putInArrayDelay ());
-
+	public void Awake()
+	{
+		StartCoroutine(putInArrayDelay());
 	}
 
-	public IEnumerator putInArrayDelay() {
+	public IEnumerator putInArrayDelay()
+	{
 		yield return new WaitForSeconds (0.5f);
 		if (heatMap != null) {
-			heatMap.putInArray (this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform, 3);
+			heatMap.putInArray(this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform, 3);
 		}
-
 	}
 
 

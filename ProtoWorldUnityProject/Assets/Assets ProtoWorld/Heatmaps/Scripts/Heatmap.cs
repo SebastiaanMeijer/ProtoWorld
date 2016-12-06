@@ -24,6 +24,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.IO;
 
 public class Heatmap : MonoBehaviour {
 	private CameraControl cameraObject;
@@ -37,6 +38,8 @@ public class Heatmap : MonoBehaviour {
 	public Material material;
 
 	public int count = 1000;
+	private int counted = 0;
+
 	private int pedestriansCounted = 0;
 	private int trafficCounted = 0;
 	private int metroCounted = 0;
@@ -66,16 +69,18 @@ public class Heatmap : MonoBehaviour {
 	public static int heatmapTypeNumber = 1;
 	public static string typeString;
 
-	private IEnumerator refreshCoroutine;
-
 	public Text TypeText;
+	
+	private ComputeBuffer buffer;
+
+	private WaitForSeconds wait;
 
 
 	/// <summary>
 	/// Awake method.
 	/// </summary>
 	void Awake() {
-		TypeText = transform.parent.Find("HeatMapCanvas").Find("HeatMapControlPanelUI").Find ("HeatmapTypeText").GetComponent<Text>();
+		TypeText = transform.parent.Find("HeatMapCanvas").Find("HeatMapControlPanelUI").Find("HeatmapTypeText").GetComponent<Text>();
 		cameraObject = FindObjectOfType<CameraControl>();
 	}
 
@@ -89,20 +94,14 @@ public class Heatmap : MonoBehaviour {
 		pedestrians = new Transform[count];
 		traffic = new Transform[count];
 		metro = new Transform[count];
+		
+		buffer = new ComputeBuffer(count, 16);
+		material.SetBuffer("points", buffer);
 
 		resetPoints();
 
-		Texture2D texture = new Texture2D(1024, 1024, TextureFormat.ARGB32, false, false);
-		Color empty = new Color(0, 0, 0, 0);
-		Color[] data = new Color[1024 * 1024];
-		for(int index = 0; index < data.Length; index++) {
-			data[index] = empty;
-		}
-		texture.SetPixels(data);
-		texture.Apply();
-
-		refreshCoroutine = heatmapRefresh();
-		StartCoroutine(refreshCoroutine);
+		wait = new WaitForSeconds(refreshTime);
+		StartCoroutine(heatmapRefresh());
 	}
 
 
@@ -223,13 +222,13 @@ public class Heatmap : MonoBehaviour {
 	/// Refresh the heatmap every refreshTime seconds.
 	/// </summary>
 	public IEnumerator heatmapRefresh() {
-		yield return new WaitForSeconds(refreshTime);
+		yield return wait;
 
 		// Convert the radius to a factor depending on the scale and the size of the grid:
 		// - "radiusMultiplier" is a user set value to allow for adjusting the radius in advance without influencing the UI slider.
 		// - "transform.localScale.x" is the scale of the grid. Make sure it is uniformly scaled!!!
 		// - "0.5 * (0.5 ^ gridSubdivisions) / cos(30)" is the distance from the center point to a vertex of a triangle in the grid. This ensures that all data points influence at least one vertex by default.
-		radius = radius = HMRadius * radiusMultiplier * transform.localScale.x * 0.5f * Mathf.Pow(0.5f, gridSubdivisions) / Mathf.Cos(30.0f * Mathf.Deg2Rad);
+		radius = HMRadius * radiusMultiplier * transform.localScale.x * 0.5f * Mathf.Pow(0.5f, gridSubdivisions) / Mathf.Cos(30.0f * Mathf.Deg2Rad);
 
 		if(activeHeatMaps) {
 			transform.position = new Vector3(transform.position.x, heightHM, transform.position.z);
@@ -267,6 +266,8 @@ public class Heatmap : MonoBehaviour {
 	/// </summary>
 	public void OnDestroy() {
 		resetPoints();
+
+		buffer.Release();
 	}
 
 
@@ -282,13 +283,13 @@ public class Heatmap : MonoBehaviour {
 					typeString = "Locations";
 					points [i] = new Vector4 (pedestrians [i].transform.position.x, heightHM, pedestrians [i].transform.position.z, intensity);
 					break;
-				
 				}
 			}
 			else {
 				points[i] = new Vector4(0, 0, 0, 0);
 			}
 		}
+		counted = pedestriansCounted;
 		updateShader();
 	}
 
@@ -310,6 +311,7 @@ public class Heatmap : MonoBehaviour {
 				points[i] = new Vector4(0, 0, 0, 0);
 			}
 		}
+		counted = trafficCounted;
 		updateShader();
 	}
 
@@ -339,6 +341,7 @@ public class Heatmap : MonoBehaviour {
 				points[i] = new Vector4(0, 0, 0, 0);
 			}
 		}
+		counted = metroCounted;
 		updateShader();
 	}
 
@@ -369,6 +372,7 @@ public class Heatmap : MonoBehaviour {
 				points[i] = new Vector4(0, 0, 0, 0);
 			}
 		}
+		counted = metroCounted;
 		updateShader();
 	}
 
@@ -399,37 +403,26 @@ public class Heatmap : MonoBehaviour {
 				points[i] = new Vector4(0, 0, 0, 0);
 			}
 		}
+		counted = metroCounted;
 		updateShader();
 	}
 
-
-
-	/*
-	private void updatePointsFromMetro() {
-		for(int i = 0; i < metroCounted; i++) {
-			if(metro[i].gameObject.activeSelf) {
-				points[i] = new Vector4(metro[i].transform.position.x, heightHM, metro[i].transform.position.z, intensity + metro[i].GetComponent<VehicleController>().delay);
-			}
-			else {
-				points[i] = new Vector4(0, 0, 0, 0);
-			}
-		}
-		updateShader();
-	}
-	*/
 
 	private void resetPoints() {
 		for(int i = 0; i < count; i++) {
 			points[i] = new Vector4(0, 0, 0, 0);
 		}
+		counted = 0;
 		updateShader();
 	}
 
 
 	private void updateShader() {
 		TypeText.text = typeString;
-		material.SetInt("count", count);
-		material.SetVectorArray("points", points);
+
+		material.SetInt("count", counted);
 		material.SetFloat("radius", radius);
+
+		buffer.SetData(points);
 	}
 }

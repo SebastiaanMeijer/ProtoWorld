@@ -57,7 +57,10 @@ public class TrafficIntegrationVehicle : MonoBehaviour
     private bool braked = false;
     private float brakingCountdown = 0.0f;
     private float currentAngle = float.MaxValue;
-
+	
+	/// <summary>
+	/// Note that the heatmap is initialized by the spawner to improve performance.
+	/// </summary>
 	[HideInInspector]
 	public Heatmap heatMap;
 
@@ -77,10 +80,9 @@ public class TrafficIntegrationVehicle : MonoBehaviour
         startTime = -1.0f;
         speed = 1.5f;
     
-		if (heatMap != null) {
-			if(50 > Random.Range(0,100)){
-				heatMap.putInArray (this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform, 2);
-			}
+		if (heatMap != null)
+		{
+			heatMap.putInArray(this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform, 2);
 		}
 	}
 

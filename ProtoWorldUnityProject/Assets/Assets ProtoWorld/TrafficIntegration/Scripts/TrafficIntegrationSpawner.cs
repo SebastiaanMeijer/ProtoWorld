@@ -82,7 +82,6 @@ public class TrafficIntegrationSpawner : MonoBehaviour
     /// </summary>
     void Awake()
     {
-
 		heatMap = FindObjectOfType<Heatmap>();
         trafficContr = FindObjectOfType<TrafficIntegrationController>();
         timeContr = FindObjectOfType<TimeController>();
@@ -243,6 +242,7 @@ public class TrafficIntegrationSpawner : MonoBehaviour
                 vc.timeToBrakeInSeconds = timeToBrakeInSeconds;
                 vc.driversPatienceInSeconds = driversPatienceInSeconds;
                 vc.angleOfView = angleOfView;
+				// Provide this from our cached version to improve performance, as this is called a lot during spawning events.
 				vc.heatMap = heatMap;
                 vehControllers.Add(v.id, vc);
             }

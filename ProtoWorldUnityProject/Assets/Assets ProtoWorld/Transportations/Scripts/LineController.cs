@@ -65,10 +65,9 @@ public class LineController : MonoBehaviour
 
 	private Heatmap heatMap;
 
-	public void Awake(){
-
+	public void Awake()
+	{
 		heatMap = FindObjectOfType<Heatmap>();
-
 	}
 
 	/// <summary>
@@ -435,6 +434,7 @@ public class LineController : MonoBehaviour
 		foreach (var vehicle in vehicles)
 		{
 			var controller = vehicle.GetComponent<VehicleController>();
+			// Provide this from our cached version to improve performance, as this is called a lot during spawning events.
 			controller.heatMap = heatMap;
 			if (vehicle.activeInHierarchy && controller != null)
 				headCount += controller.headCount;

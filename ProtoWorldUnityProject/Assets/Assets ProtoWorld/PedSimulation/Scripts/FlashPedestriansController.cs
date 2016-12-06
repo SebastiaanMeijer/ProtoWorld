@@ -87,9 +87,9 @@ public class FlashPedestriansController : TravelerController, Loggable
 
 	private bool isPause = false;
 
-	public Heatmap heatMap1;
-	public Transform heatMap2;
-
+	/// <summary>
+	/// Note that the heatmap is initialized by the spawner to improve performance.
+	/// </summary>
 	[HideInInspector]
 	public Heatmap heatMap;
 
@@ -108,7 +108,6 @@ public class FlashPedestriansController : TravelerController, Loggable
 		navAgent = gameObject.GetComponent<NavMeshAgent>();
 		FSM = gameObject.GetComponent<Animator>();
 		balloons = transform.Find("Balloons");
-	//	heatMap = GameObject.Find("HeatMapPedestrians").GetComponent<Heatmap>();
 	}
 
 	/// <summary>
@@ -131,15 +130,14 @@ public class FlashPedestriansController : TravelerController, Loggable
 
 		currentWeather = FlashPedestriansGlobalParameters.WeatherConditions.DefaultWeather;
 
-		//Needed to put info about object into heatmaps array
-		if (heatMap != null) {
-			if(50 > UnityEngine.Random.Range(0,100)){
-			heatMap.putInArray (this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform, 1);
-				}
+		// Needed to put info about object into heatmaps array
+		if (heatMap != null)
+		{
+			heatMap.putInArray(this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform, 1);
 		}
 
 		Renderer rsp = GetComponentInParent<Renderer> ();
-		//Deactivate render if zoomed out
+		// Deactivate render if zoomed out
 		if (rsp.enabled != true) {
 			StartCoroutine (LateStart (0.5f));
 		}

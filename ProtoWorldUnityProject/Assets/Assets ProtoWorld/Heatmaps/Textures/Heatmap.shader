@@ -13,7 +13,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 */
 
 /*
-* Micro/Macro Visualization Module
+* Heatmap Module
 *
 * Furkan Sonmez
 * Berend Wouda
@@ -30,23 +30,15 @@ Shader "Hidden/Heatmap" {
 		Blend SrcAlpha OneMinusSrcAlpha
 		Pass {
 			CGPROGRAM
-				// Only supports Windows builds.
-				#if SHADER_API_D3D11_9X
-					#define MAXIMUM_NUMBER_OF_POINTS 13
-				#elif SHADER_API_D3D9
-					#define MAXIMUM_NUMBER_OF_POINTS 87
-				#else
-					#define MAXIMUM_NUMBER_OF_POINTS 1023
-				#endif
+				#pragma target 5.0
 				
 				#pragma vertex vert
 				#pragma fragment frag
 				
-				uniform uint count = 0;
-				uniform float4 points[MAXIMUM_NUMBER_OF_POINTS];
+				uniform uint count;
 				uniform float radius;
 
-				sampler2D data;
+				StructuredBuffer<float4> points;
 
 				sampler2D _HeatTex;
 				
@@ -56,7 +48,7 @@ Shader "Hidden/Heatmap" {
 				
 				struct vertOutput {
 					float4 position : POSITION;
-					fixed intensity : TEXCOORD0;
+					float intensity : TEXCOORD0;
 				};
 
 				vertOutput vert(vertInput input) {
@@ -66,26 +58,22 @@ Shader "Hidden/Heatmap" {
 					
 					float4 worldPosition = mul(unity_ObjectToWorld, input.position);
 
-					half h = 0;
-					for(uint i = 0; i < MAXIMUM_NUMBER_OF_POINTS && i < count; i++) {
-						uint y = i / 1024;
-						uint x = i % 1024;
+					float intensity = 0;
 
-						float4 value = tex2Dlod(data, fixed4(x, y, 0, 0));
-
-						// Calculates the contribution of each point.
-						half di = distance(worldPosition.xyz, value.xyz);
-						half hi = 1 - saturate(di / radius);
-						h += hi * value.w;
+					for(uint index = 0; index < count; index++) {
+						// Calculate the contribution of each point.
+						float distanz0r = distance(worldPosition.xyz, points[index].xyz);
+						float contribution = 1 - saturate(distanz0r / radius);
+						intensity += contribution * points[index].w;
 					}
 
-					output.intensity = saturate(h);
+					output.intensity = saturate(intensity);
 
 					return output;
 				}
 
 				half4 frag(vertOutput output) : COLOR {
-					// Converts [0, 1] according to the heat texture.
+					// Convert the intensity into heat using to the heat texture.
 					return tex2D(_HeatTex, fixed2(output.intensity, 0.5));
 				}
 			ENDCG
