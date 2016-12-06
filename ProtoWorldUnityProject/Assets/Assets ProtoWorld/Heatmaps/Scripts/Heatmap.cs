@@ -23,6 +23,7 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Heatmap : MonoBehaviour {
 	private CameraControl cameraObject;
@@ -47,7 +48,7 @@ public class Heatmap : MonoBehaviour {
 	public float radiusMultiplier = 1.0f;
 
 	private float radius;
-	private float intensity;
+	public float intensity = 10;
 
 	private static float HMIntensity = 0.1f;
 	private static float HMRadius = 0.1f;
@@ -63,14 +64,18 @@ public class Heatmap : MonoBehaviour {
 
 	public static int heatmapNumber = 1;
 	public static int heatmapTypeNumber = 1;
+	public static string typeString;
 
 	private IEnumerator refreshCoroutine;
+
+	public Text TypeText;
 
 
 	/// <summary>
 	/// Awake method.
 	/// </summary>
 	void Awake() {
+		TypeText = transform.parent.Find("HeatMapCanvas").Find("HeatMapControlPanelUI").Find ("HeatmapTypeText").GetComponent<Text>();
 		cameraObject = FindObjectOfType<CameraControl>();
 	}
 
@@ -225,7 +230,6 @@ public class Heatmap : MonoBehaviour {
 		// - "transform.localScale.x" is the scale of the grid. Make sure it is uniformly scaled!!!
 		// - "0.5 * (0.5 ^ gridSubdivisions) / cos(30)" is the distance from the center point to a vertex of a triangle in the grid. This ensures that all data points influence at least one vertex by default.
 		radius = radius = HMRadius * radiusMultiplier * transform.localScale.x * 0.5f * Mathf.Pow(0.5f, gridSubdivisions) / Mathf.Cos(30.0f * Mathf.Deg2Rad);
-		intensity = HMIntensity;
 
 		if(activeHeatMaps) {
 			transform.position = new Vector3(transform.position.x, heightHM, transform.position.z);
@@ -271,9 +275,11 @@ public class Heatmap : MonoBehaviour {
 			if(pedestrians[i].gameObject.activeSelf) {
 				switch(type){
 				case 1:
+					typeString = "Locations";
 					points [i] = new Vector4 (pedestrians [i].transform.position.x, heightHM, pedestrians [i].transform.position.z, intensity);
 					break;
 				default:
+					typeString = "Locations";
 					points [i] = new Vector4 (pedestrians [i].transform.position.x, heightHM, pedestrians [i].transform.position.z, intensity);
 					break;
 				
@@ -291,9 +297,11 @@ public class Heatmap : MonoBehaviour {
 			if(traffic[i].gameObject.activeSelf) {
 				switch (type) {
 				case 1:
+					typeString = "Locations";
 					points [i] = new Vector4 (traffic [i].transform.position.x, heightHM, traffic [i].transform.position.z, intensity);
 					break;
 				default:
+					typeString = "Locations";
 					points [i] = new Vector4 (traffic [i].transform.position.x, heightHM, traffic [i].transform.position.z, intensity);
 					break;
 				}
@@ -310,15 +318,19 @@ public class Heatmap : MonoBehaviour {
 			if(metro[i].gameObject.activeSelf) {
 				switch (type) {
 				case 1:
+					typeString = "Locations";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
 					break;
 				case 2:
+					typeString = "Delays";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().delay);
 					break;
 				case 3:
+					typeString = "Passengers";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().headCount);
 					break;
 				default:
+					typeString = "Locations";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
 					break;
 				}
@@ -336,15 +348,19 @@ public class Heatmap : MonoBehaviour {
 				if (metro [i].gameObject.GetComponent<VehicleController> ().line.category == LineCategory.Metro)
 					switch (type) {
 				case 1:
+					typeString = "Locations";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
 					break;
 				case 2:
+					typeString = "Delays";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().delay);
 					break;
 				case 3:
+					typeString = "Passengers";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().headCount);
 					break;
 				default:
+					typeString = "Locations";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
 					break;
 				}
@@ -362,15 +378,19 @@ public class Heatmap : MonoBehaviour {
 				if (metro [i].gameObject.GetComponent<VehicleController> ().line.category == LineCategory.Train)
 					switch (type) {
 				case 1:
+					typeString = "Locations";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
 					break;
 				case 2:
+					typeString = "Delays";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().delay);
 					break;
 				case 3:
+					typeString = "Passengers";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().headCount);
 					break;
 				default:
+					typeString = "Locations";
 					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
 					break;
 				}
@@ -407,6 +427,7 @@ public class Heatmap : MonoBehaviour {
 
 
 	private void updateShader() {
+		TypeText.text = typeString;
 		material.SetInt("count", count);
 		material.SetVectorArray("points", points);
 		material.SetFloat("radius", radius);

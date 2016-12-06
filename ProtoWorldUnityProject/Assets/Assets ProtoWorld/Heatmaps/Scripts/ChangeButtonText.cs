@@ -35,9 +35,10 @@ public class ChangeButtonText : MonoBehaviour {
 
 	public void resetHMText() {
 		ButtonText.text = buttonText[Heatmap.heatmapNumber - 1];
-		TypeText.text = "Type: 1";
+		TypeText.text = "Locations";
 	}
 	public void resetTypeText() {
-		TypeText.text = typeText[Heatmap.heatmapTypeNumber -1];
+		//TypeText.text = typeText[Heatmap.heatmapTypeNumber -1];
+		//TypeText.text = Heatmap.typeString;
 	}
 }
