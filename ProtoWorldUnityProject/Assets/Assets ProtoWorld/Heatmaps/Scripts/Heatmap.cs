@@ -59,7 +59,10 @@ public class Heatmap : MonoBehaviour {
 
 	private bool zoomedIn;
 
+	public int numberOfHeatmaps;
+
 	public static int heatmapNumber = 1;
+	public static int heatmapTypeNumber = 1;
 
 	private IEnumerator refreshCoroutine;
 
@@ -171,9 +174,41 @@ public class Heatmap : MonoBehaviour {
 
 	public void nextHeatmap() {
 		heatmapNumber = heatmapNumber + 1;
+		heatmapTypeNumber = 1;
 
-		if(heatmapNumber > 3) {
+		if(heatmapNumber > numberOfHeatmaps) {
 			heatmapNumber = 1;
+		}
+
+		resetPoints();
+	}
+
+	public void previousHeatmap() {
+		heatmapNumber = heatmapNumber - 1;
+		heatmapTypeNumber = 1;
+
+		if(heatmapNumber < 1) {
+			heatmapNumber = numberOfHeatmaps;
+		}
+
+		resetPoints();
+	}
+
+	public void nextType() {
+		heatmapTypeNumber = heatmapTypeNumber + 1;
+
+		if(heatmapTypeNumber > 3) {
+			heatmapTypeNumber = 1;
+		}
+
+		resetPoints();
+	}
+
+	public void previousType() {
+		heatmapTypeNumber = heatmapTypeNumber - 1;
+
+		if(heatmapTypeNumber < 1) {
+			heatmapTypeNumber = 3;
 		}
 
 		resetPoints();
@@ -199,13 +234,19 @@ public class Heatmap : MonoBehaviour {
 
 				switch(heatmapNumber) {
 					case 1:
-						updatePointsFromPedestrians();
+						updatePointsFromPedestrians(heatmapTypeNumber);
 						break;
 					case 2:
-						updatePointsFromTraffic();
+						updatePointsFromTraffic(heatmapTypeNumber);
 						break;
 					case 3:
-						updatePointsFromMetro();
+						updatePointsFromTransport(heatmapTypeNumber);
+						break;
+					case 4:
+						updatePointsFromMetro(heatmapTypeNumber);
+						break;
+					case 5:
+						updatePointsFromTrain(heatmapTypeNumber);
 						break;
 				}
 			}
@@ -225,10 +266,18 @@ public class Heatmap : MonoBehaviour {
 	}
 
 
-	private void updatePointsFromPedestrians() {
+	private void updatePointsFromPedestrians(int type) {
 		for(int i = 0; i < pedestriansCounted; i++) {
 			if(pedestrians[i].gameObject.activeSelf) {
-				points[i] = new Vector4(pedestrians[i].transform.position.x, heightHM, pedestrians[i].transform.position.z, intensity);
+				switch(type){
+				case 1:
+					points [i] = new Vector4 (pedestrians [i].transform.position.x, heightHM, pedestrians [i].transform.position.z, intensity);
+					break;
+				default:
+					points [i] = new Vector4 (pedestrians [i].transform.position.x, heightHM, pedestrians [i].transform.position.z, intensity);
+					break;
+				
+				}
 			}
 			else {
 				points[i] = new Vector4(0, 0, 0, 0);
@@ -237,10 +286,17 @@ public class Heatmap : MonoBehaviour {
 		updateShader();
 	}
 
-	private void updatePointsFromTraffic() {
+	private void updatePointsFromTraffic(int type) {
 		for(int i = 0; i < trafficCounted; i++) {
 			if(traffic[i].gameObject.activeSelf) {
-				points[i] = new Vector4(traffic[i].transform.position.x, heightHM, traffic[i].transform.position.z, intensity);
+				switch (type) {
+				case 1:
+					points [i] = new Vector4 (traffic [i].transform.position.x, heightHM, traffic [i].transform.position.z, intensity);
+					break;
+				default:
+					points [i] = new Vector4 (traffic [i].transform.position.x, heightHM, traffic [i].transform.position.z, intensity);
+					break;
+				}
 			}
 			else {
 				points[i] = new Vector4(0, 0, 0, 0);
@@ -249,10 +305,90 @@ public class Heatmap : MonoBehaviour {
 		updateShader();
 	}
 
+	private void updatePointsFromTransport(int type) {
+		for(int i = 0; i < metroCounted; i++) {
+			if(metro[i].gameObject.activeSelf) {
+				switch (type) {
+				case 1:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
+					break;
+				case 2:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().delay);
+					break;
+				case 3:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().headCount);
+					break;
+				default:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
+					break;
+				}
+			}
+			else {
+				points[i] = new Vector4(0, 0, 0, 0);
+			}
+		}
+		updateShader();
+	}
+
+	private void updatePointsFromMetro(int type) {
+		for(int i = 0; i < metroCounted; i++) {
+			if(metro[i].gameObject.activeSelf) {
+				if (metro [i].gameObject.GetComponent<VehicleController> ().line.category == LineCategory.Metro)
+					switch (type) {
+				case 1:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
+					break;
+				case 2:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().delay);
+					break;
+				case 3:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().headCount);
+					break;
+				default:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
+					break;
+				}
+			}
+			else {
+				points[i] = new Vector4(0, 0, 0, 0);
+			}
+		}
+		updateShader();
+	}
+
+	private void updatePointsFromTrain(int type) {
+		for(int i = 0; i < metroCounted; i++) {
+			if(metro[i].gameObject.activeSelf) {
+				if (metro [i].gameObject.GetComponent<VehicleController> ().line.category == LineCategory.Train)
+					switch (type) {
+				case 1:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
+					break;
+				case 2:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().delay);
+					break;
+				case 3:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, metro [i].GetComponent<VehicleController> ().headCount);
+					break;
+				default:
+					points [i] = new Vector4 (metro [i].transform.position.x, heightHM, metro [i].transform.position.z, intensity);
+					break;
+				}
+			}
+			else {
+				points[i] = new Vector4(0, 0, 0, 0);
+			}
+		}
+		updateShader();
+	}
+
+
+
+	/*
 	private void updatePointsFromMetro() {
 		for(int i = 0; i < metroCounted; i++) {
 			if(metro[i].gameObject.activeSelf) {
-				points[i] = new Vector4(metro[i].transform.position.x, heightHM, metro[i].transform.position.z, intensity * metro[i].GetComponent<VehicleController>().delay);
+				points[i] = new Vector4(metro[i].transform.position.x, heightHM, metro[i].transform.position.z, intensity + metro[i].GetComponent<VehicleController>().delay);
 			}
 			else {
 				points[i] = new Vector4(0, 0, 0, 0);
@@ -260,6 +396,7 @@ public class Heatmap : MonoBehaviour {
 		}
 		updateShader();
 	}
+	*/
 
 	private void resetPoints() {
 		for(int i = 0; i < count; i++) {
