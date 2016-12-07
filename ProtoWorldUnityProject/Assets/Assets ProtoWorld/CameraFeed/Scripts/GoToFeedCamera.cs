@@ -35,10 +35,16 @@ public class GoToFeedCamera : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 	private GameObject feedCamerasObject;
 	private CameraControl cameraControlScript;
 
+	private bool proximitySensor;
+	private bool iAmASign = false;
+
 	
 	void Awake() {
 		feedCamerasObject = GameObject.Find("FeedCameras");
 		cameraControlScript = Camera.main.GetComponent<CameraControl>();
+		if (this.transform.name == "CameraSign") {
+			iAmASign = true;
+		}
 	}
 
 	
@@ -47,6 +53,14 @@ public class GoToFeedCamera : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 			Camera.main.GetComponent<CameraControl>().targetCameraPosition = this.transform.parent.position;
 			Camera.main.transform.rotation = this.transform.parent.rotation;
 			clickedCameraIcon = false;
+		}
+		if(iAmASign)
+		if (Vector3.Distance (this.transform.position, cameraControlScript.transform.position) < 80 && proximitySensor == true) {
+			proximitySensor = false;
+			this.GetComponent<SpriteRenderer> ().enabled = false;
+		} else if(Vector3.Distance(this.transform.position, cameraControlScript.transform.position) > 80 && proximitySensor == false) {
+			proximitySensor = true;
+			this.GetComponent<SpriteRenderer> ().enabled = true;
 		}
 	}
 
