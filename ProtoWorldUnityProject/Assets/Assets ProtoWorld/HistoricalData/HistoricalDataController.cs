@@ -94,14 +94,6 @@ public class HistoricalDataController : MonoBehaviour
 		camera = GameObject.Find("Main Camera").GetComponent<CameraControl>();
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        //Lock the camera on mouseover!
-        if (!EventSystem.current.IsPointerOverGameObject()) camera.enabled = true;
-        else camera.enabled = false;
-    }
-
 	public IEnumerator logToXML()
 	{
 		//As long as the simulation is not paused log the data of each subscribed loggable object
