@@ -31,6 +31,11 @@ public class LineStatistics : MonoBehaviour {
     public int totalQueuing;
     public int totalTraveling;
 
+    public int trainQueuing = 0;
+    public int tramQueuing = 0;
+    public int busQueuing = 0;
+    public int metroQueuing = 0;
+
     public List<LineStats> lineStats;
 
     // Use this for initialization
@@ -51,12 +56,34 @@ public class LineStatistics : MonoBehaviour {
 	void Update () {
         totalQueuing = 0;
         totalTraveling = 0;
+        trainQueuing = 0;
+        tramQueuing = 0;
+        busQueuing = 0;
+        metroQueuing = 0;
+
         foreach (var stats in lineStats)
         {
             stats.queuing = stats.controller.queuingHeadCount;
             stats.traveling = stats.controller.travelingHeadCount;
             totalQueuing += stats.queuing;
             totalTraveling += stats.traveling;
+
+            if (stats.controller.gameObject.name.Contains("Train_"))
+            {
+                trainQueuing += stats.queuing;
+            }
+            else if (stats.controller.gameObject.name.Contains("Bus_"))
+            {
+                busQueuing += stats.queuing;
+            }
+            else if (stats.controller.gameObject.name.Contains("Tram_"))
+            {
+                tramQueuing += stats.queuing;
+            }
+            else if (stats.controller.gameObject.name.Contains("Metro_"))
+            {
+                metroQueuing += stats.queuing;
+            }
         }
     }
 }

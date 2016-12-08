@@ -28,6 +28,8 @@ public class KPIPassengersPerType : MonoBehaviour
     public int metroPassengers = 0;
     public int carPassengers = 0;
     public int bicyclePassengers = 0;
+    public int totalPublicTransportPassengers = 0;
+    public int totalPassengers = 0;
 
     private LineStatistics lineStatistics;
     private Transform spawnerPoints, transLines, destinationPoints, trafficIntegration;
@@ -84,6 +86,9 @@ public class KPIPassengersPerType : MonoBehaviour
         busPassengers = tmpBus;
         trainPassengers = tmpTrain;
         metroPassengers = tmpMetro;
+
+        totalPublicTransportPassengers = tramPassengers + busPassengers + trainPassengers + metroPassengers;
+        totalPassengers = totalPublicTransportPassengers + carPassengers + bicyclePassengers;
     }
 
     private int getBusPassengers()

@@ -22,13 +22,14 @@ using System.Collections;
 
 public class KPIQueuePerType : MonoBehaviour
 {
-    public int busQueue = 0;
-
     private StationStatistics stationStatistics;
-    public int trainQueue = 0;
-
     private LineStatistics lineStatistics;
+
+    public int busQueue = 0;
+    public int trainQueue = 0;
     public int tramQueue = 0;
+    public int metroQueue = 0;
+    public int totalQueue = 0;
 
     // Use this for initialization
     void Start()
@@ -40,13 +41,11 @@ public class KPIQueuePerType : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        busQueue = getBusQueue();
-        trainQueue = stationStatistics.totalQueuing;
-        tramQueue = lineStatistics.totalQueuing;
-    }
+        busQueue = lineStatistics.busQueuing;
+        trainQueue = lineStatistics.trainQueuing;
+        tramQueue = lineStatistics.tramQueuing;
+        metroQueue = lineStatistics.metroQueuing;
 
-    private int getBusQueue()
-    {
-        return 0;
+        totalQueue = busQueue + trainQueue + tramQueue + metroQueue;
     }
 }
