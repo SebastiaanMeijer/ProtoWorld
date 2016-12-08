@@ -38,7 +38,7 @@ public class FlashBikingBehaviour : StateMachineBehaviour
 
             GameObject TransportationModule = GameObject.Find("TransportationModule");
             KPIPassengersPerType kpipassengers = TransportationModule.GetComponent<KPIPassengersPerType>();
-            kpipassengers.bicyclePassengers++;
+            kpipassengers.bicycleCounter++;
         }
         else
         {

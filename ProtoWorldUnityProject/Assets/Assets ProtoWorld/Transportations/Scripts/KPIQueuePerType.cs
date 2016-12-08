@@ -22,8 +22,8 @@ using System.Collections;
 
 public class KPIQueuePerType : MonoBehaviour
 {
-    private StationStatistics stationStatistics;
     private LineStatistics lineStatistics;
+    private FlashPedestriansGlobalParameters pedestrianGlobals;
 
     public int busQueue = 0;
     public int trainQueue = 0;
@@ -34,17 +34,17 @@ public class KPIQueuePerType : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        stationStatistics = GetComponentInChildren<StationStatistics>();
         lineStatistics = GetComponentInChildren<LineStatistics>();
+        pedestrianGlobals = GameObject.Find("FlashPedestriansModule").GetComponent<FlashPedestriansGlobalParameters>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        busQueue = lineStatistics.busQueuing;
-        trainQueue = lineStatistics.trainQueuing;
-        tramQueue = lineStatistics.tramQueuing;
-        metroQueue = lineStatistics.metroQueuing;
+        busQueue = pedestrianGlobals.numberOfPedestriansPerAgent * lineStatistics.busQueuing;
+        trainQueue = pedestrianGlobals.numberOfPedestriansPerAgent * lineStatistics.trainQueuing;
+        tramQueue = pedestrianGlobals.numberOfPedestriansPerAgent * lineStatistics.tramQueuing;
+        metroQueue = pedestrianGlobals.numberOfPedestriansPerAgent * lineStatistics.metroQueuing;
 
         totalQueue = busQueue + trainQueue + tramQueue + metroQueue;
     }

@@ -535,7 +535,7 @@ public class FlashPedestriansController : TravelerController, Loggable
                 //remove cyclist from total
                 GameObject TransportationModule = GameObject.Find("TransportationModule");
                 KPIPassengersPerType kpipassengers = TransportationModule.GetComponent<KPIPassengersPerType>();
-                kpipassengers.bicyclePassengers--;
+                kpipassengers.bicycleCounter--;
             }
             bike.gameObject.SetActive(false);
             FSM.SetBool("OnDestination", true);
