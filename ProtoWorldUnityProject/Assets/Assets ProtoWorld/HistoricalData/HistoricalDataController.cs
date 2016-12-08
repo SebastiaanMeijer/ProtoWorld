@@ -135,7 +135,7 @@ public class HistoricalDataController : MonoBehaviour
         timeController.PauseGame(true);
     }
 
-    public void recreateLog(string file, string timestamp)
+	public void recreateLog(string file, string timestamp)
 	{
         //print((from element in XDocument.Load(file).Root.Descendants("TimeStamp") where element.FirstAttribute.Value.Equals(timestamp) select element).FirstOrDefault());
         XElement timeStampElement =
@@ -143,6 +143,7 @@ public class HistoricalDataController : MonoBehaviour
              where element.FirstAttribute.Value.Equals(timestamp)
              select element).FirstOrDefault();
 
+		// TODO Use the interface to allow objects to destroy (or recycle, etc.) themselves.
         removeActiveData ();
         recreateObjects(timeStampElement);
 
@@ -160,7 +161,11 @@ public class HistoricalDataController : MonoBehaviour
             {
                 foreach (XElement loggedObject in timestampElement.Descendants(((MonoBehaviour)loggable).tag))
                 {
-                    loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
+					// TODO Instead of recreating spawners and destinations we can just update the properties that
+					// change over time. This temporary if statement shows that it works without recreating them.
+					if(!(loggable is FlashPedestriansSpawner) && !(loggable is FlashPedestriansDestination)) {
+						loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
+					}
                 }
             }
         }
@@ -174,7 +179,7 @@ public class HistoricalDataController : MonoBehaviour
 		}
 		return logData;
 	}
-
+	
 	private void removeActiveData(){
         FlashPedestriansSpawner.nextIdForPedestrian = 0;
         FlashPedestriansInformer flashInformer = FindObjectOfType<FlashPedestriansInformer>();
@@ -182,8 +187,12 @@ public class HistoricalDataController : MonoBehaviour
         flashInformer.activePedestrians = new Dictionary<int, FlashPedestriansController>();
         foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
 		{
-			LoggableManager.unsubscribe (loggable);
-			Destroy (((MonoBehaviour)loggable).gameObject);
+			// TODO Instead of destroying spawners and destinations we can just update the properties that
+			// change over time. This temporary if statement shows that it works without destroying them.
+			if(!(loggable is FlashPedestriansSpawner) && !(loggable is FlashPedestriansDestination)) {
+				LoggableManager.unsubscribe (loggable);
+				Destroy (((MonoBehaviour)loggable).gameObject);
+			}
 		}
 	}
 }
