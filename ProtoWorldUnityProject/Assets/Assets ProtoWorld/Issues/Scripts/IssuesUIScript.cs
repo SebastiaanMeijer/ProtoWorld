@@ -43,12 +43,11 @@ public class IssuesUIScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 	
 	void LateUpdate() {
 		if(showing) {
-			if(rayHitPositionClass.dragging) {
+			if(Input.GetMouseButtonDown(0)) {
 				if(Input.mousePosition.y > GetComponent<RectTransform>().transform.position.y + 0.5 * myHeight ||
 					Input.mousePosition.y < GetComponent<RectTransform>().transform.position.y - 0.5 * myHeight ||
 					Input.mousePosition.x > GetComponent<RectTransform>().transform.position.x + 0.5 * myWidth ||
 					Input.mousePosition.x < GetComponent<RectTransform>().transform.position.x - 0.5 * myWidth) {
-
 					this.transform.localPosition = new Vector3(this.transform.localPosition.x, myYPos + 1000, this.transform.localPosition.z);
 				}
 			}
