@@ -423,6 +423,7 @@ public class Heatmap : MonoBehaviour {
 		material.SetInt("count", counted);
 		material.SetFloat("radius", radius);
 
-		buffer.SetData(points);
+        if(points != null)
+		    buffer.SetData(points);
 	}
 }

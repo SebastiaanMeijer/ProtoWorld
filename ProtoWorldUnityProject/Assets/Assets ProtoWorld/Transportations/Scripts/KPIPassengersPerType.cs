@@ -28,8 +28,12 @@ public class KPIPassengersPerType : MonoBehaviour
     public int metroPassengers = 0;
     public int carPassengers = 0;
     public int bicyclePassengers = 0;
+    public int totalPublicTransportPassengers = 0;
+    public int totalPassengers = 0;
 
-    private LineStatistics lineStatistics;
+    public int bicycleCounter = 0;
+
+    private FlashPedestriansGlobalParameters pedestrianGlobals;
     private Transform spawnerPoints, transLines, destinationPoints, trafficIntegration;
 
     // Use this for initialization
@@ -41,17 +45,14 @@ public class KPIPassengersPerType : MonoBehaviour
         destinationPoints = GameObject.Find("DestinationPoints").transform;
         trafficIntegration = GameObject.Find("TrafficIntegrationData").transform;
 
-        lineStatistics = GetComponentInChildren<LineStatistics>();
+        pedestrianGlobals = GameObject.Find("FlashPedestriansModule").GetComponent<FlashPedestriansGlobalParameters>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //busPassengers = getBusPassengers();
-        //tramPassengers = lineStatistics.totalTraveling;
-        //trainPassengers = getTrainPassengers();
-        //metroPassengers = getMetroPassengers();
         carPassengers = getCarPassengers();
+        bicyclePassengers = pedestrianGlobals.numberOfPedestriansPerAgent * bicycleCounter;
 
         int tmpTram = 0;
         int tmpTrain = 0;
@@ -80,31 +81,13 @@ public class KPIPassengersPerType : MonoBehaviour
             }
         }
 
-        tramPassengers = tmpTram;
-        busPassengers = tmpBus;
-        trainPassengers = tmpTrain;
-        metroPassengers = tmpMetro;
-    }
+        tramPassengers = pedestrianGlobals.numberOfPedestriansPerAgent * tmpTram;
+        busPassengers = pedestrianGlobals.numberOfPedestriansPerAgent * tmpBus;
+        trainPassengers = pedestrianGlobals.numberOfPedestriansPerAgent * tmpTrain;
+        metroPassengers = pedestrianGlobals.numberOfPedestriansPerAgent * tmpMetro;
 
-    private int getBusPassengers()
-    {
-        int buscount = 0;
-        foreach (Transform transType in transLines)
-        {
-            if (transType.gameObject.activeSelf)
-            {
-                foreach (Transform carriage in transType)
-                {
-                    if (carriage.gameObject.activeSelf)
-                    {
-                        VehicleController vc = carriage.GetComponent<VehicleController>();
-                        if (vc != null)
-                            buscount += vc.headCount;
-                    }
-                }
-            }
-        }
-        return buscount;
+        totalPublicTransportPassengers = tramPassengers + busPassengers + trainPassengers + metroPassengers;
+        totalPassengers = totalPublicTransportPassengers + carPassengers + bicyclePassengers;
     }
 
     private int getCarPassengers()
@@ -118,19 +101,10 @@ public class KPIPassengersPerType : MonoBehaviour
                     carcount++;
             }
         }
-        return carcount;
+        return pedestrianGlobals.numberOfPedestriansPerAgent * carcount;
     }
 
-    private int getMetroPassengers()
-    {
-        return 0;
-    }
-
-    private int getTrainPassengers()
-    {
-        return 0;
-    }
-
+    /*
     private int getBicyclePassengers()
     {
         int cyclists = 0;
@@ -156,4 +130,5 @@ public class KPIPassengersPerType : MonoBehaviour
         }
         return cyclists;
     }
+    */
 }

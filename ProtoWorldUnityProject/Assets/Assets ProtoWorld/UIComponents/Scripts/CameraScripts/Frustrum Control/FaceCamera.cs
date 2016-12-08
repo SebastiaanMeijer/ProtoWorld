@@ -29,56 +29,97 @@ using System.Collections;
 /// </summary>
 public class FaceCamera : MonoBehaviour
 {
-    private Transform camera;
-    private CameraFrustumScript frustum;
+    //private Transform camera;
+    //private CameraFrustumScript frustum;
+    public CameraControl camera;
+    public Quaternion currentCameraRotation;
 
-    /// <summary>
-    /// If true, then the object disappears when not in front of the camera.
-    /// </summary>
-    public bool useFrustumForUpdate = true;
+    ///// <summary>
+    ///// If true, then the object disappears when not in front of the camera.
+    ///// </summary>
+    //public bool useFrustumForUpdate = true;
 
-    /// <summary>
-    /// If true, it will flip the orientation of the X axis. 
-    /// </summary>
-    public bool flipXAxis = false;
+    ///// <summary>
+    ///// If true, it will flip the orientation of the X axis. 
+    ///// </summary>
+    //public bool flipXAxis = false;
 
-    /// <summary>
-    /// If true, it will only rotate the object around the Y axis. 
-    /// </summary>
-    public bool rotateOnlyOnYAxis = false;
+    ///// <summary>
+    ///// If true, it will only rotate the object around the Y axis. 
+    ///// </summary>
+    //public bool rotateOnlyOnYAxis = false;
 
     /// <summary>
     /// Initializes the FaceCamera class
     /// </summary>
-    void Start()
-    {
-        camera = Camera.main.transform;
-        frustum = camera.GetComponent<CameraFrustumScript>();
-        if (frustum == null)
-            useFrustumForUpdate = false;
-    }
+    //void Start()
+    //{
+    //    camera = Camera.main.transform;
+    //    frustum = camera.GetComponent<CameraFrustumScript>();
+    //    if (frustum == null)
+    //        useFrustumForUpdate = false;
+    //}
 
     /// <summary>
     /// Updates the rotation of the attached object to face the camera.
     /// </summary>
+    //void Update()
+    //{
+    //    //if (!useFrustumForUpdate
+    //    //    || UnityEngine.GeometryUtility.TestPlanesAABB(frustum.Frustum, GetComponent<Renderer>().bounds))
+    //    //{
+    //    //    transform.LookAt(camera);
+    //    //    var temp = transform.eulerAngles;
+
+    //    //    if (!flipXAxis)
+    //    //        temp.y += 180;
+
+    //    //    if (rotateOnlyOnYAxis)
+    //    //    {
+    //    //        temp.x = 0.0f;
+    //    //        temp.z = 0.0f;
+    //    //    }
+
+    //    //    transform.eulerAngles = temp;
+    //    //}
+    //}
+
+    // Use this for initialization
+    void Start()
+
+    {
+        camera = Camera.main.GetComponent<CameraControl>();
+        currentCameraRotation = Camera.main.transform.rotation;
+    }
+
+    // Update is called once per frame
     void Update()
     {
-        if (!useFrustumForUpdate
-            || UnityEngine.GeometryUtility.TestPlanesAABB(frustum.Frustum, GetComponent<Renderer>().bounds))
+        if (cameraRotationChanged())
         {
-            transform.LookAt(camera);
-            var temp = transform.eulerAngles;
-
-            if (!flipXAxis)
-                temp.y += 180;
-
-            if (rotateOnlyOnYAxis)
-            {
-                temp.x = 0.0f;
-                temp.z = 0.0f;
-            }
-
-            transform.eulerAngles = temp;
+            gameObject.transform.rotation = calculateIconRotation();
         }
+    }
+
+    //checks if the camera has changed position, if yes set current cameraposition
+    bool cameraRotationChanged()
+    {
+        if (currentCameraRotation != Camera.main.transform.rotation)
+        {
+            currentCameraRotation = Camera.main.transform.rotation;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    //calculates the font rotation so it rotates with the camera
+    Quaternion calculateIconRotation()
+    {
+        //Quaternion fontRotation = new Quaternion();
+        //fontRotation = Camera.main.transform.rotation;
+        return Camera.main.transform.rotation;
     }
 }

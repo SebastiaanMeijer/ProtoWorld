@@ -173,13 +173,24 @@ public class Utilities : Editor {
 			}
 		}
 
-		EditorUtility.ClearProgressBar();
-
+		EditorUtility.ClearProgressBar(); 
 		Debug.Log("Assigned missing layers to grouped " + pluralName + ".");
 	}
 
+    [MenuItem("ProtoWorld Editor/Transportation Module/Add Dynamic Station Fonts")]
+    public static void AddDynamicStationFonts()
+    {
+        GameObject transportationModule = GameObject.Find("TransportationModule");
+        Transform stations = transportationModule.transform.FindChild("Stations").transform;
 
-	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Utilities/Remove Empty Buildings")]
+        foreach (Transform station in stations)
+        {
+            station.gameObject.AddComponent<StationTextController>();
+        }
+    }
+
+
+    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Utilities/Remove Empty Buildings")]
 	public static void RemoveEmptyBuildings() {
 		RemoveEmptyGameObjects("building", "buildings", "Building");
 	}
