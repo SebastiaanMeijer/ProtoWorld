@@ -86,6 +86,7 @@ public class FaceCamera : MonoBehaviour
 
     // Use this for initialization
     void Start()
+
     {
         camera = Camera.main.GetComponent<CameraControl>();
         currentCameraRotation = Camera.main.transform.rotation;
