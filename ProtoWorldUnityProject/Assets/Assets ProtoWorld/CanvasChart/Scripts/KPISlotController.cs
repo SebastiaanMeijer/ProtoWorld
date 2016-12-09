@@ -26,6 +26,11 @@ public class KPISlotController : MonoBehaviour
 	    dropdown.onValueChanged.AddListener(delegate { OnKPISelect(dropdown); });
 	}
 
+    void Update ()
+    {
+        id_text.text = "Chart " + (slotid + 1);
+    }
+    
     public void OnKPISelect(Dropdown dropdown)
     {
         string old_kpi = activekpi;
@@ -33,20 +38,19 @@ public class KPISlotController : MonoBehaviour
 
         controller.KpiSelect(this, old_kpi, new_kpi);
     }
-	
-	void Update ()
-	{
-		int slotNumber = slotid + 1;
-	    id_text.text = "Chart " + slotNumber.ToString();
-	}
+
 
     public void FillOptions(List<ChartController> charts)
     {
+        //Fill the dropdown array with all charts, unique chart names only
         dropdown.options.Clear();
         foreach (ChartController chart in charts)
         {
             AddKpiOption(chart.name);
         }
+
+        //None option
+        AddKpiOption("None");
     }
 
 

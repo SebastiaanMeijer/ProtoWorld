@@ -66,6 +66,7 @@ public class ChartPanelController : MonoBehaviour
 
 	    foreach (ChartController chart in ordering)
 	    {
+	        if (chart == null) continue;
 	        chart.gameObject.SetActive(true);
 	        Vector3 pos = origin;
 	        pos.y -= height;
@@ -96,6 +97,11 @@ public class ChartPanelController : MonoBehaviour
     public void KpiSelect(KPISlotController slotController, string oldkpi, string newkpi)
     {
         // Grab the old/new chart controller.
+        if (newkpi.Equals("None"))
+        {
+            ordering[slotController.slotid] = null;
+            return;
+        }
         ChartController newChart = charts.FirstOrDefault(chart => chart.name.Equals(newkpi));
         ChartController oldChart = charts.FirstOrDefault(chart => chart.name.Equals(oldkpi));
 
