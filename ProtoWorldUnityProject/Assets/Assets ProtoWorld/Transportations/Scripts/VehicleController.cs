@@ -65,6 +65,8 @@ public class VehicleController : MonoBehaviour
 	[HideInInspector]
 	public Heatmap heatMap;
 
+	private WaitForSeconds wait = new WaitForSeconds(0.5f);
+
 	[System.Serializable]
 	public class DisembarkStats
 	{
@@ -82,7 +84,7 @@ public class VehicleController : MonoBehaviour
 
 	public IEnumerator putInArrayDelay()
 	{
-		yield return new WaitForSeconds (0.5f);
+		yield return wait;
 		if (heatMap != null) {
 			heatMap.putInArray(this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform, 3);
 		}

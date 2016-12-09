@@ -88,6 +88,12 @@ public class FlashPedestriansController : TravelerController, Loggable
 	private bool isPause = false;
 
 	/// <summary>
+	/// Reusing the WaitForSeconds globally since it saves a lot of allocation and deallocation.
+	/// This causes the garbage collector to run less often.
+	/// </summary>
+	private static WaitForSeconds waitForZoom = new WaitForSeconds(0.5f);
+
+	/// <summary>
 	/// Note that the heatmap is initialized by the spawner to improve performance.
 	/// </summary>
 	[HideInInspector]
@@ -139,13 +145,13 @@ public class FlashPedestriansController : TravelerController, Loggable
 		Renderer rsp = GetComponentInParent<Renderer> ();
 		// Deactivate render if zoomed out
 		if (rsp.enabled != true) {
-			StartCoroutine (LateStart (0.5f));
+			StartCoroutine (LateStart ());
 		}
 
 	}
 
-	IEnumerator LateStart(float waitTime){
-		yield return new WaitForSeconds (waitTime);
+	IEnumerator LateStart(){
+		yield return waitForZoom;
 
 		Renderer[] rs = GetComponentsInChildren<Renderer> ();
 		foreach (Renderer r in rs)

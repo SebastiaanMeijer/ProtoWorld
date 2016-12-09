@@ -42,6 +42,8 @@ public class HistoricalDataController : MonoBehaviour
 
     private CameraControl camera;
 
+	private WaitForSeconds waitForLog;
+
 	//TODO: logfile reset after loading of snapshot
 
     // Use this for initialization
@@ -55,6 +57,8 @@ public class HistoricalDataController : MonoBehaviour
 		initiateLogFile ();
 		createLogDestination ();
 		initiateLoggingInterface ();
+
+		waitForLog = new WaitForSeconds(logIntervalSeconds);
 
 		StartCoroutine(logToXML());
     }
@@ -106,7 +110,7 @@ public class HistoricalDataController : MonoBehaviour
 			{
 				timeStamp.Add(convertDataToXML (loggable.getLogData()));
 			}
-			yield return new WaitForSeconds(logIntervalSeconds);
+			yield return waitForLog;
 		}
 	}
 
