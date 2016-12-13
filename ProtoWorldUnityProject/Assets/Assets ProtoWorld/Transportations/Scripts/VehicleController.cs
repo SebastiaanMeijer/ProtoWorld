@@ -126,7 +126,7 @@ public class VehicleController : MonoBehaviour
 		renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 		renderer.receiveShadows = false;
 		renderer.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
-		renderer.useLightProbes = false;
+		renderer.lightProbeUsage = UnityEngine.Rendering.LightProbeUsage.Off;
 
 		// Cache the material to improve performance, as this is called a lot during spawning events.
 		if(gameObjectMaterial == null)

@@ -6,7 +6,7 @@ public class StationTextController : MonoBehaviour {
     public int fontSizeFactor = 5;
     public TextMesh textMesh;
     public MeshRenderer meshRenderer;
-    public CameraControl camera;
+    public CameraControl cameraControl;
     public Vector3 currentTargetCameraPosition;
     public Quaternion currentCameraRotation;
 
@@ -22,9 +22,9 @@ public class StationTextController : MonoBehaviour {
             }
         }
 
-        camera = Camera.main.GetComponent<CameraControl>();
+        cameraControl = Camera.main.GetComponent<CameraControl>();
 
-        currentTargetCameraPosition = camera.targetCameraPosition;
+        currentTargetCameraPosition = cameraControl.targetCameraPosition;
         currentCameraRotation = Camera.main.transform.rotation;
     }
 	
@@ -49,9 +49,9 @@ public class StationTextController : MonoBehaviour {
     //checks if the camera has changed position, if yes set current cameraposition
     bool cameraChanged()
     {
-        if ((camera.targetCameraPosition != currentTargetCameraPosition )|| (currentCameraRotation != Camera.main.transform.rotation))
+        if ((cameraControl.targetCameraPosition != currentTargetCameraPosition )|| (currentCameraRotation != Camera.main.transform.rotation))
         {
-            currentTargetCameraPosition = camera.targetCameraPosition;
+            currentTargetCameraPosition = cameraControl.targetCameraPosition;
             currentCameraRotation = Camera.main.transform.rotation;
             return true;
         }
@@ -82,7 +82,7 @@ public class StationTextController : MonoBehaviour {
     //calculates the font size needed with the current camera distance (uses the factor declared above)
     int calculateFontSize()
     {
-        return (int)Mathf.Ceil(camera.targetCameraPosition.y / 100 * fontSizeFactor);
+        return (int)Mathf.Ceil(cameraControl.targetCameraPosition.y / 100 * fontSizeFactor);
     }
 
     
