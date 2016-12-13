@@ -40,6 +40,13 @@ public class IssuesUIScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 		myWidth = GetComponent<RectTransform>().rect.width;
 		myHeight = GetComponent<RectTransform>().rect.height;
 	}
+
+	public void Start(){
+
+		IssueScript.originalY = GetComponent<RectTransform>().localPosition.y - 1000;
+		GetComponent<RectTransform>().localPosition = new Vector3(GetComponent<RectTransform>().localPosition.x, IssueScript.originalY + 1000, GetComponent<RectTransform>().localPosition.z);
+
+	}
 	
 	void LateUpdate() {
 		if(showing) {
