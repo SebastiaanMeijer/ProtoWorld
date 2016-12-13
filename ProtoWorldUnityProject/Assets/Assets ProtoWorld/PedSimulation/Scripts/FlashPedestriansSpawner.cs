@@ -456,6 +456,10 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
     {
 		return LogPriorities.High;
     }
+
+	public bool destroyOnLogLoad(){
+		return false;
+	}
 }
 
 

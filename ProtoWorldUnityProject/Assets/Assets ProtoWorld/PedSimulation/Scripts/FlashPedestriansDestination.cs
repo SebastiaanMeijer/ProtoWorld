@@ -100,4 +100,8 @@ public class FlashPedestriansDestination : MonoBehaviour, Loggable
 	{
 		return LogPriorities.High;
 	}
+
+	public bool destroyOnLogLoad(){
+		return false;
+	}
 }

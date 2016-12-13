@@ -47,7 +47,6 @@ public class HistoricalDataController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        getLoggables();
         timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
 		GameObject flashPedestriansModule = GameObject.Find("FlashPedestriansModule");
         globalParameters = flashPedestriansModule.GetComponent<FlashPedestriansGlobalParameters>();
@@ -57,21 +56,6 @@ public class HistoricalDataController : MonoBehaviour
 		initiateLoggingInterface ();
 
 		StartCoroutine(logToXML());
-    }
-
-    //TODO: Optimize! THIS IS A HORSETHING!!!//
-    List<Loggable> getLoggables()
-    {
-        List<GameObject> loggableObjects = new List<GameObject>();
-        loggableObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)).Cast<GameObject>().Where(g => g.tag == "Loggable").ToList();
-        List<Loggable> loggables = new List<Loggable>();
-        foreach (GameObject loggable in  loggableObjects)
-        {
-            print(loggable.ToString());
-            loggables.Add(loggable.GetComponent<Loggable>());
-        }
-        //print(loggables.Count);
-        return loggables;
     }
 
     void initiateLogFile(){
@@ -137,7 +121,6 @@ public class HistoricalDataController : MonoBehaviour
 
 	public void recreateLog(string file, string timestamp)
 	{
-        //print((from element in XDocument.Load(file).Root.Descendants("TimeStamp") where element.FirstAttribute.Value.Equals(timestamp) select element).FirstOrDefault());
         XElement timeStampElement =
             (from element in XDocument.Load(file).Root.Descendants("TimeStamp")
              where element.FirstAttribute.Value.Equals(timestamp)
@@ -155,17 +138,13 @@ public class HistoricalDataController : MonoBehaviour
 	private void recreateObjects(XElement timestampElement){
         //Get all objects which have the loggable interface with a unique tag
         List<Loggable> loggables = InterfaceHelper.FindObjectsInResources<Loggable>().Distinct(new DistinctLoggableComparer()).ToList();
-        //List<Loggable> loggables = getLoggables();
+
         foreach (LogPriorities priority in Enum.GetValues(typeof(LogPriorities))) {
             foreach (Loggable loggable in loggables.FindAll(item => item.getPriorityLevel() == priority))
             {
                 foreach (XElement loggedObject in timestampElement.Descendants(((MonoBehaviour)loggable).tag))
                 {
-					// TODO Instead of recreating spawners and destinations we can just update the properties that
-					// change over time. This temporary if statement shows that it works without recreating them.
-					if(!(loggable is FlashPedestriansSpawner) && !(loggable is FlashPedestriansDestination)) {
-						loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
-					}
+					loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
                 }
             }
         }
@@ -187,9 +166,7 @@ public class HistoricalDataController : MonoBehaviour
         flashInformer.activePedestrians = new Dictionary<int, FlashPedestriansController>();
         foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
 		{
-			// TODO Instead of destroying spawners and destinations we can just update the properties that
-			// change over time. This temporary if statement shows that it works without destroying them.
-			if(!(loggable is FlashPedestriansSpawner) && !(loggable is FlashPedestriansDestination)) {
+			if (loggable.destroyOnLogLoad ()) {
 				LoggableManager.unsubscribe (loggable);
 				Destroy (((MonoBehaviour)loggable).gameObject);
 			}
