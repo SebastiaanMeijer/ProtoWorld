@@ -914,4 +914,8 @@ public class FlashPedestriansController : TravelerController, Loggable
     {
         return LogPriorities.Default;
     }
+
+	public bool destroyOnLogLoad(){
+		return true;
+	}
 }

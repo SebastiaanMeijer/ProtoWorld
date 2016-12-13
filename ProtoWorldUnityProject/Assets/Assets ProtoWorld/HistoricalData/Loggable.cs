@@ -7,4 +7,5 @@ public interface Loggable{
 	LogDataTree getLogData();
 	void rebuildFromLog(LogDataTree logData);
 	LogPriorities getPriorityLevel();
+	bool destroyOnLogLoad ();
 }
