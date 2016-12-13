@@ -163,7 +163,7 @@ public class HistoricalDataController : MonoBehaviour
                 {
 					// TODO Instead of recreating spawners and destinations we can just update the properties that
 					// change over time. This temporary if statement shows that it works without recreating them.
-					if(!(loggable is FlashPedestriansSpawner) && !(loggable is FlashPedestriansDestination)) {
+					if(!(loggable is FlashPedestriansDestination)) {
 						loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
 					}
                 }

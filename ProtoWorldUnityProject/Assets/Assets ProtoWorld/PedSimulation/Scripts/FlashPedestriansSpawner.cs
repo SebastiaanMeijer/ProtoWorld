@@ -411,18 +411,19 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
     public void rebuildFromLog(LogDataTree logData)
     {
         GameObject flashSpawnerObject = null;
-        FlashPedestriansSpawner flashSpawnerScript = flashSpawnerObject.GetComponent<FlashPedestriansSpawner>();
+        FlashPedestriansSpawner flashSpawnerScript = new FlashPedestriansSpawner();
         flashSpawnerScript.id = int.Parse(logData.GetChild("ID").Value);
         foreach (Loggable spawner in LoggableManager.getCurrentSubscribedLoggables())
         {
-            //foreach (GameObject spawner in GameObject.FindGameObjectsWithTag("PedestrianSpawner"))
-            //{
-            if (((MonoBehaviour)spawner).GetComponent<FlashPedestriansSpawner>().id == flashSpawnerScript.id)
+            if (((MonoBehaviour)spawner).gameObject.tag == "PedestrianSpawner")
             {
-                flashSpawnerObject = ((MonoBehaviour)spawner).gameObject;
-                flashSpawnerScript = flashSpawnerObject.GetComponent<FlashPedestriansSpawner>();
+                if (((MonoBehaviour)spawner).GetComponent<FlashPedestriansSpawner>().id == flashSpawnerScript.id)
+                {
+                    print("test");
+                    flashSpawnerObject = ((MonoBehaviour)spawner).gameObject;
+                    flashSpawnerScript = flashSpawnerObject.GetComponent<FlashPedestriansSpawner>();
+                }
             }
-            //}
         }
         Vector3 position = new Vector3();
         position.x = float.Parse(logData.GetChild("PositionX").Value);
