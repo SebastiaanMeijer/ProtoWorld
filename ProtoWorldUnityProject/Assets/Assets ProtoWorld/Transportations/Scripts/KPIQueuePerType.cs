@@ -41,6 +41,10 @@ public class KPIQueuePerType : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //pause the gathering of data when a log is being loaded
+        if (KPIParameters.pauseKPIS)
+            return;
+
         busQueue = pedestrianGlobals.numberOfPedestriansPerAgent * lineStatistics.busQueuing;
         trainQueue = pedestrianGlobals.numberOfPedestriansPerAgent * lineStatistics.trainQueuing;
         tramQueue = pedestrianGlobals.numberOfPedestriansPerAgent * lineStatistics.tramQueuing;

@@ -30,28 +30,28 @@ public class KPIDelays : MonoBehaviour
 
     public Transform transLines;
 
-	// Use this for initialization
-	void Start () {
-	    transLines = GameObject.Find("TransLines").transform;
-    }
-	
-	// Update is called once per frame
-	void Update ()
-	{
-        UpdateDelays();
-	}
-
-    private void UpdateDelays()
+    // Use this for initialization
+    void Start()
     {
+        transLines = GameObject.Find("TransLines").transform;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //pause the gathering of data when a log is being loaded
+        if (KPIParameters.pauseKPIS)
+            return;
+
         float tmpTramDelay = 0;
         float tmpTrainDelay = 0;
         float tmpBusDelay = 0;
         float tmpMetroDelay = 0;
 
         foreach (Transform transLine in transLines)
-		{
+        {
             foreach (Transform item in transLine)
-			{
+            {
                 VehicleController vc = item.GetComponent<VehicleController>();
                 if (transLine.name.StartsWith("Tram_"))
                     tmpTramDelay += vc.delay;
@@ -64,7 +64,7 @@ public class KPIDelays : MonoBehaviour
 
                 if (transLine.name.StartsWith("Metro_"))
                     tmpMetroDelay += vc.delay;
-            }         
+            }
         }
 
         TramDelay = tmpTramDelay;

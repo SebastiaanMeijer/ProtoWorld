@@ -53,6 +53,10 @@ public class KPIAvgDelaysPerType : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //pause the gathering of data when a log is being loaded
+        if (KPIParameters.pauseKPIS)
+            return;
+
         avgTramDelay = Update(TramDelaysDict, delays.TramDelay);
         avgBusDelay = Update(BusDelaysDict, delays.BusDelay);
         avgTrainDelay = Update(TrainDelaysDict, delays.TrainDelay);
@@ -65,10 +69,10 @@ public class KPIAvgDelaysPerType : MonoBehaviour
         //Add the average value if it isn't stored yet (for this second)
         if (!dict.ContainsKey(time))
             dict.Add(time, value);
-        
+
         //Remove all old (time - timeunit) values
         RemoveOld(dict);
-        
+
         //Calculate the sum
         return CalculateSum(dict);
     }
@@ -77,7 +81,7 @@ public class KPIAvgDelaysPerType : MonoBehaviour
     {
         float sum = 0;
         int count = 0;
-        foreach(KeyValuePair<int, float> entry in dict)
+        foreach (KeyValuePair<int, float> entry in dict)
         {
             count++;
             sum += entry.Value;

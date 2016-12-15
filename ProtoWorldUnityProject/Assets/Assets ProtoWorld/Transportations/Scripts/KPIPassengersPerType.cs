@@ -51,6 +51,10 @@ public class KPIPassengersPerType : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //pause the gathering of data when a log is being loaded
+        if (KPIParameters.pauseKPIS)
+            return;
+
         carPassengers = getCarPassengers();
         bicyclePassengers = pedestrianGlobals.numberOfPedestriansPerAgent * bicycleCounter;
 
@@ -104,10 +108,9 @@ public class KPIPassengersPerType : MonoBehaviour
         return pedestrianGlobals.numberOfPedestriansPerAgent * carcount;
     }
 
-    /*
-    private int getBicyclePassengers()
+    public void updateBicyclePassengers()
     {
-        int cyclists = 0;
+        int numCyclists = 0;
         foreach (Transform spawner in spawnerPoints)
         {
             if (spawner.gameObject.activeSelf)
@@ -120,7 +123,7 @@ public class KPIPassengersPerType : MonoBehaviour
                         {
                             if (child.name == "bike" && child.gameObject.activeSelf)
                             {
-                                cyclists++;
+                                numCyclists++;
                                 break;
                             }
                         }
@@ -128,7 +131,6 @@ public class KPIPassengersPerType : MonoBehaviour
                 }
             }
         }
-        return cyclists;
+        bicycleCounter = numCyclists;
     }
-    */
 }

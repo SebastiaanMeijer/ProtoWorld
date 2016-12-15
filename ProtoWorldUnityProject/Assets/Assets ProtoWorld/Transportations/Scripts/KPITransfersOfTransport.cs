@@ -44,6 +44,8 @@ public class KPITransfersOfTransport : MonoBehaviour
     private int current_metro = 0;
     public int deltaMetro = 0;
 
+    private float timeout = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -54,39 +56,50 @@ public class KPITransfersOfTransport : MonoBehaviour
     //Calculates the difference in passengers per type
     void Update()
     {
-        //Tram
-        if (passenger_data.tramPassengers != current_tram)
-        {
-            deltaTram = passenger_data.tramPassengers - current_tram;
-            current_tram = passenger_data.tramPassengers;
-        }
+        //pause the gathering of data when a log is being loaded
+        if (KPIParameters.pauseKPIS)
+            return;
 
-        //Train
-        if(passenger_data.trainPassengers != current_train)
+        //run only once per second, otherwise the deltas are not noticable
+        timeout += Time.deltaTime;
+        if (timeout >= 1)
         {
-            deltaTrain = passenger_data.trainPassengers - current_train;
-            current_train = passenger_data.trainPassengers;
-        }
+            //Tram
+            if (passenger_data.tramPassengers != current_tram)
+            {
+                deltaTram = passenger_data.tramPassengers - current_tram;
+                current_tram = passenger_data.tramPassengers;
+            }
 
-        //Bus
-        if (passenger_data.busPassengers != current_bus)
-        {
-            deltaBus = passenger_data.busPassengers - current_bus;
-            current_bus = passenger_data.busPassengers;
-        }
+            //Train
+            if (passenger_data.trainPassengers != current_train)
+            {
+                deltaTrain = passenger_data.trainPassengers - current_train;
+                current_train = passenger_data.trainPassengers;
+            }
 
-        //Car
-        if (passenger_data.carPassengers != current_car)
-        {
-            deltaCar = passenger_data.carPassengers - current_car;
-            current_car = passenger_data.carPassengers;
-        }
+            //Bus
+            if (passenger_data.busPassengers != current_bus)
+            {
+                deltaBus = passenger_data.busPassengers - current_bus;
+                current_bus = passenger_data.busPassengers;
+            }
 
-        //Metro
-        if (passenger_data.metroPassengers != current_metro)
-        {
-            deltaMetro = passenger_data.metroPassengers - current_metro;
-            current_metro = passenger_data.metroPassengers;
+            //Car
+            if (passenger_data.carPassengers != current_car)
+            {
+                deltaCar = passenger_data.carPassengers - current_car;
+                current_car = passenger_data.carPassengers;
+            }
+
+            //Metro
+            if (passenger_data.metroPassengers != current_metro)
+            {
+                deltaMetro = passenger_data.metroPassengers - current_metro;
+                current_metro = passenger_data.metroPassengers;
+            }
+
+            timeout--;
         }
     }
 }

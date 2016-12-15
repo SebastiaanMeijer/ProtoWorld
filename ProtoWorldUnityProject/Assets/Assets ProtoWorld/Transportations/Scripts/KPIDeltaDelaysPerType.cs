@@ -52,6 +52,10 @@ public class KPIDeltaDelaysPerType : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //pause the gathering of data when a log is being loaded
+        if (KPIParameters.pauseKPIS)
+            return;
+
         //run only once per second, otherwise the delays are not noticable
         timeout += Time.deltaTime;
         if (timeout >= 1)
