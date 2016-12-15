@@ -50,7 +50,7 @@ public class FlashPedestriansDestination : MonoBehaviour, Loggable
     void Awake()
     {
         initializeDestination();
-		LoggableManager.subscribe((Loggable)this);
+        LoggableManager.subscribe((Loggable)this);
     }
 
     public void initializeDestination()
@@ -66,38 +66,40 @@ public class FlashPedestriansDestination : MonoBehaviour, Loggable
         //+ " stations nearby");
     }
 
-	public LogDataTree getLogData(){
-		LogDataTree logData = new LogDataTree (tag,null);
-		logData.AddChild(new LogDataTree("Name",destinationName));
-		logData.AddChild(new LogDataTree("PositionX",destinationTransform.position.x.ToString()));
-		logData.AddChild(new LogDataTree("PositionY",destinationTransform.position.y.ToString()));
-		logData.AddChild(new LogDataTree("PositionZ",destinationTransform.position.z.ToString()));
-		logData.AddChild(new LogDataTree("CheckRadius",radiousToCheckStations.ToString()));
-		logData.AddChild(new LogDataTree("Priority",destinationPriority.ToString()));
-		return logData;
-	}
-
-	public void rebuildFromLog(LogDataTree logData){
-		GameObject flashDestinationObject = GameObject.Instantiate(gameObject) as GameObject;
-		FlashPedestriansDestination flashDestinationScript = flashDestinationObject.GetComponent<FlashPedestriansDestination>();
-		Vector3 position = new Vector3();
-
-		flashDestinationScript.destinationName = logData.GetChild ("Name").Value;
-		position.x = float.Parse(logData.GetChild("PositionX").Value);
-		position.y = float.Parse(logData.GetChild("PositionY").Value);
-		position.z = float.Parse(logData.GetChild("PositionZ").Value);
-		flashDestinationScript.radiousToCheckStations = float.Parse(logData.GetChild("CheckRadius").Value);
-		flashDestinationScript.destinationPriority = float.Parse(logData.GetChild("Priority").Value);
-		flashDestinationObject.transform.parent = GameObject.Find("DestinationPoints").transform;
-		flashDestinationObject.name = "FlashDestination";
-		flashDestinationScript.destinationTransform.position = position;
-
-		flashDestinationScript.initializeDestination();
-		flashDestinationScript.enabled = true;
+    public LogDataTree getLogData()
+    {
+        LogDataTree logData = new LogDataTree(tag, null);
+        logData.AddChild(new LogDataTree("Name", destinationName));
+        logData.AddChild(new LogDataTree("PositionX", destinationTransform.position.x.ToString()));
+        logData.AddChild(new LogDataTree("PositionY", destinationTransform.position.y.ToString()));
+        logData.AddChild(new LogDataTree("PositionZ", destinationTransform.position.z.ToString()));
+        logData.AddChild(new LogDataTree("CheckRadius", radiousToCheckStations.ToString()));
+        logData.AddChild(new LogDataTree("Priority", destinationPriority.ToString()));
+        return logData;
     }
 
-	public  LogPriorities getPriorityLevel()
-	{
-		return LogPriorities.High;
-	}
+    public void rebuildFromLog(LogDataTree logData)
+    {
+        GameObject flashDestinationObject = GameObject.Instantiate(gameObject) as GameObject;
+        FlashPedestriansDestination flashDestinationScript = flashDestinationObject.GetComponent<FlashPedestriansDestination>();
+        Vector3 position = new Vector3();
+
+        flashDestinationScript.destinationName = logData.GetChild("Name").Value;
+        position.x = float.Parse(logData.GetChild("PositionX").Value);
+        position.y = float.Parse(logData.GetChild("PositionY").Value);
+        position.z = float.Parse(logData.GetChild("PositionZ").Value);
+        flashDestinationScript.radiousToCheckStations = float.Parse(logData.GetChild("CheckRadius").Value);
+        flashDestinationScript.destinationPriority = float.Parse(logData.GetChild("Priority").Value);
+        flashDestinationObject.transform.parent = GameObject.Find("DestinationPoints").transform;
+        flashDestinationObject.name = "FlashDestination";
+        flashDestinationScript.destinationTransform.position = position;
+
+        flashDestinationScript.initializeDestination();
+        flashDestinationScript.enabled = true;
+    }
+
+    public LogPriorities getPriorityLevel()
+    {
+        return LogPriorities.High;
+    }
 }
