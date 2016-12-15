@@ -97,7 +97,7 @@ public class VehicleController : MonoBehaviour
 
 	public static GameObject CreateGameObject(LineController line, LineDirection direction)
 	{
-		GameObject obj = obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		obj.transform.localScale *= 0.6f;
 
 		if (line.category == LineCategory.Train)
@@ -136,6 +136,9 @@ public class VehicleController : MonoBehaviour
 		}
 
 		renderer.material = gameObjectMaterial;
+
+		// Assign the vehicles to their own layer so they can be selectively hidden.
+		obj.layer = LayerMask.NameToLayer("PublicTransit");
 
 		return obj;
 	}

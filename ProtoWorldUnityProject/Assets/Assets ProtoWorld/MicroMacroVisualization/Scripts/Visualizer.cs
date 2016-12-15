@@ -50,8 +50,9 @@ public class Visualizer : MonoBehaviour {
 			previousLevel = ZoomScrollbarMMV.level;
 			for(int i = 0; objectRenders.Length > i; i++) {
 				changeVisualizationRenderer(previousLevel, objectRendersLvl[i]);
-				changeVisualizationActive(previousLevel, objectScalesLvl[i]);
-				//changeVisualizationScale (previousLevel,objectSelfLvl[i]);
+			}
+			for(int i = 0; objectSelf.Length > i; i++) {
+				changeVisualizationActive(previousLevel, objectSelfLvl[i]);
 			}
 		}
 	}
@@ -63,10 +64,11 @@ public class Visualizer : MonoBehaviour {
 		if(activatedMicroMacro == true) {
 			for(int i = 0; objectRenders.Length > i; i++) {
 				changeVisualizationRenderer(-1, objectRendersLvl[i]);
-				changeVisualizationActive(-1, objectScalesLvl[i]);
-				//changeVisualizationScale (-1, objectSelfLvl [i]);
-
 			}
+			for(int i = 0; objectSelf.Length > i; i++) {
+				changeVisualizationActive(previousLevel, objectSelfLvl[i]);
+			}
+
 			activatedMicroMacro = false;
 		}
 		else {
@@ -74,8 +76,9 @@ public class Visualizer : MonoBehaviour {
 
 			for(int i = 0; objectRenders.Length > i; i++) {
 				changeVisualizationRenderer(previousLevel, objectRendersLvl[i]);
-				changeVisualizationActive(previousLevel, objectScalesLvl[i]);
-				//changeVisualizationScale (previousLevel,objectSelfLvl[i]);
+			}
+			for(int i = 0; objectSelf.Length > i; i++) {
+				changeVisualizationActive(previousLevel, objectSelfLvl[i]);
 			}
 		}
 	}
