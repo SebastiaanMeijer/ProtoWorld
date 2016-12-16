@@ -137,9 +137,6 @@ public class VehicleController : MonoBehaviour
 
 		renderer.material = gameObjectMaterial;
 
-		// Assign the vehicles to their own layer so they can be selectively hidden.
-		obj.layer = LayerMask.NameToLayer("PublicTransit");
-
 		return obj;
 	}
 
@@ -191,8 +188,12 @@ public class VehicleController : MonoBehaviour
 		ResetTimer();
 		if (line.useDefaultVehicleSymbol)
 			TryAttachVehiclePrefab();
-
-
+		
+		// Assign the vehicles to their own layer so they can be selectively hidden.
+		LayerMask layerMask = LayerMask.NameToLayer("PublicTransit");
+		foreach(Transform childTransform in GetComponentsInChildren<Transform>()) {
+			childTransform.gameObject.layer = layerMask;
+		}
 	}
 
 	void TryAttachVehiclePrefab()

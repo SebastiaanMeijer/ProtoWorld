@@ -88,52 +88,24 @@ public class Visualizer : MonoBehaviour {
 		if(activatedMicroMacro) {
 			for(int i = 0; i < objectRenders.Length; i++) {
 				if(objectRenders[i] != null) {
-					Renderer[] rs = objectRenders[i].GetComponentsInChildren<Renderer>();
-					foreach(Renderer r in rs)
-						r.enabled = true;
-				}
-			}
-
-			cameraObject.GetComponent<Camera>().cullingMask |= 1 << LayerMask.NameToLayer("Pedestrian");
-
-			for(int i = 0; i < objectRenders.Length; i++) {
-				if(objectRenders[i] != null) {
-					Renderer[] rs = objectRenders[i].GetComponentsInChildren<Renderer>();
 					if(objectRendersLvl[i] > levelNumber && objectRendersLvl[i] >= 0) {
 						var newMask = cameraObject.GetComponent<Camera>().cullingMask | (1 << objectRenders[i].gameObject.layer);
 						cameraObject.GetComponent<Camera>().cullingMask = newMask;
-
-						foreach(Renderer r in rs) {
-							//r.enabled = true;
-							//LayerMask.NameToLayer("Pedestrian");
-						}
 					}
 					else if(objectRendersLvl[i] <= levelNumber && objectRendersLvl[i] >= 0) {
 						var newMask = cameraObject.GetComponent<Camera>().cullingMask & ~(1 << objectRenders[i].gameObject.layer);
 						cameraObject.GetComponent<Camera>().cullingMask = newMask;
-
-						foreach(Renderer r in rs) {
-
-						}
 					}
 					else if(objectRendersLvl[i] > -levelNumber && objectRendersLvl[i] < 0) {
 						var newMask = cameraObject.GetComponent<Camera>().cullingMask | (1 << objectRenders[i].gameObject.layer);
 						cameraObject.GetComponent<Camera>().cullingMask = newMask;
-
-						foreach(Renderer r in rs) {
-							//r.enabled = true;
-						}
 					}
 					else if(objectRendersLvl[i] <= -levelNumber && objectRendersLvl[i] < 0) {
 						var newMask = cameraObject.GetComponent<Camera>().cullingMask & ~(1 << objectRenders[i].gameObject.layer);
 						cameraObject.GetComponent<Camera>().cullingMask = newMask;
-						foreach(Renderer r in rs) {
-							//r.enabled = false;
-						}
 					}
 				}
 			}
-
 		}
 	}
 
