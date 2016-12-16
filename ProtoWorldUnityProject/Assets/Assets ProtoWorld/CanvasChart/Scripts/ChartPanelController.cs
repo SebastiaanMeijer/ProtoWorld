@@ -18,7 +18,7 @@ public class ChartPanelController : MonoBehaviour
 	void Start ()
 	{
 	    charts = new List<ChartController>();
-	    slotPanel = GameObject.Find("SlotPanel").transform;
+	    slotPanel = GameObject.Find("KPISlotPanel").transform;
 	    AddSlot = GameObject.Find("AddSlot").transform;
 
         original_ordering = new List<ChartController>(ordering);
