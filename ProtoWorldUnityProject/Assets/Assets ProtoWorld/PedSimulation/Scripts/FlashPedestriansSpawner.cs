@@ -419,7 +419,6 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
             {
                 if (((MonoBehaviour)spawner).GetComponent<FlashPedestriansSpawner>().id == flashSpawnerScript.id)
                 {
-                    print("test");
                     flashSpawnerObject = ((MonoBehaviour)spawner).gameObject;
                     flashSpawnerScript = flashSpawnerObject.GetComponent<FlashPedestriansSpawner>();
                 }
@@ -443,8 +442,6 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
         flashSpawnerScript.numberOfPedestriansGenerated = int.Parse(logData.GetChild("NumberOfPedestriansGenerated").Value);
         flashSpawnerScript.numberOfPedestriansOnDestination = int.Parse(logData.GetChild("NumberOfPedestriansOnDestination").Value);
         flashSpawnerObject.name = "FlashSpawner";
-        //flashSpawnerObject.transform.parent = GameObject.Find("SpawnerPoints").transform;
-        //flashSpawnerScript.initializeSpawner();
         flashSpawnerScript.enabled = true;
     }
 

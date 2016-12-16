@@ -78,17 +78,27 @@ public class FlashPedestriansDestination : MonoBehaviour, Loggable
 	}
 
 	public void rebuildFromLog(LogDataTree logData){
-		GameObject flashDestinationObject = GameObject.Instantiate(gameObject) as GameObject;
-		FlashPedestriansDestination flashDestinationScript = flashDestinationObject.GetComponent<FlashPedestriansDestination>();
-		Vector3 position = new Vector3();
-
+		GameObject flashDestinationObject = null;
+        FlashPedestriansDestination flashDestinationScript = new FlashPedestriansDestination();
+        foreach (Loggable destination in LoggableManager.getCurrentSubscribedLoggables())
+        {
+            if (((MonoBehaviour)destination).gameObject.tag == "PedestrianDestination")
+            {
+                if (((MonoBehaviour)destination).GetComponent<FlashPedestriansDestination>().destinationName == destinationName)
+                {
+                    flashDestinationObject = ((MonoBehaviour)destination).gameObject;
+                    flashDestinationScript = flashDestinationObject.GetComponent<FlashPedestriansDestination>();
+                }
+            }
+        }
+        Vector3 position = new Vector3();
 		flashDestinationScript.destinationName = logData.GetChild ("Name").Value;
 		position.x = float.Parse(logData.GetChild("PositionX").Value);
 		position.y = float.Parse(logData.GetChild("PositionY").Value);
 		position.z = float.Parse(logData.GetChild("PositionZ").Value);
 		flashDestinationScript.radiousToCheckStations = float.Parse(logData.GetChild("CheckRadius").Value);
 		flashDestinationScript.destinationPriority = float.Parse(logData.GetChild("Priority").Value);
-		flashDestinationObject.transform.parent = GameObject.Find("DestinationPoints").transform;
+		//flashDestinationObject.transform.parent = GameObject.Find("DestinationPoints").transform;
 		flashDestinationObject.name = "FlashDestination";
 		flashDestinationScript.destinationTransform.position = position;
 
