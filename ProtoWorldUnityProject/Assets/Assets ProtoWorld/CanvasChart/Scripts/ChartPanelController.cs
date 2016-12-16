@@ -1,81 +1,97 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using UnityEngine.Networking.NetworkSystem;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ChartPanelController : MonoBehaviour
 {
     internal List<ChartController> charts;
 
-    public ChartController[] ordering;
+    public List<ChartController> ordering;
+    private List<ChartController> original_ordering;
+
 
     private Transform slotPanel;
     public GameObject slotPrefab;
+    private Transform AddSlot;
 	
 	void Start ()
 	{
 	    charts = new List<ChartController>();
 	    slotPanel = GameObject.Find("SlotPanel").transform;
+	    AddSlot = GameObject.Find("AddSlot").transform;
 
+        original_ordering = new List<ChartController>(ordering);
+
+	    //Fetch all KPICharts in the scene
 	    foreach (Transform kpichart in transform)
 	    {
 	        ChartController controller = kpichart.GetComponent<ChartController>();
 	        if (controller != null) charts.Add(controller);
 	    }
 
-	    var i = 0;
-
-	    // Create a kpislot object for each item in the ordering.
-	    foreach (ChartController chart in ordering)
-	    {
-	        GameObject kpi_obj = Instantiate(slotPrefab, transform.position, Quaternion.identity) as GameObject;
-	        KPISlotController kpislot = kpi_obj.GetComponent<KPISlotController>();
-
-	        kpislot.dropdown.options.Clear();
-	        kpislot.transform.SetParent(slotPanel);
-	        kpislot.active_chart = chart;
-	        kpislot.activekpi = chart.name;
-	        kpislot.FillOptions(charts);
-	        kpislot.slotid = i++;
-	        kpislot.SetDropdown();
-	        kpi_obj.name = "KPISlot " + kpislot.slotid;
-	    }
+	    //Generate all slots from the ordering setted in the scene.
+        GenerateKpiSlots(ordering);
 
 		// Start with the slot panel disabled.
 		SlotPanelController scontroller = slotPanel.GetComponent<SlotPanelController>();
         scontroller.active = false;
 	}
 
-	
-	void Update ()
-	{
-	    // Disable each chart that is not selected in the slots.
-	    foreach (ChartController chart in charts)
-	    {
-	        if(!ordering.Contains(chart)) chart.gameObject.SetActive(false);
-	    }
+    void Update ()
+    {
+        // Disable each chart that is not selected in the slots.
+        foreach (ChartController chart in charts)
+        {
+            if(!ordering.Contains(chart)) chart.gameObject.SetActive(false);
+        }
 
-	    Vector3 origin = transform.position;
-	    float height = slotPanel.GetComponent<RectTransform>().sizeDelta.y;
+        Vector3 origin = transform.position;
+        float height = slotPanel.GetComponent<RectTransform>().sizeDelta.y;
 
-	    foreach (ChartController chart in ordering)
-	    {
-	        if (chart == null) continue;
-	        chart.gameObject.SetActive(true);
-	        Vector3 pos = origin;
-	        pos.y -= height;
-	        chart.transform.position = pos;
+        foreach (ChartController chart in ordering)
+        {
+            if (chart == null) continue;
+            chart.gameObject.SetActive(true);
+            Vector3 pos = origin;
+            pos.y -= height;
+            chart.transform.position = pos;
 
-	        if (chart.contentPanel.activeSelf) height += 200;
-	        else height += 25;
-	    }
-	}
+            if (chart.contentPanel.activeSelf) height += 200;
+            else height += 25;
+        }
+    }
+
+    //Creates a new KPISlot bases on a chartcontroller, if the chartcontroller is null
+    //the KPISlot sets the selected item to "None".
+    private GameObject CreateKpiSlot(ChartController chart, int slotid)
+    {
+        GameObject kpi_obj = Instantiate(slotPrefab, transform.position, Quaternion.identity) as GameObject;
+        KPISlotController kpislot = kpi_obj.GetComponent<KPISlotController>();
+
+        kpislot.dropdown.options.Clear();
+        kpislot.transform.SetParent(slotPanel);
+        kpislot.active_chart = chart;
+        kpislot.slotid = slotid;
+        kpi_obj.name = "KPISlot " + kpislot.slotid;
+
+        if (chart != null) kpislot.activekpi = chart.name;
+        kpislot.FillOptions(charts);
+        kpislot.SetDropdown();
+
+        return kpi_obj;
+    }
+
+    //Generate slots from a chart list.
+    void GenerateKpiSlots(List<ChartController> charts)
+    {
+        var i = 0;
+        // Create a kpislot object for each item in the ordering.
+        foreach (ChartController chart in charts) CreateKpiSlot(chart, i++);
+
+        //So the transform is at the bottom of the list
+        AddSlot.SetAsLastSibling();
+    }
 
     // Toggle the slotpanel
     public void ToggleSlotConfig()
@@ -94,16 +110,24 @@ public class ChartPanelController : MonoBehaviour
         }  
     }
 
+    //Gets called when a new chart is selected from a KPI Slot.
     public void KpiSelect(KPISlotController slotController, string oldkpi, string newkpi)
     {
+
+        ChartController oldChart = null;
         // Grab the old/new chart controller.
         if (newkpi.Equals("None"))
         {
             ordering[slotController.slotid] = null;
             return;
         }
+        if (!oldkpi.Equals("None"))
+        {
+            oldChart = charts.FirstOrDefault(chart => chart.name.Equals(oldkpi));
+        }
+
         ChartController newChart = charts.FirstOrDefault(chart => chart.name.Equals(newkpi));
-        ChartController oldChart = charts.FirstOrDefault(chart => chart.name.Equals(oldkpi));
+
 
         // Reset the dropdown to the old item if the wanted chart is already in a slot
         if (ordering.Contains(newChart))
@@ -112,7 +136,8 @@ public class ChartPanelController : MonoBehaviour
         }
         else {
             // Set the state of the previous contentPanel to the new one
-            bool was_active = oldChart.contentPanel.activeSelf;
+            bool was_active = true;
+            if (oldChart != null) was_active = oldChart.contentPanel.activeSelf;
             newChart.contentPanel.SetActive(was_active);
 
             // Finally, set the new chart
@@ -120,5 +145,54 @@ public class ChartPanelController : MonoBehaviour
             slotController.activekpi = newChart.name;
             ordering[slotController.slotid] = newChart;
         }
+    }
+
+    //Add a new slot
+    public void AddSlotPanel()
+    {
+        GameObject kpislot = CreateKpiSlot(null, ordering.Count);
+        ordering.Add(kpislot.GetComponent<ChartController>());
+        AddSlot.SetAsLastSibling();
+    }
+
+    //Remove a slot from the slotpanel, called by the KPISlotController
+    public void RemoveSlot(int slotid)
+    {
+        //Remove the slot at slotid position
+        ordering.RemoveAt(slotid);
+
+        //Reorder the remaining slotid's
+        int i = 0;
+        foreach (Transform SlotPanel in slotPanel)
+        {
+            if (!SlotPanel.gameObject.name.StartsWith("KPISlot") ||
+                SlotPanel.gameObject.name.Equals("KPISlot " + slotid)) continue;
+            KPISlotController slot = SlotPanel.GetComponent<KPISlotController>();
+            slot.slotid = i;
+            SlotPanel.gameObject.name = "KPISlot " + i;
+            Text text = SlotPanel.FindChild("ID").GetComponent<Text>();
+            text.text = "Slot " + i;
+            i++;
+        }
+
+        //Remove the prefab
+        GameObject obj = GameObject.Find("KPISlot " + slotid);
+        Destroy(obj);
+    }
+
+    //Set the kpi slots back to the initial values.
+    public void RestoreSlots()
+    {
+        //Set the original ordering back to the ordering array
+        ordering = new List<ChartController>(original_ordering);
+
+        //Remove all KPISlots
+        foreach (Transform kpi_slot in slotPanel)
+        {
+            if(kpi_slot.name.StartsWith("KPISlot")) Destroy(kpi_slot.gameObject);
+        }
+
+        //And generate them again from the chart list.
+        GenerateKpiSlots(ordering);
     }
 }

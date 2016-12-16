@@ -30,7 +30,7 @@ public class KPISlotController : MonoBehaviour
     {
         id_text.text = "Chart " + (slotid + 1);
     }
-    
+
     public void OnKPISelect(Dropdown dropdown)
     {
         string old_kpi = activekpi;
@@ -69,7 +69,8 @@ public class KPISlotController : MonoBehaviour
 
     public void SetDropdown()
     {
-        string kpi = active_chart.name;
+        string kpi = "None";
+        if(active_chart != null) kpi = active_chart.name;
         dropdown.value = GetKpiOptionValue(kpi);
         dropdown.captionText.text = kpi;
     }
@@ -80,5 +81,10 @@ public class KPISlotController : MonoBehaviour
             if (option.text.Equals(kpi)) return dropdown.options.IndexOf(option);
         }
         return -1;
+    }
+
+    public void RemoveSlot()
+    {
+        controller.RemoveSlot(slotid);
     }
 }
