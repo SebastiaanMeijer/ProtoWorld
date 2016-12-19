@@ -80,7 +80,7 @@ public class Heatmap : MonoBehaviour {
 	/// Awake method.
 	/// </summary>
 	void Awake() {
-		TypeText = transform.parent.Find("HeatMapCanvas").Find("HeatMapControlPanelUI").Find("HeatmapTypeText").GetComponent<Text>();
+		TypeText = transform.parent.Find("HeatMapCanvas/HeatMapControlPanelUI/TypeText").GetComponent<Text>();
 		cameraObject = FindObjectOfType<CameraControl>();
 	}
 

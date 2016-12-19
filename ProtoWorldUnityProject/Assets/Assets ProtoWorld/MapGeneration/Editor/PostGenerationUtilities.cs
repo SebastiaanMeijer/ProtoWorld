@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class Utilities : Editor {
+public class PostGenerationUtilities : Editor {
 	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Utilities/Remove Buildings with Vertices with Non-finite Values")]
 	public static void RemoveBuildingsWithVerticesWithNonFiniteValues() {
 		RemoveGameObjectsWithVerticesWithNonFiniteValues("building", "buildings", "Building");
