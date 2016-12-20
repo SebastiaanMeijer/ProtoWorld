@@ -79,7 +79,7 @@ public class Visualizer : MonoBehaviour {
 				setLayerVisualization(layerLevel, layerLevel.level <= level);
 			}
 			else {
-				setLayerVisualization(layerLevel, layerLevel.level > level);
+				setLayerVisualization(layerLevel, layerLevel.level >= level);
 			}
 		}
 		else {
@@ -94,7 +94,7 @@ public class Visualizer : MonoBehaviour {
 					setObjectVisualization(objectLevel, objectLevel.level <= level);
 				}
 				else {
-					setObjectVisualization(objectLevel, objectLevel.level > level);
+					setObjectVisualization(objectLevel, objectLevel.level >= level);
 				}
 			}
 		}
