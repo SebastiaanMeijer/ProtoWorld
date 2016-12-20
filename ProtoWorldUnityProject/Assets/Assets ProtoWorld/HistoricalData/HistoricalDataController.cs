@@ -97,7 +97,6 @@ public class HistoricalDataController : MonoBehaviour
         FileScrollView = GameObject.Find("FileScrollView").GetComponent<ScrollRect>();
         loadFileBrowser = GameObject.Find("LoadFileBrowser");
         TimestampScrollView = GameObject.Find("TimestampScrollView").GetComponent<ScrollRect>();
-        loadFileBrowser.SetActive(false);
         camera = GameObject.Find("Main Camera").GetComponent<CameraControl>();
     }
 
