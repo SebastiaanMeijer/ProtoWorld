@@ -30,6 +30,7 @@ public class Visualizer : MonoBehaviour {
 	public struct LayerLevel {
 		public LayerMask layer;
 		public int level;
+		public bool inverted;
 	}
 
 	public LayerLevel[] layerLevels;
@@ -38,6 +39,7 @@ public class Visualizer : MonoBehaviour {
 	public struct ObjectLevel {
 		public GameObject gameObject;
 		public int level;
+		public bool inverted;
 	}
 
 	public ObjectLevel[] objectLevels;
@@ -73,17 +75,11 @@ public class Visualizer : MonoBehaviour {
 
 	private void updateLayerVisualization(LayerLevel layerLevel) {
 		if(visualizationEnabled) {
-			if(layerLevel.level > level && layerLevel.level >= 0) {
-				setLayerVisualization(layerLevel, true);
+			if(layerLevel.inverted) {
+				setLayerVisualization(layerLevel, layerLevel.level <= level);
 			}
-			else if(layerLevel.level <= level && layerLevel.level >= 0) {
-				setLayerVisualization(layerLevel, false);
-			}
-			else if(layerLevel.level > -level && layerLevel.level < 0) {
-				setLayerVisualization(layerLevel, true);
-			}
-			else if(layerLevel.level <= -level && layerLevel.level < 0) {
-				setLayerVisualization(layerLevel, false);
+			else {
+				setLayerVisualization(layerLevel, layerLevel.level > level);
 			}
 		}
 		else {
@@ -94,17 +90,11 @@ public class Visualizer : MonoBehaviour {
 	private void updateObjectVisualization(ObjectLevel objectLevel) {
 		if(visualizationEnabled) {
 			if(objectLevel.gameObject != null) {
-				if(objectLevel.level > level && objectLevel.level >= 0) {
-					setObjectVisualization(objectLevel, true);
+				if(objectLevel.inverted) {
+					setObjectVisualization(objectLevel, objectLevel.level <= level);
 				}
-				else if(objectLevel.level <= level && objectLevel.level >= 0) {
-					setObjectVisualization(objectLevel, false);
-				}
-				else if(objectLevel.level > -level && objectLevel.level < 0) {
-					setObjectVisualization(objectLevel, true);
-				}
-				else if(objectLevel.level <= -level && objectLevel.level < 0) {
-					setObjectVisualization(objectLevel, false);
+				else {
+					setObjectVisualization(objectLevel, objectLevel.level > level);
 				}
 			}
 		}
