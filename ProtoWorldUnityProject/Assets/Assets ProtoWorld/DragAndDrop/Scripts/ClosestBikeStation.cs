@@ -35,7 +35,7 @@ public class ClosestBikeStation : MonoBehaviour {
 	//The different positions that are used
 	public Vector3 closestBikeStationPos;
 	public Vector3 currentBikeStationPos;
-	private Vector3 nulVector;
+	private Vector3 nulVector = Vector3.zero;
 
 	//Some used variables
 	public bool bikeStationReached = false;

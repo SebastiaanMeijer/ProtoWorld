@@ -36,8 +36,8 @@ public class IssueScript : MonoBehaviour {
 	public Text detailsText;
 	public RectTransform issuesTransform;
 
-	private string issueTypeString;
-	private string detailsString;
+	private string issueTypeString = "";
+	private string detailsString = "";
 	
 
 	void Awake() {
