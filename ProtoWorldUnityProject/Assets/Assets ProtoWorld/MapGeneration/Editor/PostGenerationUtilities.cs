@@ -89,108 +89,7 @@ public class PostGenerationUtilities : Editor {
 	}
 
 
-	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Utilities/Assign Missing Layers to Buildings")]
-	public static void AssignMissingLayersToBuildings() {
-		AssignMissingLayersToGameObjects("building", "buildings", "Buildings", "Building", "Buildings");
-	}
-
-	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Utilities/Assign Missing Layers to Roads")]
-	public static void AssignMissingLayersToRoads() {
-		AssignMissingLayersToGameObjects("road", "roads", "Lines", "Line", "Lines");
-	}
-
-	private static void AssignMissingLayersToGameObjects(string singularName, string pluralName, string name, string tag, string layer) {
-		Debug.Log("Assigning missing layers to " + pluralName + "...");
-
-		GameObject group = GameObject.Find(name);
-
-		if(group.layer == LayerMask.NameToLayer("Default")) {
-			Debug.Log("Assigning missing layer \"" + layer + "\" to group \"" + group.name + "\"...");
-
-			group.layer = LayerMask.NameToLayer(layer);
-		}
-
-		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
-
-		for(int index = 0; index < gameObjects.Length; index++) {
-			if(EditorUtility.DisplayCancelableProgressBar("Assigning missing layers to " + pluralName + "...", "", index / (float) gameObjects.Length)) {
-				return;
-			}
-
-			GameObject gameObject = gameObjects[index];
-
-			if(gameObject.layer == LayerMask.NameToLayer("Default")) {
-				Debug.Log("Assigning missing layer \"" + layer + "\" to " + singularName + " \"" + gameObject.name + "\"...");
-
-				gameObject.layer = LayerMask.NameToLayer(layer);
-			}
-		}
-
-		EditorUtility.ClearProgressBar();
-
-		Debug.Log("Assigned missing layers to " + pluralName + ".");
-	}
-
-
-	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Utilities/Assign Missing Layers to Grouped Buildings")]
-	public static void AssignMissingLayersToGroupedBuildings() {
-		AssignMissingLayersToGroupedGameObjects("building", "buildings", "CombinedBuildings");
-	}
-
-	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Utilities/Assign Missing Layers to Grouped Roads")]
-	public static void AssignMissingLayersToGroupedRoads() {
-		AssignMissingLayersToGroupedGameObjects("road", "roads", "CombinedLines");
-	}
-
-	private static void AssignMissingLayersToGroupedGameObjects(string singularName, string pluralName, string tag) {
-		Debug.Log("Assigning missing layers to grouped " + pluralName + "...");
-
-		GameObject[] combinations = GameObject.FindGameObjectsWithTag(tag);
-
-		for(int combinationsIndex = 0; combinationsIndex < combinations.Length; combinationsIndex++) {
-			if(EditorUtility.DisplayCancelableProgressBar("Assigning missing layers to grouped " + pluralName + "...", "", combinationsIndex / (float) combinations.Length)) {
-				return;
-			}
-
-			GameObject combination = combinations[combinationsIndex];
-
-			// Set the layer to the layer the first matching child is in, which is likely
-			// to be the layer all the children are in, since their materials are the same.
-			if(combination.layer == LayerMask.NameToLayer("Default")) {
-				for(int childIndex = 0; childIndex < combination.transform.parent.childCount; childIndex++) {
-					GameObject child = combination.transform.parent.GetChild(childIndex).gameObject;
-
-					if(child.tag != tag) {
-						if(child.GetComponent<Renderer>().sharedMaterial.name == combination.GetComponent<Renderer>().sharedMaterial.name) {
-							Debug.Log("Assigning missing layer \"" + LayerMask.LayerToName(child.layer) + "\" to grouped " + singularName + " \"" + combination.name + "\"...");
-
-							combination.layer = child.layer;
-
-							break;
-						}
-					}
-				}
-			}
-		}
-
-		EditorUtility.ClearProgressBar(); 
-		Debug.Log("Assigned missing layers to grouped " + pluralName + ".");
-	}
-
-    [MenuItem("ProtoWorld Editor/Transportation Module/Add Dynamic Station Fonts")]
-    public static void AddDynamicStationFonts()
-    {
-        GameObject transportationModule = GameObject.Find("TransportationModule");
-        Transform stations = transportationModule.transform.FindChild("Stations").transform;
-
-        foreach (Transform station in stations)
-        {
-            station.gameObject.AddComponent<StationTextController>();
-        }
-    }
-
-
-    [MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Utilities/Remove Empty Buildings")]
+	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Utilities/Remove Empty Buildings")]
 	public static void RemoveEmptyBuildings() {
 		RemoveEmptyGameObjects("building", "buildings", "Building");
 	}
@@ -244,5 +143,97 @@ public class PostGenerationUtilities : Editor {
 		EditorUtility.ClearProgressBar();
 
 		Debug.Log("Removed empty " + pluralName + ".");
+	}
+
+
+	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Upgrades/Assign Missing Layers to Buildings")]
+	public static void AssignMissingLayersToBuildings() {
+		AssignMissingLayersToGameObjects("building", "buildings", "Building", "Buildings");
+	}
+
+	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Upgrades/Assign Missing Layers to Roads")]
+	public static void AssignMissingLayersToRoads() {
+		AssignMissingLayersToGameObjects("road", "roads", "Line", "Lines");
+	}
+
+	private static void AssignMissingLayersToGameObjects(string singularName, string pluralName, string tag, string layer) {
+		Debug.Log("Assigning missing layers to " + pluralName + "...");
+
+		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
+
+		for(int index = 0; index < gameObjects.Length; index++) {
+			if(EditorUtility.DisplayCancelableProgressBar("Assigning missing layers to " + pluralName + "...", "", index / (float) gameObjects.Length)) {
+				return;
+			}
+
+			GameObject gameObject = gameObjects[index];
+
+			if(gameObject.layer == LayerMask.NameToLayer("Default")) {
+				Debug.Log("Assigning missing layer \"" + layer + "\" to " + singularName + " \"" + gameObject.name + "\"...");
+
+				gameObject.layer = LayerMask.NameToLayer(layer);
+			}
+		}
+
+		EditorUtility.ClearProgressBar();
+
+		Debug.Log("Assigned missing layers to " + pluralName + ".");
+	}
+
+
+	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Upgrades/Assign Missing Layers to Grouped Buildings")]
+	public static void AssignMissingLayersToGroupedBuildings() {
+		AssignMissingLayersToGroupedGameObjects("building", "buildings", "CombinedBuildings");
+	}
+
+	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Upgrades/Assign Missing Layers to Grouped Roads")]
+	public static void AssignMissingLayersToGroupedRoads() {
+		AssignMissingLayersToGroupedGameObjects("road", "roads", "CombinedLines");
+	}
+
+	private static void AssignMissingLayersToGroupedGameObjects(string singularName, string pluralName, string tag) {
+		Debug.Log("Assigning missing layers to grouped " + pluralName + "...");
+
+		GameObject[] combinations = GameObject.FindGameObjectsWithTag(tag);
+
+		for(int combinationsIndex = 0; combinationsIndex < combinations.Length; combinationsIndex++) {
+			if(EditorUtility.DisplayCancelableProgressBar("Assigning missing layers to grouped " + pluralName + "...", "", combinationsIndex / (float) combinations.Length)) {
+				return;
+			}
+
+			GameObject combination = combinations[combinationsIndex];
+
+			// Set the layer to the layer the first matching child is in, which is likely
+			// to be the layer all the children are in, since their materials are the same.
+			if(combination.layer == LayerMask.NameToLayer("Default")) {
+				for(int childIndex = 0; childIndex < combination.transform.parent.childCount; childIndex++) {
+					GameObject child = combination.transform.parent.GetChild(childIndex).gameObject;
+
+					if(child.tag != tag) {
+						if(child.GetComponent<Renderer>().sharedMaterial.name == combination.GetComponent<Renderer>().sharedMaterial.name) {
+							Debug.Log("Assigning missing layer \"" + LayerMask.LayerToName(child.layer) + "\" to grouped " + singularName + " \"" + combination.name + "\"...");
+
+							combination.layer = child.layer;
+
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		EditorUtility.ClearProgressBar();
+		Debug.Log("Assigned missing layers to grouped " + pluralName + ".");
+	}
+
+
+	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Upgrades/Add Missing Station Controllers")]
+	public static void AddMissingStationControllers() {
+		GameObject transportationModule = GameObject.Find("TransportationModule");
+		Transform stations = transportationModule.transform.FindChild("Stations").transform;
+
+		foreach(Transform station in stations) {
+			station.gameObject.AddComponent<StationTextController>();
+		}
 	}
 }
