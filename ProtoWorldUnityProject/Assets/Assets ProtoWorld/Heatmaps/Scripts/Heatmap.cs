@@ -45,7 +45,6 @@ public class Heatmap : MonoBehaviour {
 	private int metroCounted = 0;
 
 	public float refreshTime = 2;
-	public int minCameraHeight = 100;
 	public float heightHM;
 
 	public float radiusMultiplier = 1.0f;
@@ -60,8 +59,6 @@ public class Heatmap : MonoBehaviour {
 
 	private bool activeHeatMaps = true;
 	private bool activatedHM = false;
-
-	private bool zoomedIn;
 
 	public int numberOfHeatmaps;
 
@@ -232,30 +229,23 @@ public class Heatmap : MonoBehaviour {
 
 		if(activeHeatMaps) {
 			transform.position = new Vector3(transform.position.x, heightHM, transform.position.z);
-			if(cameraObject.targetCameraPosition.y > minCameraHeight) {
-				zoomedIn = false;
 
-				switch(heatmapNumber) {
-					case 1:
-						updatePointsFromPedestrians(heatmapTypeNumber);
-						break;
-					case 2:
-						updatePointsFromTraffic(heatmapTypeNumber);
-						break;
-					case 3:
-						updatePointsFromTransport(heatmapTypeNumber);
-						break;
-					case 4:
-						updatePointsFromMetro(heatmapTypeNumber);
-						break;
-					case 5:
-						updatePointsFromTrain(heatmapTypeNumber);
-						break;
-				}
-			}
-			else if(zoomedIn == false) {
-				resetPoints();
-				zoomedIn = true;
+			switch(heatmapNumber) {
+				case 1:
+					updatePointsFromPedestrians(heatmapTypeNumber);
+					break;
+				case 2:
+					updatePointsFromTraffic(heatmapTypeNumber);
+					break;
+				case 3:
+					updatePointsFromTransport(heatmapTypeNumber);
+					break;
+				case 4:
+					updatePointsFromMetro(heatmapTypeNumber);
+					break;
+				case 5:
+					updatePointsFromTrain(heatmapTypeNumber);
+					break;
 			}
 		}
 		StartCoroutine(heatmapRefresh());
@@ -423,7 +413,8 @@ public class Heatmap : MonoBehaviour {
 		material.SetInt("count", counted);
 		material.SetFloat("radius", radius);
 
-        if(points != null)
+        if(points != null) {
 		    buffer.SetData(points);
+		}
 	}
 }
