@@ -227,8 +227,8 @@ public class PostGenerationUtilities : Editor {
 	}
 
 
-	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Upgrades/Add Missing Station Controllers")]
-	public static void AddMissingStationControllers() {
+	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Upgrades/Add Missing Station Text Controllers")]
+	public static void AddMissingStationTextControllers() {
 		GameObject transportationModule = GameObject.Find("TransportationModule");
 		Transform stations = transportationModule.transform.FindChild("Stations").transform;
 
