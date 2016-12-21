@@ -77,7 +77,6 @@ public class IssueScript : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		Debug.LogError ("CLICKED");
 		clicked = true;
 		StartMouseX = Input.mousePosition.x;
 		StartMouseY = Input.mousePosition.y;
@@ -85,10 +84,8 @@ public class IssueScript : MonoBehaviour {
 	}
 
 	void OnMouseUp() {
-		Debug.LogError ("LET GO");
 		if(clicked == true) {
 			if(StartMouseX == Input.mousePosition.x && StartMouseY == Input.mousePosition.y) {
-				Debug.LogError ("FURTHER");
 				issueTypeText.text = issueTypeString;
 				detailsText.text = detailsString;
 				issuesTransform.localPosition = new Vector3(issuesTransform.localPosition.x, originalY, issuesTransform.localPosition.z);
