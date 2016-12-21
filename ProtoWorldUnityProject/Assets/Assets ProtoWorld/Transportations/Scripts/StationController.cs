@@ -23,7 +23,7 @@ using UnityEditor;
 #endif
 
 //[System.Serializable]
-public class StationController : MonoBehaviour
+public class StationController : MonoBehaviour, Loggable
 {
     private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
     private int logSeriesId;
@@ -118,7 +118,6 @@ public class StationController : MonoBehaviour
         textMesh.fontStyle = FontStyle.Bold;
         tgo.transform.localScale *= 5;
 #endif
-
         return controller;
     }
 
@@ -128,7 +127,10 @@ public class StationController : MonoBehaviour
         if (controller == null)
             return null;
         else
+        {
+            LoggableManager.subscribe((Loggable)controller);
             return controller.gameObject;
+        }
     }
 
     void Awake()
@@ -400,5 +402,35 @@ public class StationController : MonoBehaviour
         return stationsNearThisStation;
     }
 
+    public LogDataTree getLogData()
+    {
+        LogDataTree logData = new LogDataTree(tag, null);
+        logData.AddChild(new LogDataTree("Name", stationName));
+        logData.AddChild(new LogDataTree("ID", id.ToString()));
+        logData.AddChild(new LogDataTree("PositionX", transform.position.x.ToString()));
+        logData.AddChild(new LogDataTree("PositionY", transform.position.y.ToString()));
+        logData.AddChild(new LogDataTree("PositionZ", transform.position.z.ToString()));
+        logData.AddChild(new LogDataTree("CheckRadius", radiusToCheckStations.ToString()));
+        logData.AddChild(new LogDataTree("Priority", outOfService.ToString()));
+        logData.AddChild(new LogDataTree("Capacity", capacity.ToString()));
+        logData.AddChild(new LogDataTree("Queuing", queuing.ToString()));
+        logData.AddChild(new LogDataTree("NextLogUpdate", nextLogUpdate.ToString()));
+        logData.AddChild(new LogDataTree("LogUpdateRateInSeconds", LogUpdateRateInSeconds.ToString()));
+        return logData;
+    }
 
+    public void rebuildFromLog(LogDataTree logData)
+    {
+        throw new NotImplementedException();
+    }
+
+    public LogPriorities getPriorityLevel()
+    {
+        return LogPriorities.Critical;
+    }
+
+    public bool destroyOnLogLoad()
+    {
+        return false;
+    }
 }
