@@ -18,7 +18,7 @@ using System.Linq;
 using UnityEngine;
 using System.Collections;
 
-public class VehicleController : MonoBehaviour
+public class VehicleController : MonoBehaviour, Loggable
 {
 	private static int IdCounter = 0;
 
@@ -414,5 +414,23 @@ public class VehicleController : MonoBehaviour
 			name, transform.position, nextStation, GetHeadCount());
 	}
 
+    public LogDataTree getLogData()
+    {
+        throw new NotImplementedException();
+    }
 
+    public void rebuildFromLog(LogDataTree logData)
+    {
+        throw new NotImplementedException();
+    }
+
+    public LogPriorities getPriorityLevel()
+    {
+        return LogPriorities.Default;
+    }
+
+    public bool destroyOnLogLoad()
+    {
+        return true;
+    }
 }

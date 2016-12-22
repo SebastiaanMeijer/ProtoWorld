@@ -23,7 +23,7 @@ using UnityEditor;
 #endif
 
 //[System.Serializable]
-public class StationController : MonoBehaviour
+public class StationController : MonoBehaviour, Loggable
 {
     private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
     private int logSeriesId;
@@ -118,7 +118,6 @@ public class StationController : MonoBehaviour
         textMesh.fontStyle = FontStyle.Bold;
         tgo.transform.localScale *= 5;
 #endif
-
         return controller;
     }
 
@@ -128,13 +127,14 @@ public class StationController : MonoBehaviour
         if (controller == null)
             return null;
         else
+        {
             return controller.gameObject;
+        }
     }
 
     void Awake()
     {
         logSeriesId = LoggerAssembly.GetLogSeriesId();
-
         //LOG STATION LOG INFO
         log.Info(string.Format("{0}:{1}:{2}", logSeriesId, "title", GetIdAndName() + " log"));
         //LOG STATION QUEUING CHART INFO
@@ -154,6 +154,8 @@ public class StationController : MonoBehaviour
             if (!station.Equals(this))
                 aux.Add(station);
         }
+
+        LoggableManager.subscribe((Loggable)this);
 
         stationsNearThisStation = aux.ToArray();
     }
@@ -400,5 +402,60 @@ public class StationController : MonoBehaviour
         return stationsNearThisStation;
     }
 
+    public LogDataTree getLogData()
+    {
+        LogDataTree logData = new LogDataTree(tag, null);
+        logData.AddChild(new LogDataTree("Name", stationName));
+        logData.AddChild(new LogDataTree("ID", id.ToString()));
+        logData.AddChild(new LogDataTree("PositionX", transform.position.x.ToString()));
+        logData.AddChild(new LogDataTree("PositionY", transform.position.y.ToString()));
+        logData.AddChild(new LogDataTree("PositionZ", transform.position.z.ToString()));
+        logData.AddChild(new LogDataTree("CheckRadius", radiusToCheckStations.ToString()));
+        logData.AddChild(new LogDataTree("OutOfService", outOfService.ToString()));
+        logData.AddChild(new LogDataTree("Capacity", capacity.ToString()));
+        logData.AddChild(new LogDataTree("Queuing", queuing.ToString()));
+        logData.AddChild(new LogDataTree("NextLogUpdate", nextLogUpdate.ToString()));
+        logData.AddChild(new LogDataTree("LogUpdateRateInSeconds", LogUpdateRateInSeconds.ToString()));
+        return logData;
+    }
 
+    public void rebuildFromLog(LogDataTree logData)
+    {
+        GameObject transStationObject = null;
+        StationController transStationScript = new StationController();
+        foreach (Loggable station in LoggableManager.getCurrentSubscribedLoggables())
+        {
+            if (((MonoBehaviour)station).gameObject.tag == "TransStation")
+            {
+                transStationScript.SetStationName(logData.GetChild("Name").Value);
+                if (((MonoBehaviour)station).GetComponent<FlashPedestriansDestination>().destinationName == transStationScript.stationName)
+                {
+                    transStationObject = ((MonoBehaviour)station).gameObject;
+                    transStationScript = transStationObject.GetComponent<StationController>();
+                }
+            }
+        }
+        Vector3 position = new Vector3();
+        position.x = float.Parse(logData.GetChild("PositionX").Value);
+        position.y = float.Parse(logData.GetChild("PositionY").Value);
+        position.z = float.Parse(logData.GetChild("PositionZ").Value);
+        transStationScript.radiusToCheckStations = float.Parse(logData.GetChild("CheckRadius").Value);
+        transStationScript.outOfService = bool.Parse(logData.GetChild("OutOfService").Value);
+        transStationScript.capacity = int.Parse(logData.GetChild("Capacity").Value);
+        transStationScript.queuing = int.Parse(logData.GetChild("Queuing").Value);
+        transStationScript.nextLogUpdate = float.Parse(logData.GetChild("NextLogUpdate").Value);
+        transStationScript.LogUpdateRateInSeconds = float.Parse(logData.GetChild("LogUpdateRateInSeconds").Value);
+        transStationScript.name = "TransStation";
+        transStationScript.transform.position = position;
+    }
+
+    public LogPriorities getPriorityLevel()
+    {
+        return LogPriorities.Critical;
+    }
+
+    public bool destroyOnLogLoad()
+    {
+        return false;
+    }
 }

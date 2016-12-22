@@ -38,20 +38,19 @@ public class HistoricalDataController : MonoBehaviour
 
     private TimeController timeController;
 
-    private FlashPedestriansGlobalParameters globalParameters;
+	private FlashPedestriansGlobalParameters globalParameters;
 
     private CameraControl camera;
 
     private WaitForSeconds waitForLog;
 
-    //TODO: logfile reset after loading of snapshot
+	//TODO: logfile reset after loading of snapshot
 
     // Use this for initialization
     void Start()
     {
-        getLoggables();
         timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
-        GameObject flashPedestriansModule = GameObject.Find("FlashPedestriansModule");
+		GameObject flashPedestriansModule = GameObject.Find("FlashPedestriansModule");
         globalParameters = flashPedestriansModule.GetComponent<FlashPedestriansGlobalParameters>();
 
         initiateLogFile();
@@ -60,80 +59,64 @@ public class HistoricalDataController : MonoBehaviour
 
         waitForLog = new WaitForSeconds(logIntervalSeconds);
 
-        StartCoroutine(logToXML());
+		StartCoroutine(logToXML());
     }
 
-    //TODO: Optimize! THIS IS A HORSETHING!!!//
-    List<Loggable> getLoggables()
-    {
-        List<GameObject> loggableObjects = new List<GameObject>();
-        loggableObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)).Cast<GameObject>().Where(g => g.tag == "Loggable").ToList();
-        List<Loggable> loggables = new List<Loggable>();
-        foreach (GameObject loggable in loggableObjects)
-        {
-            print(loggable.ToString());
-            loggables.Add(loggable.GetComponent<Loggable>());
-        }
-        //print(loggables.Count);
-        return loggables;
-    }
-
-    void initiateLogFile()
-    {
-        //Create XML document for logging data with root element "LogData" 
-        logFile = new XDocument();
-        logFile.Add(new XElement("LogData"));
-    }
+    void initiateLogFile(){
+		//Create XML document for logging data with root element "LogData" 
+		logFile = new XDocument();
+		logFile.Add(new XElement("LogData"));
+	}
 
     void createLogDestination()
     {
-        //Define path to the log folder and create it if it doesn't exist
-        logDirectory = new DirectoryInfo(Application.dataPath + "/log/");
-        if (!logDirectory.Exists) logDirectory.Create();
-    }
+		//Define path to the log folder and create it if it doesn't exist
+		logDirectory = new DirectoryInfo(Application.dataPath + "/log/");
+		if (!logDirectory.Exists) logDirectory.Create();
+	}
 
     void initiateLoggingInterface()
     {
-        FileScrollView = GameObject.Find("FileScrollView").GetComponent<ScrollRect>();
-        loadFileBrowser = GameObject.Find("LoadFileBrowser");
-        TimestampScrollView = GameObject.Find("TimestampScrollView").GetComponent<ScrollRect>();
-        camera = GameObject.Find("Main Camera").GetComponent<CameraControl>();
-    }
+		FileScrollView = GameObject.Find("FileScrollView").GetComponent<ScrollRect>();
+		loadFileBrowser = GameObject.Find("LoadFileBrowser");
+		TimestampScrollView = GameObject.Find("TimestampScrollView").GetComponent<ScrollRect>();
+		camera = GameObject.Find("Main Camera").GetComponent<CameraControl>();
+	}
 
-    public IEnumerator logToXML()
-    {
-        //As long as the simulation is not paused log the data of each subscribed loggable object
-        while (!globalParameters.flashPedestriansPaused)
-        {
-            XElement timeStamp = new XElement("TimeStamp");
-            timeStamp.Add(new XAttribute("timestamp", timeController.gameTime));
-            logFile.Root.Add(timeStamp);
-            foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
-            {
+	public IEnumerator logToXML()
+	{
+		//As long as the simulation is not paused log the data of each subscribed loggable object
+		while (!globalParameters.flashPedestriansPaused)
+		{
+			XElement timeStamp = new XElement("TimeStamp");
+			timeStamp.Add(new XAttribute("timestamp", timeController.gameTime));
+			logFile.Root.Add(timeStamp);
+			foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
+			{
                 timeStamp.Add(convertDataToXML(loggable.getLogData()));
-            }
+			}
             yield return waitForLog;
-        }
-    }
+		}
+	}
 
-    //Recursive call for logging a tree to XML
+	//Recursive call for logging a tree to XML
     XElement convertDataToXML(LogDataTree logData)
     {
         XElement element = new XElement(logData.Key, logData.Value);
         foreach (LogDataTree child in logData.getChildren())
         {
             element.Add(convertDataToXML(child));
-        }
-        return element;
-    }
+		}
+		return element;
+	}
 
-    public void SaveHistoricalData()
-    {
-        timeController.PauseGame(true);
-        logFileName = DateTime.Now.ToString("ddMMyyyy_HH-mm-ss");
-        logFile.Save(logDirectory + "/" + logFileName + ".xml");
-        timeController.PauseGame(false);
-    }
+	public void SaveHistoricalData()
+	{
+		timeController.PauseGame(true);
+		logFileName = DateTime.Now.ToString("ddMMyyyy_HH-mm-ss");
+		logFile.Save(logDirectory + "/" + logFileName + ".xml");
+		timeController.PauseGame(false);
+	}
 
     public void loadLogDirectory()
     {
@@ -143,23 +126,22 @@ public class HistoricalDataController : MonoBehaviour
         timeController.PauseGame(true);
     }
 
-    public void recreateLog(string file, string timestamp)
-    {
-        //print((from element in XDocument.Load(file).Root.Descendants("TimeStamp") where element.FirstAttribute.Value.Equals(timestamp) select element).FirstOrDefault());
+	public void recreateLog(string file, string timestamp)
+	{
         XElement timeStampElement =
             (from element in XDocument.Load(file).Root.Descendants("TimeStamp")
              where element.FirstAttribute.Value.Equals(timestamp)
              select element).FirstOrDefault();
 
-        // TODO Use the interface to allow objects to destroy (or recycle, etc.) themselves.
+		// TODO Use the interface to allow objects to destroy (or recycle, etc.) themselves.
         removeActiveData();
         recreateObjects(timeStampElement);
 
         loadFileBrowser.SetActive(false);
-        timeController.PauseGame(false);
-    }
+		timeController.PauseGame(false);
+	}
 
-    //Recreates the logged loggables in order of priority
+	//Recreates the logged loggables in order of priority
     private void recreateObjects(XElement timestampElement)
     {
         //Get all objects which have the loggable interface with a unique tag
@@ -171,12 +153,8 @@ public class HistoricalDataController : MonoBehaviour
             {
                 foreach (XElement loggedObject in timestampElement.Descendants(((MonoBehaviour)loggable).tag))
                 {
-                    // TODO Instead of recreating spawners and destinations we can just update the properties that
-                    // change over time. This temporary if statement shows that it works without recreating them.
-                    if (!(loggable is FlashPedestriansSpawner) && !(loggable is FlashPedestriansDestination))
-                    {
-                        loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
-                    }
+                    loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
+                }
                 }
             }
         }
@@ -217,24 +195,23 @@ public class HistoricalDataController : MonoBehaviour
                 {
                     if (!(loggable is FlashPedestriansSpawner) && !(loggable is FlashPedestriansDestination))
                     {
-                        loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
-                    }
+						loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
+					}
                 }
             }
         }
-    }
 
-    //Recursively transforms the XML data of a loggable to a LogDataTree
+	//Recursively transforms the XML data of a loggable to a LogDataTree
     private LogDataTree rebuildObjectLogData(XElement element)
     {
         LogDataTree logData = new LogDataTree(element.Name.ToString(), element.Value);
         foreach (XElement child in element.Descendants())
         {
-            logData.AddChild(rebuildObjectLogData(child));
-        }
-        return logData;
-    }
-
+			logData.AddChild(rebuildObjectLogData(child));
+		}
+		return logData;
+	}
+	
     private void removeActiveData()
     {
         FlashPedestriansSpawner.nextIdForPedestrian = 0;
@@ -242,14 +219,11 @@ public class HistoricalDataController : MonoBehaviour
         flashInformer.accumPedestrians = 0;
         flashInformer.activePedestrians = new Dictionary<int, FlashPedestriansController>();
         foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
-        {
-            // TODO Instead of destroying spawners and destinations we can just update the properties that
-            // change over time. This temporary if statement shows that it works without destroying them.
-            if (!(loggable is FlashPedestriansSpawner) && !(loggable is FlashPedestriansDestination))
-            {
-                LoggableManager.unsubscribe(loggable);
-                Destroy(((MonoBehaviour)loggable).gameObject);
-            }
-        }
-    }
+		{
+			if (loggable.destroyOnLogLoad ()) {
+				LoggableManager.unsubscribe (loggable);
+				Destroy (((MonoBehaviour)loggable).gameObject);
+			}
+		}
+	}
 }
