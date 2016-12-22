@@ -155,7 +155,6 @@ public class HistoricalDataController : MonoBehaviour
                 {
                     loggable.rebuildFromLog(rebuildObjectLogData(loggedObject));
                 }
-                }
             }
         }
     }
@@ -200,6 +199,7 @@ public class HistoricalDataController : MonoBehaviour
                 }
             }
         }
+	}
 
 	//Recursively transforms the XML data of a loggable to a LogDataTree
     private LogDataTree rebuildObjectLogData(XElement element)
