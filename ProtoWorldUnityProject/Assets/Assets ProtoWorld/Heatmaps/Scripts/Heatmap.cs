@@ -26,7 +26,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.IO;
 
-public class Heatmap : MonoBehaviour {
+public class Heatmap : MonoBehaviour, Loggable {
 	private CameraControl cameraObject;
 
 	private Vector4[] points;
@@ -99,6 +99,8 @@ public class Heatmap : MonoBehaviour {
 
 		wait = new WaitForSeconds(refreshTime);
 		StartCoroutine(heatmapRefresh());
+
+		LoggableManager.subscribe((Loggable)this);
 	}
 
 
@@ -416,5 +418,32 @@ public class Heatmap : MonoBehaviour {
         if(points != null) {
 		    buffer.SetData(points);
 		}
+	}
+
+	public LogDataTree getLogData(){
+		return new LogDataTree (tag,"No heatmap data to log at this moment");
+	}
+
+	public void rebuildFromLog(LogDataTree logData){
+		for(int i = 0; i <= pedestriansCounted; i++){
+			pedestrians[i] = null;
+		}
+		pedestriansCounted = 0;
+		for(int i = 0; i <= metroCounted; i++){
+			metro[i] = null;
+		}
+		metroCounted = 0;
+		for(int i = 0; i <= trafficCounted; i++){
+			traffic[i] = null;
+		}
+		trafficCounted = 0;
+	}
+
+	public LogPriorities getPriorityLevel(){
+		return LogPriorities.Default;
+	}
+
+	public bool destroyOnLogLoad(){
+		return false;
 	}
 }
