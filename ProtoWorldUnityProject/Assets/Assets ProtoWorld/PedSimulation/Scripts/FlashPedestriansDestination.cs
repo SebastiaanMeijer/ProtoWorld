@@ -84,7 +84,8 @@ public class FlashPedestriansDestination : MonoBehaviour, Loggable
         {
             if (((MonoBehaviour)destination).gameObject.tag == "PedestrianDestination")
             {
-                if (((MonoBehaviour)destination).GetComponent<FlashPedestriansDestination>().destinationName == destinationName)
+                flashDestinationScript.destinationName = logData.GetChild("Name").Value;
+                if (((MonoBehaviour)destination).GetComponent<FlashPedestriansDestination>().destinationName == flashDestinationScript.destinationName)
                 {
                     flashDestinationObject = ((MonoBehaviour)destination).gameObject;
                     flashDestinationScript = flashDestinationObject.GetComponent<FlashPedestriansDestination>();
@@ -92,13 +93,11 @@ public class FlashPedestriansDestination : MonoBehaviour, Loggable
             }
         }
         Vector3 position = new Vector3();
-		flashDestinationScript.destinationName = logData.GetChild ("Name").Value;
 		position.x = float.Parse(logData.GetChild("PositionX").Value);
 		position.y = float.Parse(logData.GetChild("PositionY").Value);
 		position.z = float.Parse(logData.GetChild("PositionZ").Value);
 		flashDestinationScript.radiousToCheckStations = float.Parse(logData.GetChild("CheckRadius").Value);
 		flashDestinationScript.destinationPriority = float.Parse(logData.GetChild("Priority").Value);
-		//flashDestinationObject.transform.parent = GameObject.Find("DestinationPoints").transform;
 		flashDestinationObject.name = "FlashDestination";
 		flashDestinationScript.destinationTransform.position = position;
 

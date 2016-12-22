@@ -128,7 +128,6 @@ public class StationController : MonoBehaviour, Loggable
             return null;
         else
         {
-            LoggableManager.subscribe((Loggable)controller);
             return controller.gameObject;
         }
     }
@@ -136,7 +135,6 @@ public class StationController : MonoBehaviour, Loggable
     void Awake()
     {
         logSeriesId = LoggerAssembly.GetLogSeriesId();
-
         //LOG STATION LOG INFO
         log.Info(string.Format("{0}:{1}:{2}", logSeriesId, "title", GetIdAndName() + " log"));
         //LOG STATION QUEUING CHART INFO
@@ -156,6 +154,8 @@ public class StationController : MonoBehaviour, Loggable
             if (!station.Equals(this))
                 aux.Add(station);
         }
+
+        LoggableManager.subscribe((Loggable)this);
 
         stationsNearThisStation = aux.ToArray();
     }
@@ -411,7 +411,7 @@ public class StationController : MonoBehaviour, Loggable
         logData.AddChild(new LogDataTree("PositionY", transform.position.y.ToString()));
         logData.AddChild(new LogDataTree("PositionZ", transform.position.z.ToString()));
         logData.AddChild(new LogDataTree("CheckRadius", radiusToCheckStations.ToString()));
-        logData.AddChild(new LogDataTree("Priority", outOfService.ToString()));
+        logData.AddChild(new LogDataTree("OutOfService", outOfService.ToString()));
         logData.AddChild(new LogDataTree("Capacity", capacity.ToString()));
         logData.AddChild(new LogDataTree("Queuing", queuing.ToString()));
         logData.AddChild(new LogDataTree("NextLogUpdate", nextLogUpdate.ToString()));
@@ -421,7 +421,32 @@ public class StationController : MonoBehaviour, Loggable
 
     public void rebuildFromLog(LogDataTree logData)
     {
-        throw new NotImplementedException();
+        GameObject transStationObject = null;
+        StationController transStationScript = new StationController();
+        foreach (Loggable station in LoggableManager.getCurrentSubscribedLoggables())
+        {
+            if (((MonoBehaviour)station).gameObject.tag == "TransStation")
+            {
+                transStationScript.SetStationName(logData.GetChild("Name").Value);
+                if (((MonoBehaviour)station).GetComponent<FlashPedestriansDestination>().destinationName == transStationScript.stationName)
+                {
+                    transStationObject = ((MonoBehaviour)station).gameObject;
+                    transStationScript = transStationObject.GetComponent<StationController>();
+                }
+            }
+        }
+        Vector3 position = new Vector3();
+        position.x = float.Parse(logData.GetChild("PositionX").Value);
+        position.y = float.Parse(logData.GetChild("PositionY").Value);
+        position.z = float.Parse(logData.GetChild("PositionZ").Value);
+        transStationScript.radiusToCheckStations = float.Parse(logData.GetChild("CheckRadius").Value);
+        transStationScript.outOfService = bool.Parse(logData.GetChild("OutOfService").Value);
+        transStationScript.capacity = int.Parse(logData.GetChild("Capacity").Value);
+        transStationScript.queuing = int.Parse(logData.GetChild("Queuing").Value);
+        transStationScript.nextLogUpdate = float.Parse(logData.GetChild("NextLogUpdate").Value);
+        transStationScript.LogUpdateRateInSeconds = float.Parse(logData.GetChild("LogUpdateRateInSeconds").Value);
+        transStationScript.name = "TransStation";
+        transStationScript.transform.position = position;
     }
 
     public LogPriorities getPriorityLevel()
