@@ -427,8 +427,8 @@ public class StationController : MonoBehaviour, Loggable
         {
             if (((MonoBehaviour)station).gameObject.tag == "TransStation")
             {
-                transStationScript.SetStationName(logData.GetChild("Name").Value);
-                if (((MonoBehaviour)station).GetComponent<FlashPedestriansDestination>().destinationName == transStationScript.stationName)
+                transStationScript.stationName = logData.GetChild("Name").Value;
+                if (((MonoBehaviour)station).GetComponent<StationController>().stationName == transStationScript.stationName)
                 {
                     transStationObject = ((MonoBehaviour)station).gameObject;
                     transStationScript = transStationObject.GetComponent<StationController>();
