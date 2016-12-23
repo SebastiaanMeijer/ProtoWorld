@@ -41,10 +41,12 @@ public class HistoricalDataController : MonoBehaviour
 
     private WaitForSeconds waitForLog;
 
-    //TODO: logfile reset after loading of snapshot
+	private bool exiting;
 
-    // Use this for initialization
-    void Start()
+
+	//TODO: logfile reset after loading of snapshot
+
+	void Start()
     {
         getLoggables();
         timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
@@ -100,15 +102,15 @@ public class HistoricalDataController : MonoBehaviour
     public IEnumerator logToXML()
     {
         //As long as the simulation is not paused log the data of each subscribed loggable object
-        while (!globalParameters.flashPedestriansPaused)
+        while (!globalParameters.flashPedestriansPaused && !exiting)
         {
-            XElement timeStamp = new XElement("TimeStamp");
-            timeStamp.Add(new XAttribute("timestamp", timeController.gameTime));
-            logFile.Root.Add(timeStamp);
-            foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
-            {
-                timeStamp.Add(convertDataToXML(loggable.getLogData()));
-            }
+			XElement timeStamp = new XElement("TimeStamp");
+			timeStamp.Add(new XAttribute("timestamp", timeController.gameTime));
+			logFile.Root.Add(timeStamp);
+			foreach (Loggable loggable in LoggableManager.getCurrentSubscribedLoggables())
+			{
+				timeStamp.Add(convertDataToXML(loggable.getLogData()));
+			}
             yield return waitForLog;
         }
     }
@@ -249,4 +251,12 @@ public class HistoricalDataController : MonoBehaviour
             }
         }
     }
+
+
+	/// <summary>
+	/// Prevents logging while the application is closing.
+	/// </summary>
+	private void OnApplicationQuit() {
+		exiting = true;
+	}
 }
