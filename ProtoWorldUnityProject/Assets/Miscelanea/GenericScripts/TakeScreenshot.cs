@@ -31,7 +31,9 @@ using System.Collections;
 /// </remarks>
 public class TakeScreenshot : MonoBehaviour
 {
-    public bool takeScreenshotOnQuit = false;
+	public bool takeScreenshotOnSpace = false;
+
+	public bool takeScreenshotOnQuit = false;
 
     public bool autoScreenshot = false;
 
@@ -46,6 +48,20 @@ public class TakeScreenshot : MonoBehaviour
         if (autoScreenshot)
             StartCoroutine(AutoScreenshotCoroutine());
     }
+
+	/// <summary>
+    /// Update method.
+    /// </summary>
+	private void Update()
+	{
+		if (takeScreenshotOnSpace)
+		{
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				TakeNewScreenshot();
+			}
+		}
+	}
 
     /// <summary>
     /// Coroutine to handle auto screenshots.
