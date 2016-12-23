@@ -1,14 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
 using System;
-using System.Xml;
 using System.Xml.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 class DistinctLoggableComparer : IEqualityComparer<Loggable> {
 
@@ -94,7 +91,7 @@ public class HistoricalDataController : MonoBehaviour
 
     void initiateLoggingInterface()
     {
-        FileScrollView = GameObject.Find("FileScrollView").GetComponent<ScrollRect>();
+        //FileScrollView = GameObject.Find("FileScrollView").GetComponent<ScrollRect>();
         loadFileBrowser = GameObject.Find("LoadFileBrowser");
         TimestampScrollView = GameObject.Find("TimestampScrollView").GetComponent<ScrollRect>();
         camera = GameObject.Find("Main Camera").GetComponent<CameraControl>();
