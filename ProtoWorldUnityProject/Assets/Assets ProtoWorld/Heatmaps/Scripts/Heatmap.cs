@@ -262,23 +262,25 @@ public class Heatmap : MonoBehaviour {
 
 
 	private void updatePointsFromPedestrians(int type) {
-		for(int i = 0; i < pedestriansCounted; i++) {
-			if(pedestrians[i].gameObject.activeSelf) {
-				switch(type){
-				case 1:
-					typeString = "Locations";
-					points [i] = new Vector4 (pedestrians [i].transform.position.x, heightHM, pedestrians [i].transform.position.z, intensity);
-					break;
-				default:
-					typeString = "Locations";
-					points [i] = new Vector4 (pedestrians [i].transform.position.x, heightHM, pedestrians [i].transform.position.z, intensity);
-					break;
-				}
-			}
-			else {
-				points[i] = new Vector4(0, 0, 0, 0);
-			}
-		}
+        for (int i = 0; i < pedestriansCounted; i++) {
+            if (pedestrians[i] != null) {
+                if (pedestrians[i].gameObject.activeSelf) {
+                    switch (type) {
+                        case 1:
+                            typeString = "Locations";
+                            points[i] = new Vector4(pedestrians[i].transform.position.x, heightHM, pedestrians[i].transform.position.z, intensity);
+                            break;
+                        default:
+                            typeString = "Locations";
+                            points[i] = new Vector4(pedestrians[i].transform.position.x, heightHM, pedestrians[i].transform.position.z, intensity);
+                            break;
+                    }
+                }
+                else {
+                    points[i] = new Vector4(0, 0, 0, 0);
+                }
+            }
+        }
 		counted = pedestriansCounted;
 		updateShader();
 	}
