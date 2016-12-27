@@ -82,6 +82,9 @@ public class FlashPedestriansDestination : MonoBehaviour, Loggable
         FlashPedestriansDestination flashDestinationScript = new FlashPedestriansDestination();
         foreach (Loggable destination in LoggableManager.getCurrentSubscribedLoggables())
         {
+            if (destination == null)
+                continue;
+
             if (((MonoBehaviour)destination).gameObject.tag == "PedestrianDestination")
             {
                 flashDestinationScript.destinationName = logData.GetChild("Name").Value;

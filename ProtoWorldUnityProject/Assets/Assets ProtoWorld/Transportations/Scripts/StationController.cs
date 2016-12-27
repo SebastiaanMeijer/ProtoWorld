@@ -154,9 +154,7 @@ public class StationController : MonoBehaviour, Loggable
             if (!station.Equals(this))
                 aux.Add(station);
         }
-
-        LoggableManager.subscribe((Loggable)this);
-
+        LoggableManager.subscribe(this);
         stationsNearThisStation = aux.ToArray();
     }
 
@@ -425,6 +423,9 @@ public class StationController : MonoBehaviour, Loggable
         StationController transStationScript = new StationController();
         foreach (Loggable station in LoggableManager.getCurrentSubscribedLoggables())
         {
+            if (station == null)
+                continue;
+
             if (((MonoBehaviour)station).gameObject.tag == "TransStation")
             {
                 transStationScript.stationName = logData.GetChild("Name").Value;
@@ -445,8 +446,8 @@ public class StationController : MonoBehaviour, Loggable
         transStationScript.queuing = int.Parse(logData.GetChild("Queuing").Value);
         transStationScript.nextLogUpdate = float.Parse(logData.GetChild("NextLogUpdate").Value);
         transStationScript.LogUpdateRateInSeconds = float.Parse(logData.GetChild("LogUpdateRateInSeconds").Value);
-        transStationScript.name = "TransStation";
-        transStationScript.transform.position = position;
+        transStationScript.stationName = "TransStation";
+        transStationScript.gameObject.transform.position = position;
     }
 
     public LogPriorities getPriorityLevel()

@@ -52,7 +52,6 @@ public class HistoricalDataController : MonoBehaviour
         timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
         GameObject flashPedestriansModule = GameObject.Find("FlashPedestriansModule");
         globalParameters = flashPedestriansModule.GetComponent<FlashPedestriansGlobalParameters>();
-
         initiateLogFile();
         createLogDestination();
         initiateLoggingInterface();
@@ -95,6 +94,7 @@ public class HistoricalDataController : MonoBehaviour
     {
         //FileScrollView = GameObject.Find("FileScrollView").GetComponent<ScrollRect>();
         loadFileBrowser = GameObject.Find("LoadFileBrowser");
+        loadFileBrowser.SetActive(false);
         //TimestampScrollView = GameObject.Find("TimestampScrollView").GetComponent<ScrollRect>();
         camera = GameObject.Find("Main Camera").GetComponent<CameraControl>();
     }
@@ -128,6 +128,7 @@ public class HistoricalDataController : MonoBehaviour
 
     public void SaveHistoricalData()
     {
+        KPIParameters.pauseKPIS = true;
         timeController.PauseGame(true);
         logFileName = DateTime.Now.ToString("ddMMyyyy_HH-mm-ss");
         logFile.Save(logDirectory + "/" + logFileName + ".xml");
@@ -140,6 +141,7 @@ public class HistoricalDataController : MonoBehaviour
         controller.loadLogDirectory();
         loadFileBrowser.SetActive(true);
         timeController.PauseGame(true);
+        KPIParameters.pauseKPIS = false;
     }
 
     public void recreateLog(string file, string timestamp)
@@ -244,7 +246,7 @@ public class HistoricalDataController : MonoBehaviour
         {
             // TODO Instead of destroying spawners and destinations we can just update the properties that
             // change over time. This temporary if statement shows that it works without destroying them.
-            if (!(loggable is FlashPedestriansSpawner) && !(loggable is FlashPedestriansDestination))
+            if (loggable.destroyOnLogLoad())
             {
                 LoggableManager.unsubscribe(loggable);
                 Destroy(((MonoBehaviour)loggable).gameObject);

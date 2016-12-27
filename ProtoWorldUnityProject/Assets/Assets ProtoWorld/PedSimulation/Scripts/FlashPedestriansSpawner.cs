@@ -415,6 +415,9 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
         flashSpawnerScript.id = int.Parse(logData.GetChild("ID").Value);
         foreach (Loggable spawner in LoggableManager.getCurrentSubscribedLoggables())
         {
+            if (spawner == null)
+                continue;
+
             if (((MonoBehaviour)spawner).gameObject.tag == "PedestrianSpawner")
             {
                 if (((MonoBehaviour)spawner).GetComponent<FlashPedestriansSpawner>().id == flashSpawnerScript.id)

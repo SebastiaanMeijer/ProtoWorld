@@ -23,10 +23,10 @@ public static class LoggableManager {
 	}
 
 	public static List<Loggable> getCurrentSubscribedLoggables(){
-		cleanup ();
-		List<Loggable> objects = new List<Loggable> (subscribedObjects);
-		return objects;
-	}
+        cleanup();
+        List<Loggable> objects = new List<Loggable>(subscribedObjects);
+        return objects;
+    }
 
 	private static void cleanup(){
 		lock (subscribedObjects) {
