@@ -47,9 +47,9 @@ class DragTransform : MonoBehaviour
     public bool dragging = false;
     public bool justDragged = true;
     public bool clicked = false;
-    public bool selected;
-    public bool deleting;
-    public bool ClickingOnChild;
+    public bool selected = false;
+    public bool deleting = false;
+    public bool ClickingOnChild = false;
 
     //public bool justInstantiated = true;
     private float distance;
@@ -58,17 +58,17 @@ class DragTransform : MonoBehaviour
     public float hoveringOverY;
 
     //this is a public Vector3. The y of this Vector3 should be changed to half the height of this object so that the object doesnt get dropped in the floor, but on the floor 
-    private Vector3 hoveringover;
+    private Vector3 hoveringover = Vector3.zero;
 
     //This is a Vector3 to store the nulVector
-    private Vector3 nulVector;
+    //private Vector3 nulVector;
 
     //these floats are needed to determine whether the player is just clicking the object or if he's gonna drag it
-    public float StartMouseX;
-    public float StartMouseY;
+    public float StartMouseX = 0;
+    public float StartMouseY = 0;
 
     //this float holds the rotation of the object in the Y
-    public float rotationY;
+    public float rotationY = 0;
 
     //this float is to change the smoothness at which the rotation happens
     public float smooth = 10.0F;
@@ -77,11 +77,11 @@ class DragTransform : MonoBehaviour
     public float rotationSpeed = 60.0F;
 
     //This float stores the distance between the click position and the object itself
-    float distanceClickAndSelf;
-    public float distanceToDeselect = 10f;
+    //float distanceClickAndSelf;
+    //public float distanceToDeselect = 10f;
 
     //These are the start and hightlightcolors of the object for when its selected or not. The highlightcolor can be set from the inspector
-    private Color startcolor;
+    private Color startcolor = Color.magenta;
     public Color highLightColor;
 
     //This reference controls the concurrence between dragging the scene in multitouch controller and dragging objects.
@@ -121,8 +121,8 @@ class DragTransform : MonoBehaviour
         rotationCanvas = GetComponentInChildren<Transform>().FindChild("RotateToCamera");
 
         //The startcolor of the object is being assigned to the private Color startcolor
-        if (this.GetComponent<Renderer>().material.color != null)
-            startcolor = GetComponent<Renderer>().material.color;
+        //if (this.GetComponent<Renderer>().material.color != null)
+        startcolor = GetComponent<Renderer>().material.color;
 
         // this code only applies to newly added objects. So objects that were added before the simulation will not be affected
         if (rayHitPositionClass.gameStartedBool == true)
@@ -183,8 +183,8 @@ class DragTransform : MonoBehaviour
         //The object is now selected 
         //selected = true;
         //Change the color of the object to the highlighted color
-        if (GetComponent<Renderer>().material.color != null)
-            GetComponent<Renderer>().material.color = GetComponent<Renderer>().material.color + highLightColor;
+        //if (GetComponent<Renderer>().material.color != null)
+        GetComponent<Renderer>().material.color = GetComponent<Renderer>().material.color + highLightColor;
 
         //The selected events invoker
         m_Selected.Invoke();
@@ -241,8 +241,8 @@ class DragTransform : MonoBehaviour
                 //The object is no longer selected
                 selected = false;
                 //change the color of the object back to the original color
-                if (GetComponent<Renderer>().material.color != null)
-                    GetComponent<Renderer>().material.color = startcolor;
+                //if (GetComponent<Renderer>().material.color != null)
+                GetComponent<Renderer>().material.color = startcolor;
 
                 //The Deselected events invoker
                 m_Deselected.Invoke();
@@ -264,8 +264,8 @@ class DragTransform : MonoBehaviour
                 //The object is now selected 
                 //selected = true;
                 //Change the color of the object to the highlighted color
-                if (GetComponent<Renderer>().material.color != null)
-                    GetComponent<Renderer>().material.color = GetComponent<Renderer>().material.color + highLightColor;
+                //if (GetComponent<Renderer>().material.color != null)
+                GetComponent<Renderer>().material.color = GetComponent<Renderer>().material.color + highLightColor;
 
                 //The selected events invoker
                 m_Selected.Invoke();
@@ -369,8 +369,8 @@ class DragTransform : MonoBehaviour
                 rotationCanvas.gameObject.SetActive(false);
 
             //change the highlightedcolor to the startcolor
-            if (GetComponent<Renderer>().material.color != null)
-                GetComponent<Renderer>().material.color = startcolor;
+            //if (GetComponent<Renderer>().material.color != null)
+            GetComponent<Renderer>().material.color = startcolor;
 
         }
 

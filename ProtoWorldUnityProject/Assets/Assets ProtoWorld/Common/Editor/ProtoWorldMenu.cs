@@ -49,6 +49,7 @@ public class ProtoWorldMenu : MonoBehaviour
 	static string heatMapModuleName = "HeatMapModule";
 	static string microMacroVisualisationModuleName = "MicroMacroVisualisationModule";
 	static string historicalDataModuleName = "HistoricalDataModule";
+	static string overlayModuleName = "OverlayModule";
 
 	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Add Essentials", false, 0)]
     static void AddEssentialsModuleToScene()
@@ -621,7 +622,7 @@ public class ProtoWorldMenu : MonoBehaviour
 		}
 	}
 
-	[MenuItem("ProtoWorld Editor/Issues Module/Add Issue", false, 8)]
+	[MenuItem("ProtoWorld Editor/Issues Module/Add Issue", false, 9)]
 	static void AddIssuesModule() {
 		AddModuleIfNotExist(issuesModuleName);
 
@@ -635,7 +636,7 @@ public class ProtoWorldMenu : MonoBehaviour
         }
 	}
 
-	[MenuItem("ProtoWorld Editor/Issues Module/Remove Module", false, 8)]
+	[MenuItem("ProtoWorld Editor/Issues Module/Remove Module", false, 9)]
 	static void ClearIssuesModule() {
 		var option = EditorUtility.DisplayDialogComplex(
 	"Issues Module",
@@ -655,12 +656,12 @@ public class ProtoWorldMenu : MonoBehaviour
 		}
 	}
 
-	[MenuItem("ProtoWorld Editor/Heatmap Module/Add Heatmap Module", false, 8)]
+	[MenuItem("ProtoWorld Editor/Heatmap Module/Add Heatmap Module", false, 10)]
 	static void AddHeatMapModule() {
 		AddModuleIfNotExist(heatMapModuleName);
 	}
 
-	[MenuItem("ProtoWorld Editor/Heatmap Module/Remove Module", false, 8)]
+	[MenuItem("ProtoWorld Editor/Heatmap Module/Remove Module", false, 10)]
 	static void ClearHeatMapModule() {
 		var option = EditorUtility.DisplayDialogComplex(
 	"Heatmap Module",
@@ -680,12 +681,12 @@ public class ProtoWorldMenu : MonoBehaviour
 		}
 	}
 
-	[MenuItem("ProtoWorld Editor/Micro Macro Visualisation Module/Add Micro Macro Visualisation Module", false, 8)]
+	[MenuItem("ProtoWorld Editor/Micro Macro Visualisation Module/Add Micro Macro Visualisation Module", false, 11)]
 	static void AddMicroMacroVisualisationModule() {
 		AddModuleIfNotExist(microMacroVisualisationModuleName);
 	}
 
-	[MenuItem("ProtoWorld Editor/Micro Macro Visualisation Module/Remove Module", false, 8)]
+	[MenuItem("ProtoWorld Editor/Micro Macro Visualisation Module/Remove Module", false, 11)]
 	static void ClearMicroMacroVisualisationModule() {
 		var option = EditorUtility.DisplayDialogComplex(
 	"Micro Macro Visualisation Module",
@@ -705,12 +706,12 @@ public class ProtoWorldMenu : MonoBehaviour
 		}
 	}
 
-	[MenuItem("ProtoWorld Editor/Historical Data Module/Add Historical Data Module", false, 8)]
+	[MenuItem("ProtoWorld Editor/Historical Data Module/Add Historical Data Module", false, 12)]
 	static void AddHistoricalDataModule() {
 		AddModuleIfNotExist(historicalDataModuleName);
 	}
 
-	[MenuItem("ProtoWorld Editor/Historical Data Module/Remove Module", false, 8)]
+	[MenuItem("ProtoWorld Editor/Historical Data Module/Remove Module", false, 12)]
 	static void ClearHistoricalDataModule() {
 		var option = EditorUtility.DisplayDialogComplex(
 	"Historical Data Module",
@@ -722,6 +723,31 @@ public class ProtoWorldMenu : MonoBehaviour
 		switch(option) {
 			case 0:
 				DestroyImmediate(GameObject.Find(historicalDataModuleName));
+				Debug.Log("The module is removed.");
+				return;
+			default:
+				Debug.Log("User cancelled the operation.");
+				return;
+		}
+	}
+
+	[MenuItem("ProtoWorld Editor/Overlay Module/Add Overlay Module", false, 13)]
+	static void AddOverlayModule() {
+		AddModuleIfNotExist(overlayModuleName);
+	}
+
+	[MenuItem("ProtoWorld Editor/Overlay Module/Remove Module", false, 13)]
+	static void ClearOverlayModule() {
+		var option = EditorUtility.DisplayDialogComplex(
+	"Overlay Module",
+	"Do you want to remove " + overlayModuleName,
+	"Clear",
+	"Do not clear",
+	"Cancel");
+
+		switch(option) {
+			case 0:
+				DestroyImmediate(GameObject.Find(overlayModuleName));
 				Debug.Log("The module is removed.");
 				return;
 			default:

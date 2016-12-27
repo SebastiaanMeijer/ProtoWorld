@@ -65,6 +65,8 @@ public class VehicleController : MonoBehaviour, Loggable
 	[HideInInspector]
 	public Heatmap heatMap;
 
+	private WaitForSeconds wait = new WaitForSeconds(0.5f);
+
 	[System.Serializable]
 	public class DisembarkStats
 	{
@@ -82,7 +84,7 @@ public class VehicleController : MonoBehaviour, Loggable
 
 	public IEnumerator putInArrayDelay()
 	{
-		yield return new WaitForSeconds (0.5f);
+		yield return wait;
 		if (heatMap != null) {
 			heatMap.putInArray(this.transform.position.x, this.transform.position.y, this.transform.position.z, this.transform, 3);
 		}
@@ -95,7 +97,7 @@ public class VehicleController : MonoBehaviour, Loggable
 
 	public static GameObject CreateGameObject(LineController line, LineDirection direction)
 	{
-		GameObject obj = obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		obj.transform.localScale *= 0.6f;
 
 		if (line.category == LineCategory.Train)
@@ -124,7 +126,7 @@ public class VehicleController : MonoBehaviour, Loggable
 		renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 		renderer.receiveShadows = false;
 		renderer.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
-		renderer.useLightProbes = false;
+		renderer.lightProbeUsage = UnityEngine.Rendering.LightProbeUsage.Off;
 
 		// Cache the material to improve performance, as this is called a lot during spawning events.
 		if(gameObjectMaterial == null)
@@ -186,8 +188,12 @@ public class VehicleController : MonoBehaviour, Loggable
 		ResetTimer();
 		if (line.useDefaultVehicleSymbol)
 			TryAttachVehiclePrefab();
-
-
+		
+		// Assign the vehicles to their own layer so they can be selectively hidden.
+		LayerMask layerMask = LayerMask.NameToLayer("PublicTransit");
+		foreach(Transform childTransform in GetComponentsInChildren<Transform>()) {
+			childTransform.gameObject.layer = layerMask;
+		}
 	}
 
 	void TryAttachVehiclePrefab()

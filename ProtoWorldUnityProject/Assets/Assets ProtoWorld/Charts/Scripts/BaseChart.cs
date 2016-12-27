@@ -96,6 +96,8 @@ public abstract class BaseChart : MonoBehaviour
     public float updateFrequency = 0.1f;
     public float ElapsedTime { get; set; }
 
+	private WaitForSeconds waitForUpdate;
+
     //// Log related variables
     //public static int LinechartCounter = 0;
     //public int MyChartIdx { get; protected set; }
@@ -124,6 +126,9 @@ public abstract class BaseChart : MonoBehaviour
     void Start()
     {
         ElapsedTime = 0;
+
+		waitForUpdate = new WaitForSeconds(updateFrequency);
+
         InitChart();
         InitBackground();
 
@@ -144,7 +149,7 @@ public abstract class BaseChart : MonoBehaviour
         {
             start = Time.time;
             currentFeed.Update();
-            yield return new WaitForSeconds(updateFrequency);
+            yield return waitForUpdate;
             ElapsedTime += Time.time-start;
         }
     }

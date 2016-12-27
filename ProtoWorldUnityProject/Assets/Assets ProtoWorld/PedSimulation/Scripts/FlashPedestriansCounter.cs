@@ -41,7 +41,7 @@ public class FlashPedestriansCounter : MonoBehaviour
 
     FlashPedestriansGlobalParameters globalParam;
 
-    LoggerAssembly logger;
+    public LoggerAssembly logger;
 
     void Awake()
     {

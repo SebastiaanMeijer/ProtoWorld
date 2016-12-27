@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
 
 public class SlotPanelController : MonoBehaviour
 {
@@ -19,11 +17,11 @@ public class SlotPanelController : MonoBehaviour
 
 	    RectTransform rect = gameObject.GetComponent<RectTransform>();
 
-	    int num_slots = _chartPanelController.ordering.Length;
+	    int num_slots = _chartPanelController.ordering.Count;
 
 	    //Set the height depending on the amount of slots (if active)
 	    float x = rect.sizeDelta.x;
-	    float y = active ? num_slots * 35 : 0 ;
+	    float y = active ? (num_slots + 1) * 35 : 0 ;
 	    rect.sizeDelta = new Vector2(x,y);
 
 	    //Set all the children to the state of the slotpanel.

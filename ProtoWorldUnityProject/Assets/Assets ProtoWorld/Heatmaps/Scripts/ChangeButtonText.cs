@@ -27,16 +27,16 @@ public class ChangeButtonText : MonoBehaviour {
 	public string[] buttonText;
 	public string[] typeText;
 
-	public void Awake(){
-
-		ButtonText = transform.parent.Find ("HeatmapTargetText").GetComponent<Text>();
-		TypeText = transform.parent.Find ("HeatmapTypeText").GetComponent<Text>();
+	public void Awake() {
+		ButtonText = transform.parent.Find("TargetText").GetComponent<Text>();
+		TypeText = transform.parent.Find("TypeText").GetComponent<Text>();
 	}
 
 	public void resetHMText() {
 		ButtonText.text = buttonText[Heatmap.heatmapNumber - 1];
 		TypeText.text = "Locations";
 	}
+
 	public void resetTypeText() {
 		//TypeText.text = typeText[Heatmap.heatmapTypeNumber -1];
 		//TypeText.text = Heatmap.typeString;

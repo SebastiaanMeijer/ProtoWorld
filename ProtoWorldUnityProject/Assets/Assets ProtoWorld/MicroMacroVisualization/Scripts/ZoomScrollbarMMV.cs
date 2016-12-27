@@ -42,6 +42,9 @@ public class ZoomScrollbarMMV : MonoBehaviour {
 
 	private bool fading = false;
 
+	private WaitForSeconds waitForShow = new WaitForSeconds(1.0f);
+	private WaitForSeconds waitForChange = new WaitForSeconds(0.1f);
+
 	void Awake() {
 		scrollbar = this.gameObject.GetComponent<Scrollbar>();
 		maxHeight = Camera.main.GetComponent<CameraControl>().maxHeight;
@@ -54,7 +57,7 @@ public class ZoomScrollbarMMV : MonoBehaviour {
 			GameObject instantiatedIndicator = Instantiate(indicatorImage, new Vector3(this.transform.position.x, (stagesHeights[i] / maxHeight) * rt.sizeDelta.y + transform.position.y - rt.sizeDelta.y / 2, this.transform.position.z), Quaternion.identity) as GameObject;
 			instantiatedIndicator.transform.parent = this.transform;
 		}
-		StartCoroutine(changeTag(0.1f));
+		StartCoroutine(changeTag());
 	}
 
 	public void sliderChanged() {
@@ -79,21 +82,21 @@ public class ZoomScrollbarMMV : MonoBehaviour {
 			fading = true;
 			handleText.color = new Vector4(handleText.color.r, handleText.color.g, handleText.color.b, 1);
 
-			StartCoroutine(showTag(1f));
+			StartCoroutine(showTag());
 			//StartCoroutine (changeTag (0.1f));
 		}
 	}
 
-	public IEnumerator showTag(float timeOfFade) {
-		yield return new WaitForSeconds(timeOfFade);
+	public IEnumerator showTag() {
+		yield return waitForShow;
 		handleText.color = new Vector4(handleText.color.r, handleText.color.g, handleText.color.b, 0);
 		fading = false;
 		lastHeight = height;
 		yield return null;
 	}
 
-	public IEnumerator changeTag(float timeOfFade) {
-		yield return new WaitForSeconds(timeOfFade);
+	public IEnumerator changeTag() {
+		yield return waitForChange;
 		if(lastHeight != height) {
 			for(int i = 0; i < stagesHeights.Length; i++) {
 				if(value * maxHeight > stagesHeights[i]) {
@@ -105,6 +108,6 @@ public class ZoomScrollbarMMV : MonoBehaviour {
 			}
 			lastHeight = height;
 		}
-		StartCoroutine(changeTag(0.1f));
+		StartCoroutine(changeTag());
 	}
 }

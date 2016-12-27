@@ -28,16 +28,16 @@ public class IssueScript : MonoBehaviour {
 
 	private bool clicked = false;
 	private bool dragging = false;
-	private float originalY;
-	private int issuesId;
+	public static float originalY;
+	public int issuesId;
 	private static int issuesIdStatic;
 	
-	private Text issueTypeText;
-	private Text detailsText;
-	private RectTransform issuesTransform;
+	public Text issueTypeText;
+	public Text detailsText;
+	public RectTransform issuesTransform;
 
-	private string issueTypeString;
-	private string detailsString;
+	private string issueTypeString = "";
+	private string detailsString = "";
 	
 
 	void Awake() {
@@ -47,16 +47,19 @@ public class IssueScript : MonoBehaviour {
 	}
 	
 	void Start() {
-		originalY = issuesTransform.localPosition.y;
-		issuesTransform.localPosition = new Vector3(issuesTransform.localPosition.x, originalY + 1000, issuesTransform.localPosition.z);
+		issuesId = issuesId + 1;
+		//originalY = issuesTransform.localPosition.y - 1000;
+		//issuesTransform.localPosition = new Vector3(issuesTransform.localPosition.x, originalY + 1000, issuesTransform.localPosition.z);
 	}
 	
-	void Update() {
+	void LateUpdate() {
 		if(IssuesUIScript.issueButtonClicked == true) {
 			if(IssuesUIScript.solveAnIssue == true) {
 				if(issuesId == issuesIdStatic) {
+					issuesIdStatic = -1;
 					IssuesUIScript.issueButtonClicked = false;
 					IssuesUIScript.solveAnIssue = false;
+					issuesTransform.localPosition = new Vector3(issuesTransform.localPosition.x, originalY + 1000, issuesTransform.localPosition.z);
 					Destroy(this.gameObject.GetComponentInParent<Transform>().gameObject);
 				}
 			}
@@ -64,6 +67,7 @@ public class IssueScript : MonoBehaviour {
 				if(issuesId == issuesIdStatic) {
 					IssuesUIScript.issueButtonClicked = false;
 					IssuesUIScript.goToIssue = false;
+					issuesTransform.localPosition = new Vector3(issuesTransform.localPosition.x, originalY + 1000, issuesTransform.localPosition.z);
 					Camera.main.gameObject.GetComponent<CameraControl>().targetCameraPosition = this.transform.position + new Vector3(Camera.main.gameObject.GetComponent<CameraControl>().targetCameraPosition.x - this.transform.position.x, 0, Camera.main.gameObject.GetComponent<CameraControl>().targetCameraPosition.z - this.transform.position.z).normalized * 30;
 					Camera.main.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, this.transform.rotation.eulerAngles.y + 180, Camera.main.transform.rotation.eulerAngles.z);
 
@@ -76,6 +80,7 @@ public class IssueScript : MonoBehaviour {
 		clicked = true;
 		StartMouseX = Input.mousePosition.x;
 		StartMouseY = Input.mousePosition.y;
+
 	}
 
 	void OnMouseUp() {
@@ -85,6 +90,7 @@ public class IssueScript : MonoBehaviour {
 				detailsText.text = detailsString;
 				issuesTransform.localPosition = new Vector3(issuesTransform.localPosition.x, originalY, issuesTransform.localPosition.z);
 				issuesTransform.gameObject.GetComponent<IssuesUIScript>().showing = true;
+				issuesId = Random.Range (0, 10000);
 				issuesIdStatic = issuesId;
 			}
 		}

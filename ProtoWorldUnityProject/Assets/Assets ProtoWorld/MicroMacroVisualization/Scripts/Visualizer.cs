@@ -20,162 +20,100 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
  */
 
 using UnityEngine;
-using System.Collections;
 
 public class Visualizer : MonoBehaviour {
-	private CameraControl cameraObject;
+	public bool visualizationEnabled = true;
 
-	private bool activatedMicroMacro = true;
+	private int level;
 
-	private int previousLevel;
-
-	public GameObject[] objectRenders;
-	public int[] objectRendersLvl;
-	public GameObject[] objectScales;
-	public int[] objectScalesLvl;
-	public GameObject[] objectSelf;
-	public int[] objectSelfLvl;
-
-
-	/// <summary>
-	/// Awake method.
-	/// </summary>
-	void Awake() {
-		cameraObject = FindObjectOfType<CameraControl>();
+	[System.Serializable]
+	public struct LayerLevel {
+		public LayerMask layer;
+		public int level;
+		public bool inverted;
 	}
+
+	public LayerLevel[] layerLevels;
+
+	[System.Serializable]
+	public struct ObjectLevel {
+		public GameObject gameObject;
+		public int level;
+		public bool inverted;
+	}
+
+	public ObjectLevel[] objectLevels;
 
 
 	public void Update() {
-		if(previousLevel != ZoomScrollbarMMV.level) {
-			previousLevel = ZoomScrollbarMMV.level;
-			for(int i = 0; objectRenders.Length > i; i++) {
-				changeVisualizationRenderer(previousLevel, objectRendersLvl[i]);
-				changeVisualizationActive(previousLevel, objectScalesLvl[i]);
-				//changeVisualizationScale (previousLevel,objectSelfLvl[i]);
-			}
+		if(level != ZoomScrollbarMMV.level) {
+			level = ZoomScrollbarMMV.level;
+
+			updateVisualization();
 		}
 	}
 
 	/// <summary>
-	/// Activate or deactivate the visualizer when button is pressed
+	/// Activates or deactivates the visualizer when the button is pressed.
 	/// </summary>
 	public void activateDeactivateMMV() {
-		if(activatedMicroMacro == true) {
-			for(int i = 0; objectRenders.Length > i; i++) {
-				changeVisualizationRenderer(-1, objectRendersLvl[i]);
-				changeVisualizationActive(-1, objectScalesLvl[i]);
-				//changeVisualizationScale (-1, objectSelfLvl [i]);
+		visualizationEnabled = !visualizationEnabled;
 
+		updateVisualization();
+	}
+
+
+	private void updateVisualization() {
+		foreach(LayerLevel layerLevel in layerLevels) {
+			updateLayerVisualization(layerLevel);
+		}
+
+		foreach(ObjectLevel objectLevel in objectLevels) {
+			updateObjectVisualization(objectLevel);
+		}
+	}
+
+	private void updateLayerVisualization(LayerLevel layerLevel) {
+		if(visualizationEnabled) {
+			if(layerLevel.inverted) {
+				setLayerVisualization(layerLevel, layerLevel.level <= level);
 			}
-			activatedMicroMacro = false;
+			else {
+				setLayerVisualization(layerLevel, layerLevel.level >= level);
+			}
 		}
 		else {
-			activatedMicroMacro = true;
+			setLayerVisualization(layerLevel, true);
+		}
+	}
 
-			for(int i = 0; objectRenders.Length > i; i++) {
-				changeVisualizationRenderer(previousLevel, objectRendersLvl[i]);
-				changeVisualizationActive(previousLevel, objectScalesLvl[i]);
-				//changeVisualizationScale (previousLevel,objectSelfLvl[i]);
+	private void updateObjectVisualization(ObjectLevel objectLevel) {
+		if(visualizationEnabled) {
+			if(objectLevel.gameObject != null) {
+				if(objectLevel.inverted) {
+					setObjectVisualization(objectLevel, objectLevel.level <= level);
+				}
+				else {
+					setObjectVisualization(objectLevel, objectLevel.level >= level);
+				}
 			}
+		}
+		else {
+			setObjectVisualization(objectLevel, true);
 		}
 	}
 
 
-	public void changeVisualizationRenderer(int levelNumber, int arrayNumber) {
-		if(activatedMicroMacro) {
-			for(int i = 0; i < objectRenders.Length; i++) {
-				if(objectRenders[i] != null) {
-					Renderer[] rs = objectRenders[i].GetComponentsInChildren<Renderer>();
-					foreach(Renderer r in rs)
-						r.enabled = true;
-				}
-			}
-
-			cameraObject.GetComponent<Camera>().cullingMask |= 1 << LayerMask.NameToLayer("Pedestrian");
-
-			for(int i = 0; i < objectRenders.Length; i++) {
-				if(objectRenders[i] != null) {
-					Renderer[] rs = objectRenders[i].GetComponentsInChildren<Renderer>();
-					if(objectRendersLvl[i] > levelNumber && objectRendersLvl[i] >= 0) {
-						var newMask = cameraObject.GetComponent<Camera>().cullingMask | (1 << objectRenders[i].gameObject.layer);
-						cameraObject.GetComponent<Camera>().cullingMask = newMask;
-
-						foreach(Renderer r in rs) {
-							//r.enabled = true;
-							//LayerMask.NameToLayer("Pedestrian");
-						}
-					}
-					else if(objectRendersLvl[i] <= levelNumber && objectRendersLvl[i] >= 0) {
-						var newMask = cameraObject.GetComponent<Camera>().cullingMask & ~(1 << objectRenders[i].gameObject.layer);
-						cameraObject.GetComponent<Camera>().cullingMask = newMask;
-
-						foreach(Renderer r in rs) {
-
-						}
-					}
-					else if(objectRendersLvl[i] > -levelNumber && objectRendersLvl[i] < 0) {
-						var newMask = cameraObject.GetComponent<Camera>().cullingMask | (1 << objectRenders[i].gameObject.layer);
-						cameraObject.GetComponent<Camera>().cullingMask = newMask;
-
-						foreach(Renderer r in rs) {
-							//r.enabled = true;
-						}
-					}
-					else if(objectRendersLvl[i] <= -levelNumber && objectRendersLvl[i] < 0) {
-						var newMask = cameraObject.GetComponent<Camera>().cullingMask & ~(1 << objectRenders[i].gameObject.layer);
-						cameraObject.GetComponent<Camera>().cullingMask = newMask;
-						foreach(Renderer r in rs) {
-							//r.enabled = false;
-						}
-					}
-				}
-			}
-
+	private void setLayerVisualization(LayerLevel layerLevel, bool layerEnabled) {
+		if(layerEnabled) {
+			Camera.main.cullingMask |= layerLevel.layer.value;
+		}
+		else {
+			Camera.main.cullingMask &= ~layerLevel.layer.value;
 		}
 	}
 
-	public void changeVisualizationActive(int levelNumber, int arrayNumber) {
-		if(activatedMicroMacro) {
-			for(int i = 0; i < objectSelf.Length; i++) {
-				GameObject rs1 = objectSelf[i];
-				if(rs1 != null) {
-					if(objectSelfLvl[i] > levelNumber && objectSelfLvl[i] >= 0) {
-						rs1.gameObject.SetActive(true);
-					}
-					else if(objectSelfLvl[i] <= levelNumber && objectSelfLvl[i] >= 0) {
-						rs1.gameObject.SetActive(false);
-					}
-					else if(objectSelfLvl[i] > -levelNumber && objectSelfLvl[i] < 0) {
-						rs1.gameObject.SetActive(true);
-					}
-					else if(objectSelfLvl[i] <= -levelNumber && objectSelfLvl[i] < 0) {
-						rs1.gameObject.SetActive(false);
-					}
-				}
-			}
-		}
-	}
-
-	public void changeVisualizationScale(int levelNumber, int arrayNumber) {
-		if(activatedMicroMacro) {
-			for(int i = 0; i < objectScales.Length; i++) {
-				if(objectSelf[i] != null) {
-					GameObject rs1 = objectSelf[i];
-
-					if(objectScalesLvl[i] > levelNumber && objectScalesLvl[i] >= 0) {
-						objectScales[i].transform.localScale = new Vector3(1, 1, 1);
-					}
-					else if(objectScalesLvl[i] < levelNumber && objectScalesLvl[i] >= 0) {
-						objectScales[i].transform.localScale = new Vector3(1, 0, 1);
-					}
-					else if(objectScalesLvl[i] > -levelNumber && objectScalesLvl[i] < 0) {
-						objectScales[i].transform.localScale = new Vector3(1, 1, 1);
-					}
-					else if(objectScalesLvl[i] < -levelNumber && objectScalesLvl[i] < 0) {
-						objectScales[i].transform.localScale = new Vector3(1, 0, 1);
-					}
-				}
-			}
-		}
+	private void setObjectVisualization(ObjectLevel objectLevel, bool objectEnabled) {
+		objectLevel.gameObject.SetActive(objectEnabled);
 	}
 }

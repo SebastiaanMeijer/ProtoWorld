@@ -20,20 +20,27 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 using UnityEngine;
 using System.Collections;
 
-public class KPIPedestrians : MonoBehaviour {
+public class KPIPedestrians : MonoBehaviour
+{
     private FlashPedestriansGlobalParameters pedestrianGlobals;
 
     public int numberOfPedestriansActive = 0;
     public int numberOfPedestriansReachingDestination = 0;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         pedestrianGlobals = GetComponent<FlashPedestriansGlobalParameters>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //pause the gathering of data when a log is being loaded
+        if (KPIParameters.pauseKPIS)
+            return;
+
         numberOfPedestriansActive = pedestrianGlobals.numberOfPedestriansPerAgent * pedestrianGlobals.numberOfPedestriansOnScenario;
         numberOfPedestriansReachingDestination = pedestrianGlobals.numberOfPedestriansPerAgent * pedestrianGlobals.numberOfPedestrianReachingDestination;
-	}
+    }
 }
