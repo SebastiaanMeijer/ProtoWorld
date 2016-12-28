@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class BlueToothDataRenderer : MonoBehaviour
 {
+    public enum CSVtype { Haifa, Venice };
+    public CSVtype fileType;
     public TextAsset[] files;
     public MapBoundaries boundaries;
 
@@ -33,11 +36,25 @@ public class BlueToothDataRenderer : MonoBehaviour
         gameMaxX = boundaries.minMaxX[1] + boundaries.MinPointOnMap.x;
         gameMaxY = boundaries.minMaxY[1] + boundaries.MinPointOnMap.z;
 
-        //loop over all files
-        for (int i = 0; i < files.Length; i++)
+        if (fileType == CSVtype.Haifa)
         {
-            TextAsset file = files[i];
-            readCSV(i, file.name, file.text);
+            //loop over all files
+            for (int i = 0; i < files.Length; i++)
+            {
+                TextAsset file = files[i];
+                readCSVHaifa(i, file.name, file.text);
+            }
+        }
+        else
+        {
+            if (files.Length < 2)
+            {
+                Debug.LogWarning("The Venice type requires two files");
+                return;
+            }
+            TextAsset positions = files[0];
+            TextAsset distances = files[1];
+            readCSVVenice(positions.text, distances.text);
         }
     }
 
@@ -47,7 +64,7 @@ public class BlueToothDataRenderer : MonoBehaviour
 
     }
 
-    private void readCSV(int index, string name, string text)
+    private void readCSVHaifa(int index, string name, string text)
     {
         GameObject parentObj = new GameObject(name);
         parentObj.transform.parent = transform;
@@ -76,6 +93,69 @@ public class BlueToothDataRenderer : MonoBehaviour
 
             //create line
             createLine(parentObj.transform, pos1, pos2, value);
+        }
+    }
+
+    private void readCSVVenice(string text, string text2)
+    {
+        //flip files if they are in the wrong order
+        if (text.Length > text2.Length)
+        {
+            string temp = text;
+            text = text2;
+            text2 = temp;
+        }
+
+        List<string> ids = new List<string>();
+        Dictionary<string, Vector3> positions = new Dictionary<string, Vector3>();
+        string[] parts;
+
+        string[] lines = text.Split("\n"[0]);
+        foreach (string line in lines)
+        {
+            parts = line.Split(',');
+            if (parts.Length < 4)
+                continue;
+
+            double x1 = double.Parse(parts[1]);
+            double y1 = double.Parse(parts[2]);
+            Vector3 pos = realToGameCoords(x1, y1);
+            positions.Add(parts[0].Trim('"'), pos);
+        }
+
+        lines = text2.Split("\n"[0]);
+        parts = lines[0].Split(',');
+        foreach(string part in parts) {
+            ids.Add(part.Trim('"'));
+        }
+
+        GameObject parentObj = new GameObject(""+lines[1]);
+        parentObj.transform.parent = transform;
+        int firstOffset = 1;
+        for (int i = 2; i < lines.Length; i++)
+        {
+            string line = lines[i];
+            parts = line.Split(',');
+            if (parts.Length == 1)
+            {
+                if (i > 1000) //arbitrary stop to not have it calculate for like 10 minutes
+                    break;
+                parentObj = new GameObject("" + lines[i]);
+                parentObj.transform.parent = transform;
+                firstOffset = i;
+                continue;
+            }
+
+            for (int j = 0; j < parts.Length; j++)
+            {
+                float value = float.Parse(parts[j]);
+                if (value > 0.1f)
+                {
+                    Vector3 pos1 = positions[ids[i-firstOffset-1]];
+                    Vector3 pos2 = positions[ids[j]];
+                    createLine(parentObj.transform, pos1, pos2, value / 3000f);
+                }
+            }
         }
     }
 

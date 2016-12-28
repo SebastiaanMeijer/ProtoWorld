@@ -22,6 +22,7 @@ Assets/Cases ProtoWorld/*
 Assets/Cases ProtoWorld/*.meta
 Assets/Miscelanea/Legacy/SEStarIntegration/
 Assets/Miscelanea/Legacy/SEStarIntegration.meta
+!Assets/Assets ProtoWorld/BluetoothData/*.csv
 
 Assets/log
 Assets/log/*

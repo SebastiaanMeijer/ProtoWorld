@@ -44,3 +44,4 @@ ScriptsAndTools/SumoFiles/Rome/*.xml filter=lfs diff=lfs merge=lfs -text
 
 # Haifa Scene
 ProtoWorldUnityProject/Assets/Cases[[:space:]]ProtoWorld/Haifa[[:space:]]Case/Haifa[[:space:]]Case[[:space:]]v2.0/NavMesh.asset filter=lfs diff=lfs merge=lfs -text
+ProtoWorldUnityProject/Assets/Assets[[:space:]]ProtoWorld/BluetoothData/*.csv filter=lfs diff=lfs merge=lfs -text

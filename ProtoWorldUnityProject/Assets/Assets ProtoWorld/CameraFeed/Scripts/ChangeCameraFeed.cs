@@ -50,7 +50,7 @@ public class ChangeCameraFeed : MonoBehaviour {
 
 
 	public void nextCameraFeed() {
-		if(i + 3 < getFeedCameraCount()) {
+		if(i + 3 < FeedCamera.numberOfFeedCameras) {
 			i += 1;
 
 			setFeedCamerasEnabled(i);
