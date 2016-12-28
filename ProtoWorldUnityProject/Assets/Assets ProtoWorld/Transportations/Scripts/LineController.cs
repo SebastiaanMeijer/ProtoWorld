@@ -263,7 +263,8 @@ public class LineController : MonoBehaviour
 	/// <param name="vehicle"></param>
 	public void AddVehicle(GameObject vehicle)
 	{
-		vehicles.Add(vehicle);
+        vehicle.tag = "TransVehicle";
+        vehicles.Add(vehicle);
 	}
 
 

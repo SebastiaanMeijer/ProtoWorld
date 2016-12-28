@@ -112,6 +112,17 @@ public class SpawnerLineController : MonoBehaviour
         numberVehiclesOutOfService = vehiclesOutOfService.Count;
     }
 
+    void SpawnVehicleFromLog(GameObject logVehicle)
+    {
+        GameObject vehicle = VehicleController.CreateGameObject(transline, LineDirection.OutBound);
+        // Provide this from our cached version to improve performance, as this is called a lot during spawning events.
+        vehicle.GetComponent<VehicleController>().timeController = timeController;
+
+
+
+        transline.AddVehicle(vehicle);
+    }
+
     /// <summary>
     /// This will spawn 2 vehicles at each end of this transline.
     /// Will reuse deactivated vehicles if exist or it will create a new vehicle.

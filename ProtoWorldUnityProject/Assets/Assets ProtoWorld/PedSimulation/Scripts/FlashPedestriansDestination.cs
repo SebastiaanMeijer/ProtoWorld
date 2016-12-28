@@ -50,7 +50,7 @@ public class FlashPedestriansDestination : MonoBehaviour, Loggable
     void Awake()
     {
         initializeDestination();
-		LoggableManager.subscribe((Loggable)this);
+		LoggableManager.subscribe(this);
     }
 
     public void initializeDestination()
@@ -87,25 +87,27 @@ public class FlashPedestriansDestination : MonoBehaviour, Loggable
 
             if (((MonoBehaviour)destination).gameObject.tag == "PedestrianDestination")
             {
+                //get the destination that needs to be altered and modify it.
                 flashDestinationScript.destinationName = logData.GetChild("Name").Value;
                 if (((MonoBehaviour)destination).GetComponent<FlashPedestriansDestination>().destinationName == flashDestinationScript.destinationName)
                 {
                     flashDestinationObject = ((MonoBehaviour)destination).gameObject;
                     flashDestinationScript = flashDestinationObject.GetComponent<FlashPedestriansDestination>();
+
+                    Vector3 position = new Vector3();
+                    position.x = float.Parse(logData.GetChild("PositionX").Value);
+                    position.y = float.Parse(logData.GetChild("PositionY").Value);
+                    position.z = float.Parse(logData.GetChild("PositionZ").Value);
+                    flashDestinationScript.radiousToCheckStations = float.Parse(logData.GetChild("CheckRadius").Value);
+                    flashDestinationScript.destinationPriority = float.Parse(logData.GetChild("Priority").Value);
+                    flashDestinationObject.name = "FlashDestination";
+                    flashDestinationScript.destinationTransform.position = position;
+
+                    flashDestinationScript.initializeDestination();
+                    flashDestinationScript.enabled = true;
                 }
             }
         }
-        Vector3 position = new Vector3();
-		position.x = float.Parse(logData.GetChild("PositionX").Value);
-		position.y = float.Parse(logData.GetChild("PositionY").Value);
-		position.z = float.Parse(logData.GetChild("PositionZ").Value);
-		flashDestinationScript.radiousToCheckStations = float.Parse(logData.GetChild("CheckRadius").Value);
-		flashDestinationScript.destinationPriority = float.Parse(logData.GetChild("Priority").Value);
-		flashDestinationObject.name = "FlashDestination";
-		flashDestinationScript.destinationTransform.position = position;
-
-		flashDestinationScript.initializeDestination();
-		flashDestinationScript.enabled = true;
     }
 
 	public  LogPriorities getPriorityLevel()

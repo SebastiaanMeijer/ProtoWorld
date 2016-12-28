@@ -80,6 +80,7 @@ public class VehicleController : MonoBehaviour, Loggable
 	public void Awake()
 	{
 		StartCoroutine(putInArrayDelay());
+        LoggableManager.subscribe(this);
 	}
 
 	public IEnumerator putInArrayDelay()
@@ -416,12 +417,70 @@ public class VehicleController : MonoBehaviour, Loggable
 
     public LogDataTree getLogData()
     {
-        throw new NotImplementedException();
+        LogDataTree logData = new LogDataTree(tag, null);
+        logData.AddChild(new LogDataTree("ID", id.ToString()));
+        logData.AddChild(new LogDataTree("PositionX", transform.position.x.ToString()));
+        logData.AddChild(new LogDataTree("PositionY", transform.position.y.ToString()));
+        logData.AddChild(new LogDataTree("PositionZ", transform.position.z.ToString()));
+        logData.AddChild(new LogDataTree("CurrentStation", currentStation.stationName.ToString()));
+        logData.AddChild(new LogDataTree("NextStation", nextStation.stationName.ToString()));
+        logData.AddChild(new LogDataTree("LineDirection", direction.ToString()));
+        logData.AddChild(new LogDataTree("StartTime", startTime.ToString()));
+        logData.AddChild(new LogDataTree("Capacity", capacity.ToString()));
+        logData.AddChild(new LogDataTree("HeadCount", headCount.ToString()));
+        logData.AddChild(new LogDataTree("Delay", delay.ToString()));
+        logData.AddChild(new LogDataTree("Speed", speed.ToString()));
+        logData.AddChild(new LogDataTree("CurrentDistance", current_distance.ToString()));
+        logData.AddChild(new LogDataTree("PreviousDistance", previous_distance.ToString()));
+        
+        return logData;
     }
 
     public void rebuildFromLog(LogDataTree logData)
     {
-        throw new NotImplementedException();
+        GameObject vehicleObject = GameObject.Instantiate(gameObject) as GameObject;
+        VehicleController vehicleController = vehicleObject.GetComponent<VehicleController>();
+        Vector3 position = new Vector3();
+
+        vehicleController.id = int.Parse(logData.GetChild("ID").Value);
+        position.x = float.Parse(logData.GetChild("PositionX").Value);
+        position.y = float.Parse(logData.GetChild("PositionY").Value);
+        position.z = float.Parse(logData.GetChild("PositionZ").Value);
+        vehicleController.transform.position = position;
+        vehicleObject.transform.position = position;
+
+        vehicleController.startTime = float.Parse(logData.GetChild("StartTime").Value);
+        vehicleController.capacity = int.Parse(logData.GetChild("Capacity").Value);
+        vehicleController.headCount = int.Parse(logData.GetChild("HeadCount").Value);
+        vehicleController.delay = float.Parse(logData.GetChild("Delay").Value);
+        vehicleController.speed = float.Parse(logData.GetChild("Speed").Value);
+        vehicleController.current_distance = float.Parse(logData.GetChild("CurrentDistance").Value);
+        vehicleController.previous_distance = float.Parse(logData.GetChild("PreviousDistance").Value);
+
+        switch (logData.GetChild("LineDirection").Value)
+        {
+            case "InBound":
+                vehicleController.direction = LineDirection.InBound;
+                break;
+            case "Undecided":
+                vehicleController.direction = LineDirection.Undecided;
+                break;
+            case "OutBound":
+                vehicleController.direction = LineDirection.OutBound;
+                break;
+        }
+
+        foreach (GameObject station in GameObject.FindGameObjectsWithTag("TransStation"))
+        {
+            if (station.GetComponent<StationController>().stationName == logData.GetChild("CurrentStation").Value)
+            {
+                vehicleController.currentStation = station.GetComponent<StationController>();
+            }
+            if (station.GetComponent<StationController>().stationName == logData.GetChild("NextStation").Value)
+            {
+                vehicleController.nextStation = station.GetComponent<StationController>();
+            }
+        }
     }
 
     public LogPriorities getPriorityLevel()
@@ -433,4 +492,21 @@ public class VehicleController : MonoBehaviour, Loggable
     {
         return true;
     }
+
+    //private static int IdCounter = 0;
+
+    //public LineController line; // To SUMO: line.Id = "route id"
+
+    //protected Dictionary<int, List<TravelerController>> disembarkersAtStation = new Dictionary<int, List<TravelerController>>();
+
+    //protected Dictionary<int, List<int>> redistributeFromStationToStation = new Dictionary<int, List<int>>();
+
+    //TextMesh[] texts;
+
+    //[HideInInspector]
+    //public TimeController timeController;
+
+    //public Heatmap heatMap;
+
+    //private WaitForSeconds wait = new WaitForSeconds(0.5f);
 }

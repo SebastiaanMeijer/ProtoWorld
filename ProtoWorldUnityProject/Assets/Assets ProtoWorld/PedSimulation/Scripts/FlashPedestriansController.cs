@@ -907,9 +907,6 @@ public class FlashPedestriansController : TravelerController, Loggable
             {
                 if (flashSpawnerScript.id == flashPedestrianScript.spawnerId)
                 {
-                    //StationController[] stationsNearby = StationsNearCurrentPosition();
-                    //flashSpawnerScript.flashInformer.FindBestItinerary(flashPedestrianObject.transform.position,
-                    //    flashPedestrianScript.routing.destinationPoint, stationsNearby, flashPedestrianScript.profile.travelPreference);
                     flashPedestrianObject.transform.SetParent(flashSpawnerObject.transform);
                     flashSpawnerScript.SpawnPedestrianFromLog(flashPedestrianScript);
                     break;

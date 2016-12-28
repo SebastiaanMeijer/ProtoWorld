@@ -145,7 +145,7 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
         initializeSpawner();
 
 		heatMap = FindObjectOfType<Heatmap>();
-		LoggableManager.subscribe((Loggable)this);
+		LoggableManager.subscribe(this);
 	}
 
     public void initializeSpawner()
@@ -417,35 +417,36 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
         {
             if (spawner == null)
                 continue;
-
+            //get the destination that needs to be altered and modify it.
             if (((MonoBehaviour)spawner).gameObject.tag == "PedestrianSpawner")
             {
                 if (((MonoBehaviour)spawner).GetComponent<FlashPedestriansSpawner>().id == flashSpawnerScript.id)
                 {
                     flashSpawnerObject = ((MonoBehaviour)spawner).gameObject;
                     flashSpawnerScript = flashSpawnerObject.GetComponent<FlashPedestriansSpawner>();
+
+                    Vector3 position = new Vector3();
+                    position.x = float.Parse(logData.GetChild("PositionX").Value);
+                    position.y = float.Parse(logData.GetChild("PositionY").Value);
+                    position.z = float.Parse(logData.GetChild("PositionZ").Value);
+                    flashSpawnerObject.transform.position = position;
+                    flashSpawnerScript.transform.position = position;
+                    flashSpawnerScript.maxNumberOfPedestriansToSpawn = int.Parse(logData.GetChild("MaxNumberOfPedestriansToSpawn").Value);
+                    flashSpawnerScript.spawnPedestriansInInfiniteLoop = bool.Parse(logData.GetChild("SpawnPedestriansInInfiteLoop").Value);
+                    flashSpawnerScript.minPedestriansPerSpawningIteration = int.Parse(logData.GetChild("MinPedestriansPerSpawningIteration").Value);
+                    flashSpawnerScript.maxPedestriansPerSpawningIteration = int.Parse(logData.GetChild("MaxPedestriansPerSpawningIteration").Value);
+                    flashSpawnerScript.spawningFrequencyInSeconds = float.Parse(logData.GetChild("PedestrianSpawnFrequencyInSeconds").Value);
+                    flashSpawnerScript.spawningArea = float.Parse(logData.GetChild("SpawningArea").Value);
+                    flashSpawnerScript.radiousToCheckStations = float.Parse(logData.GetChild("RadiousToCheckStations").Value);
+                    flashSpawnerScript.spawningDelayAtStart = float.Parse(logData.GetChild("SpawningDelayAtStart").Value);
+                    flashSpawnerScript.initialNumberOfPedestriansInCache = int.Parse(logData.GetChild("InitialNumberOfPedestriansInCache").Value);
+                    flashSpawnerScript.numberOfPedestriansGenerated = int.Parse(logData.GetChild("NumberOfPedestriansGenerated").Value);
+                    flashSpawnerScript.numberOfPedestriansOnDestination = int.Parse(logData.GetChild("NumberOfPedestriansOnDestination").Value);
+                    flashSpawnerObject.name = "FlashSpawner";
+                    flashSpawnerScript.enabled = true;
                 }
             }
         }
-        Vector3 position = new Vector3();
-        position.x = float.Parse(logData.GetChild("PositionX").Value);
-        position.y = float.Parse(logData.GetChild("PositionY").Value);
-        position.z = float.Parse(logData.GetChild("PositionZ").Value);
-        flashSpawnerObject.transform.position = position;
-        flashSpawnerScript.transform.position = position;
-        flashSpawnerScript.maxNumberOfPedestriansToSpawn = int.Parse(logData.GetChild("MaxNumberOfPedestriansToSpawn").Value);
-        flashSpawnerScript.spawnPedestriansInInfiniteLoop = bool.Parse(logData.GetChild("SpawnPedestriansInInfiteLoop").Value);
-        flashSpawnerScript.minPedestriansPerSpawningIteration = int.Parse(logData.GetChild("MinPedestriansPerSpawningIteration").Value);
-        flashSpawnerScript.maxPedestriansPerSpawningIteration = int.Parse(logData.GetChild("MaxPedestriansPerSpawningIteration").Value);
-        flashSpawnerScript.spawningFrequencyInSeconds = float.Parse(logData.GetChild("PedestrianSpawnFrequencyInSeconds").Value);
-        flashSpawnerScript.spawningArea = float.Parse(logData.GetChild("SpawningArea").Value);
-        flashSpawnerScript.radiousToCheckStations = float.Parse(logData.GetChild("RadiousToCheckStations").Value);
-        flashSpawnerScript.spawningDelayAtStart = float.Parse(logData.GetChild("SpawningDelayAtStart").Value);
-        flashSpawnerScript.initialNumberOfPedestriansInCache = int.Parse(logData.GetChild("InitialNumberOfPedestriansInCache").Value);
-        flashSpawnerScript.numberOfPedestriansGenerated = int.Parse(logData.GetChild("NumberOfPedestriansGenerated").Value);
-        flashSpawnerScript.numberOfPedestriansOnDestination = int.Parse(logData.GetChild("NumberOfPedestriansOnDestination").Value);
-        flashSpawnerObject.name = "FlashSpawner";
-        flashSpawnerScript.enabled = true;
     }
 
     void OnDestroy()

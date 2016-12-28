@@ -433,21 +433,22 @@ public class StationController : MonoBehaviour, Loggable
                 {
                     transStationObject = ((MonoBehaviour)station).gameObject;
                     transStationScript = transStationObject.GetComponent<StationController>();
+
+                    Vector3 position = new Vector3();
+                    position.x = float.Parse(logData.GetChild("PositionX").Value);
+                    position.y = float.Parse(logData.GetChild("PositionY").Value);
+                    position.z = float.Parse(logData.GetChild("PositionZ").Value);
+                    transStationScript.radiusToCheckStations = float.Parse(logData.GetChild("CheckRadius").Value);
+                    transStationScript.outOfService = bool.Parse(logData.GetChild("OutOfService").Value);
+                    transStationScript.capacity = int.Parse(logData.GetChild("Capacity").Value);
+                    transStationScript.queuing = int.Parse(logData.GetChild("Queuing").Value);
+                    transStationScript.nextLogUpdate = float.Parse(logData.GetChild("NextLogUpdate").Value);
+                    transStationScript.LogUpdateRateInSeconds = float.Parse(logData.GetChild("LogUpdateRateInSeconds").Value);
+                    transStationScript.stationName = "TransStation";
+                    transStationScript.gameObject.transform.position = position;
                 }
             }
         }
-        Vector3 position = new Vector3();
-        position.x = float.Parse(logData.GetChild("PositionX").Value);
-        position.y = float.Parse(logData.GetChild("PositionY").Value);
-        position.z = float.Parse(logData.GetChild("PositionZ").Value);
-        transStationScript.radiusToCheckStations = float.Parse(logData.GetChild("CheckRadius").Value);
-        transStationScript.outOfService = bool.Parse(logData.GetChild("OutOfService").Value);
-        transStationScript.capacity = int.Parse(logData.GetChild("Capacity").Value);
-        transStationScript.queuing = int.Parse(logData.GetChild("Queuing").Value);
-        transStationScript.nextLogUpdate = float.Parse(logData.GetChild("NextLogUpdate").Value);
-        transStationScript.LogUpdateRateInSeconds = float.Parse(logData.GetChild("LogUpdateRateInSeconds").Value);
-        transStationScript.stationName = "TransStation";
-        transStationScript.gameObject.transform.position = position;
     }
 
     public LogPriorities getPriorityLevel()
