@@ -112,11 +112,16 @@ public class StationController : MonoBehaviour
 
         var textMesh = tgo.AddComponent<TextMesh>();
         textMesh.text = controller.GetIdAndName();
-        textMesh.anchor = TextAnchor.LowerCenter;
+        textMesh.anchor = TextAnchor.MiddleCenter;
         textMesh.color = Color.black;
         textMesh.fontSize = 20;
         textMesh.fontStyle = FontStyle.Bold;
         tgo.transform.localScale *= 5;
+
+		var textController = tgo.AddComponent<TextController>();
+		textController.scale = 1.0f;
+		textController.hideDistance = 10.0f;
+		textController.height = textMesh.fontSize / 200.0f;
 #endif
 
         return controller;
