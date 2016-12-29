@@ -227,13 +227,54 @@ public class PostGenerationUtilities : Editor {
 	}
 
 
+	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Upgrades/Add Missing Feed Camera Sprite Controllers")]
+	public static void AddMissingFeedCameraSpriteControllers() {
+		GameObject cameraFeedModule = GameObject.Find("CameraFeedModule");
+		Transform feedCameras = cameraFeedModule.transform.FindChild("FeedCameras");
+
+		foreach(Transform feedCamera in feedCameras) {
+			Transform cameraSign = feedCamera.FindChild("CameraSign");
+
+			if(cameraSign.gameObject.GetComponent<SpriteController>() == null) {
+				SpriteController spriteController = cameraSign.gameObject.AddComponent<SpriteController>();
+				spriteController.scale = 1.0f;
+				spriteController.hideDistance = 10.0f;
+			}
+		}
+	}
+
+	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Upgrades/Add Missing Issue Sprite Controllers")]
+	public static void AddMissingIssueSpriteControllers() {
+		GameObject issuesModule = GameObject.Find("IssuesModule");
+		Transform issues = issuesModule.transform.FindChild("Issues");
+
+		foreach(Transform issue in issues) {
+			Transform sign = issue.FindChild("Sign");
+
+			if(sign.gameObject.GetComponent<SpriteController>() == null) {
+				SpriteController spriteController = sign.gameObject.AddComponent<SpriteController>();
+				spriteController.scale = 0.15f;
+				spriteController.hideDistance = 10.0f;
+			}
+		}
+	}
+
 	[MenuItem("ProtoWorld Editor/ProtoWorld Essentials/Map Tools/Upgrades/Add Missing Station Text Controllers")]
 	public static void AddMissingStationTextControllers() {
 		GameObject transportationModule = GameObject.Find("TransportationModule");
-		Transform stations = transportationModule.transform.FindChild("Stations").transform;
+		Transform stations = transportationModule.transform.FindChild("Stations");
 
 		foreach(Transform station in stations) {
-			station.gameObject.AddComponent<StationTextController>();
+			TextMesh textMesh = station.GetComponentInChildren<TextMesh>();
+
+			if(textMesh.gameObject.GetComponent<TextController>() == null) {
+				TextController textController = textMesh.gameObject.AddComponent<TextController>();
+				textController.scale = 1.0f;
+				textController.hideDistance = 10.0f;
+				textController.height = textMesh.fontSize / 200.0f;
+
+				textMesh.anchor = TextAnchor.MiddleCenter;
+			}
 		}
 	}
 }
