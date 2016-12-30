@@ -798,6 +798,7 @@ public class FlashPedestriansController : TravelerController, Loggable
         logData.AddChild(new LogDataTree("VisualizeRumoursCaught", visualizeRumoursCaught.ToString()));
         logData.AddChild(new LogDataTree("BalloonsEnabled", balloonsEnabled.ToString()));
         logData.AddChild(new LogDataTree("IsPause", isPause.ToString()));
+		logData.AddChild (new LogDataTree ("TravelerId", travelerId.ToString()));
 
         LogDataTree routingData = new LogDataTree("Routing", null);
         routingData.AddChild(new LogDataTree("DestinationName", routing.destinationPoint.destinationName));
@@ -858,6 +859,8 @@ public class FlashPedestriansController : TravelerController, Loggable
         flashPedestrianScript.visualizeRumoursCaught = bool.Parse(logData.GetChild("VisualizeRumoursCaught").Value);
         flashPedestrianScript.balloonsEnabled = bool.Parse(logData.GetChild("BalloonsEnabled").Value);
         flashPedestrianScript.isPause = bool.Parse(logData.GetChild("IsPause").Value);
+
+		flashPedestrianScript.travelerId = long.Parse (logData.GetChild ("TravelerId").Value);
 
         if (logData.containsKey("Profile"))
         {
