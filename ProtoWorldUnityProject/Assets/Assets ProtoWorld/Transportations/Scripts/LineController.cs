@@ -434,11 +434,14 @@ public class LineController : MonoBehaviour
 		int headCount = 0;
 		foreach (var vehicle in vehicles)
 		{
-			var controller = vehicle.GetComponent<VehicleController>();
-			// Provide this from our cached version to improve performance, as this is called a lot during spawning events.
-			controller.heatMap = heatMap;
-			if (vehicle.activeInHierarchy && controller != null)
-				headCount += controller.headCount;
+            if (vehicle != null)
+            {
+                var controller = vehicle.GetComponent<VehicleController>();
+                // Provide this from our cached version to improve performance, as this is called a lot during spawning events.
+                controller.heatMap = heatMap;
+                if (vehicle.activeInHierarchy && controller != null)
+                    headCount += controller.headCount;
+            }
 		}
 		return headCount;
 	}

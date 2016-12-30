@@ -417,7 +417,8 @@ public class FlashPedestriansSpawner : MonoBehaviour, Loggable
         {
             if (spawner == null)
                 continue;
-            //get the destination that needs to be altered and modify it.
+            //get the destination that needs to be altered and modify it. Deletion causes the sim to act weird
+            //so thats why we need to modify the existing one.
             if (((MonoBehaviour)spawner).gameObject.tag == "PedestrianSpawner")
             {
                 if (((MonoBehaviour)spawner).GetComponent<FlashPedestriansSpawner>().id == flashSpawnerScript.id)

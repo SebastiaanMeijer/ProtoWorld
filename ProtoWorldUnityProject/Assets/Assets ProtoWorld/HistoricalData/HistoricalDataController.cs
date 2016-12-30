@@ -61,7 +61,6 @@ public class HistoricalDataController : MonoBehaviour
         StartCoroutine(logToXML());
     }
 
-    //TODO: Optimize! THIS IS A HORSETHING!!!//
     List<Loggable> getLoggables()
     {
         List<GameObject> loggableObjects = new List<GameObject>();
