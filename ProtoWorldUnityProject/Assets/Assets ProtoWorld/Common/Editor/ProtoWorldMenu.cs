@@ -765,8 +765,7 @@ public class ProtoWorldMenu : MonoBehaviour
             if (go == null)
                 Debug.Log("There is no " + moduleName);
         }
-		// TODO Currently disabled to speed up development.
-        //PrefabUtility.DisconnectPrefabInstance(go);
+        PrefabUtility.DisconnectPrefabInstance(go);
         // NB: Do not set activeGameObject = go, otherwise all the CreatorEditors will not work.
         return go;
     }
@@ -787,8 +786,7 @@ public class ProtoWorldMenu : MonoBehaviour
                 {
                     var prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)) as GameObject;
                     instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-					// TODO Currently disabled to speed up development.
-					//PrefabUtility.DisconnectPrefabInstance(instance);
+					PrefabUtility.DisconnectPrefabInstance(instance);
                     Undo.RegisterCreatedObjectUndo(instance, "Prefab instantiated...");
                     Debug.Log(prefabName + " was added to the scene.");
                     foundPrefab = true;
