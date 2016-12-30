@@ -19,10 +19,12 @@ sysinfo.txt
 Assets/Cases ProtoWorld/*
 !Assets/Cases ProtoWorld/Rome Case/
 !Assets/Cases ProtoWorld/Haifa Case/
+!Assets/Cases ProtoWorld/Venice Case/
 Assets/Cases ProtoWorld/*.meta
 Assets/Miscelanea/Legacy/SEStarIntegration/
 Assets/Miscelanea/Legacy/SEStarIntegration.meta
-!Assets/Assets ProtoWorld/BluetoothData/*.csv
+!Assets/Miscelanea/Resources/Haifa Flows/*.csv
+!Assets/Miscelanea/Resources/Venice Flows/*.csv
 
 Assets/log
 Assets/log/*

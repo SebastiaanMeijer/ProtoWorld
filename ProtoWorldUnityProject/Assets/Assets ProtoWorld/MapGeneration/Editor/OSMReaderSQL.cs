@@ -49,9 +49,9 @@ public class OSMReaderSQL : Editor
         CalculateBoundaries(mapproperties);
         ImportOSMDataSQL_ServerSide(true, true, true);
         Vector3 scale = new Vector3(mapproperties.Scale.x, 1, mapproperties.Scale.y);
-        GroupObjectsWithTags("Lines", "Lines", new string[] { "Line" }, scale, false, true);
-        GroupObjectsWithTags("Buildings", "Buildings", new string[] { "Building" }, scale, false, true);
-        GroupObjectsWithTags("Areas", "Default", new string[] { "Area" }, scale, false, true);
+        GroupObjectsWithTags("Lines", new string[] { "Line" }, scale, false, true);
+        GroupObjectsWithTags("Buildings", new string[] { "Building" }, scale, false, true);
+        GroupObjectsWithTags("Areas", new string[] { "Area" }, scale, false, true);
         //GroupLines(false);
         AssignStaticLayers();
         //BakeNavigation();
@@ -65,7 +65,7 @@ public class OSMReaderSQL : Editor
         CalculateBoundaries(mapproperties);
         ImportOSMDataSQL_ServerSide(true, false, true);
         Vector3 scale = new Vector3(mapproperties.Scale.x, 1, mapproperties.Scale.y);
-        GroupObjectsWithTags("Buildings", "Buildings", new string[] { "Building" }, scale, false);
+        GroupObjectsWithTags("Buildings", new string[] { "Building" }, scale, false);
         //GroupBuildings();
         AssignStaticLayers();
         //BakeNavigation();
@@ -80,7 +80,7 @@ public class OSMReaderSQL : Editor
         CalculateBoundaries(mapproperties);
         ImportOSMDataSQL_ServerSide(true, true, false);
         Vector3 scale = new Vector3(mapproperties.Scale.x, 1, mapproperties.Scale.y);
-        GroupObjectsWithTags("Lines", "Lines", new string[] { "Line" }, scale, false, true);
+        GroupObjectsWithTags("Lines", new string[] { "Line" }, scale, false, true);
         //GroupRoads();
         AssignStaticLayers();
         //BakeNavigation();
@@ -94,7 +94,7 @@ public class OSMReaderSQL : Editor
         string[][] tags = new string[1][];
         tags[0] = new string[] { "natural", "water" };
         ImportOSMDataSQL_ArbitraryShapeFromWay(tags, "Water", "Water", properties.WaterMaterial.name, 0f);
-        GroupObjectsWithTags("Water Areas", "Water", new string[] { "Water" }, Vector3.zero, false, true);
+        GroupObjectsWithTags("Water Areas", new string[] { "Water" }, Vector3.zero, false, true);
         //AddBusStopLogic();
     }
 
@@ -155,7 +155,7 @@ public class OSMReaderSQL : Editor
         string[][] tags = new string[1][];
         tags[0] = new string[] { "highway", "traffic_signals" };
         ImportOSMDataSQL_Billboard(tags, "TrafficLight", "TrafficLight", "TrafficLight", 0.5f);
-        GroupObjectsWithTags("Traffic Lights", "Default", new string[] { "TrafficLight" }, Vector3.zero, true, true);
+        GroupObjectsWithTags("Traffic Lights", new string[] { "TrafficLight" }, Vector3.zero, true, true);
     }
 
     //[MenuItem("ProtoWorld Editor/Scenario/Bus stops from the database")]
@@ -165,7 +165,7 @@ public class OSMReaderSQL : Editor
         tags[0] = new string[] { "highway", "bus_stop" };
         tags[1] = new string[] { "bus", "yes" };
         ImportOSMDataSQL_Billboard(tags, "BusStop", "BusStop", "BusStopMaterial", 0.5f);
-        GroupObjectsWithTags("Bus stops", "Default", new string[] { "BusStop" }, Vector3.zero, true, true);
+        GroupObjectsWithTags("Bus stops", new string[] { "BusStop" }, Vector3.zero, true, true);
         //AddBusStopLogic();
     }
 
@@ -176,8 +176,8 @@ public class OSMReaderSQL : Editor
         var mapproperties = globalO.GetComponent<MapBoundaries>();
         ImportOSMDataSQL(true, true, true);
         Vector3 scale = new Vector3(mapproperties.Scale.x, 1, mapproperties.Scale.y);
-        GroupObjectsWithTags("Lines", "Lines", new string[] { "Line" }, scale, false, true);
-        GroupObjectsWithTags("Buildings", "Buildings", new string[] { "Building" }, scale, false, true);
+        GroupObjectsWithTags("Lines", new string[] { "Line" }, scale, false, true);
+        GroupObjectsWithTags("Buildings", new string[] { "Building" }, scale, false, true);
         //GroupLines(false);
         AssignStaticLayers();
     }
@@ -443,8 +443,8 @@ public class OSMReaderSQL : Editor
             var globalO = GameObject.Find("AramGISBoundaries");
             var mapproperties = globalO.GetComponent<MapBoundaries>();
             Vector3 scale = new Vector3(mapproperties.Scale.x, 1, mapproperties.Scale.y);
-            GroupObjectsWithTags("Lines", "Lines", new string[] { "Line" }, scale, false, true);
-            GroupObjectsWithTags("Buildings", "Buildings", new string[] { "Building" }, scale, false, true);
+            GroupObjectsWithTags("Lines", new string[] { "Line" }, scale, false, true);
+            GroupObjectsWithTags("Buildings", new string[] { "Building" }, scale, false, true);
         }
         catch (System.Exception e)
         {
@@ -465,7 +465,7 @@ public class OSMReaderSQL : Editor
         var globalO = GameObject.Find("AramGISBoundaries");
         var mapproperties = globalO.GetComponent<MapBoundaries>();
         Vector3 scale = new Vector3(mapproperties.Scale.x, 1, mapproperties.Scale.y);
-        GroupObjectsWithTags("MockDataGroup", "Default", new string[] { "MockData" }, scale, false);
+        GroupObjectsWithTags("MockDataGroup", new string[] { "MockData" }, scale, false);
     }
 
     //[MenuItem("Gapslabs Extended Editor/Generate and save as Obj/From the database(roads+Building Shapes)", false, 1)]
@@ -563,7 +563,7 @@ public class OSMReaderSQL : Editor
 
         //ImportOSMDataSQL_ServerSide_Extra(true, true, false, TagValues: tags);
         Vector3 scale = new Vector3(mapproperties.Scale.x, 1, mapproperties.Scale.y);
-        GroupObjectsWithTags("Lines", "Lines", new string[] { "Line" }, scale, false, true);
+        GroupObjectsWithTags("Lines", new string[] { "Line" }, scale, false, true);
         AssignStaticLayers();
     }
 
@@ -750,7 +750,7 @@ public class OSMReaderSQL : Editor
         EditorUtility.ClearProgressBar();
     }
 
-    static void GroupObjectsWithTags(string GroupName, string LayerName, string[] Tags, Vector3 OverrideScale, bool addfaceCamera = true, bool applyScaleToTheObjects = false)
+    static void GroupObjectsWithTags(string GroupName, string[] Tags, Vector3 OverrideScale, bool addfaceCamera = true, bool applyScaleToTheObjects = false)
     {
         //NOTE: <param name="OverrideScale">Pass Vector3.zero to ignore, otherwise to override.</param>
 
@@ -758,8 +758,6 @@ public class OSMReaderSQL : Editor
         var mapproperties = globalO.GetComponent<MapBoundaries>();
         GameObject go = new GameObject(GroupName);
         List<GameObject> gos = new List<GameObject>();
-
-		go.layer = LayerMask.NameToLayer(LayerName);
 
         if (OverrideScale == Vector3.zero)
             OverrideScale = new Vector3(mapproperties.Scale.x, mapproperties.Scale.x, mapproperties.Scale.y);

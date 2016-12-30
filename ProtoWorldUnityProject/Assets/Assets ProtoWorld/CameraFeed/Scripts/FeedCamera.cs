@@ -23,12 +23,10 @@ using UnityEngine;
 
 public class FeedCamera : MonoBehaviour {
 	public string name;
-	public static int numberOfFeedCameras;
 
     void Start()
     {
-		numberOfFeedCameras = numberOfFeedCameras + 1;
-		Debug.LogError (numberOfFeedCameras);
+        
     }
 
     void Update()
