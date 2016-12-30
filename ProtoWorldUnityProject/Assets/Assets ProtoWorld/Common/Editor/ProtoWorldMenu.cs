@@ -588,7 +588,7 @@ public class ProtoWorldMenu : MonoBehaviour
         }
 	}
 
-	[MenuItem("ProtoWorld Editor/Camera Feed Module/Add Camera Feed", false, 8)]
+	[MenuItem("ProtoWorld Editor/Camera Feed Module/Add Feed Camera", false, 8)]
 	static void AddCameraFeedModule() {
 		AddModuleIfNotExist(cameraFeedModuleName);
 
