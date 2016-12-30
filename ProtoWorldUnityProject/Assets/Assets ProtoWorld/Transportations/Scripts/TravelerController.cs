@@ -23,6 +23,7 @@ using System.Collections.Generic;
 public class TravelerController : MonoBehaviour
 {
     private static long counter = 0;
+	protected long travelerId;
 
     public Transform destination;
     public Itinerary itinerary;
@@ -46,6 +47,7 @@ public class TravelerController : MonoBehaviour
     {
         GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
         obj.name = "Passenger " + counter++;
+		travelerId = counter;
         obj.transform.localScale *= 0.4f;
         var controller = obj.AddComponent<TravelerController>();
         if (destination == null)
@@ -219,6 +221,10 @@ public class TravelerController : MonoBehaviour
     {
         //throw new NotImplementedException();
     }
+
+	public long getTravelerId(){
+		return travelerId;
+	}
 
     /// <summary>
     /// Reset the parameters to animate the walk to the next destination.

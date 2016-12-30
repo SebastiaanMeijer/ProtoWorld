@@ -435,7 +435,14 @@ public class VehicleController : MonoBehaviour, Loggable
         logData.AddChild(new LogDataTree("Speed", speed.ToString()));
         logData.AddChild(new LogDataTree("CurrentDistance", current_distance.ToString()));
         logData.AddChild(new LogDataTree("PreviousDistance", previous_distance.ToString()));
-        
+
+		foreach (KeyValuePair<int, List<TravelerController>> entry in disembarkersAtStation) {
+			LogDataTree station = new LogDataTree ("Station", entry.Key.ToString());
+			foreach (TravelerController traveler in entry.Value) {
+				station.AddChild (new LogDataTree ("Disembarker", traveler.getTravelerId ().ToString()));
+			}
+			logData.AddChild (station);
+		}
         return logData;
     }
 
@@ -459,6 +466,23 @@ public class VehicleController : MonoBehaviour, Loggable
         vehicleController.speed = float.Parse(logData.GetChild("Speed").Value);
         vehicleController.current_distance = float.Parse(logData.GetChild("CurrentDistance").Value);
         vehicleController.previous_distance = float.Parse(logData.GetChild("PreviousDistance").Value);
+
+		List<TravelerController> activeTravelers = FindObjectsOfType<TravelerController> ().ToList();
+
+		foreach (LogDataTree entry in logData.getChildren("Station")) {
+			List<TravelerController> disembarkers = new List<TravelerController> ();
+			foreach (LogDataTree traveler in entry.getChildren("Disembarker")) {
+				long id = long.Parse (traveler.Value);
+				foreach(TravelerController possibleTraveler in activeTravelers){
+					if (possibleTraveler.getTravelerId () == id) {
+						disembarkers.Add (possibleTraveler);
+						break;
+					}
+				}
+			}
+			vehicleController.disembarkersAtStation.Add(int.Parse(entry.Value), disembarkers);
+		}
+
 
         switch (logData.GetChild("LineDirection").Value)
         {
@@ -494,11 +518,13 @@ public class VehicleController : MonoBehaviour, Loggable
             }
         }
 
+
+
     }
 
     public LogPriorities getPriorityLevel()
     {
-        return LogPriorities.Default;
+        return LogPriorities.Low;
     }
 
     public bool destroyOnLogLoad()

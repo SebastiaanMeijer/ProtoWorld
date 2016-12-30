@@ -52,4 +52,12 @@ public class LogDataTree
 		return children;
 	}
 
+	public List<LogDataTree> getChildren(string childrenKey){
+		List<LogDataTree> items = new List<LogDataTree> ();
+		foreach (LogDataTree n in children)
+			if (n.Key.Equals (childrenKey))
+				items.Add (n);
+		return items;
+	}
+
 }
