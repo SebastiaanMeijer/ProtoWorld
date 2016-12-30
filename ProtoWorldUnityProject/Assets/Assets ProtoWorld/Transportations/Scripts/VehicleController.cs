@@ -24,6 +24,8 @@ public class VehicleController : MonoBehaviour, Loggable
 
 	public int id;
 
+    public SpawnerLineController spawnerLineController;
+
 	public LineController line; // To SUMO: line.Id = "route id"
 
 	public LineDirection direction;
@@ -419,6 +421,7 @@ public class VehicleController : MonoBehaviour, Loggable
     {
         LogDataTree logData = new LogDataTree(tag, null);
         logData.AddChild(new LogDataTree("ID", id.ToString()));
+        logData.AddChild(new LogDataTree("SpawnerLineController", spawnerLineController.gameObject.name));
         logData.AddChild(new LogDataTree("PositionX", transform.position.x.ToString()));
         logData.AddChild(new LogDataTree("PositionY", transform.position.y.ToString()));
         logData.AddChild(new LogDataTree("PositionZ", transform.position.z.ToString()));
@@ -481,6 +484,16 @@ public class VehicleController : MonoBehaviour, Loggable
                 vehicleController.nextStation = station.GetComponent<StationController>();
             }
         }
+
+        //spawn vehicle trough original spawner
+        foreach (GameObject spawnerLineController in GameObject.FindGameObjectsWithTag("TransLine"))
+        {
+            if (spawnerLineController.name == logData.GetChild("SpawnerLineController").Value)
+            {
+                spawnerLineController.GetComponent<SpawnerLineController>().spawnVehicleFromLog(vehicleObject);
+            }
+        }
+
     }
 
     public LogPriorities getPriorityLevel()

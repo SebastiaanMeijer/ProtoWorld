@@ -112,14 +112,17 @@ public class SpawnerLineController : MonoBehaviour
         numberVehiclesOutOfService = vehiclesOutOfService.Count;
     }
 
-    void SpawnVehicleFromLog(GameObject logVehicle)
+    public void spawnVehicleFromLog(GameObject logVehicle)
     {
-        GameObject vehicle = VehicleController.CreateGameObject(transline, LineDirection.OutBound);
-        // Provide this from our cached version to improve performance, as this is called a lot during spawning events.
+
+        if (timeController == null)
+            return;
+        startTime = timeController.gameTime;
+
+        GameObject vehicle;
+        vehicle = VehicleController.CreateGameObject(transline, LineDirection.OutBound);
         vehicle.GetComponent<VehicleController>().timeController = timeController;
-
-
-
+        vehicle.GetComponent<VehicleController>().spawnerLineController = this;
         transline.AddVehicle(vehicle);
     }
 
@@ -140,6 +143,7 @@ public class SpawnerLineController : MonoBehaviour
             vehiclesOutOfService.Remove(vehicle);
             vehicle.SetActive(true);
             vehicle.GetComponent<VehicleController>().ResetVehicle(LineDirection.OutBound);
+            vehicle.GetComponent<VehicleController>().spawnerLineController = this;
         }
         else
         {
@@ -147,6 +151,7 @@ public class SpawnerLineController : MonoBehaviour
             vehicle.transform.SetParent(transform);
 			// Provide this from our cached version to improve performance, as this is called a lot during spawning events.
 			vehicle.GetComponent<VehicleController>().timeController = timeController;
+            vehicle.GetComponent<VehicleController>().spawnerLineController = this;
             transline.AddVehicle(vehicle);
         }
         if (vehiclesOutOfService.Count > 0)
@@ -155,6 +160,7 @@ public class SpawnerLineController : MonoBehaviour
             vehiclesOutOfService.Remove(vehicle);
             vehicle.SetActive(true);
             vehicle.GetComponent<VehicleController>().ResetVehicle(LineDirection.InBound);
+            vehicle.GetComponent<VehicleController>().spawnerLineController = this;
         }
         else
         {
@@ -162,7 +168,8 @@ public class SpawnerLineController : MonoBehaviour
             vehicle.transform.SetParent(transform);
 			// Provide this from our cached version to improve performance, as this is called a lot during spawning events.
 			vehicle.GetComponent<VehicleController>().timeController = timeController;
-			transline.AddVehicle(vehicle);
+            vehicle.GetComponent<VehicleController>().spawnerLineController = this;
+            transline.AddVehicle(vehicle);
         }
     }
 
