@@ -23,7 +23,7 @@ using System.Collections.Generic;
 public class TravelerController : MonoBehaviour
 {
     private static long counter = 0;
-	protected long travelerId;
+	public long travelerId;
 
     public Transform destination;
     public Itinerary itinerary;
@@ -47,9 +47,9 @@ public class TravelerController : MonoBehaviour
     {
         GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
         obj.name = "Passenger " + counter++;
-		travelerId = counter;
         obj.transform.localScale *= 0.4f;
         var controller = obj.AddComponent<TravelerController>();
+        controller.travelerId = FlashPedestriansGlobalParameters.travelerId;
         if (destination == null)
             controller.destination = itinerary.LastStop.transform;
         else

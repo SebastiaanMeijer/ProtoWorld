@@ -48,7 +48,6 @@ public class HistoricalDataController : MonoBehaviour
 
 	void Start()
     {
-        getLoggables();
         timeController = GameObject.Find("TimeControllerUI").GetComponent<TimeController>();
         GameObject flashPedestriansModule = GameObject.Find("FlashPedestriansModule");
         globalParameters = flashPedestriansModule.GetComponent<FlashPedestriansGlobalParameters>();
@@ -59,20 +58,6 @@ public class HistoricalDataController : MonoBehaviour
         waitForLog = new WaitForSeconds(logIntervalSeconds);
 
         StartCoroutine(logToXML());
-    }
-
-    List<Loggable> getLoggables()
-    {
-        List<GameObject> loggableObjects = new List<GameObject>();
-        loggableObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)).Cast<GameObject>().Where(g => g.tag == "Loggable").ToList();
-        List<Loggable> loggables = new List<Loggable>();
-        foreach (GameObject loggable in loggableObjects)
-        {
-            print(loggable.ToString());
-            loggables.Add(loggable.GetComponent<Loggable>());
-        }
-        //print(loggables.Count);
-        return loggables;
     }
 
     void initiateLogFile()

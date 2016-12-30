@@ -127,6 +127,7 @@ public class SpawnerLineController : MonoBehaviour
         vehicle = VehicleController.CreateGameObject(transline, LineDirection.OutBound);
         vehicle.GetComponent<VehicleController>().timeController = timeController;
         vehicle.GetComponent<VehicleController>().spawnerLineController = this;
+        TimeController test = vehicle.GetComponent<VehicleController>().timeController;
         vehicle.transform.SetParent(transform);
         transline.AddVehicle(vehicle);
     }

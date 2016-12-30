@@ -94,6 +94,8 @@ public class FlashPedestriansGlobalParameters : MonoBehaviour
     /// </summary>
     public bool bikesEnabled = true;
 
+    public static long travelerId = 0;
+
     /// <summary>
     /// Percentage of pedestrians willing to take a bike. 
     /// </summary>

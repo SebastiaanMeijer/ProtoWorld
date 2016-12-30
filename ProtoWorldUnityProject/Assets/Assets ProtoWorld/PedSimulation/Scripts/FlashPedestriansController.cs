@@ -114,6 +114,7 @@ public class FlashPedestriansController : TravelerController, Loggable
         navAgent = gameObject.GetComponent<NavMeshAgent>();
         FSM = gameObject.GetComponent<Animator>();
         balloons = transform.Find("Balloons");
+        travelerId = FlashPedestriansGlobalParameters.travelerId++;
     }
 
     /// <summary>
