@@ -34,15 +34,15 @@ public class VehicleController : MonoBehaviour, Loggable
 
 	public StationController nextStation; // To SUMO: nextStation.Id = "route index"
 
-	protected float LegTravelTime { get { return line.GetLegTravelTime(currentStation, nextStation); } }
+	public float LegTravelTime { get { return line.GetLegTravelTime(currentStation, nextStation); } }
 
-	protected float DistanceToNextStation { get { return Vector3.Distance(transform.position, nextStation.transform.position); } }
+	public float DistanceToNextStation { get { return Vector3.Distance(transform.position, nextStation.transform.position); } }
 
-	protected Dictionary<int, List<TravelerController>> disembarkersAtStation = new Dictionary<int, List<TravelerController>>();
+	public Dictionary<int, List<TravelerController>> disembarkersAtStation = new Dictionary<int, List<TravelerController>>();
 
-	protected Dictionary<int, List<int>> redistributeFromStationToStation = new Dictionary<int, List<int>>();
+	public Dictionary<int, List<int>> redistributeFromStationToStation = new Dictionary<int, List<int>>();
 
-	protected float startTime;
+	public float startTime;
 
 	public int capacity;
 
@@ -256,9 +256,10 @@ public class VehicleController : MonoBehaviour, Loggable
 				gameObject.SetActive(false);
 				return;
 			}
-
-			float journeyTime = timeController.gameTime - startTime;
-			float fracTime = journeyTime / LegTravelTime;
+            //somehow the timecontroller gets deleted or is null at reload :(
+            //need to look into this
+                float journeyTime = timeController.gameTime - startTime;
+                float fracTime = journeyTime / LegTravelTime;
 			transform.position = Vector3.Lerp(currentStation.transform.position, nextStation.transform.position, fracTime);
 		}
 	}
@@ -514,6 +515,7 @@ public class VehicleController : MonoBehaviour, Loggable
         {
             if (spawnerLineController.name == logData.GetChild("SpawnerLineController").Value)
             {
+                vehicleController.timeController = spawnerLineController.GetComponent<SpawnerLineController>().timeController;
                 spawnerLineController.GetComponent<SpawnerLineController>().spawnVehicleFromLog(vehicleObject);
             }
         }

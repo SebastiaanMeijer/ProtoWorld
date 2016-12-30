@@ -23,7 +23,7 @@ using System.Linq;
 /// </summary>
 public class SpawnerLineController : MonoBehaviour
 {
-    protected HashSet<GameObject> vehiclesOutOfService;
+    public HashSet<GameObject> vehiclesOutOfService;
 
     public int numberVehiclesOutOfService;
 
@@ -32,20 +32,20 @@ public class SpawnerLineController : MonoBehaviour
     [Range(1, 65535)]
     public float localSpawnRate = 5;
 
-    protected float globalSpawnRate = 5;
+    public float globalSpawnRate = 5;
 
     public bool spawnFromStart = false;
 
     [Range(0, 65535)]
     public float spawnFromStartDelay = 0;
 
-    protected float startTime;
+    public float startTime;
 
-    protected LineController transline;
+    public LineController transline;
 
-    protected RoutingController mainRouter;
+    public RoutingController mainRouter;
 
-    protected TimeController timeController;
+    public TimeController timeController;
 
     public GameObject modelToSpawn;
 
@@ -122,7 +122,6 @@ public class SpawnerLineController : MonoBehaviour
         if (timeController == null)
             return;
         startTime = timeController.gameTime;
-
         GameObject vehicle;
         vehicle = VehicleController.CreateGameObject(transline, LineDirection.OutBound);
         vehicle.GetComponent<VehicleController>().timeController = timeController;
