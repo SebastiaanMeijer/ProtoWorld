@@ -7,6 +7,8 @@ For more information about ProtoWorld, please look at vimeo.com/gapslabs.
 
 ProtoWorld was developed at the Gaming Participatory Labs (GaPSLabs) at the School of Technology and Health, KTH Royal Institute of Technology, Huddinge, Sweden. Authors are Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, Johnson Ho and Sebastiaan Meijer. 
 
+The dashboard branch contains a visualization dashboad developed for the PETRA project (http://petraproject.eu/). The dashboard contains an user interface to various forms of data visualisation, as well as a number of tools, fixes, and optimizations. Additionally, various scenes have been created using these new features. The dashboard was developed based on ProtoWorld, by TUDelft. 
+
 Dependencies:
 
 Unity3D
