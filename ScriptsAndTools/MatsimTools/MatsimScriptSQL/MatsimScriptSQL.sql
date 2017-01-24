@@ -103,7 +103,7 @@ select setval('seq_gid', max(gid)) from road_ext;
 -- select minlat/10000000::float8 as minlat, maxlat/10000000::float8 as maxlat, minlon/10000000::float8 as minlon, maxlon/10000000::float8 as maxlon from viewbounds_stockholm ;
 
 
--- Read the .poly file of the admin boundary of stockholms län --
+-- Read the .poly file of the admin boundary of stockholms lan --
 -- remarks: change the path to the polybound. --
 drop table if exists polybound;
 create table polybound (content text, lon numeric, lat numeric);
@@ -125,7 +125,7 @@ FROM line_geoms;
 
 -- select * from roi_bounds ;
 
--- save the matsimnodes which is outside of stockholms län --
+-- save the matsimnodes which is outside of stockholms lan --
 drop table if exists matsimnodes_out_of_bounds;
 create table matsimnodes_out_of_bounds as 
 select mn.id as matsim_id, st_x(mn.geom), st_y(mn.geom), mn.geom 
@@ -205,7 +205,7 @@ from matsim_nodes_road as mn
 ) as foo;
 
 
--- compare distance between matsim node and road or osm node inside stockholms län--
+-- compare distance between matsim node and road or osm node inside stockholms lan--
 drop table if exists mapping_compare;
 create table mapping_compare as
 select a.*, b.gid, 
@@ -436,7 +436,7 @@ FROM car_events_osm a, unique_routings b
 join node_geom c
 ON b.node = c.node_id
 WHERE a.source = b.source
-AND a.target = b.target
+AND a.target = b.target;
 
 -- SELECT * FROM car_events_routing ORDER BY veh_id, leg_id, seq;
 
