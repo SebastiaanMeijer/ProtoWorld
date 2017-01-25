@@ -301,7 +301,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-# We need these...
-!*.sln
-!*.csproj

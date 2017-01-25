@@ -1,0 +1,3 @@
+# We need these...
+!*.sln
+!*.csproj
