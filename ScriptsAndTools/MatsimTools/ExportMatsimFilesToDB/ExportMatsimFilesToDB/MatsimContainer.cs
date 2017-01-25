@@ -5,6 +5,8 @@ namespace ExportMatsimFilesToDB
 {
     class MatsimContainer
     {
+		public const int numberOfStatementsPerTransaction = 1000;
+
         public MatSimNetwork matSimNetwork;
         public MatSimSchedule matSimSchedule;
         public MatSimsVehicles vehicleDefinition;
@@ -33,7 +35,7 @@ namespace ExportMatsimFilesToDB
 
         public void LoadNetwork(string path)
         {
-            var networkPath = Path.Combine(path, "network-plain.xml");
+            var networkPath = Path.Combine(path, "network.xml");
             matSimNetwork = MatSimNetwork.Load(networkPath);
             Console.WriteLine("Network loaded!");
         }

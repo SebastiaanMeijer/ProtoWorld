@@ -52,10 +52,17 @@ namespace ExportMatsimFilesToDB
                 int counterEvents = 0;
                 int totalEvents = matsimEvents.Count;
 
+				NpgsqlTransaction transaction = null;
+				int numberOfStatements = 0;
+				
+				Console.Write("\r{0} of {1} events exported", counterEvents, totalEvents);
+
                 foreach (var ev in matsimEvents)
                 {
-                    Console.Write("\r{0} of {1} events exported", ++counterEvents, totalEvents);
-                    
+					if(transaction == null) {
+						transaction = dbConn.BeginTransaction();
+					}
+
                     var insertString = string.Format("INSERT INTO {0} {1};", eventTable, ev.SQLValueString());
 
                     //Console.WriteLine(ev.ToString());
@@ -64,7 +71,28 @@ namespace ExportMatsimFilesToDB
 
                     dbCommand = new NpgsqlCommand(insertString, dbConn);
                     dbCommand.ExecuteNonQuery();
+
+					counterEvents += 1;
+					numberOfStatements += 1;
+
+					if(numberOfStatements == MatsimContainer.numberOfStatementsPerTransaction) {
+						transaction.Commit();
+						transaction.Dispose();
+						transaction = null;
+
+						numberOfStatements = 0;
+
+						Console.Write("\r{0} of {1} events exported", counterEvents, totalEvents);
+					}
                 }
+
+				if(transaction != null) {
+					transaction.Commit();
+					transaction.Dispose();
+
+					Console.Write("\r{0} of {1} events exported", counterEvents, totalEvents);
+				}
+
                 dbConn.Close();
                 Console.WriteLine();
             }

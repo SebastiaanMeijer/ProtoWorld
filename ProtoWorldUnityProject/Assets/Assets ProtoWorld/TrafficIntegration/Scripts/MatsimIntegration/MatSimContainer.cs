@@ -53,14 +53,14 @@ public class MatSimContainer : MonoBehaviour
 
     public void LoadNetwork(string path)
     {
-        var networkPath = Path.Combine(path, "network-plain.xml");
+        var networkPath = Path.Combine(path, "network.xml");
         matSimNetwork = MatSimNetwork.Load(networkPath);
         Debug.Log("network loaded!");
     }
 
     public void LoadSchedule(string path)
     {
-        var schedulePath = Path.Combine(path, "transitSchedule.xml");
+        var schedulePath = Path.Combine(path, "transitScheduleHagastadenMin.xml");
         matSimSchedule = MatSimSchedule.Load(schedulePath);
         Debug.Log("schedule loaded!");
 
@@ -68,7 +68,7 @@ public class MatSimContainer : MonoBehaviour
 
     public void LoadVehicles(string path)
     {
-        var vehiclePath = Path.Combine(path, "vehicles.xml");
+        var vehiclePath = Path.Combine(path, "vehiclesHagastadenMin.xml");
         vehicleDefinition = MatSimsVehicles.Load(vehiclePath);
         Debug.Log("vehicles loaded!");
 

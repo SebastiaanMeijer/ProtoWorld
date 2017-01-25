@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace ExportMatsimFilesToDB
 {
@@ -33,6 +31,8 @@ namespace ExportMatsimFilesToDB
 
                 return;
             }
+			
+			Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
             // Get the arguments
             string matsimEventFilePath = args[0];
