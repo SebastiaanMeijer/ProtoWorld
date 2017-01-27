@@ -98,7 +98,9 @@ public class SimulationReader : MonoBehaviour
                 reader.SetIO(new VissimIO());
                 break;
             case TrafficIntegrationController.TypeOfIntegration.MatsimDatabase:
-                reader.SetConnectionString(aramGisBoundaries.GetOverridenConnectionString());
+                //reader.SetConnectionString(aramGisBoundaries.GetOverridenConnectionString());
+				// HACK: For Stockholm case, so we can control from which database the simulation is read.
+                reader.SetConnectionString(StockholmMatSIMParameters.Instance.ConnectionString);
                 reader.SetIO(new MatsimIO());
                 break;
             case TrafficIntegrationController.TypeOfIntegration.PWSimPWSFile:
