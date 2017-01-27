@@ -31,3 +31,4 @@
 
 #Special files
 Assets/StreamingAssets/SQLiteDB/trajectoriesDB filter=lfs diff=lfs merge=lfs -text
+ProtoWorldUnityProject/Assets/Cases[[:space:]]ProtoWorld/Stockholm[[:space:]]Case/Stockholm[[:space:]]Case[[:space:]]v2.0/NavMesh.asset filter=lfs diff=lfs merge=lfs -text

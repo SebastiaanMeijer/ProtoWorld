@@ -217,10 +217,22 @@ public class CameraControl : MonoBehaviour
         {
             if (this.GetComponent<Camera>().orthographic == false)
             {
-                if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-                    keyBoardControlToMove += transform.forward * 100;
-                else
-                    keyBoardControlToMove += transform.forward * 10;
+                if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
+					if(Mathf.Abs(transform.rotation.eulerAngles.x) > 45.0f) {
+						keyBoardControlToMove += transform.up * 100;
+					}
+					else {
+						keyBoardControlToMove += transform.forward * 100;
+					}
+				}
+                else {
+					if(Mathf.Abs(transform.rotation.eulerAngles.x) > 45.0f) {
+						keyBoardControlToMove += transform.up * 10;
+					}
+					else {
+						keyBoardControlToMove += transform.forward * 10;
+					}
+				}
             }
             else
             {
@@ -232,11 +244,22 @@ public class CameraControl : MonoBehaviour
         {
             if (this.GetComponent<Camera>().orthographic == false)
             {
-                if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-                    keyBoardControlToMove -= transform.forward * 100;
-                else
-                    keyBoardControlToMove -= transform.forward * 10;
-
+                if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
+					if(Mathf.Abs(transform.rotation.eulerAngles.x) > 45.0f) {
+						keyBoardControlToMove -= transform.up * 100;
+					}
+					else {
+						keyBoardControlToMove -= transform.forward * 10;
+					}
+				}
+                else {
+					if(Mathf.Abs(transform.rotation.eulerAngles.x) > 45.0f) {
+						keyBoardControlToMove -= transform.up * 10;
+					}
+					else {
+						keyBoardControlToMove -= transform.forward * 10;
+					}
+				}
             }
             else
             {
