@@ -20,10 +20,13 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
  * 
  */
 
-public enum StockholmMatSIMLocation {
-	Alvsjo,
-	Arstafaltet,
-	FarstaCentrum,
-	Gullmarsplan,
-	Hagastaden
+using UnityEngine;
+
+public class BuildingViewerBuildingButton : MonoBehaviour {
+	public GameObject buildings;
+
+
+	public void toggle() {
+		buildings.SetActive(!buildings.activeSelf);
+	}
 }

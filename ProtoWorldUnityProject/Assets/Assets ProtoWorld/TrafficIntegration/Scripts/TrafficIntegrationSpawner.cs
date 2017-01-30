@@ -262,8 +262,13 @@ public class TrafficIntegrationSpawner : MonoBehaviour
                 vehControllers.Add(v.id, vc);
 
                 // Track the vehicle in the heatmap
-                if (visualizeTrafficHeatmap && heatmapCtrl != null)
-                    heatmapCtrl.TrackNewElement(vehObject);
+                if (visualizeTrafficHeatmap && heatmapCtrl != null) {
+					float score = 0.0f;
+
+					// TODO Retrieve score for "vehicle" (?) from the database.
+
+                    heatmapCtrl.TrackNewElement(vehObject, score);
+				}
             }
         }
     }

@@ -33,7 +33,7 @@ namespace HeatmapLayer
         /// <summary>
         /// Unit of a heatmap pixel in the scene.
         /// </summary>
-        [Range(1, 100)]
+        [Range(1, 1000)]
         public int heatmapUnitSize = 25;
 
         /// <summary>

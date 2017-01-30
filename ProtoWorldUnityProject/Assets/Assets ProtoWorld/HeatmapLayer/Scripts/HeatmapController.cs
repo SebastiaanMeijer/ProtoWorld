@@ -112,7 +112,7 @@ namespace HeatmapLayer
 
                     go.transform.parent = this.transform;
 
-                    go.transform.position = new Vector3(conf.minCoordinates.x + x * conf.heatmapUnitSize + halfStep, 0f,
+                    go.transform.position = new Vector3(conf.minCoordinates.x + x * conf.heatmapUnitSize + halfStep, 100f,
                                                         conf.minCoordinates.z + z * conf.heatmapUnitSize + halfStep);
 
                     go.transform.localScale = new Vector3(conf.heatmapUnitSize, conf.heatmapUnitSize * 5, conf.heatmapUnitSize);

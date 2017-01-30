@@ -20,10 +20,10 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
  * 
  */
 
-public enum StockholmMatSIMLocation {
-	Alvsjo,
-	Arstafaltet,
-	FarstaCentrum,
-	Gullmarsplan,
-	Hagastaden
+using UnityEngine;
+
+public class ScenarioSelectorExitButton : MonoBehaviour {
+	public void exit() {
+		Application.Quit();
+	}
 }
