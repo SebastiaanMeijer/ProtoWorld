@@ -107,8 +107,15 @@ select setval('seq_gid', max(gid)) from road_ext;
 -- remarks: change the path to the polybound. --
 drop table if exists polybound;
 create table polybound (content text, lon numeric, lat numeric);
-copy polybound from'C:\Users\protoworld\Desktop\MatsimFiles\osmFiles/stockholm_lan.pgpoly'
- with (DELIMITER E'\t');
+--copy polybound from'C:\Users\protoworld\Desktop\MatsimFiles\osmFiles/stockholm_lan.pgpoly'
+-- with (DELIMITER E'\t');
+
+-- Hack because the above mentioned file is missing, mirrors OSM import boundaries.
+INSERT INTO polybound (lon, lat) VALUES (17.868, 59.234);
+INSERT INTO polybound (lon, lat) VALUES (18.175, 59.234);
+INSERT INTO polybound (lon, lat) VALUES (18.175, 59.415);
+INSERT INTO polybound (lon, lat) VALUES (17.868, 59.415);
+INSERT INTO polybound (lon, lat) VALUES (17.868, 59.234);
 
 -- select * from polybound;
 
