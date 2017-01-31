@@ -61,12 +61,20 @@ namespace HeatmapLayer
         /// <summary>
         /// Tracked vehicles of the scene to add value to the heatmap.
         /// </summary>
-        private List<Tuple<GameObject, float>> vehElements;
+        private List<Tuple<GameObject, ScoreContainer>> vehElements;
 
         /// <summary>
         /// Tracked general elements of the scene to add value to the heatmap.
         /// </summary>
         private List<Tuple<GameObject, float>> generalElements;
+
+		public class ScoreContainer {
+			public float score;
+
+			public ScoreContainer(float score) {
+				this.score = score;
+			}
+		}
 
         /// <summary>
         /// Script awakening.
@@ -83,7 +91,7 @@ namespace HeatmapLayer
 
             // Initialize the tracked element lists
             flashPedElements = new List<Tuple<GameObject, float>>();
-            vehElements = new List<Tuple<GameObject, float>>();
+            vehElements = new List<Tuple<GameObject, ScoreContainer>>();
             generalElements = new List<Tuple<GameObject, float>>();
 
             // Get the number of elements for row Z
@@ -146,33 +154,34 @@ namespace HeatmapLayer
                             for (int x = 0; x < numberOfXElements; x++)
                                 heatmapArray[z][x].Reset();
 
-                    List<Tuple<GameObject, float>> selectedList;
+                    List<Tuple<GameObject, ScoreContainer>> selectedList;
 
                     // Select the elements to display in the heatmap
-                    if (conf.visualizationType == HeatmapConfig.HeatmapVisualizationType.Pedestrians)
-                        selectedList = flashPedElements;
-                    else if (conf.visualizationType == HeatmapConfig.HeatmapVisualizationType.Vehicles)
+                    //if (conf.visualizationType == HeatmapConfig.HeatmapVisualizationType.Pedestrians)
+                    //    selectedList = flashPedElements;
+                    //else if (conf.visualizationType == HeatmapConfig.HeatmapVisualizationType.Vehicles)
                         selectedList = vehElements;
-                    else
-                        selectedList = generalElements;
+                    //else
+                    //    selectedList = generalElements;
 
-                    foreach (Tuple<GameObject, float> T in selectedList)
+                    foreach (Tuple<GameObject, ScoreContainer> T in selectedList)
                     {
                         Vector3 pos = T.Item1.transform.position;
 
                         // Check if the position falls within the bounding box and map it in the heatmap
+						// HACK: For the Stockholm case, also check if the vehicle is active. Perhaps it should even do that in general.
                         if (pos.x > conf.minCoordinates.x && pos.x < conf.maxCoordinates.x
-                            && pos.z > conf.minCoordinates.z && pos.z < conf.maxCoordinates.z)
+                            && pos.z > conf.minCoordinates.z && pos.z < conf.maxCoordinates.z && T.Item1.activeSelf)
                         {
                             int z = Mathf.FloorToInt(Mathf.Abs(pos.z - conf.minCoordinates.z) / (float)conf.heatmapUnitSize);
                             int x = Mathf.FloorToInt(Mathf.Abs(pos.x - conf.minCoordinates.x) / (float)conf.heatmapUnitSize);
 
-                            heatmapArray[z][x].AddToValue(T.Item2);
+                            heatmapArray[z][x].AddToValue(T.Item2.score);
 
                             //Add to the neighbouring heatmap units
                             if (conf.affectVecinityUnits)
                             {
-                                float vecValue = T.Item2 * conf.vecinityRatio;
+                                float vecValue = T.Item2.score * conf.vecinityRatio;
 
                                 try
                                 {
@@ -201,16 +210,17 @@ namespace HeatmapLayer
         /// </summary>
         /// <param name="element">GameObject to track.</param>
         /// <param name="elementValue">Added value of the GameObject int the heatmap. 1f by default.</param>
-        public void TrackNewElement(GameObject element, float elementValue = 1f)
+        public void TrackNewElement(GameObject element, ScoreContainer scoreContainer)
         {
-            if (element.GetComponent<FlashPedestriansController>() != null)
-                flashPedElements.Add(new Tuple<GameObject, float>(element, elementValue));
+			// HACK: Stockholm case.
+            //if (element.GetComponent<FlashPedestriansController>() != null)
+                //flashPedElements.Add(new Tuple<GameObject, float>(element, elementValue));
 
-            else if (element.GetComponent<TrafficIntegrationVehicle>() != null)
-                vehElements.Add(new Tuple<GameObject, float>(element, elementValue));
+            //else if (element.GetComponent<TrafficIntegrationVehicle>() != null)
+                vehElements.Add(new Tuple<GameObject, ScoreContainer>(element, scoreContainer));
 
-            else
-                generalElements.Add(new Tuple<GameObject, float>(element, elementValue));
+            //else
+                //generalElements.Add(new Tuple<GameObject, float>(element, elementValue));
         }
     }
 }

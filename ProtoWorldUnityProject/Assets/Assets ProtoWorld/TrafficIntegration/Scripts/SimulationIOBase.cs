@@ -133,7 +133,8 @@ public abstract class SimulationIOBase
         {
             timeController.RequestResumeGame();
             timeController.ShowLoadingIcon(false);
-            timeController.ActivateTimeSlider(trafficDB.getNumberOfTimeSteps());
+			// HACK: For the Stockholm case.
+            //timeController.ActivateTimeSlider(trafficDB.getNumberOfTimeSteps());
         }
 
         //Keeps reading concurrently for MatSim integration
@@ -149,7 +150,8 @@ public abstract class SimulationIOBase
             {
                 shouldStop = false;
                 Read((string)param);
-                timeController.ActivateTimeSlider(trafficDB.getNumberOfTimeSteps());
+				// HACK: For the Stockholm case.
+                //timeController.ActivateTimeSlider(trafficDB.getNumberOfTimeSteps());
                 completedIterations++;
             }
         }

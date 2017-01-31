@@ -99,7 +99,7 @@ public class SimulationReader : MonoBehaviour
                 break;
             case TrafficIntegrationController.TypeOfIntegration.MatsimDatabase:
                 //reader.SetConnectionString(aramGisBoundaries.GetOverridenConnectionString());
-				// HACK: For Stockholm case, so we can control from which database the simulation is read.
+				// HACK: For the Stockholm case, so we can control from which database the simulation is read.
                 reader.SetConnectionString(StockholmMatSIMParameters.Instance.ConnectionString);
                 reader.SetIO(new MatsimIO());
                 break;

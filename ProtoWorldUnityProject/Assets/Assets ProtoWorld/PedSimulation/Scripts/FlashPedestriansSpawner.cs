@@ -434,9 +434,10 @@ public class FlashPedestriansSpawner : MonoBehaviour
 
         newAgent.SetActive(true);
 
+		// HACK: Stockholm case hack.
         // Track the pedestrian in the heatmap
-        if (trackPedestriansInHeatmap && heatmapCtrl != null)
-            heatmapCtrl.TrackNewElement(newAgent);
+//        if (trackPedestriansInHeatmap && heatmapCtrl != null)
+//           heatmapCtrl.TrackNewElement(newAgent);
 
         // Atomic increment of the KPI property
         Interlocked.Add(ref pedGlobalParameters.numberOfPedestriansOnScenario, pedGlobalParameters.numberOfPedestriansPerAgent);

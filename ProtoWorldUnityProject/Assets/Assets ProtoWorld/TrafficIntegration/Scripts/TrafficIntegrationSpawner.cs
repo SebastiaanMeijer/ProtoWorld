@@ -12,19 +12,18 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
- * 
- * TRAFFIC INTEGRATION
- * TrafficIntegrationSpawner.cs
- * Miguel Ramos Carretero
- * Johnson Ho
- * 
- */
+/*
+* 
+* TRAFFIC INTEGRATION
+* TrafficIntegrationSpawner.cs
+* Miguel Ramos Carretero
+* Johnson Ho
+* 
+*/
 
 using UnityEngine;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+using Npgsql;
 
 /// <summary>
 /// Generates the graphic vehicles in the Unity scene from the data of Traffic Integration Data.
@@ -83,6 +82,22 @@ public class TrafficIntegrationSpawner : MonoBehaviour
 
     private HeatmapLayer.HeatmapController heatmapCtrl;
 
+	private struct PersonTimes {
+		public PersonTimes(int pid, int startTimeStep, int endTimeStep) {
+			this.pid = pid;
+			this.startTimeStep = startTimeStep;
+			this.endTimeStep = endTimeStep;
+		}
+
+		public int pid;
+		public int startTimeStep;
+		public int endTimeStep;
+	}
+
+	private Dictionary<string, List<PersonTimes>> publicTransitPersonTimes;
+	private Dictionary<string, HeatmapLayer.HeatmapController.ScoreContainer> scoreContainers;
+	private Dictionary<int, float> scores;
+
     /// <summary>
     /// Awakes the script.
     /// </summary>
@@ -104,6 +119,88 @@ public class TrafficIntegrationSpawner : MonoBehaviour
             angleOfView = trafficContr.driversAngleOfView;
             visualizeTrafficHeatmap = trafficContr.visualizeTrafficInHeatmap;
         }
+		
+		if(trafficContr.typeOfIntegration == TrafficIntegrationController.TypeOfIntegration.MatsimDatabase) {
+			try
+			{
+				// HACK: For the Stockholm case. This is not meant to be universal code.
+				NpgsqlConnection connection = new NpgsqlConnection(StockholmMatSIMParameters.Instance.ConnectionString);
+
+				connection.Open();
+				
+				scores = new Dictionary<int, float>();
+
+				// Roughly 100000 rows.
+				string scoresQuery = "SELECT pid, score FROM scores ORDER BY pid;";
+
+				NpgsqlCommand scoresCommand = new NpgsqlCommand(scoresQuery, connection);
+
+				NpgsqlDataReader scoresDataReader = scoresCommand.ExecuteReader();
+				
+				int scoresCounter = 0;
+
+				while (scoresDataReader.Read())
+				{
+					int pid = scoresDataReader.GetInt32(0);
+					float score = scoresDataReader.GetFloat(1);
+
+					scores[pid] = score;
+
+					scoresCounter++;
+				}
+
+				Debug.Log(string.Format("{0} scores retrieved from the database.", scoresCounter));
+
+				if (!scoresDataReader.IsClosed)
+				{
+					scoresDataReader.Close();
+				}
+
+				publicTransitPersonTimes = new Dictionary<string, List<PersonTimes>>();
+				scoreContainers = new Dictionary<string, HeatmapLayer.HeatmapController.ScoreContainer>();
+
+				// Roughly 200000 rows.
+				string personTimesQuery = "select veh_id, pid, min(event_time) as start, max(event_time) as end from events where veh_id like 'Veh%' and pid not like 'pt%' and pid not like '' group by veh_id, pid order by veh_id, pid;";
+
+				NpgsqlCommand personTimesCommand = new NpgsqlCommand(personTimesQuery, connection);
+
+				NpgsqlDataReader personTimesDataReader = personTimesCommand.ExecuteReader();
+				
+				int personTimesCounter = 0;
+
+				while (personTimesDataReader.Read())
+				{
+					string veh_id = personTimesDataReader.GetString(0);
+					string pid = personTimesDataReader.GetString(1);
+					float start = personTimesDataReader.GetFloat(2);
+					float end = personTimesDataReader.GetFloat(3);
+
+					// All person IDs should now be just integers in string form, so no guards.
+					PersonTimes personTimes = new PersonTimes(int.Parse(pid), (int) start, (int) end);
+					
+					if(!publicTransitPersonTimes.ContainsKey(veh_id)) {
+						publicTransitPersonTimes[veh_id] = new List<PersonTimes>();
+					}
+
+					publicTransitPersonTimes[veh_id].Add(personTimes);
+
+					personTimesCounter++;
+				}
+
+				Debug.Log(string.Format("{0} person times retrieved from the database.", personTimesCounter));
+
+				if (!personTimesDataReader.IsClosed)
+				{
+					personTimesDataReader.Close();
+				}
+
+				connection.Close();
+			}
+			catch (System.Exception ex)
+			{
+				Debug.LogError(ex);
+			}
+		}
     }
 
     /// <summary>
@@ -220,6 +317,24 @@ public class TrafficIntegrationSpawner : MonoBehaviour
                     if (lod != null)
                         lod.enabled = false;
                 }
+				
+				// HACK: For the Stockholm case.
+				if (visualizeTrafficHeatmap && heatmapCtrl != null) {
+					if(v.id.StartsWith("Veh")) {
+						// Public transit. Public transit vehicles scores are the sum of the contained person scores (since that is how the heatmap works).
+						List<PersonTimes> vehiclePersonTimes = publicTransitPersonTimes[v.id];
+
+						float score = 0.0f;
+
+						foreach(PersonTimes personTimes in vehiclePersonTimes) {
+							if(timeStepIndex >= personTimes.startTimeStep && timeStepIndex <= personTimes.endTimeStep) {
+								score += scores[personTimes.pid];
+							}
+						}
+
+						scoreContainers[v.id].score = score;
+					}
+				}
             }
             else
             {
@@ -263,11 +378,29 @@ public class TrafficIntegrationSpawner : MonoBehaviour
 
                 // Track the vehicle in the heatmap
                 if (visualizeTrafficHeatmap && heatmapCtrl != null) {
-					float score = 0.0f;
+					//heatmapCtrl.TrackNewElement(vehObject);
 
-					// TODO Retrieve score for "vehicle" (?) from the database.
+					// HACK: For the Stockholm case.
+					if(v.id.StartsWith("Veh")) {
+						// Public transit. Public transit vehicles start out without a score.
+						HeatmapLayer.HeatmapController.ScoreContainer scoreContainer = new HeatmapLayer.HeatmapController.ScoreContainer(0.0f);
 
-                    heatmapCtrl.TrackNewElement(vehObject, score);
+						scoreContainers[v.id] = scoreContainer;
+
+						heatmapCtrl.TrackNewElement(vehObject, scoreContainer);
+					}
+					else {
+						// Personal transit. Person IDs are the same as vehicle IDs when they travel by car.
+						int pid;
+					
+						if(int.TryParse(v.id, out pid)) {
+							float score = scores[pid];
+
+							HeatmapLayer.HeatmapController.ScoreContainer scoreContainer = new HeatmapLayer.HeatmapController.ScoreContainer(score);
+
+							heatmapCtrl.TrackNewElement(vehObject, scoreContainer);
+						}
+					}
 				}
             }
         }
