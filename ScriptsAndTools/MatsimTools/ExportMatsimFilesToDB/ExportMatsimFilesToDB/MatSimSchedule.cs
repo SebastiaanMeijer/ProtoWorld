@@ -49,9 +49,9 @@ namespace ExportMatsimFilesToDB
             string departTable = "matsimDeparture";
 
             string commandString = string.Format("DROP TABLE IF EXISTS {0};" +
-                "CREATE TABLE {0}(id integer, name text, x numeric, y numeric, geom geometry);" +
+                "CREATE TABLE {0}(id text, name text, x numeric, y numeric, geom geometry);" +
                 "DROP TABLE IF EXISTS {1};" +
-                "CREATE TABLE {1}(lineroute_id integer, line_id text, route_id text, leg_id text, start_id integer, end_id integer, seq_id integer);" +
+                "CREATE TABLE {1}(lineroute_id integer, line_id text, route_id text, leg_id text, start_id text, end_id text, seq_id integer);" +
                 "DROP TABLE IF EXISTS {2};" +
                 "CREATE TABLE {2}(lineroute_id integer, dep_id text, veh_id text, time interval);",
                 scheduleTable, routeTable, departTable);
@@ -75,7 +75,7 @@ namespace ExportMatsimFilesToDB
                 {
                     Console.Write("\r{0} of {1} stops exported", ++counterStops, totalStops);
 
-                    var insertString = string.Format("INSERT INTO {0} VALUES ({1},'{2}',{3},{4}, ST_Transform(ST_SetSRID(ST_MakePoint({3}, {4}), 3006), 4326));",
+                    var insertString = string.Format("INSERT INTO {0} VALUES ('{1}','{2}',{3},{4}, ST_Transform(ST_SetSRID(ST_MakePoint({3}, {4}), 3006), 4326));",
                         scheduleTable, s.id, s.name, s.x.ToString(CultureInfo.InvariantCulture), s.y.ToString(CultureInfo.InvariantCulture));
                     byte[] bytes = Encoding.Default.GetBytes(insertString);
                     insertString = Encoding.UTF8.GetString(bytes);
@@ -110,7 +110,7 @@ namespace ExportMatsimFilesToDB
                             var start_id = route.stops[i - 1].refId;
                             var end_id = route.stops[i].refId;
                             var leg_id = start_id + "to" + end_id;
-                            var insertString = string.Format("INSERT INTO {0} VALUES ({1},'{2}','{3}','{4}',{5},{6},{7});", routeTable, counter, line_id, route_id, leg_id, start_id, end_id, (i - 1));
+                            var insertString = string.Format("INSERT INTO {0} VALUES ({1},'{2}','{3}','{4}','{5}','{6}',{7});", routeTable, counter, line_id, route_id, leg_id, start_id, end_id, (i - 1));
                             dbCommand = new NpgsqlCommand(insertString, dbConn);
                             dbCommand.ExecuteNonQuery();
                         }
@@ -237,7 +237,7 @@ namespace ExportMatsimFilesToDB
     public class MatSimProfileStop
     {
         [XmlAttribute]
-        public int refId;
+        public string refId;
 
         [XmlAttribute]
         public string departureOffset;
