@@ -12,13 +12,15 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 
 */
 
-﻿/*
+/*
  *
  * Stockholm MatSIM integration.
  * 
  * Berend Wouda
  * 
  */
+
+using System.Globalization;
 
 /// <summary>
 /// This singleton remains in memory while scenes are loading, carrying the selected simulation parameters to the scene being loaded.
@@ -38,6 +40,7 @@ public class StockholmMatSIMParameters {
 
 
 	private StockholmMatSIMLocation location;
+	private StockholmMatSIMHour hour;
 	private StockholmMatSIMEmployment employment;
 	private StockholmMatSIMCommitment commitment;
 
@@ -50,6 +53,17 @@ public class StockholmMatSIMParameters {
 		}
 		set {
 			location = value;
+
+			set = true;
+		}
+	}
+	
+	public StockholmMatSIMHour Hour {
+		get {
+			return hour;
+		}
+		set {
+			hour = value;
 
 			set = true;
 		}
@@ -87,22 +101,31 @@ public class StockholmMatSIMParameters {
 
 	public string ConnectionString {
 		get {
-			string database = "Stockholm_Plain";
+			// This isn't really necessary but you can use it to start in an unselectable simulation like the plain Stockholm simulation.
+			// Do note that the start time is still the one from the constructor.
+			//string database = "StockholmPlainSQLScriptTest";
+			string database = "stockholm_alvsjo_employed_max";
+			string server = "127.0.0.1";
+			string port = "5432";
+			string userID = "postgres";
+			//string password = "test";
+			string password = "postgres";
 
 			if(set) {
-				database = string.Format("Stockholm_{0}_{1}_{2}", location.ToString(), employment.ToString().ToLower(), commitment == StockholmMatSIMCommitment.Minimum ? "min" : "max");
+				database = string.Format("stockholm_{0}_{1}_{2}", location.ToString().ToLower(CultureInfo.InvariantCulture), employment.ToString().ToLower(CultureInfo.InvariantCulture), commitment == StockholmMatSIMCommitment.Minimum ? "min" : "max");
 			}
 
-			// TODO This is hard-coded! This needs to either be somehow set from Unity or changed here to work for the deployment setup.
-			return string.Format("Server=127.0.0.1;Port=5432;Database={0};User Id=postgres;Password=test;", database);
+			// This is hard-coded! This needs to be changed here to work for the deployment setup.
+			return string.Format("Server={0};Port={1};Database={2};User Id={3};Password={4};", server, port, database, userID, password);
 		}
 	}
 
 
 	private StockholmMatSIMParameters() {
 		location = StockholmMatSIMLocation.Alvsjo;
-		employment = StockholmMatSIMEmployment.Plain;
-		commitment = StockholmMatSIMCommitment.Minimum;
+		hour = StockholmMatSIMHour.Hour7;
+		employment = StockholmMatSIMEmployment.Employed;
+		commitment = StockholmMatSIMCommitment.Maximum;
 
 		set = false;
 	}

@@ -13,12 +13,12 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 */
 
 /*
-*
-* Stockholm MatSIM integration.
-* 
-* Berend Wouda
-* 
-*/
+ *
+ * Stockholm MatSIM integration.
+ * 
+ * Berend Wouda
+ * 
+ */
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,19 +26,25 @@ using UnityEngine.UI;
 
 public class ScenarioSelectorViewButton : MonoBehaviour {
 	public Dropdown scenarioDropdown;
-	public Dropdown locationDropdown;
+	public Dropdown hourDropdown;
 	public Dropdown employmentDropdown;
 	public Dropdown parameterDropdown;
 
 	public string scenePath = "Stockholm Case v2.0";
 
+	public TransitionController transitionController;
+
 
 	public void view() {
 		StockholmMatSIMParameters.Instance.Location = (StockholmMatSIMLocation) scenarioDropdown.value;
-		//StockholmMatSIMParameters.Instance.[???] = (StockholmMatSIM[???]) locationDropdown.value;
+		StockholmMatSIMParameters.Instance.Hour = (StockholmMatSIMHour) hourDropdown.value;
 		StockholmMatSIMParameters.Instance.Employment = (StockholmMatSIMEmployment) employmentDropdown.value;
 		StockholmMatSIMParameters.Instance.Commitment = (StockholmMatSIMCommitment) parameterDropdown.value;
 
+		transitionController.transitionOut(load);
+	}
+
+	private void load() {
 		SceneManager.LoadScene(scenePath, LoadSceneMode.Single);
 	}
 }

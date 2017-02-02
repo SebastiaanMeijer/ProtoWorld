@@ -19,13 +19,30 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
  * Berend Wouda
  * 
  */
-using UnityEngine;
 
-public class BuildingViewerBuildingButton : MonoBehaviour {
-	public GameObject buildings;
-
-
-	public void toggle() {
-		buildings.SetActive(!buildings.activeSelf);
-	}
+public enum StockholmMatSIMHour {
+	Hour0,
+	Hour1,
+	Hour2,
+	Hour3,
+	Hour4,
+	Hour5,
+	Hour6,
+	Hour7,
+	Hour8,
+	Hour9,
+	Hour10,
+	Hour11,
+	Hour12,
+	Hour13,
+	Hour14,
+	Hour15,
+	Hour16,
+	Hour17,
+	Hour18,
+	Hour19,
+	Hour20,
+	Hour21,
+	Hour22,
+	Hour23
 }

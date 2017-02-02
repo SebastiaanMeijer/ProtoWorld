@@ -21,7 +21,6 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
  */
 
 public enum StockholmMatSIMEmployment {
-	Plain,
 	Unemployed,
 	Mixed,
 	Employed

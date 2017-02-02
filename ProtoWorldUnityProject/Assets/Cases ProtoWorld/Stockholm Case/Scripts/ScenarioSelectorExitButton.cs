@@ -23,7 +23,14 @@ Authors of ProtoWorld: Miguel Ramos Carretero, Jayanth Raghothama, Aram Azhari, 
 using UnityEngine;
 
 public class ScenarioSelectorExitButton : MonoBehaviour {
+	public TransitionController transitionController;
+
+
 	public void exit() {
+		transitionController.transitionOut(quit);
+	}
+
+	private void quit() {
 		Application.Quit();
 	}
 }

@@ -47,12 +47,19 @@ public class MatsimIO : SimulationIOBase
         {
             NpgsqlConnection dbConn = new NpgsqlConnection(connectionString);
 
+			// HACK: For the Stockholm case.
+			int hour = (int) StockholmMatSIMParameters.Instance.Hour;
+			int startTimeStep = hour * 3600;
+			int endTimeStep = (hour + 1) * 3600;
+
+			string commandString = string.Format("select veh_id, event_time, longitude, latitude from vehicle_events where event_time >= {0} and event_time < {1};", startTimeStep, endTimeStep);
+
             // TODO It might generate a connection timeout if this queries the whole table,
             // therefore more reasonable to split up the query by eventtime (ex. using a for-loop)...
-            string commandString = string.Format(
-                "SELECT * FROM {0} WHERE eventtime>={1}" +
-                " AND eventtime<{2} ORDER BY eventtime, veh_id",
-                vehTable, trafficDB.getNumberOfTimeSteps(), trafficDB.getNumberOfTimeSteps() + readingChunkForMatsim);
+//            string commandString = string.Format(
+//                "SELECT * FROM {0} WHERE eventtime>={1}" +
+//                " AND eventtime<{2} ORDER BY eventtime, veh_id",
+//                vehTable, trafficDB.getNumberOfTimeSteps(), trafficDB.getNumberOfTimeSteps() + readingChunkForMatsim);
 
             Debug.Log(commandString);
 
@@ -63,12 +70,19 @@ public class MatsimIO : SimulationIOBase
             List<string> output = new List<string>();
             while (dbReader.Read())
             {
+                //var veh_id = dbReader["veh_id"].ToString();
+                //var time = dbReader["eventtime"].ToString();
+				//var type = dbReader["veh_type"].ToString();
+                //var x = dbReader["x"].ToString();
+                //var y = dbReader["y"].ToString();
+                //var ang = dbReader["deg"].ToString();
+				
                 var veh_id = dbReader["veh_id"].ToString();
-                var time = dbReader["eventtime"].ToString();
-				var type = dbReader["veh_type"].ToString();
-                var x = dbReader["x"].ToString();
-                var y = dbReader["y"].ToString();
-                var ang = dbReader["deg"].ToString();
+                var time = dbReader["event_time"].ToString();
+				var type = "CAR";
+                var x = dbReader["longitude"].ToString();
+                var y = dbReader["latitude"].ToString();
+                var ang = "0";
 
                 //var str = string.Join(",", new string[] { veh_id, time, x, y, ang });
                 //output.Add(str);

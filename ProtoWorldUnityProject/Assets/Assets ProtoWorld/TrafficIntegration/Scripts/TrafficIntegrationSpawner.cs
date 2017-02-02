@@ -387,7 +387,7 @@ public class TrafficIntegrationSpawner : MonoBehaviour
 
 						scoreContainers[v.id] = scoreContainer;
 
-						heatmapCtrl.TrackNewElement(vehObject, scoreContainer);
+						//heatmapCtrl.TrackNewElement(vehObject, scoreContainer);
 					}
 					else {
 						// Personal transit. Person IDs are the same as vehicle IDs when they travel by car.
@@ -398,7 +398,7 @@ public class TrafficIntegrationSpawner : MonoBehaviour
 
 							HeatmapLayer.HeatmapController.ScoreContainer scoreContainer = new HeatmapLayer.HeatmapController.ScoreContainer(score);
 
-							heatmapCtrl.TrackNewElement(vehObject, scoreContainer);
+							//heatmapCtrl.TrackNewElement(vehObject, scoreContainer);
 						}
 					}
 				}

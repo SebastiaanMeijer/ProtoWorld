@@ -79,6 +79,16 @@ namespace HeatmapLayer
         public float minHeatmapValue = 0f,
                      maxHeatmapValue = 100f;
 
+		/// <summary>
+		/// HACK: For the Stockholm case.
+		/// </summary>
+		public Color defaultHeatmapColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+
+		/// <summary>
+		/// HACK: For the Stockholm case.
+		/// </summary>
+		public Gradient heatmapGradient;
+
         /// <summary>
         /// Colors to cover the value spectrum of the heatmap.
         /// </summary>
@@ -116,7 +126,8 @@ namespace HeatmapLayer
         /// </summary>
         void Start()
         {
-            halfStep = maxHeatmapValue / 2f;
+			// HACK: For the Stockholm case.
+            halfStep = (minHeatmapValue + maxHeatmapValue) / 2f;
 
             if (heatmapCamera != null)
                 heatmapCamera.clearFlags = CameraClearFlags.Depth;
