@@ -262,21 +262,23 @@ public class VehicleEvents : MonoBehaviour {
 		
 		foreach(string id in vehicleContainers.Keys) {
 			if(id.Contains("Veh") && publicTransitPersonTimes.ContainsKey(id)) {
-				// Public transit. Public transit vehicles scores are the sum of the contained person scores (since that is how the heatmap works).
+				// Public transit. Public transit vehicles scores are the average of the contained person scores (since that is how the heatmap works).
 				List<PersonTimes> vehiclePersonTimes = publicTransitPersonTimes[id];
 
 				float score = 0.0f;
+				int count = 0;
 
 				foreach(PersonTimes personTimes in vehiclePersonTimes) {
 					if(timeStep >= personTimes.startTimeStep && timeStep <= personTimes.endTimeStep) {
 						// Some persons have a non-integer ID while the scores table has an integer ID, so skip these for now.
 						if(scores.ContainsKey(personTimes.pid)) {
 							score += scores[personTimes.pid];
+							count++;
 						}
 					}
 				}
 
-				scoreContainers[id].score = score;
+				scoreContainers[id].score = score / count;
 			}
 			else if(scores.ContainsKey(id)) {
 				// Personal transit. Person IDs are the same as vehicle IDs when they travel by car.
