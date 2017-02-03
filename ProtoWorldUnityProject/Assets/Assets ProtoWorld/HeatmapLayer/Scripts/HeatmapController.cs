@@ -56,17 +56,22 @@ namespace HeatmapLayer
         /// <summary>
         /// Tracked flash pedestrians of the scene to add value to the heatmap.
         /// </summary>
-        //private List<Tuple<GameObject, float>> flashPedElements;
+        private List<Tuple<GameObject, float>> flashPedElements;
 
         /// <summary>
         /// Tracked vehicles of the scene to add value to the heatmap.
         /// </summary>
-        private List<Tuple<VehicleContainer, ScoreContainer>> vehElements;
+        private List<Tuple<GameObject, float>> vehElements;
 
         /// <summary>
         /// Tracked general elements of the scene to add value to the heatmap.
         /// </summary>
-        //private List<Tuple<GameObject, float>> generalElements;
+        private List<Tuple<GameObject, float>> generalElements;
+		
+		/// <summary>
+		/// HACK: For the Stockholm case.
+		/// </summary>
+        private List<Tuple<VehicleContainer, ScoreContainer>> vehicleScores;
 
 		public class VehicleContainer {
 			public string id;
@@ -102,9 +107,12 @@ namespace HeatmapLayer
             timeCtrl = FindObjectOfType<TimeController>();
 
             // Initialize the tracked element lists
-            //flashPedElements = new List<Tuple<GameObject, float>>();
-            vehElements = new List<Tuple<VehicleContainer, ScoreContainer>>();
-            //generalElements = new List<Tuple<GameObject, float>>();
+            flashPedElements = new List<Tuple<GameObject, float>>();
+            vehElements = new List<Tuple<GameObject, float>>();
+            generalElements = new List<Tuple<GameObject, float>>();
+
+			// HACK: For the Stockholm case.
+			vehicleScores = new List<Tuple<VehicleContainer, ScoreContainer>>();
 
             // Get the number of elements for row Z
             numberOfZElements = Mathf.FloorToInt((conf.maxCoordinates.z - conf.minCoordinates.z)
@@ -132,7 +140,8 @@ namespace HeatmapLayer
 
                     go.transform.parent = this.transform;
 
-                    go.transform.position = new Vector3(conf.minCoordinates.x + x * conf.heatmapUnitSize + halfStep, 100f,
+					// HACK: For the Stockholm case.
+                    go.transform.position = new Vector3(conf.minCoordinates.x + x * conf.heatmapUnitSize + halfStep, 100.0f,
                                                         conf.minCoordinates.z + z * conf.heatmapUnitSize + halfStep);
 
                     go.transform.localScale = new Vector3(conf.heatmapUnitSize, conf.heatmapUnitSize * 5, conf.heatmapUnitSize);
@@ -166,62 +175,39 @@ namespace HeatmapLayer
                             for (int x = 0; x < numberOfXElements; x++)
                                 heatmapArray[z][x].Reset();
 
-                    List<Tuple<VehicleContainer, ScoreContainer>> selectedList;
+                    List<Tuple<GameObject, float>> selectedList;
 
                     // Select the elements to display in the heatmap
-                    //if (conf.visualizationType == HeatmapConfig.HeatmapVisualizationType.Pedestrians)
-                    //    selectedList = flashPedElements;
-                    //else if (conf.visualizationType == HeatmapConfig.HeatmapVisualizationType.Vehicles)
+                    if (conf.visualizationType == HeatmapConfig.HeatmapVisualizationType.Pedestrians)
+                        selectedList = flashPedElements;
+                    else if (conf.visualizationType == HeatmapConfig.HeatmapVisualizationType.Vehicles)
                         selectedList = vehElements;
-                    //else
-                    //    selectedList = generalElements;
+                    else
+                        selectedList = generalElements;
 
-                    foreach (Tuple<VehicleContainer, ScoreContainer> T in selectedList)
+					// HACK: For the Stockholm case.
+                    foreach (Tuple<VehicleContainer, ScoreContainer> T in vehicleScores)
                     {
+						// HACK: For the Stockholm case.
                         Vector3 pos = T.Item1.position;
 
                         // Check if the position falls within the bounding box and map it in the heatmap
-						// HACK: For the Stockholm case, also check if the vehicle is active. Perhaps it should even do that in general.
+						// HACK: For the Stockholm case, also check if the vehicle is active.
                         if (pos.x > conf.minCoordinates.x && pos.x < conf.maxCoordinates.x
                             && pos.z > conf.minCoordinates.z && pos.z < conf.maxCoordinates.z && T.Item1.active)
                         {
                             int z = Mathf.FloorToInt(Mathf.Abs(pos.z - conf.minCoordinates.z) / (float)conf.heatmapUnitSize);
                             int x = Mathf.FloorToInt(Mathf.Abs(pos.x - conf.minCoordinates.x) / (float)conf.heatmapUnitSize);
 
+							// HACK: For the Stockholm case.
                             heatmapArray[z][x].AddToValue(T.Item2.score);
 
                             //Add to the neighbouring heatmap units
                             if (conf.affectVecinityUnits)
                             {
                                 float vecValue = T.Item2.score * conf.vecinityRatio;
-
-								// HACK: For the Stockholm case. Exception-based checks cause massive lag. But it's still very slow.
-								if(x >= 1 && z >= 1) {
-                                    heatmapArray[z - 1][x - 1].AddToValue(vecValue);
-								}
-								if(z >= 1) {
-                                    heatmapArray[z - 1][x].AddToValue(vecValue);
-								}
-								if(x < numberOfXElements - 1 && z >= 1) {
-                                    heatmapArray[z - 1][x + 1].AddToValue(vecValue);
-								}
-								if(x >= 1) {
-                                    heatmapArray[z][x - 1].AddToValue(vecValue);
-								}
-								if(x < numberOfXElements - 1) {
-                                    heatmapArray[z][x + 1].AddToValue(vecValue);
-								}
-								if(x >= 1 && z < numberOfZElements - 1) {
-									heatmapArray[z + 1][x - 1].AddToValue(vecValue);
-								}
-								if(z < numberOfZElements - 1) {
-                                    heatmapArray[z + 1][x].AddToValue(vecValue);
-								}
-								if(x < numberOfXElements - 1 && z < numberOfZElements - 1) {
-                                    heatmapArray[z + 1][x + 1].AddToValue(vecValue);
-								}
-
-                                /*try
+								
+								try
                                 {
                                     heatmapArray[z + 1][x + 1].AddToValue(vecValue);
                                     heatmapArray[z + 1][x].AddToValue(vecValue);
@@ -233,7 +219,7 @@ namespace HeatmapLayer
                                 catch (IndexOutOfRangeException e)
                                 {
                                     Debug.LogWarning("Heatmap position beyond the boundaries: " + e.Message);
-                                }*/
+                                }
                             }
                         }
                     }
@@ -248,17 +234,24 @@ namespace HeatmapLayer
         /// </summary>
         /// <param name="element">GameObject to track.</param>
         /// <param name="elementValue">Added value of the GameObject int the heatmap. 1f by default.</param>
-        public void TrackNewElement(VehicleContainer element, ScoreContainer scoreContainer)
+        public void TrackNewElement(GameObject element, float elementValue = 1f)
         {
-			// HACK: Stockholm case.
-            //if (element.GetComponent<FlashPedestriansController>() != null)
-                //flashPedElements.Add(new Tuple<GameObject, float>(element, elementValue));
+            if (element.GetComponent<FlashPedestriansController>() != null)
+                flashPedElements.Add(new Tuple<GameObject, float>(element, elementValue));
 
-            //else if (element.GetComponent<TrafficIntegrationVehicle>() != null)
-                vehElements.Add(new Tuple<VehicleContainer, ScoreContainer>(element, scoreContainer));
+            else if (element.GetComponent<TrafficIntegrationVehicle>() != null)
+                vehElements.Add(new Tuple<GameObject, float>(element, elementValue));
 
-            //else
-                //generalElements.Add(new Tuple<GameObject, float>(element, elementValue));
+            else
+                generalElements.Add(new Tuple<GameObject, float>(element, elementValue));
         }
+
+
+		/// <summary>
+		/// HACK: For the Stockholm case.
+		/// </summary>
+		public void trackVehicleScore(VehicleContainer element, ScoreContainer scoreContainer) {
+			vehicleScores.Add(new Tuple<VehicleContainer, ScoreContainer>(element, scoreContainer));
+		}
     }
 }

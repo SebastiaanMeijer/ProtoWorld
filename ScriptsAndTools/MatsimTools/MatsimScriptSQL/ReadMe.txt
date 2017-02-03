@@ -1,0 +1,1 @@
+Set the path on line 110 in the MatsimScriptSQL.sql file to point to the file with the bounds of your scenario. This file should contain a PostgreSQL COPY TO table export.

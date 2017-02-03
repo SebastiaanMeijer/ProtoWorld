@@ -166,7 +166,7 @@ public class VehicleEvents : MonoBehaviour {
 				
 				HeatmapController.ScoreContainer scoreContainer = scoreContainers[id];
 
-				heatmapController.TrackNewElement(vehicleContainer, scoreContainer);
+				heatmapController.trackVehicleScore(vehicleContainer, scoreContainer);
 
 				positionsCounter++;
 			}
