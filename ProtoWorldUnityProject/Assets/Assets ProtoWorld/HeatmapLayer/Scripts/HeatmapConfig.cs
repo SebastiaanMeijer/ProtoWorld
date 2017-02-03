@@ -33,7 +33,7 @@ namespace HeatmapLayer
         /// <summary>
         /// Unit of a heatmap pixel in the scene.
         /// </summary>
-        [Range(1, 1000)]
+        [Range(1, 100)]
         public int heatmapUnitSize = 25;
 
         /// <summary>
@@ -126,8 +126,7 @@ namespace HeatmapLayer
         /// </summary>
         void Start()
         {
-			// HACK: For the Stockholm case.
-            halfStep = (minHeatmapValue + maxHeatmapValue) / 2f;
+            halfStep = maxHeatmapValue / 2f;
 
             if (heatmapCamera != null)
                 heatmapCamera.clearFlags = CameraClearFlags.Depth;

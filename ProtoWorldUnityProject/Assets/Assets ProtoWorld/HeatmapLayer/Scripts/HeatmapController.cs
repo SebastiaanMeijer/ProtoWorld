@@ -72,7 +72,10 @@ namespace HeatmapLayer
 		/// HACK: For the Stockholm case.
 		/// </summary>
         private List<Tuple<VehicleContainer, ScoreContainer>> vehicleScores;
-
+		
+		/// <summary>
+		/// HACK: For the Stockholm case.
+		/// </summary>
 		public class VehicleContainer {
 			public string id;
 			public Vector3 position;
@@ -84,7 +87,10 @@ namespace HeatmapLayer
 				this.active = active;
 			}
 		}
-
+		
+		/// <summary>
+		/// HACK: For the Stockholm case.
+		/// </summary>
 		public class ScoreContainer {
 			public float score;
 
@@ -205,6 +211,7 @@ namespace HeatmapLayer
                             //Add to the neighbouring heatmap units
                             if (conf.affectVecinityUnits)
                             {
+								// HACK: For the Stockholm case.
                                 float vecValue = T.Item2.score * conf.vecinityRatio;
 								
 								try

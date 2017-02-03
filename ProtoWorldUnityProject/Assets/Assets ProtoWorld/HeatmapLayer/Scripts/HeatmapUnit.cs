@@ -38,7 +38,7 @@ namespace HeatmapLayer
 		/// <summary>
 		/// HACK: For the Stockholm case.
 		/// </summary>
-		public int count;
+		private int count;
 
         /// <summary>
         /// Renderer of the heatmap unit.
@@ -76,9 +76,13 @@ namespace HeatmapLayer
         /// <param name="add">Value to add.</param>
         public void AddToValue(float add)
         {
-            this.value += add;
+			// HACK: For the Stockholm case.
 			count++;
-            InterpolateToColor();
+
+            this.value += add;
+
+			// HACK: For the Stockholm case.
+            interpolateToGradient();
         }
 
         /// <summary>
@@ -97,6 +101,8 @@ namespace HeatmapLayer
         public void Reset()
         {
             this.value = conf.minHeatmapValue;
+
+			// HACK: For the Stockholm case.
             renderer.material.color = conf.defaultHeatmapColor;
 
 			// HACK: For the Stockholm case.
@@ -110,36 +116,39 @@ namespace HeatmapLayer
         {
             float halfStep = conf.GetHalfStep();
 
-			// HACK: For the Stockholm case, ignore empty cells.
+            if (value < halfStep)
+            {
+                // If value below half step, interpolate between min and med color
+                renderer.material.color =
+                    Color.Lerp(conf.minHeatmapColor, conf.medHeatmapColor,
+                                value / halfStep);
+            }
+            else
+            {
+                // Interpolate between med and max color
+                renderer.material.color =
+                    Color.Lerp(conf.medHeatmapColor, conf.maxHeatmapColor,
+                                (value - halfStep) / halfStep);
+            }
+        }
+
+		/// <summary>
+		/// HACK: For the Stockholm case.
+		/// </summary>
+		private void interpolateToGradient() {
+			// Ignore empty cells.
 			if(count == 0) {
 				renderer.material.color = conf.defaultHeatmapColor;
 
 				return;
 			}
 			
-			// HACK: For the Stockholm case, calculates an average instead of a sum.
+			// Calculate an average.
 			float value = this.value / count;
 
-			// HACK: For the Stockholm case, interpolate a gradient.
+			// Interpolate a gradient.
 			renderer.material.color = conf.heatmapGradient.Evaluate(Mathf.Clamp01((value - conf.minHeatmapValue) / (conf.maxHeatmapValue - conf.minHeatmapValue)));
-/*
-            if (value < halfStep)
-            {
-                // If value below half step, interpolate between min and med color
-				// HACK: For the Stockholm case.
-                renderer.material.color =
-                    Color.Lerp(conf.minHeatmapColor, conf.medHeatmapColor,
-                                (value - conf.minHeatmapValue) / (halfStep - conf.minHeatmapValue));
-            }
-            else
-            {
-                // Interpolate between med and max color
-				// HACK: For the Stockholm case.
-                renderer.material.color =
-                    Color.Lerp(conf.medHeatmapColor, conf.maxHeatmapColor,
-                                (value - halfStep) / (conf.maxHeatmapValue - halfStep));
-            }*/
-        }
+		}
 
         /// <summary>
         /// Set a random color for the heatmap unit (for testing purposes).
